@@ -18,7 +18,7 @@
   },
   "lint-staged": {
     "linters": {
-      "src/**/*.{js,css}": ["prettier --write", "git add"]
+      "src/**/*.{tsx,css}": ["prettier --write", "git add"]
     }
   },
   "dependencies": {
