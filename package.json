@@ -19,7 +19,9 @@
   "lint-staged": {
     "linters": {
       "src/**/*.{tsx,css}": ["prettier --write", "git add"]
-    }
+    },
+    "ignore": ["node_modules", "dist", "package-lock.json"]
+
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.7.1",
