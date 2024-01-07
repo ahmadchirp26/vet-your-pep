@@ -1,9 +1,8 @@
-// import "../styles/global.css";
-
 export default function HomePage() {
+  console.log("Hello World");
   return (
     <>
-      <div className="text-greensharp">Hello Sir!!</div>
+      <div className="text-greensharp">Hello !!</div>
       <div className="text-greendark">Hello Bhai</div>
       <div className="text-greenprimary">Hello Dear</div>
       <div className="text-greensecondary">Hello USA</div>
