@@ -112,6 +112,20 @@ body {
       #172932 100%
     );
   }
+
+  .register-container-gradient {
+    background: linear-gradient(180deg, #1b4546 0%, #172932 100%);
+  }
+
+  .or-gradient {
+    background: linear-gradient(90deg, #6ae389 -52.38%, #172931 96.43%);
+  }
+
+  .register-background {
+    background-image: url(../../public/assets/register.png);
+    height: 100%;
+    width: 100%;
+  }
 }
 
 @layer base {
