@@ -3,13 +3,14 @@ import React from "react";
 import { FormikProvider, useFormik } from "formik";
 import Image from "next/image";
 
-import { Button } from "../atoms/button";
-import { Input } from "../atoms/input";
+import { Button } from "../../atoms/button";
+import { Input } from "../../atoms/input";
 import { Checkbox } from "@/core/ui/checkbox";
 
-import EmailIcon from "../../../../public/assets/register_email_icon.svg";
-import PhoneIcon from "../../../../public/assets/register_phone_icon.svg";
-import PasswordIcon from "../../../../public/assets/register_password_icon.svg";
+import EmailIcon from "../../../../../public/assets/register_email_icon.svg";
+import PhoneIcon from "../../../../../public/assets/register_phone_icon.svg";
+import PasswordIcon from "../../../../../public/assets/register_password_icon.svg";
+import Link from "next/link";
 
 const RegisterForm = () => {
   const formik = useFormik({
@@ -130,7 +131,7 @@ const RegisterForm = () => {
             className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white w-1/2 flex justify-center items-center"
             type="submit"
           >
-            Next
+            <Link href="/register/upload-image">Next</Link>
           </Button>
         </div>
       </form>

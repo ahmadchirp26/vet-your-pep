@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
 
 import MainLayout from "../components/layout/MainLayout";
-import RegisterForm from "../components/organisms/RegisterForm";
+import RegisterForm from "../components/organisms/Forms/RegisterForm";
 import { Button } from "../components/atoms/button";
 
 import Logo from "../../../public/assets/logo.svg";
