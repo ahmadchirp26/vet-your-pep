@@ -73,13 +73,14 @@ const UploadImageForm = () => {
             </div>
           )}
         </label>
-        <Button
-          className="rounded-full mt-5 w-[180px]  bg-greentertiary hover:bg-greenaccent text-white   flex justify-center items-center"
-          type="submit"
-        >
-          {/* Using a Link for navigation */}
-          <Link href="/login">Create Account</Link>
-        </Button>
+        <Link href="/login">
+          <Button
+            className="rounded-full mt-5 bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-48"
+            type="submit"
+          >
+            Create account
+          </Button>
+        </Link>
       </div>
     </form>
   );

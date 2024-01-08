@@ -127,12 +127,14 @@ const RegisterForm = () => {
 
         {/* Submit Button */}
         <div className="flex justify-center items-center mt-2">
-          <Button
-            className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white w-1/2 flex justify-center items-center"
-            type="submit"
-          >
-            <Link href="/register/upload-image">Next</Link>
-          </Button>
+          <Link href="/register/upload-image">
+            <Button
+              className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-48"
+              type="submit"
+            >
+              Next
+            </Button>
+          </Link>
         </div>
       </form>
     </FormikProvider>
