@@ -1,4 +1,4 @@
-export default function MainLayout({
+export default function ThemeLayout({
   children,
 }: {
   children: React.ReactNode;

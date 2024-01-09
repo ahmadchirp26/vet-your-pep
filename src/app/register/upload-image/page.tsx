@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import MainLayout from "@/app/components/layout/MainLayout";
+import ThemeLayout from "@/app/components/layout/ThemeLayout";
 import UploadImageForm from "@/app/register/upload-image/components/UploadImageForm";
 
 import BackButton from "@/core/ui/backButton";
@@ -9,7 +9,7 @@ export default function UploadImage() {
   const backHref = "/register";
   return (
     <>
-      <MainLayout>
+      <ThemeLayout>
         <div className="flex w-full h-screen p-3 flex-col ">
           <div className="w-full justify-start">
             <BackButton href={backHref} />
@@ -35,7 +35,7 @@ export default function UploadImage() {
             </div>
           </div>
         </div>
-      </MainLayout>
+      </ThemeLayout>
     </>
   );
 }

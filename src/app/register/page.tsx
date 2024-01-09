@@ -2,14 +2,14 @@ import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 
-import MainLayout from "../components/layout/MainLayout";
+import ThemeLayout from "../components/layout/ThemeLayout";
 import RegisterForm from "./components/RegisterForm";
 import { Button } from "@/core/ui/button";
 
 export default function Register() {
   return (
     <>
-      <MainLayout>
+      <ThemeLayout>
         <div className="flex w-full h-full ">
           <div className="w-1/2 max-md:w-full flex flex-col justify-center items-center p-4">
             <div className="flex flex-col mx-4 items-center justify-center w-full gap-3">
@@ -79,7 +79,7 @@ export default function Register() {
             </div>
           </div>
         </div>
-      </MainLayout>
+      </ThemeLayout>
     </>
   );
 }
