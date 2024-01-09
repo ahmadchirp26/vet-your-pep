@@ -3,8 +3,8 @@ import React from "react";
 import { FormikProvider, useFormik } from "formik";
 import Link from "next/link";
 
-import { Button } from "../../atoms/button";
-import { Input } from "../../atoms/input";
+import { Button } from "@/core/ui/button";
+import { Input } from "@/core/ui/input";
 
 const ForgotPassForm = () => {
   const formik = useFormik({

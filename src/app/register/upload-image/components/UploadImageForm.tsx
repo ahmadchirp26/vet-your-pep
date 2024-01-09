@@ -4,8 +4,7 @@ import { useFormik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Button } from "../../atoms/button";
-import UploadIcon from "../../../../../public/assets/upload_icon.svg";
+import { Button } from "@/core/ui/button";
 
 const UploadImageForm = () => {
   const initialValues = {
@@ -69,7 +68,12 @@ const UploadImageForm = () => {
             </div>
           ) : (
             <div className="flex justify-center items-center p-10 bg-greenprimary rounded-2xl ">
-              <Image src={UploadIcon} alt="upload_icon" className="w-10 h-10" />
+              <Image
+                src={"/assets/upload_icon.svg"}
+                alt="upload_icon"
+                width={50}
+                height={50}
+              />
             </div>
           )}
         </label>

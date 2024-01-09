@@ -1,20 +1,16 @@
 "use client";
 import React from "react";
 import { FormikProvider, useFormik } from "formik";
-import Image from "next/image";
 import Link from "next/link";
 
-import { Button } from "../../atoms/button";
-import { Input } from "../../atoms/input";
+import { Button } from "@/core/ui/button";
+import { Input } from "@/core/ui/input";
 
-import EmailIcon from "../../../../../public/assets/register_email_icon.svg";
-import PasswordIcon from "../../../../../public/assets/register_password_icon.svg";
-
-const LoginForm = () => {
+const ResetPassForm = () => {
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      newPassword: "",
+      confirmPassword: "",
     },
 
     onSubmit: (values) => {
@@ -26,40 +22,31 @@ const LoginForm = () => {
   return (
     <FormikProvider value={formik}>
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
-        {/* Email */}
-
-        <div className="flex items-center w-full border-b border-b-graylight ">
+        <div className="flex items-center  border-b border-b-graylight w-[280px]">
           <Input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email Address"
+            type="password"
+            id="newPassword"
+            name="newPassword"
+            placeholder="New Password"
             onChange={formik.handleChange}
-            value={formik.values.email}
+            value={formik.values.newPassword}
             className="bg-transparent outline-none  border-none placeholder:text-graylight "
           />
-          <Image src={EmailIcon} alt="email_icon" className="w-6 h-6" />
         </div>
 
-        {/* Password */}
+        {/* Confirm Password */}
 
         <div className="flex items-center w-full border-b border-b-graylight ">
           <Input
             type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm Password"
             onChange={formik.handleChange}
-            value={formik.values.password}
+            value={formik.values.confirmPassword}
             className="bg-transparent outline-none  border-none placeholder:text-graylight "
           />
-          <Image src={PasswordIcon} alt="password_icon" className="w-6 h-6" />
         </div>
-        <Link href="/login/forgot-password">
-          <div className="w-full justify-end text-xs text-white flex cursor-pointer">
-            Forgot Password?
-          </div>
-        </Link>
 
         {/* Submit Button */}
         <div className="flex justify-center items-center mt-2">
@@ -68,7 +55,7 @@ const LoginForm = () => {
               className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-36"
               type="submit"
             >
-              Next
+              Confirm
             </Button>
           </Link>
         </div>
@@ -77,4 +64,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ResetPassForm;

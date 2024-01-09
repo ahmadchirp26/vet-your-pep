@@ -1,10 +1,9 @@
 import Image from "next/image";
 
 import MainLayout from "@/app/components/layout/MainLayout";
-import UploadImageForm from "@/app/components/organisms/Forms/UploadImageForm";
+import UploadImageForm from "@/app/register/upload-image/components/UploadImageForm";
 
-import Logo from "../../../../public/assets/logo.svg";
-import BackButton from "@/app/components/atoms/backButton";
+import BackButton from "@/core/ui/backButton";
 
 export default function UploadImage() {
   const backHref = "/register";
@@ -16,7 +15,12 @@ export default function UploadImage() {
             <BackButton href={backHref} />
           </div>
           <div className="flex flex-col justify-center items-center gap-2 mt-16">
-            <Image src={Logo} alt="Logo" className="w-24 h-24" />
+            <Image
+              src={"/assets/logo.svg"}
+              alt="Logo"
+              width={100}
+              height={100}
+            />
 
             <span className="text-greensharp text-2xl  font-bold">
               {" "}

@@ -3,10 +3,8 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 
 import MainLayout from "../components/layout/MainLayout";
-import RegisterForm from "../components/organisms/Forms/RegisterForm";
-import { Button } from "../components/atoms/button";
-
-import Logo from "../../../public/assets/logo.svg";
+import RegisterForm from "./components/RegisterForm";
+import { Button } from "@/core/ui/button";
 
 export default function Register() {
   return (
@@ -51,7 +49,12 @@ export default function Register() {
           </div>
           <div className="w-1/2 md:block register-background hidden  h-screen">
             <div className="flex justify-end w-full p-4">
-              <Image src={Logo} alt="logo_image" className="w-16 h-16" />
+              <Image
+                src={"/assets/logo.svg"}
+                alt="logo_image"
+                width={80}
+                height={80}
+              />
             </div>
             <div className="flex w-full justify-center items-center  mt-10">
               <div className=" bg-black rounded-lg w-1/2 p-4 mt-10 bg-opacity-85 max-xl:w-3/4">

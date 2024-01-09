@@ -1,10 +1,8 @@
 import Image from "next/image";
 
 import MainLayout from "@/app/components/layout/MainLayout";
-import BackButton from "@/app/components/atoms/backButton";
-import ForgotPassForm from "@/app/components/organisms/Forms/ForgotPassForm";
-
-import Logo from "../../../../public/assets/logo.svg";
+import BackButton from "@/core/ui/backButton";
+import ForgotPassForm from "./components/ForgotPassForm";
 
 export default function UploadImage() {
   const backHref = "/login";
@@ -16,7 +14,12 @@ export default function UploadImage() {
             <BackButton href={backHref} />
           </div>
           <div className="flex flex-col justify-center items-center gap-4 mt-16">
-            <Image src={Logo} alt="Logo" className="w-24 h-24" />
+            <Image
+              src={"/assets/logo.svg"}
+              alt="Logo"
+              width={100}
+              height={100}
+            />
 
             <span className="text-greensharp text-2xl  font-bold mt-3">
               {" "}

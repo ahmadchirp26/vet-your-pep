@@ -2,17 +2,17 @@ import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
 
 import MainLayout from "../components/layout/MainLayout";
-import { Button } from "../components/atoms/button";
+import { Button } from "../../core/ui/button";
 
 import Logo from "../../../public/assets/logo.svg";
 import Link from "next/link";
-import LoginForm from "../components/organisms/Forms/LoginForm";
+import LoginForm from "./components/LoginForm";
 
 export default function Login() {
   return (
     <>
       <MainLayout>
-        <div className="flex w-full h-full ">
+        <div className="flex w-full h-screen ">
           <div className="w-1/2 max-md:w-full flex flex-col justify-center items-center p-4">
             <div className="flex flex-col mx-4 items-center justify-center w-full gap-3">
               <span className="text-greensharp text-2xl  font-bold">
@@ -51,7 +51,12 @@ export default function Login() {
           </div>
           <div className="w-1/2 md:block login-background hidden  h-screen">
             <div className="flex justify-end w-full p-4">
-              <Image src={Logo} alt="logo_image" className="w-16 h-16" />
+              <Image
+                src={"/assets/logo.svg"}
+                alt="logo_image"
+                width={80}
+                height={80}
+              />
             </div>
             <div className="flex w-full justify-center items-center  mt-10">
               <div className=" bg-black rounded-lg w-1/2 p-4 mt-10 bg-opacity-85 max-xl:w-3/4">

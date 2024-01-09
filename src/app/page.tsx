@@ -1,4 +1,4 @@
-import { Button } from "@/app/components/atoms/button";
+import { Button } from "@/core/ui/button";
 
 export default function HomePage() {
   console.log("Hello World");

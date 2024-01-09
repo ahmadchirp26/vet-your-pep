@@ -2,15 +2,11 @@
 import React from "react";
 import { FormikProvider, useFormik } from "formik";
 import Image from "next/image";
-
-import { Button } from "../../atoms/button";
-import { Input } from "../../atoms/input";
-import { Checkbox } from "@/core/ui/checkbox";
-
-import EmailIcon from "../../../../../public/assets/register_email_icon.svg";
-import PhoneIcon from "../../../../../public/assets/register_phone_icon.svg";
-import PasswordIcon from "../../../../../public/assets/register_password_icon.svg";
 import Link from "next/link";
+
+import { Button } from "@/core/ui/button";
+import { Input } from "@/core/ui/input";
+import { Checkbox } from "@/core/ui/checkbox";
 
 const RegisterForm = () => {
   const formik = useFormik({
@@ -44,7 +40,12 @@ const RegisterForm = () => {
             value={formik.values.email}
             className="bg-transparent outline-none  border-none placeholder:text-graylight "
           />
-          <Image src={EmailIcon} alt="email_icon" className="w-6 h-6" />
+          <Image
+            src={"/assets/register_email_icon.svg"}
+            alt="email_icon"
+            width={22}
+            height={22}
+          />
         </div>
 
         {/* First Name and Last Name */}
@@ -85,7 +86,12 @@ const RegisterForm = () => {
             value={formik.values.phoneNumber}
             className="bg-transparent outline-none  border-none placeholder:text-graylight "
           />
-          <Image src={PhoneIcon} alt="phone_icon" className="w-6 h-6" />
+          <Image
+            src={"/assets/register_phone_icon.svg"}
+            alt="phone_icon"
+            width={18}
+            height={18}
+          />
         </div>
 
         {/* Password */}
@@ -100,7 +106,12 @@ const RegisterForm = () => {
             value={formik.values.password}
             className="bg-transparent outline-none  border-none placeholder:text-graylight "
           />
-          <Image src={PasswordIcon} alt="password_icon" className="w-6 h-6" />
+          <Image
+            src={"/assets/register_password_icon.svg"}
+            alt="password_icon"
+            width={22}
+            height={22}
+          />
         </div>
 
         {/* Confirm Password */}
@@ -115,7 +126,12 @@ const RegisterForm = () => {
             value={formik.values.confirmPassword}
             className="bg-transparent outline-none  border-none placeholder:text-graylight "
           />
-          <Image src={PasswordIcon} alt="password_icon" className="w-6 h-6" />
+          <Image
+            src={"/assets/register_password_icon.svg"}
+            alt="password_icon"
+            width={22}
+            height={22}
+          />
         </div>
 
         <div className="flex gap-2">
