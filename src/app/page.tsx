@@ -1,3 +1,12 @@
+import { Button } from "@/core/ui/button";
+
 export default function HomePage() {
-  return <main>{"Hello World  "} </main>;
+  console.log("Hello World");
+  return (
+    <>
+      <div className="text-greensharp">Hello World !!</div>
+
+      <Button>Testing</Button>
+    </>
+  );
 }
