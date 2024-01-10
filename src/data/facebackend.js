@@ -14,6 +14,12 @@ import OnlineFriend6 from "../../public/assets/online_friend5.png";
 import OnlineFriend7 from "../../public/assets/online_friend6.png";
 import OnlineFriend8 from "../../public/assets/online_friend7.png";
 
+import PostImage1 from "../../public/assets/post_image1.jpg";
+
+import PostImage2 from "../../public/assets/post_image2 .jpg";
+
+import PostImage3 from "../../public/assets/post_image3.jpg";
+
 export const channels = [
   {
     image: ChannelImage1,
@@ -72,4 +78,43 @@ export const onlineFriends = [
   {
     image: OnlineFriend8,
   },
+];
+
+export const posts = [
+  {
+    username: "John Doe",
+    profileImage: OnlineFriend1,
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eli velit, pretium ac gravida a Lorem ipsum dolor sit amet, consecteturadipiscing elit. Duis elit velit, pretium ac gravida a sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida aLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elitvelit, pretium ac gravida a sit amet, consectetur adipiscing elit.Duis elit velit, pretium ac gravida a Lorem ipsum dolor sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postImage: PostImage1,
+    postedTime: "5 min ago",
+    group: "AI Discussion",
+    likes: "56",
+    comments: "78",
+  },
+
+  {
+    username: "Tina Fox",
+    profileImage: OnlineFriend2,
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eli velit, pretium ac gravida a Lorem ipsum dolor sit amet, consecteturadipiscing elit. Duis elit velit, pretium ac gravida a sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida aLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elitvelit, pretium ac gravida a sit amet, consectetur adipiscing elit.Duis elit velit, pretium ac gravida a Lorem ipsum dolor sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postImage: PostImage2,
+    postedTime: "15 min ago",
+    group: "Health & Fitness ",
+    likes: "26",
+    comments: "18",
+  },
+  {
+    username: "Lius Wigton",
+    profileImage: OnlineFriend3,
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eli velit, pretium ac gravida a Lorem ipsum dolor sit amet, consecteturadipiscing elit. Duis elit velit, pretium ac gravida a sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida aLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elitvelit, pretium ac gravida a sit amet, consectetur adipiscing elit.Duis elit velit, pretium ac gravida a Lorem ipsum dolor sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postImage: PostImage3,
+    postedTime: "40 min ago",
+    group: "Education ",
+    likes: "6",
+    comments: "10",
+  },
+
+  // Add more posts as needed
 ];

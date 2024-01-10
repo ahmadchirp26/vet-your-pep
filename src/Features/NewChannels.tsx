@@ -5,8 +5,8 @@ const NewChannels = () => {
   const channelsArray = channels;
   return (
     <>
-      <div className="flex flex-col rounded-3xl container-drop-shadow bg-greendarkest p-4 ">
-        <span className="text-white font-bold">New Channels</span>
+      <div className="flex flex-col rounded-3xl container-drop-shadow bg-greendarkest p-4">
+        <span className="text-white font-bold mt-3">New Channels</span>
 
         <div className="mt-3">
           {channelsArray.map((channel, index) => (

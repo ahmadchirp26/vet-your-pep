@@ -16,7 +16,7 @@ const OnlineFriends = () => {
         {friendsArray.map((friend, index) => (
           <OnlineAvatar key={index} friend={friend} />
         ))}
-        <div className="cursor-pointer items-center justify-center flex rounded-full mt-4 bg-greenlight p-4">
+        <div className="cursor-pointer items-center justify-center flex rounded-full mt-4 bg-greenlight p-3">
           <Image
             src={"/assets/arrowdown_icon.svg"}
             alt="arrowdown_icon"
