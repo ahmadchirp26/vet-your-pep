@@ -1,5 +1,6 @@
 import AllChannels from "@/Features/AllChannels";
 import NewChannels from "@/Features/NewChannels";
+import OnlineFriends from "@/Features/OnlineFriends";
 import ProfileCard from "@/Features/ProfileCard";
 
 export default function HomePage() {
@@ -13,6 +14,7 @@ export default function HomePage() {
           <AllChannels />
         </div>
         <NewChannels />
+        <OnlineFriends />
       </div>
     </>
   );

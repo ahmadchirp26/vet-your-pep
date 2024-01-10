@@ -5,6 +5,15 @@ import ChannelImage4 from "../../public/assets/channel_image4.png";
 import ChannelImage5 from "../../public/assets/channel_image5.png";
 import ChannelImage6 from "../../public/assets/channel_image6.png";
 
+import OnlineFriend1 from "../../public/assets/online_friend.png";
+import OnlineFriend2 from "../../public/assets/online_friend1.png";
+import OnlineFriend3 from "../../public/assets/online_friend2.png";
+import OnlineFriend4 from "../../public/assets/online_friend3.png";
+import OnlineFriend5 from "../../public/assets/online_friend4.png";
+import OnlineFriend6 from "../../public/assets/online_friend5.png";
+import OnlineFriend7 from "../../public/assets/online_friend6.png";
+import OnlineFriend8 from "../../public/assets/online_friend7.png";
+
 export const channels = [
   {
     image: ChannelImage1,
@@ -35,5 +44,32 @@ export const channels = [
     image: ChannelImage6,
     title: "Fitness & Lifestyle",
     members: "9.67K",
+  },
+];
+
+export const onlineFriends = [
+  {
+    image: OnlineFriend1,
+  },
+  {
+    image: OnlineFriend2,
+  },
+  {
+    image: OnlineFriend3,
+  },
+  {
+    image: OnlineFriend4,
+  },
+  {
+    image: OnlineFriend5,
+  },
+  {
+    image: OnlineFriend6,
+  },
+  {
+    image: OnlineFriend7,
+  },
+  {
+    image: OnlineFriend8,
   },
 ];

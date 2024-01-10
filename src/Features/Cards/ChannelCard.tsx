@@ -1,5 +1,5 @@
 // ChannelCard.tsx
-import Image, { StaticImageData } from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { Button } from "@/core/ui/button";
 
