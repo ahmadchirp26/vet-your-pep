@@ -1,4 +1,5 @@
 import AllChannels from "@/Features/AllChannels";
+import NewChannels from "@/Features/NewChannels";
 import ProfileCard from "@/Features/ProfileCard";
 
 export default function HomePage() {
@@ -11,6 +12,7 @@ export default function HomePage() {
 
           <AllChannels />
         </div>
+        <NewChannels />
       </div>
     </>
   );

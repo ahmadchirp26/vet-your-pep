@@ -1,11 +1,11 @@
 "use client";
 
-import SearchBar from "@/app/(dashboard)/components/SearchBar";
 import Image from "next/image";
 import { useState } from "react";
 
 import { channels } from "@/data/facebackend";
-import ChannelCard from "./Cards/ChannelCard";
+import SearchBar from "@/app/(dashboard)/components/SearchBar";
+import ChannelCard from "@/Features/Cards/ChannelCard";
 
 const AllChannels = () => {
   const [activeSearch, setActiveSearch] = useState(false);
@@ -35,7 +35,7 @@ const AllChannels = () => {
 
         <div className="mt-3">
           {channelsArray.map((channel, index) => (
-            <ChannelCard key={index} channel={channel} />
+            <ChannelCard key={index} channel={channel} showJoinButton={false} />
           ))}
         </div>
       </div>
