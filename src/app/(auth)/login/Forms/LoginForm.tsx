@@ -70,12 +70,12 @@ const LoginForm = () => {
 
         {/* Submit Button */}
         <div className="flex justify-center items-center mt-2">
-          <Link href="/login">
+          <Link href="/">
             <Button
               className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-36"
               type="submit"
             >
-              Next
+              Login
             </Button>
           </Link>
         </div>

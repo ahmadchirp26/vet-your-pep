@@ -1,4 +1,4 @@
-const SettingsIcon = ({ fill, onClick }:any) => {
+const SettingsIcon = ({ fill, onClick }: any) => {
   return (
     <>
       <svg

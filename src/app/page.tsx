@@ -6,8 +6,6 @@ export default function HomePage() {
   return (
     <>
       <DashboardLayout>
-        <div className="text-greensharp">Hello World !!</div>
-
         <Button>Testing</Button>
       </DashboardLayout>
     </>

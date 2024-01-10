@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 
 import SearchBar from "./components/SearchBar";
 import AuthMenu from "./components/AuthMenu";
@@ -7,7 +8,11 @@ import ResponsiveMenu from "./components/ResponsiveMenu";
 
 import Logo from "../../../public/assets/logo.svg";
 
-export default function DashboardLayout() {
+interface DashboardLayoutProps {
+  children: ReactNode;
+}
+
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
     <>
       <div className="h-full w-full flex flex-col  ">
@@ -28,15 +33,19 @@ export default function DashboardLayout() {
             <ResponsiveMenu />
           </div>
         </div>
+        <div className="flex mt-5">
+          <div className="p-2 max-sm:hidden">
+            <LeftSideBar />
+          </div>
 
-        <div className="p-2 mt-5 max-sm:hidden">
-          <LeftSideBar />
-        </div>
-
-        {/* <div className="sm:hidden mt-5 flex-shrink-0  w-full  p-2">
+          {/* <div className="sm:hidden mt-5 flex-shrink-0  w-full  p-2">
           <SearchBar />
         </div> */}
+          <div className="w-full h-full">{children}</div>
+        </div>
       </div>
     </>
   );
-}
+};
+
+export default DashboardLayout;

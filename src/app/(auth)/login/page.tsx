@@ -1,14 +1,15 @@
 import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
-import Link from "next/link";
 
-import RegisterForm from "./components/RegisterForm";
 import { Button } from "@/core/ui/button";
 
-export default function Register() {
+import Link from "next/link";
+import LoginForm from "@/app/(auth)/login/Forms/LoginForm";
+
+export default function Login() {
   return (
     <>
-      <div className="flex w-full h-full ">
+      <div className="flex w-full h-screen ">
         <div className="w-1/2 max-md:w-full flex flex-col justify-center items-center p-4">
           <div className="flex flex-col mx-4 items-center justify-center w-full gap-3">
             <span className="text-greensharp text-2xl  font-bold">
@@ -16,17 +17,15 @@ export default function Register() {
               VetYourPep
             </span>
             <span className="font-bold text-greensecondary text-xl">
-              Create your account
+              Login to your account
             </span>
-            <div className="rounded-3xl register-container-gradient p-8 w-3/2 mt-1">
-              <RegisterForm />
+            <div className="rounded-3xl register-container-gradient p-8 w-1/2 mt-1">
+              <LoginForm />
             </div>
             <span className="text-white">
-              Have an account?{" "}
-              <Link href="/login">
-                <span className="text-greensharp underline cursor-pointer">
-                  Login here
-                </span>
+              Don't have an account?{" "}
+              <Link href="/register">
+                <span className="text-greensharp underline">Sign up here</span>
               </Link>
             </span>
             <div className="flex items-center w-1/2 justify-center mt-2">
@@ -39,13 +38,13 @@ export default function Register() {
 
             <Button
               type="submit"
-              className="field-drop-shadow flex h-10 px-10 items-center hover:bg-white justify-center gap-3 rounded-full bg-white text-black"
+              className="field-drop-shadow mt-3 flex h-10 px-10 items-center hover:bg-white justify-center gap-3 rounded-full bg-white text-black"
             >
               <FcGoogle size={25} /> Sign up with Google
             </Button>
           </div>
         </div>
-        <div className="w-1/2 md:block register-background hidden  h-screen">
+        <div className="w-1/2 md:block login-background hidden  h-screen">
           <div className="flex justify-end w-full p-4">
             <Image
               src={"/assets/logo.svg"}

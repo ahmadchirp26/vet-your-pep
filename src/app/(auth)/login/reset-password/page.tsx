@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 import BackButton from "@/core/ui/backButton";
-import ResetPassForm from "@/app/login/reset-password/components/ResetPassForm";
+import ResetPassForm from "@/app/(auth)/login/Forms/ResetPassForm";
 
-export default function UploadImage() {
+export default function ResetPassword() {
   const backHref = "/login/verification-code";
   return (
     <>

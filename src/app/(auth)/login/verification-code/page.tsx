@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 import BackButton from "@/core/ui/backButton";
-import VerifyCodeForm from "@/app/login/verification-code/components/VerifyCodeForm";
+import VerifyCodeForm from "@/app/(auth)/login/Forms/VerifyCodeForm";
 
-export default function UploadImage() {
+export default function VerifyCode() {
   const backHref = "/login/forgot-password";
   return (
     <>

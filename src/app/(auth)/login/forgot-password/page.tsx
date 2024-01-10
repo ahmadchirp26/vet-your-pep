@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 import BackButton from "@/core/ui/backButton";
-import ForgotPassForm from "./components/ForgotPassForm";
+import ForgotPassForm from "@/app/(auth)/login/Forms/ForgotPassForm";
 
-export default function UploadImage() {
+export default function ForgetPassword() {
   const backHref = "/login";
   return (
     <>

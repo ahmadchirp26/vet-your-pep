@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import UploadImageForm from "@/app/register/upload-image/components/UploadImageForm";
+import UploadImageForm from "@/app/(auth)/register/Forms/UploadImageForm";
 import BackButton from "@/core/ui/backButton";
 
 export default function UploadImage() {
