@@ -10,6 +10,7 @@ import {
 } from "@/core/ui/dropdown-menu";
 import LikeIcon from "@/core/icons/LikeIcon";
 import PostLikesDialog from "@/Features/Dialogs/PostLikesDialog";
+import CommentsSection from "@/Features/CommentsSection";
 
 interface Post {
   profileImage: StaticImageData;
@@ -29,12 +30,17 @@ interface PostCardProps {
 const PostCard = ({ post }: PostCardProps) => {
   const [isLiked, setIsLiked] = useState(false);
   const [openLikesDialog, setOpenLikesDialog] = useState(false);
-  console.log(openLikesDialog);
+  const [openComments, setOpenComments] = useState(false);
+
   const handleLikesDialog = () => {
     setOpenLikesDialog(true);
   };
   const handleLikeButton = () => {
     setIsLiked(!isLiked);
+  };
+
+  const handleCommentsSection = () => {
+    setOpenComments(!openComments);
   };
   return (
     <>
@@ -111,7 +117,10 @@ const PostCard = ({ post }: PostCardProps) => {
               onClose={() => setOpenLikesDialog(false)}
             />
           )}
-          <div className="flex gap-2 items-center">
+          <div
+            className="flex gap-2 items-center cursor-pointer"
+            onClick={handleCommentsSection}
+          >
             <Image
               src={"/assets/comment_icon.svg"}
               alt="comment_icon"
@@ -121,6 +130,7 @@ const PostCard = ({ post }: PostCardProps) => {
             <span className="text-graylight">{post.comments} comments </span>
           </div>
         </div>
+        {openComments && <CommentsSection />}
       </div>
     </>
   );

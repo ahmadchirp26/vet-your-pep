@@ -63,10 +63,9 @@ module.exports = {
           foreground: "hsl(var(--greenlighth-foreground))",
         },
 
-        greendialog:{
+        greendialog: {
           DEFAULT: "hsl(var(--greendialog))",
           foreground: "hsl(var(--greendialog-foreground))",
-          
         },
 
         graydark: {

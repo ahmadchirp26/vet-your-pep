@@ -134,3 +134,28 @@ export const likes = [
     profileAvatar: OnlineFriend3,
   },
 ];
+
+export const comments = [
+  {
+    username: "John Doe",
+    profileAvatar: OnlineFriend1,
+    commentContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postedTime: "5 mins ago",
+  },
+
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend2,
+    commentContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postedTime: "20 mins ago",
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend3,
+    commentContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postedTime: "33 mins ago",
+  },
+];

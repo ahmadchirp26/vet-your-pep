@@ -9,13 +9,15 @@ export default function HomePage() {
   return (
     <>
       <div className="flex gap-3 p-4">
-        <div className="flex flex-col gap-4 min-w-[220px]">
+        <div className="flex flex-col gap-4 min-w-[220px] max-sm:hidden">
           <ProfileCard />
 
           <AllChannels />
         </div>
         <FeedPosts />
+
         <NewChannels />
+
         <OnlineFriends />
       </div>
     </>
