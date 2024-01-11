@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
+
 import HomeIcon from "@/core/icons/HomeIcon";
 import CalendarIcon from "@/core/icons/CalendarIcon";
 import RulesIcon from "@/core/icons/RulesIcon";
@@ -19,18 +21,22 @@ const LeftSideBar = () => {
   return (
     <div className="bg-greendarkest px-2 py-10 rounded-full flex-col gap-5 container-drop-shadow w-16 items-center justify-center">
       <div className="flex flex-col gap-10 items-center justify-center w-full">
-        <HomeIcon
-          fill={isIconActive("home") ? "#79CD00" : "#ACACAC"}
-          onClick={() => handleIconClick("home")}
-          width={33}
-          height={33}
-        />
-        <CalendarIcon
-          fill={isIconActive("calendar") ? "#79CD00" : "#ACACAC"}
-          onClick={() => handleIconClick("calendar")}
-          width={33}
-          height={33}
-        />
+        <Link href="/">
+          <HomeIcon
+            fill={isIconActive("home") ? "#79CD00" : "#ACACAC"}
+            onClick={() => handleIconClick("home")}
+            width={33}
+            height={33}
+          />
+        </Link>
+        <Link href="/channels">
+          <CalendarIcon
+            fill={isIconActive("calendar") ? "#79CD00" : "#ACACAC"}
+            onClick={() => handleIconClick("calendar")}
+            width={33}
+            height={33}
+          />
+        </Link>
         <RulesIcon
           fill={isIconActive("rules") ? "#79CD00" : "#ACACAC"}
           onClick={() => handleIconClick("rules")}

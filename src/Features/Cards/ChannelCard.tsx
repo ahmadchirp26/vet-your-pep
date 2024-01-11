@@ -11,10 +11,15 @@ interface Channel {
 
 interface ChannelCardProps {
   channel: Channel;
-  showJoinButton?: boolean; // Optional prop to show/hide the Join button
+  showJoinButton?: boolean;
+  ButtonText?: string;
 }
 
-const ChannelCard = ({ channel, showJoinButton = true }: ChannelCardProps) => {
+const ChannelCard = ({
+  channel,
+  ButtonText,
+  showJoinButton = true,
+}: ChannelCardProps) => {
   return (
     <>
       <div className="flex gap-3 w-full items-center mt-5 max-xl:flex-col max-xl:justify-center">
@@ -34,7 +39,7 @@ const ChannelCard = ({ channel, showJoinButton = true }: ChannelCardProps) => {
                 className="rounded-full border border-white bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-20"
                 type="button"
               >
-                Join
+                {ButtonText}
               </Button>
             </Link>
           </div>

@@ -12,7 +12,12 @@ const NewChannels = () => {
 
         <div className="mt-3">
           {channelsArray.map((channel, index) => (
-            <ChannelCard key={index} channel={channel} showJoinButton={true} />
+            <ChannelCard
+              key={index}
+              channel={channel}
+              showJoinButton={true}
+              ButtonText="Join"
+            />
           ))}
         </div>
       </div>
