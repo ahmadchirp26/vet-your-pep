@@ -33,11 +33,15 @@ export function ProfileAvatar({ online = true }) {
           </div>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" forceMount>
-        <DropdownMenuItem>
-          Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+      <DropdownMenuContent
+        className="w-56 bg-greendarkest cursor-pointer border-none text-white"
+        align="end"
+        forceMount
+      >
+        <DropdownMenuItem className="cursor-pointer">
+          View Profile
         </DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">Log out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
