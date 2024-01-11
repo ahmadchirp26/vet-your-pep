@@ -37,12 +37,14 @@ const LeftSideBar = () => {
             height={33}
           />
         </Link>
-        <RulesIcon
-          fill={isIconActive("rules") ? "#79CD00" : "#ACACAC"}
-          onClick={() => handleIconClick("rules")}
-          width={33}
-          height={33}
-        />
+        <Link href="/app-rules">
+          <RulesIcon
+            fill={isIconActive("rules") ? "#79CD00" : "#ACACAC"}
+            onClick={() => handleIconClick("rules")}
+            width={33}
+            height={33}
+          />
+        </Link>
         <SettingsIcon
           fill={isIconActive("settings") ? "#79CD00" : "#ACACAC"}
           onClick={() => handleIconClick("settings")}

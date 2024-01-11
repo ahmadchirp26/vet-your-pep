@@ -169,3 +169,25 @@ export const comments = [
     postedTime: "33 mins ago",
   },
 ];
+
+export const rules = [
+  {
+    title: "New Rule",
+    ruleContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eli velit, pretium ac gravida a Lorem ipsum dolor sit amet, consecteturadipiscing elit. Duis elit velit, pretium ac gravida a sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida aLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elitvelit, pretium ac gravida a sit amet, consectetur adipiscing elit.Duis elit velit, pretium ac gravida a Lorem ipsum dolor sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postedTime: "5 mins ago",
+  },
+
+  {
+    title: "New Rule",
+    ruleContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eli velit, pretium ac gravida a Lorem ipsum dolor sit amet, consecteturadipiscing elit. Duis elit velit, pretium ac gravida a sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida aLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elitvelit, pretium ac gravida a sit amet, consectetur adipiscing elit.Duis elit velit, pretium ac gravida a Lorem ipsum dolor sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postedTime: "20 mins ago",
+  },
+  {
+    title: "New Rule",
+    ruleContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eli velit, pretium ac gravida a Lorem ipsum dolor sit amet, consecteturadipiscing elit. Duis elit velit, pretium ac gravida a sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida aLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elitvelit, pretium ac gravida a sit amet, consectetur adipiscing elit.Duis elit velit, pretium ac gravida a Lorem ipsum dolor sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postedTime: "1 hr ago",
+  },
+];
