@@ -16,7 +16,7 @@ const RuleCard = ({ rule }: RuleCardProps) => {
           <span className="text-white font-bold">{rule.title}</span>
           <span className="text-greensharp text-sm">{rule.postedTime}</span>
         </div>
-        <span className="text-graydark">{rule.ruleContent}</span>
+        <span className="text-graylight">{rule.ruleContent}</span>
       </div>
     </>
   );
