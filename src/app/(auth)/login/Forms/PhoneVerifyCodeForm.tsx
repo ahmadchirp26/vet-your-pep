@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "@/core/ui/button";
 import { Input } from "@/core/ui/input";
 
-const VerifyCodeForm = () => {
+const PhoneVerifyCodeForm = () => {
   const formik = useFormik({
     initialValues: {
       verificationCode: "",
@@ -37,12 +37,12 @@ const VerifyCodeForm = () => {
 
         {/* Submit Button */}
         <div className="flex justify-center items-center mt-2">
-          <Link href="/login/reset-password">
+          <Link href="/account-settings">
             <Button
               className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-36"
               type="submit"
             >
-              Next
+              Verify
             </Button>
           </Link>
         </div>
@@ -51,4 +51,4 @@ const VerifyCodeForm = () => {
   );
 };
 
-export default VerifyCodeForm;
+export default PhoneVerifyCodeForm;
