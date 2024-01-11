@@ -42,6 +42,11 @@ export const channels = [
     members: "1.6K",
   },
   {
+    image: ChannelImage1,
+    title: "Diet, Food",
+    members: "503",
+  },
+  {
     image: ChannelImage5,
     title: "Education",
     members: "126",
@@ -50,6 +55,11 @@ export const channels = [
     image: ChannelImage6,
     title: "Fitness & Lifestyle",
     members: "9.67K",
+  },
+  {
+    image: ChannelImage4,
+    title: "Sports Club",
+    members: "1.6K",
   },
 ];
 
