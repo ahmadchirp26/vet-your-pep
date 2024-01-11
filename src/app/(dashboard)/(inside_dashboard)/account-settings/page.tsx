@@ -2,6 +2,7 @@ import { Button } from "@/core/ui/button";
 import { Switch } from "@/core/ui/switch";
 import { blockList } from "@/data/facebackend";
 import BlockListCard from "@/app/(dashboard)/(inside_dashboard)/account-settings/components/BlockListCard";
+import Link from "next/link";
 
 const AccountSettings = () => {
   const blockArray = blockList;
@@ -53,16 +54,18 @@ const AccountSettings = () => {
 
             <div className="mt-2 flex w-full justify-between">
               <span className="text-graylight">Verify my number</span>
-              <Button
-                className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-28"
-                type="button"
-              >
-                Verify Now
-              </Button>
+              <Link href="/phone-verification">
+                <Button
+                  className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-28"
+                  type="button"
+                >
+                  Verify Now
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
-        <div className="bg-greendarkest w-[280px] max-md:w-[240px] rounded-2xl container-drop-shadow">
+        <div className="bg-greendarkest w-[300px] max-md:w-[240px] rounded-2xl container-drop-shadow">
           <div className="mt-3 w-full gap-4 flex flex-col p-4">
             {blockArray.map((block, index) => (
               <BlockListCard key={index} block={block} />
