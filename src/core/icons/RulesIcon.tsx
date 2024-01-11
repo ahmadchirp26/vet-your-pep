@@ -1,9 +1,9 @@
-const RulesIcon = ({ fill, onClick }: any) => {
+const RulesIcon = ({ fill, onClick, width, height }: any) => {
   return (
     <>
       <svg
-        width="33"
-        height="33"
+        width={width}
+        height={height}
         viewBox="0 0 34 39"
         fill={fill}
         onClick={onClick}

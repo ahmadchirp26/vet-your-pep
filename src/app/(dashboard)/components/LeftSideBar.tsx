@@ -22,22 +22,32 @@ const LeftSideBar = () => {
         <HomeIcon
           fill={isIconActive("home") ? "#79CD00" : "#ACACAC"}
           onClick={() => handleIconClick("home")}
+          width={33}
+          height={33}
         />
         <CalendarIcon
           fill={isIconActive("calendar") ? "#79CD00" : "#ACACAC"}
           onClick={() => handleIconClick("calendar")}
+          width={33}
+          height={33}
         />
         <RulesIcon
           fill={isIconActive("rules") ? "#79CD00" : "#ACACAC"}
           onClick={() => handleIconClick("rules")}
+          width={33}
+          height={33}
         />
         <SettingsIcon
           fill={isIconActive("settings") ? "#79CD00" : "#ACACAC"}
           onClick={() => handleIconClick("settings")}
+          width={33}
+          height={33}
         />
         <SupportIcon
           fill={isIconActive("support") ? "#79CD00" : "#ACACAC"}
           onClick={() => handleIconClick("support")}
+          width={33}
+          height={33}
         />
       </div>
     </div>

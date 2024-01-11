@@ -1,9 +1,9 @@
-const CalendarIcon = ({ fill, onClick }: any) => {
+const CalendarIcon = ({ fill, onClick, width, height }: any) => {
   return (
     <>
       <svg
-        width="33"
-        height="33"
+        width={width}
+        height={height}
         viewBox="0 0 37 39"
         fill={fill}
         onClick={onClick}

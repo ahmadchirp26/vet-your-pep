@@ -8,17 +8,24 @@ export default function HomePage() {
   console.log("Hello World");
   return (
     <>
-      <div className="flex gap-3 p-4">
-        <div className="flex flex-col gap-4 min-w-[220px] max-sm:hidden">
+      <div className="flex gap-3 p-4 max-sm:p-1  ">
+        <div className="flex flex-col gap-4 min-w-[220px] max-md:hidden max-xl:min-w-[170px] max-lg:min-w-[150px]">
           <ProfileCard />
 
           <AllChannels />
         </div>
-        <FeedPosts />
+        <div className="flex max-md:flex-col gap-3  ">
+          <div className="max-md:order-2">
+            <FeedPosts />
+          </div>
 
-        <NewChannels />
-
-        <OnlineFriends />
+          <div className="max-lg:hidden">
+            <NewChannels />
+          </div>
+          <div className="max-md:order-1">
+            <OnlineFriends />
+          </div>
+        </div>
       </div>
     </>
   );

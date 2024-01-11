@@ -1,9 +1,9 @@
-const SettingsIcon = ({ fill, onClick }: any) => {
+const SettingsIcon = ({ fill, onClick, width, height }: any) => {
   return (
     <>
       <svg
-        width="33"
-        height="33"
+        width={width}
+        height={height}
         viewBox="0 0 37 37"
         fill={fill}
         onClick={onClick}

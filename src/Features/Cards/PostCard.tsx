@@ -107,7 +107,10 @@ const PostCard = ({ post }: PostCardProps) => {
               stroke={isLiked ? "red" : "#79CD00"}
               onClick={() => handleLikeButton()}
             />
-            <span className="text-graylight" onClick={handleLikesDialog}>
+            <span
+              className="text-graylight max-lg:text-sm"
+              onClick={handleLikesDialog}
+            >
               {post.likes} Likes{" "}
             </span>
           </div>
@@ -127,7 +130,9 @@ const PostCard = ({ post }: PostCardProps) => {
               width={20}
               height={20}
             />
-            <span className="text-graylight">{post.comments} comments </span>
+            <span className="text-graylight max-lg:text-sm">
+              {post.comments} comments{" "}
+            </span>
           </div>
         </div>
         {openComments && <CommentsSection />}

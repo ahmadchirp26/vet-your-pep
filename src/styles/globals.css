@@ -53,8 +53,8 @@ body {
     --greendarkest: 180, 44%, 13%, 1;
     --greendarkest-foreground: 180, 44%, 13%, 1;
 
-    --greendialog:180, 44%, 10%, 1;
-    --greendialog-foreground: 180, 44%,10%, 1;
+    --greendialog: 180, 44%, 10%, 1;
+    --greendialog-foreground: 180, 44%, 10%, 1;
 
     /* ****************************** */
     --primary: 222.2 47.4% 11.2%;
@@ -144,6 +144,20 @@ body {
 
   .container-drop-shadow {
     box-shadow: 0px 0px 15px 0px #247a7f;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the track */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #c5c5c5; /* Color of the thumb */
+    border-radius: 6px; /* Rounded corners */
   }
 }
 
