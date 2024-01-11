@@ -191,3 +191,19 @@ export const rules = [
     postedTime: "1 hr ago",
   },
 ];
+
+export const blockList = [
+  {
+    username: "John Doe",
+    profileAvatar: OnlineFriend1,
+  },
+
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend2,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend3,
+  },
+];

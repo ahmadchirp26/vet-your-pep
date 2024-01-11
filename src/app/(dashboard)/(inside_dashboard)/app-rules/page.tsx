@@ -7,12 +7,12 @@ const AppRules = () => {
   const RulesArray = rules;
   return (
     <>
-      <div className="flex p-4 gap-2">
+      <div className="flex p-4 gap-4">
         <div className="flex flex-col gap-2 max-sm:hidden">
           <ProfileCard />
           <AllChannels />
         </div>
-        <div className="bg-greendarkest rounded-2xl p-4 ">
+        <div className="bg-greendarkest rounded-2xl p-4 container-drop-shadow ">
           {RulesArray.map((rule, index) => (
             <RuleCard key={index} rule={rule} />
           ))}

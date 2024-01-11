@@ -45,12 +45,14 @@ const LeftSideBar = () => {
             height={33}
           />
         </Link>
-        <SettingsIcon
-          fill={isIconActive("settings") ? "#79CD00" : "#ACACAC"}
-          onClick={() => handleIconClick("settings")}
-          width={33}
-          height={33}
-        />
+        <Link href="/account-settings">
+          <SettingsIcon
+            fill={isIconActive("settings") ? "#79CD00" : "#ACACAC"}
+            onClick={() => handleIconClick("settings")}
+            width={33}
+            height={33}
+          />
+        </Link>
         <SupportIcon
           fill={isIconActive("support") ? "#79CD00" : "#ACACAC"}
           onClick={() => handleIconClick("support")}
