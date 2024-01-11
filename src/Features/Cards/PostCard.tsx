@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/core/ui/dropdown-menu";
 import LikeIcon from "@/core/icons/LikeIcon";
+import PostLikesDialog from "@/Features/Dialogs/PostLikesDialog";
 
 interface Post {
   profileImage: StaticImageData;
@@ -27,6 +28,11 @@ interface PostCardProps {
 
 const PostCard = ({ post }: PostCardProps) => {
   const [isLiked, setIsLiked] = useState(false);
+  const [openLikesDialog, setOpenLikesDialog] = useState(false);
+  console.log(openLikesDialog);
+  const handleLikesDialog = () => {
+    setOpenLikesDialog(true);
+  };
   const handleLikeButton = () => {
     setIsLiked(!isLiked);
   };
@@ -89,14 +95,22 @@ const PostCard = ({ post }: PostCardProps) => {
           />
         </div>
         <div className="flex gap-5 items-center mt-4 px-4 ">
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center cursor-pointer">
             <LikeIcon
               fill={isLiked ? "red" : "transparent"}
               stroke={isLiked ? "red" : "#79CD00"}
               onClick={() => handleLikeButton()}
             />
-            <span className="text-graylight">{post.likes} Likes </span>
+            <span className="text-graylight" onClick={handleLikesDialog}>
+              {post.likes} Likes{" "}
+            </span>
           </div>
+          {openLikesDialog && (
+            <PostLikesDialog
+              isOpen={openLikesDialog}
+              onClose={() => setOpenLikesDialog(false)}
+            />
+          )}
           <div className="flex gap-2 items-center">
             <Image
               src={"/assets/comment_icon.svg"}

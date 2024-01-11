@@ -118,3 +118,19 @@ export const posts = [
 
   // Add more posts as needed
 ];
+
+export const likes = [
+  {
+    username: "John Doe",
+    profileAvatar: OnlineFriend1,
+  },
+
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend2,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend3,
+  },
+];

@@ -9,7 +9,7 @@ export default function HomePage() {
   return (
     <>
       <div className="flex gap-3 p-4">
-        <div className="flex flex-col gap-4 w-80">
+        <div className="flex flex-col gap-4 min-w-[220px]">
           <ProfileCard />
 
           <AllChannels />

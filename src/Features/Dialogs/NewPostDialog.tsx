@@ -24,7 +24,7 @@ const NewPostDialog = ({ isOpen, onClose }: NewPostDialogProps) => {
             <div className="flex justify-between items-center">
               <span className="text-white font-bold">What's on your mind</span>
               <Select>
-                <SelectTrigger className="w-[160px] h-[45px]">
+                <SelectTrigger className="w-[160px] h-[35px]">
                   <SelectValue placeholder="Select Channel" />
                 </SelectTrigger>
                 <SelectContent>

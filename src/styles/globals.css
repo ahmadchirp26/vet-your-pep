@@ -53,6 +53,9 @@ body {
     --greendarkest: 180, 44%, 13%, 1;
     --greendarkest-foreground: 180, 44%, 13%, 1;
 
+    --greendialog:180, 44%, 10%, 1;
+    --greendialog-foreground: 180, 44%,10%, 1;
+
     /* ****************************** */
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
