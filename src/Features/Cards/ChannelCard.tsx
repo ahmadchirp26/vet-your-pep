@@ -13,16 +13,24 @@ interface ChannelCardProps {
   channel: Channel;
   showJoinButton?: boolean;
   ButtonText?: string;
+  isLandingPage?: boolean;
 }
 
 const ChannelCard = ({
   channel,
   ButtonText,
   showJoinButton = true,
+  isLandingPage = false,
 }: ChannelCardProps) => {
   return (
     <>
-      <div className="flex gap-3 w-full items-center mt-5 max-xl:flex-col max-xl:justify-center">
+      <div
+        className={`flex gap-3 w-full items-center mt-5 ${
+          isLandingPage
+            ? "max-xl:flex-col max-xl:justify-center"
+            : "max-md:flex-col max-md:justify-center "
+        }`}
+      >
         <div className="rounded-full w-12 h-12">
           <Image src={channel.image} alt="channel_image" />
         </div>
@@ -33,7 +41,11 @@ const ChannelCard = ({
           </span>
         </div>
         {showJoinButton && (
-          <div className="ml-auto max-xl:ml-0">
+          <div
+            className={`ml-auto ${
+              isLandingPage ? "max-xl:ml-0" : "max-md:ml-0"
+            }`}
+          >
             <Link href={`/join/${channel.title}`}>
               <Button
                 className="rounded-full border border-white bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-20"
