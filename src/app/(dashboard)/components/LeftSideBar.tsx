@@ -1,6 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+// import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import HomeIcon from "@/core/icons/HomeIcon";
 import CalendarIcon from "@/core/icons/CalendarIcon";
@@ -9,8 +11,17 @@ import SettingsIcon from "@/core/icons/SettingsIcon";
 import SupportIcon from "@/core/icons/SupportIcon";
 
 const LeftSideBar = () => {
-  const [activeIcon, setActiveIcon] = useState("home");
-  console.log(activeIcon);
+  // const router = useRouter();
+  const pathname = usePathname();
+  // console.log(pathname);
+  const [activeIcon, setActiveIcon] = useState("");
+  // console.log(activeIcon);
+  useEffect(() => {
+    // Extract route parameter and set active icon accordingly
+    const routeParam = pathname.replace("/", "");
+    console.log(routeParam);
+    setActiveIcon(routeParam || "home");
+  }, [pathname]);
 
   const handleIconClick = (icon: any) => {
     setActiveIcon(icon === activeIcon ? null : icon);
@@ -31,24 +42,24 @@ const LeftSideBar = () => {
         </Link>
         <Link href="/channels">
           <CalendarIcon
-            fill={isIconActive("calendar") ? "#79CD00" : "#ACACAC"}
-            onClick={() => handleIconClick("calendar")}
+            fill={isIconActive("channels") ? "#79CD00" : "#ACACAC"}
+            onClick={() => handleIconClick("channels")}
             width={33}
             height={33}
           />
         </Link>
         <Link href="/app-rules">
           <RulesIcon
-            fill={isIconActive("rules") ? "#79CD00" : "#ACACAC"}
-            onClick={() => handleIconClick("rules")}
+            fill={isIconActive("app-rules") ? "#79CD00" : "#ACACAC"}
+            onClick={() => handleIconClick("app-rules")}
             width={33}
             height={33}
           />
         </Link>
         <Link href="/account-settings">
           <SettingsIcon
-            fill={isIconActive("settings") ? "#79CD00" : "#ACACAC"}
-            onClick={() => handleIconClick("settings")}
+            fill={isIconActive("account-settings") ? "#79CD00" : "#ACACAC"}
+            onClick={() => handleIconClick("account-settings")}
             width={33}
             height={33}
           />
