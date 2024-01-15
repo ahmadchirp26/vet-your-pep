@@ -17,6 +17,7 @@ const NewChannels = () => {
               channel={channel}
               showJoinButton={true}
               ButtonText="Join"
+              isLandingPage={true}
             />
           ))}
         </div>

@@ -52,13 +52,14 @@ const Channels = () => {
           <div className="flex  mt-4">
             <span className="text-white font-bold">My Channels</span>
           </div>
-          <div className="mt-3 flex flex-col max-lg:flex-wrap gap-3  ">
+          <div className="mt-3 flex flex-col gap-3  ">
             {channelsArray.map((channel, index) => (
               <ChannelCard
                 key={index}
                 channel={channel}
                 showJoinButton={true}
                 ButtonText="View"
+                isLandingPage={false}
               />
             ))}
           </div>

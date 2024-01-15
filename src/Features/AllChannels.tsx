@@ -35,7 +35,12 @@ const AllChannels = () => {
 
         <div className="mt-3">
           {channelsArray.map((channel, index) => (
-            <ChannelCard key={index} channel={channel} showJoinButton={false} />
+            <ChannelCard
+              key={index}
+              channel={channel}
+              showJoinButton={false}
+              isLandingPage={true}
+            />
           ))}
         </div>
       </div>
