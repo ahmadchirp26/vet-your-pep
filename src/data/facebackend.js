@@ -90,6 +90,13 @@ export const onlineFriends = [
   },
 ];
 
+
+export const admins = [
+  {
+    image: OnlineFriend6,
+  },
+]
+
 export const posts = [
   {
     username: "John Doe",
