@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useLogoutMutation } from "@/api/Authentication/useLogoutMutation";
 import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
@@ -21,7 +21,9 @@ export function ProfileAvatar({ online = true }) {
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
               <AvatarImage src="/avatars/01.png" alt="@shadcn" />
-              <AvatarFallback className = "capitalize">{data?.email.charAt(0)}</AvatarFallback>
+              <AvatarFallback className="capitalize">
+                {data?.email.charAt(0)}
+              </AvatarFallback>
             </Avatar>
             {online && (
               <div className="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full"></div>
@@ -48,7 +50,7 @@ export function ProfileAvatar({ online = true }) {
           onClick={() => {
             mutate();
           }}
-          disabled = {status === "pending"}
+          disabled={status === "pending"}
         >
           {status === "pending" ? (
             <>

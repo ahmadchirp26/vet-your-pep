@@ -17,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className="min-h-screen layout-gradient">
+      <body
+        suppressHydrationWarning={true}
+        className="min-h-screen layout-gradient"
+      >
         <ReactQueryProvider>
           <AuthSessionProvider>
             <AuthRedirection>
