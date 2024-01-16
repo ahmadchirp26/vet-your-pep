@@ -6,10 +6,10 @@ import Link from "next/link";
 import { Button } from "@/core/ui/button";
 import { Input } from "@/core/ui/input";
 
-const VerifyCodeForm = () => {
+const PhoneVerificationForm = () => {
   const formik = useFormik({
     initialValues: {
-      verificationCode: "",
+      phone_number: "",
     },
 
     onSubmit: (values) => {
@@ -21,23 +21,21 @@ const VerifyCodeForm = () => {
   return (
     <FormikProvider value={formik}>
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
-        {/* Verification Code */}
-
         <div className="flex items-center border-b border-b-graylight w-[280px]">
           <Input
-            type="number"
-            id="verificationCode"
-            name="verificationCode"
-            placeholder="Verification Code"
+            type="text"
+            id="phone_number"
+            name="phone_number"
+            placeholder="Phone Number"
             onChange={formik.handleChange}
-            value={formik.values.verificationCode}
+            value={formik.values.phone_number}
             className="bg-transparent outline-none  border-none placeholder:text-graylight w-full"
           />
         </div>
 
         {/* Submit Button */}
         <div className="flex justify-center items-center mt-2">
-          <Link href="/login/reset-password">
+          <Link href="/phone-verification/verification-code">
             <Button
               className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-36"
               type="submit"
@@ -51,4 +49,4 @@ const VerifyCodeForm = () => {
   );
 };
 
-export default VerifyCodeForm;
+export default PhoneVerificationForm;

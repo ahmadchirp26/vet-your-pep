@@ -42,6 +42,11 @@ export const channels = [
     members: "1.6K",
   },
   {
+    image: ChannelImage1,
+    title: "Diet, Food",
+    members: "503",
+  },
+  {
     image: ChannelImage5,
     title: "Education",
     members: "126",
@@ -50,6 +55,11 @@ export const channels = [
     image: ChannelImage6,
     title: "Fitness & Lifestyle",
     members: "9.67K",
+  },
+  {
+    image: ChannelImage4,
+    title: "Sports Club",
+    members: "1.6K",
   },
 ];
 
@@ -157,5 +167,43 @@ export const comments = [
     commentContent:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
     postedTime: "33 mins ago",
+  },
+];
+
+export const rules = [
+  {
+    title: "New Rule",
+    ruleContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eli velit, pretium ac gravida a Lorem ipsum dolor sit amet, consecteturadipiscing elit. Duis elit velit, pretium ac gravida a sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida aLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elitvelit, pretium ac gravida a sit amet, consectetur adipiscing elit.Duis elit velit, pretium ac gravida a Lorem ipsum dolor sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postedTime: "5 mins ago",
+  },
+
+  {
+    title: "New Rule",
+    ruleContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eli velit, pretium ac gravida a Lorem ipsum dolor sit amet, consecteturadipiscing elit. Duis elit velit, pretium ac gravida a sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida aLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elitvelit, pretium ac gravida a sit amet, consectetur adipiscing elit.Duis elit velit, pretium ac gravida a Lorem ipsum dolor sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postedTime: "20 mins ago",
+  },
+  {
+    title: "New Rule",
+    ruleContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eli velit, pretium ac gravida a Lorem ipsum dolor sit amet, consecteturadipiscing elit. Duis elit velit, pretium ac gravida a sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida aLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elitvelit, pretium ac gravida a sit amet, consectetur adipiscing elit.Duis elit velit, pretium ac gravida a Lorem ipsum dolor sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postedTime: "1 hr ago",
+  },
+];
+
+export const blockList = [
+  {
+    username: "John Doe",
+    profileAvatar: OnlineFriend1,
+  },
+
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend2,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend3,
   },
 ];
