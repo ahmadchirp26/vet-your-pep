@@ -1,3 +1,7 @@
+import ReactQueryProvider from "@/core/hoc/ReactQueryProvider";
+import { Toaster } from "@/core/ui/toaster";
+import { AuthSessionProvider } from "@/lib/Authentication/context/AuthSessionContext";
+import AuthRedirection from "@/lib/Authentication/hoc/AuthRedirection";
 import "@/styles/globals.css";
 
 export const metadata = {
@@ -14,7 +18,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true} className="layout-gradient">
-        {children}
+        <ReactQueryProvider>
+          <AuthSessionProvider>
+            <AuthRedirection>
+              {children}
+              <Toaster />
+            </AuthRedirection>
+          </AuthSessionProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
