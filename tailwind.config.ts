@@ -17,13 +17,17 @@ module.exports = {
       },
     },
     extend: {
-      
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+
+        greendarkest: {
+          DEFAULT: "hsl(var(--greendarkest))",
+          foreground: "hsl(var(--greendarkest-foreground))",
+        },
         greensharp: {
           DEFAULT: "hsl(var(--greensharp))",
           foreground: "hsl(var(--greensharp-foreground))",
@@ -57,6 +61,11 @@ module.exports = {
         greenlight: {
           DEFAULT: "hsl(var(--greenlight))",
           foreground: "hsl(var(--greenlighth-foreground))",
+        },
+
+        greendialog: {
+          DEFAULT: "hsl(var(--greendialog))",
+          foreground: "hsl(var(--greendialog-foreground))",
         },
 
         graydark: {
