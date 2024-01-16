@@ -3,28 +3,44 @@ import React from "react";
 import { FormikProvider, useFormik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
-
 import { Button } from "@/core/ui/button";
 import { Input } from "@/core/ui/input";
-
+import { useLoginMutation } from "@/api/Authentication/useLoginMutation";
+import { toast } from "@/core/ui/use-toast";
+import * as Yup from "yup";
+import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
 const LoginForm = () => {
+  const { mutateAsync } = useLoginMutation();
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-
-    onSubmit: (values) => {
-      // Handle form submission
-      console.log("Form Values", values);
+    validationSchema: Yup.object().shape({
+      email: Yup.string().email().required("Required"),
+      password: Yup.string().required("Required"),
+    }),
+    onSubmit: async (values) => {
+      try {
+        await mutateAsync([values]);
+      } catch (e) {
+        console.log(e);
+        toast({
+          title: "Error",
+          description: "Invalid Credentials",
+          variant: "default",
+        });
+      }
     },
   });
 
   return (
     <FormikProvider value={formik}>
-      <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
-        {/* Email */}
-
+      <form
+        onSubmit={formik.handleSubmit}
+        method="POST"
+        className="flex flex-col gap-4"
+      >
         <div className="flex items-center w-full border-b border-b-graylight ">
           <Input
             type="email"
@@ -70,14 +86,19 @@ const LoginForm = () => {
 
         {/* Submit Button */}
         <div className="flex justify-center items-center mt-2">
-          <Link href="/">
-            <Button
-              className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-36"
-              type="submit"
-            >
-              Login
-            </Button>
-          </Link>
+          <Button
+            className="rounded-full bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center gap-2 w-36"
+            type="submit"
+          >
+            {formik.isSubmitting ? (
+              <>
+                <SpinnerCircle />
+                <p>{"Loading"}</p>
+              </>
+            ) : (
+              <p>{"Login"}</p>
+            )}
+          </Button>
         </div>
       </form>
     </FormikProvider>
