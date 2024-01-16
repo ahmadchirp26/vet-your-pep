@@ -1,14 +1,16 @@
 "use client";
-import React from "react";
 import { FormikProvider, useFormik } from "formik";
-import Image from "next/image";
-import Link from "next/link";
-
-import { Button } from "@/core/ui/button";
+import { useCreateAccountMutation } from "@/api/Authentication";
+import * as Yup from "yup";
+import { toast } from "@/core/ui/use-toast";
 import { Input } from "@/core/ui/input";
+import Image from "next/image";
 import { Checkbox } from "@/core/ui/checkbox";
+import { Button } from "@/core/ui/button";
+import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
 
 const RegisterForm = () => {
+  const { mutateAsync } = useCreateAccountMutation();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -19,15 +21,48 @@ const RegisterForm = () => {
       confirmPassword: "",
     },
 
-    onSubmit: (values) => {
-      // Handle form submission
-      console.log("Form Values", values);
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      firstName: Yup.string().required("First Name is required"),
+      lastName: Yup.string().required("Last Name is required"),
+      phoneNumber: Yup.string().required("Phone Number is required"),
+      password: Yup.string().required("Password is required"),
+      confirmPassword: Yup.string()
+        .required("Confirm Password is required")
+        .test("passwords-match", "Passwords must match", function (value) {
+          return this.parent.password === value;
+        }),
+    }),
+    onSubmit: async (values) => {
+      try {
+        await mutateAsync([
+          {
+            email: values.email,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            password: values.password,
+          },
+        ]);
+      } catch (error: any) {
+        console.log(error);
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     },
   });
 
   return (
     <FormikProvider value={formik}>
-      <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
+      <form
+        onSubmit={formik.handleSubmit}
+        method={"POST"}
+        className="flex flex-col gap-4"
+      >
         {/* Email */}
 
         <div className="flex items-center w-full border-b border-b-graylight ">
@@ -143,14 +178,19 @@ const RegisterForm = () => {
 
         {/* Submit Button */}
         <div className="flex justify-center items-center mt-2">
-          <Link href="/register/upload-image">
-            <Button
-              className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-48"
-              type="submit"
-            >
-              Next
-            </Button>
-          </Link>
+          <Button
+            className="rounded-full bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-48"
+            type="submit"
+          >
+            {formik.isSubmitting ? (
+              <>
+                <SpinnerCircle />
+                <p>{"Registering"}</p>
+              </>
+            ) : (
+              <p>{"Next"}</p>
+            )}
+          </Button>
         </div>
       </form>
     </FormikProvider>

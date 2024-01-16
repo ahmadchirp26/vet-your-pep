@@ -8,6 +8,7 @@ const CreateCustomerMutationDocument = graphql(`
     $firstName: String!
     $lastName: String!
     $email: String!
+    
     $password: String!
   ) {
     createCustomer(
@@ -16,6 +17,7 @@ const CreateCustomerMutationDocument = graphql(`
         lastName: $lastName
         email: $email
         password: $password
+        
       }
     ) {
       accessToken
@@ -24,6 +26,7 @@ const CreateCustomerMutationDocument = graphql(`
         email
         firstName
         lastName
+
       }
     }
   }
