@@ -1,6 +1,6 @@
-import { graphql, useGraphQLMutation } from '@/core/lib/react-query-graphql'
-import { mutateSession } from './mutateSession'
-import { useToast } from '@/core/ui/use-toast'
+import { graphql, useGraphQLMutation } from "@/core/lib/react-query-graphql";
+import { mutateSession } from "./mutateSession";
+import { useToast } from "@/core/ui/use-toast";
 
 const SocialLoginDocument = graphql(`
   mutation continueWithSocialSite($input: RegisterOrLoginSocialInput!) {
@@ -12,31 +12,31 @@ const SocialLoginDocument = graphql(`
       accessToken
     }
   }
-`)
+`);
 
-const mutationKey = ['socialLogin']
+const mutationKey = ["socialLogin"];
 
 const useSocialLoginMutation = () => {
-  const {toast} = useToast()
+  const { toast } = useToast();
   return useGraphQLMutation(
     {
       mutationKey,
       onError(error) {
-        const firstError = error.response.errors?.find(e => e.message)
-        if (!firstError) return
+        const firstError = error.response.errors?.find((e) => e.message);
+        if (!firstError) return;
         toast({
           title: firstError.message,
-          variant: 'destructive'
-        })
+          variant: "destructive",
+        });
       },
       onSuccess(data) {
         return mutateSession({
           accessToken: data.continueWithSocialSite.accessToken,
-          shouldBroadcast: true
-        })
-      }
+          shouldBroadcast: true,
+        });
+      },
     },
-    SocialLoginDocument
-  )
-}
-export default useSocialLoginMutation
+    SocialLoginDocument,
+  );
+};
+export default useSocialLoginMutation;

@@ -27,7 +27,7 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    NEXT_PUBLIC_SERVER_GRAPHQL_URL:process.env.NEXT_PUBLIC_SERVER_GRAPHQL_URL
+    NEXT_PUBLIC_SERVER_GRAPHQL_URL: process.env.NEXT_PUBLIC_SERVER_GRAPHQL_URL,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

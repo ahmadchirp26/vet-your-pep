@@ -31,7 +31,7 @@ function useGraphQLMutationProtected<
     Authorization: `Bearer ${data?.accessToken}`,
   });
   const { mutate, mutateAsync, ...rest } = useGraphQLMutation<T, D, E, C>(
-    ...params
+    ...params,
   );
   return {
     ...rest,
@@ -41,7 +41,7 @@ function useGraphQLMutationProtected<
           variables,
           authourizationHeaders,
         ] as unknown as VariablesAndRequestHeadersArgs<D>,
-        options
+        options,
       ),
     mutateAsync: (variables: D, options?: Parameters<typeof mutateAsync>[1]) =>
       mutateAsync(
@@ -49,7 +49,7 @@ function useGraphQLMutationProtected<
           variables,
           authourizationHeaders,
         ] as unknown as VariablesAndRequestHeadersArgs<D>,
-        options
+        options,
       ),
   };
 }

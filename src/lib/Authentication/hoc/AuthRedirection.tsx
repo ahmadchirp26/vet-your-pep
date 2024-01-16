@@ -1,41 +1,45 @@
-'use client'
-import React, { type PropsWithChildren, useEffect, useState } from 'react'
-import useAuthSessionContext from '../context/AuthSessionContext'
+"use client";
+import React, { type PropsWithChildren, useEffect, useState } from "react";
+import useAuthSessionContext from "../context/AuthSessionContext";
 
-const AuthVerifyingRoutes = ['/login', '/register']
+const AuthVerifyingRoutes = ["/login", "/register"];
 
 const AuthRedirection = ({ children }: PropsWithChildren) => {
-  const { status } = useAuthSessionContext()
-  const [isReloading, setReloading] = useState(false)
- 
+  const { status } = useAuthSessionContext();
+  const [isReloading, setReloading] = useState(false);
+
   useEffect(() => {
-    if (status === 'unauthenticated') {
-      const isOnAuthVerifyingRoute = AuthVerifyingRoutes.some(v => v === window.location.pathname)
+    if (status === "unauthenticated") {
+      const isOnAuthVerifyingRoute = AuthVerifyingRoutes.some(
+        (v) => v === window.location.pathname,
+      );
       if (!isOnAuthVerifyingRoute) {
-        window.location.href = `${window.location.origin}/login`
+        window.location.href = `${window.location.origin}/login`;
       }
-    } else if (status === 'authenticated') {
-      const isOnAuthVerifyingRoute = AuthVerifyingRoutes.some(v => v === window.location.pathname)
+    } else if (status === "authenticated") {
+      const isOnAuthVerifyingRoute = AuthVerifyingRoutes.some(
+        (v) => v === window.location.pathname,
+      );
       if (isOnAuthVerifyingRoute) {
-        window.location.href = `${window.location.origin}/`
+        window.location.href = `${window.location.origin}/`;
       }
     }
-  }, [status])
+  }, [status]);
 
   useEffect(() => {
-    setReloading(false)
+    setReloading(false);
     const handleBeforeUnload = () => {
-      setReloading(true)
-      return
-    }
-    window.addEventListener('beforeunload', handleBeforeUnload)
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
-  }, [])
+      setReloading(true);
+      return;
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, []);
 
-  if (status === 'loading' || isReloading) {
-    return <p>{'Redirecting'}</p>
+  if (status === "loading" || isReloading) {
+    return <p>{"Redirecting"}</p>;
   }
-  return <>{children}</>
-}
+  return <>{children}</>;
+};
 
-export default AuthRedirection
+export default AuthRedirection;

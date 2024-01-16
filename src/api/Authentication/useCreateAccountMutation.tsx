@@ -1,6 +1,6 @@
-import { graphql, useGraphQLMutation } from '@/core/lib/react-query-graphql'
-import { useToast } from '@/core/ui/use-toast'
-import { mutateSession } from './mutateSession'
+import { graphql, useGraphQLMutation } from "@/core/lib/react-query-graphql";
+import { useToast } from "@/core/ui/use-toast";
+import { mutateSession } from "./mutateSession";
 
 const CreateCustomerMutationDocument = graphql(`
   #graphql
@@ -11,7 +11,12 @@ const CreateCustomerMutationDocument = graphql(`
     $password: String!
   ) {
     createCustomer(
-      input: { firstName: $firstName, lastName: $lastName, email: $email, password: $password }
+      input: {
+        firstName: $firstName
+        lastName: $lastName
+        email: $email
+        password: $password
+      }
     ) {
       accessToken
       user {
@@ -22,27 +27,27 @@ const CreateCustomerMutationDocument = graphql(`
       }
     }
   }
-`)
+`);
 
 export function useCreateAccountMutation() {
-  const { toast } = useToast()
+  const { toast } = useToast();
   return useGraphQLMutation(
     {
       async onSuccess(data) {
         return mutateSession({
           accessToken: data.createCustomer.accessToken,
-          shouldBroadcast: true
-        })
+          shouldBroadcast: true,
+        });
       },
       onError(error) {
-        const firstError = error.response.errors?.find(e => e.message)
-        if (!firstError) return
+        const firstError = error.response.errors?.find((e) => e.message);
+        if (!firstError) return;
         toast({
           title: firstError.message,
-          variant: 'destructive'
-        })
-      }
+          variant: "destructive",
+        });
+      },
     },
-    CreateCustomerMutationDocument
-  )
+    CreateCustomerMutationDocument,
+  );
 }

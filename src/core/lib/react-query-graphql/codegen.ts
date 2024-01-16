@@ -1,11 +1,11 @@
 const config = {
-  schema: 'http://localhost:5000/graphql',
-  documents: ['./src/**/*.{ts,tsx}'],
+  schema: "http://localhost:5000/graphql",
+  documents: ["./src/**/*.{ts,tsx}"],
   generates: {
-    './src/__generated__/': {
-      preset: 'client'
-    }
-  }
-}
+    "./src/__generated__/": {
+      preset: "client",
+    },
+  },
+};
 
-export default config
+export default config;

@@ -20,7 +20,7 @@ export function useGraphQLQuery<TResult, TVariables>(
   queryOptions: UseQueryOptions<TResult>,
   document: TypedDocumentNode<TResult, TVariables>,
   variables?: Variables,
-  requestHeaders?: GraphQLClientRequestHeaders
+  requestHeaders?: GraphQLClientRequestHeaders,
 ) {
   return useQuery({
     ...queryOptions,
@@ -32,7 +32,7 @@ export function useGraphQLQuery<TResult, TVariables>(
         env.NEXT_PUBLIC_SERVER_GRAPHQL_URL,
         document,
         variables,
-        requestHeaders
+        requestHeaders,
       );
     },
   });
@@ -42,7 +42,7 @@ export function useGraphQLInfiniteQuery<TResult, TVariables>(
   queryOptions: UseInfiniteQueryOptions<TResult>,
   document: TypedDocumentNode<TResult, TVariables>,
   variables?: Variables,
-  requestHeaders?: GraphQLClientRequestHeaders
+  requestHeaders?: GraphQLClientRequestHeaders,
 ) {
   return useInfiniteQuery({
     ...queryOptions,
@@ -54,7 +54,7 @@ export function useGraphQLInfiniteQuery<TResult, TVariables>(
         env.NEXT_PUBLIC_SERVER_GRAPHQL_URL,
         document,
         variables,
-        requestHeaders
+        requestHeaders,
       );
     },
   });
@@ -72,7 +72,7 @@ export function useGraphQLMutation<
     VariablesAndRequestHeadersArgs<TVariables>,
     TContext
   >,
-  document: TypedDocumentNode<TResult, TVariables>
+  document: TypedDocumentNode<TResult, TVariables>,
 ) {
   return useMutation<
     TResult,
@@ -85,19 +85,19 @@ export function useGraphQLMutation<
       return await request(
         env.NEXT_PUBLIC_SERVER_GRAPHQL_URL,
         document,
-        ...variables
+        ...variables,
       );
     },
   });
 }
 export async function requestGraphQl<TResult, TVariables extends Variables>(
   document: TypedDocumentNode<TResult, TVariables>,
-  variables: VariablesAndRequestHeadersArgs<TVariables>
+  variables: VariablesAndRequestHeadersArgs<TVariables>,
 ) {
   return await request(
     env.NEXT_PUBLIC_SERVER_GRAPHQL_URL,
     document,
-    ...variables
+    ...variables,
   );
 }
 

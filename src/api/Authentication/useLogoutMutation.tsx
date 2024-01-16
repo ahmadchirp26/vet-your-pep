@@ -1,5 +1,5 @@
-import { useMutation } from '@tanstack/react-query'
-import { mutateSession } from './mutateSession'
+import { useMutation } from "@tanstack/react-query";
+import { mutateSession } from "./mutateSession";
 
 export const useLogoutMutation = () => {
   return useMutation({
@@ -7,8 +7,8 @@ export const useLogoutMutation = () => {
       // Destroy Session On Server
       return mutateSession({
         accessToken: null,
-        shouldBroadcast: true
-      })
-    }
-  })
-}
+        shouldBroadcast: true,
+      });
+    },
+  });
+};

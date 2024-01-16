@@ -1,6 +1,6 @@
-import { graphql, useGraphQLMutation } from '@/core/lib/react-query-graphql'
-import { useToast } from '@/core/ui/use-toast'
-import { mutateSession } from './mutateSession'
+import { graphql, useGraphQLMutation } from "@/core/lib/react-query-graphql";
+import { useToast } from "@/core/ui/use-toast";
+import { mutateSession } from "./mutateSession";
 
 const LoginMutationDocument = graphql(`
   #graphql
@@ -15,28 +15,28 @@ const LoginMutationDocument = graphql(`
       }
     }
   }
-`)
+`);
 
 export function useLoginMutation() {
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   return useGraphQLMutation(
     {
       onError(error) {
-        const firstError = error.response.errors?.find(e => e.message)
-        if (!firstError) return
+        const firstError = error.response.errors?.find((e) => e.message);
+        if (!firstError) return;
         toast({
           title: firstError.message,
-          variant: 'destructive'
-        })
+          variant: "destructive",
+        });
       },
       onSuccess(data) {
         return mutateSession({
           accessToken: data.loginAsCustomer.accessToken,
-          shouldBroadcast: true
-        })
-      }
+          shouldBroadcast: true,
+        });
+      },
     },
-    LoginMutationDocument
-  )
+    LoginMutationDocument,
+  );
 }
