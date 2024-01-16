@@ -121,6 +121,13 @@ body {
   .register-container-gradient {
     background: linear-gradient(180deg, #1b4546 0%, #172932 100%);
   }
+  /* 
+  .channel-background-image {
+    background-image: url("../../public/assets/banner_cover_image.png");
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  } */
 
   .or-gradient {
     background: linear-gradient(90deg, #6ae389 -52.38%, #172931 96.43%);
