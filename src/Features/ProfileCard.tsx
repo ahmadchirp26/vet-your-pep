@@ -40,7 +40,7 @@ const ProfileCard = () => {
             <span className="text-white">Verified</span>
           </div>
           <div className="flex w-full justify-center items-center">
-            <Link href="/profile">
+            <Link href="/my-profile">
               <Button
                 className="rounded-full border border-white  bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-36"
                 type="submit"

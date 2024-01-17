@@ -14,6 +14,8 @@ import OnlineFriend6 from "../../public/assets/online_friend5.png";
 import OnlineFriend7 from "../../public/assets/online_friend6.png";
 import OnlineFriend8 from "../../public/assets/online_friend7.png";
 
+import JohnDoe from "../../public/assets/john_doe_profile.png";
+
 import PostImage1 from "../../public/assets/post_image1.jpg";
 
 import PostImage2 from "../../public/assets/post_image2 .jpg";
@@ -90,6 +92,12 @@ export const onlineFriends = [
   },
 ];
 
+export const admins = [
+  {
+    image: OnlineFriend6,
+  },
+];
+
 export const posts = [
   {
     username: "John Doe",
@@ -129,6 +137,47 @@ export const posts = [
   // Add more posts as needed
 ];
 
+//
+
+export const profilePosts = [
+  {
+    username: "John Doe",
+    profileImage: JohnDoe,
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eli velit, pretium ac gravida a Lorem ipsum dolor sit amet, consecteturadipiscing elit. Duis elit velit, pretium ac gravida a sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida aLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elitvelit, pretium ac gravida a sit amet, consectetur adipiscing elit.Duis elit velit, pretium ac gravida a Lorem ipsum dolor sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postImage: PostImage1,
+    postedTime: "5 min ago",
+    group: "AI Discussion",
+    likes: "56",
+    comments: "78",
+  },
+
+  {
+    username: "John Doe",
+    profileImage: JohnDoe,
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eli velit, pretium ac gravida a Lorem ipsum dolor sit amet, consecteturadipiscing elit. Duis elit velit, pretium ac gravida a sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida aLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elitvelit, pretium ac gravida a sit amet, consectetur adipiscing elit.Duis elit velit, pretium ac gravida a Lorem ipsum dolor sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postImage: PostImage2,
+    postedTime: "15 min ago",
+    group: "Health & Fitness ",
+    likes: "26",
+    comments: "18",
+  },
+  {
+    username: "John Doe",
+    profileImage: JohnDoe,
+    postContent:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eli velit, pretium ac gravida a Lorem ipsum dolor sit amet, consecteturadipiscing elit. Duis elit velit, pretium ac gravida a sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida aLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elitvelit, pretium ac gravida a sit amet, consectetur adipiscing elit.Duis elit velit, pretium ac gravida a Lorem ipsum dolor sit amet,consectetur adipiscing elit. Duis elit velit, pretium ac gravida a",
+    postImage: PostImage3,
+    postedTime: "40 min ago",
+    group: "Education ",
+    likes: "6",
+    comments: "10",
+  },
+
+  // Add more posts as needed
+];
+
 export const likes = [
   {
     username: "John Doe",
@@ -142,6 +191,35 @@ export const likes = [
   {
     username: "Lius Wigton",
     profileAvatar: OnlineFriend3,
+  },
+];
+
+export const followers = [
+  {
+    username: "John Doe",
+    profileAvatar: OnlineFriend1,
+  },
+
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend2,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend3,
+  },
+  {
+    username: "John Doe",
+    profileAvatar: OnlineFriend4,
+  },
+
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend5,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend6,
   },
 ];
 
