@@ -14,7 +14,7 @@ interface FollowerCardProps {
 const FollowerCard = ({ followers, buttonText }: FollowerCardProps) => {
   return (
     <>
-      <div className="flex gap-3 w-full items-center px-5 mt-3">
+      <div className="flex gap-3 w-full items-center px-5 max-sm:px-0 mt-3">
         <div className="rounded-full w-12 h-12">
           <Image src={followers.profileAvatar} alt="channel_image" />
         </div>

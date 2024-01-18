@@ -35,7 +35,7 @@ const AllChannelCard = ({
 
           {showJoinButton && (
             <div className="flex justify-center mt-2">
-              <Link href={`/join/${channel.title}`}>
+              <Link href="/channels/:id">
                 <Button
                   className="rounded-full border border-white bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-20"
                   type="button"

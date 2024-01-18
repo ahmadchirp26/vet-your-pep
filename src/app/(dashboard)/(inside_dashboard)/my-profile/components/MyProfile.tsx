@@ -44,7 +44,7 @@ const UserProfile = () => {
             </div>
           </div>
         </div>
-        <div className=" w-full p-4">
+        <div className=" w-full p-4 max-sm:p-0 max-sm:mt-4">
           <ProfileTabs />
         </div>
       </div>

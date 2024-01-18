@@ -19,7 +19,7 @@ export default function Login() {
             <span className="font-bold text-greensecondary text-xl">
               Login to your account
             </span>
-            <div className="rounded-3xl register-container-gradient p-8 w-1/2 mt-1">
+            <div className="rounded-3xl register-container-gradient p-8 w-1/2 max-sm:w-full mt-1">
               <LoginForm />
             </div>
             <span className="text-white">
@@ -40,7 +40,7 @@ export default function Login() {
               type="submit"
               className="field-drop-shadow mt-3 flex h-10 px-10 items-center hover:bg-white justify-center gap-3 rounded-full bg-white text-black"
             >
-              <FcGoogle size={25} /> Sign up with Google
+              <FcGoogle size={25} /> Sign in with Google
             </Button>
           </div>
         </div>

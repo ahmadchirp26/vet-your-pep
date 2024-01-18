@@ -5,7 +5,7 @@ const ProfileFeed = () => {
   const postArray = profilePosts;
   return (
     <>
-      <div className=" w-full  p-4 gap-3">
+      <div className=" w-full  p-4 max-sm:p-0 gap-3">
         <NewPost />
         {postArray.map((post, index) => (
           <PostCard key={index} post={post} />

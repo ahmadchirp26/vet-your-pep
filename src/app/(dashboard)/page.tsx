@@ -12,7 +12,7 @@ export default function HomePage() {
           <ProfileCard />
           <AllChannels />
         </div>
-        <div className="flex max-md:flex-col gap-3 overflow-auto">
+        <div className="flex max-md:flex-col gap-3 overflow-auto ">
           <div className="max-md:order-2">
             <FeedPosts />
           </div>

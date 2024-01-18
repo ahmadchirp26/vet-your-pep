@@ -40,13 +40,14 @@ const ChannelCard = ({
             {channel.members} members
           </span>
         </div>
+
         {showJoinButton && (
           <div
             className={`ml-auto ${
               isLandingPage ? "max-xl:ml-0" : "max-md:ml-0"
             }`}
           >
-            <Link href={`/join/${channel.title}`}>
+            <Link href="/channels/:id">
               <Button
                 className="rounded-full border border-white bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-20"
                 type="button"

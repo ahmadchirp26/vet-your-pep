@@ -23,7 +23,7 @@ const ViewChannel = () => {
             <div className="flex gap-3 max-sm:order-2">
               <FeedPosts />
             </div>
-            <div className="flex flex-col gap-3 w-100 max-sm:order-1 max-sm:flex-row max-sm:w-full">
+            <div className="flex flex-col gap-3 w-100 max-sm:order-1 max-sm:flex-col max-sm:w-full">
               <AboutCard />
               <GroupAdmin />
               <EventCard />

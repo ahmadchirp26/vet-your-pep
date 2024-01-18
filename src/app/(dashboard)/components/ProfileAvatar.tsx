@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/core/ui/dropdown-menu";
 import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
+import Link from "next/link";
 
 interface Props {
   className?: string;
@@ -40,7 +41,7 @@ export function ProfileAvatar({ className }: Props) {
             <p className="text-white font-bold text-sm overflow-ellipsis">
               {data?.email.split("@")[0]}
             </p>
-            <p className="text-graydark text-sm">{"Offline"}</p>
+            <p className="text-graydark text-sm">{"Online"}</p>
           </div>
         </Button>
       </DropdownMenuTrigger>
@@ -49,9 +50,11 @@ export function ProfileAvatar({ className }: Props) {
         align="end"
         forceMount
       >
-        <DropdownMenuItem className="cursor-pointer">
-          View Profile
-        </DropdownMenuItem>
+        <Link href="/my-profile">
+          <DropdownMenuItem className="cursor-pointer">
+            View Profile
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuItem
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => {

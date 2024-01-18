@@ -11,12 +11,12 @@ const AuthMenu = ({ className }: Props) => {
     <div
       className={cn(
         "rounded-full bg-greendarkest px-5 py-2 flex-shrink-0 flex items-center max-h-12 gap-1 container-drop-shadow",
-        className,
+        className
       )}
     >
       <div className="flex gap-4">
-        <NotificationIcon className="w-6 h-6" />
         <ChatIcon className="w-6 h-6" />
+        <NotificationIcon className="w-6 h-6" />
       </div>
       <ProfileAvatar />
     </div>

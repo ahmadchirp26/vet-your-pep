@@ -6,6 +6,7 @@ import { useState } from "react";
 import { channels } from "@/data/facebackend";
 import SearchBar from "@/app/(dashboard)/components/SearchBar";
 import ChannelCard from "@/Features/Cards/ChannelCard";
+import Link from "next/link";
 
 const AllChannels = () => {
   const [activeSearch, setActiveSearch] = useState(false);
@@ -34,14 +35,16 @@ const AllChannels = () => {
         )}
 
         <div className="mt-3">
-          {channelsArray.map((channel, index) => (
-            <ChannelCard
-              key={index}
-              channel={channel}
-              showJoinButton={false}
-              isLandingPage={true}
-            />
-          ))}
+          <Link href="/channels/:id" className="hover:bg-greensharp">
+            {channelsArray.map((channel, index) => (
+              <ChannelCard
+                key={index}
+                channel={channel}
+                showJoinButton={false}
+                isLandingPage={true}
+              />
+            ))}
+          </Link>
         </div>
       </div>
     </>

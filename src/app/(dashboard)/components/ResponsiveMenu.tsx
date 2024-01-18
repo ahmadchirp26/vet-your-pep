@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/core/ui/sheet";
 import HomeIcon from "@/core/icons/HomeIcon";
@@ -17,22 +18,27 @@ interface Props {
 const MenuLinks = [
   {
     name: "Home",
+    path: "/", // Specify the route path
     icon: (props: SVGProps<SVGElement>) => <HomeIcon {...props} />,
   },
   {
     name: "All Channels",
+    path: "/channels",
     icon: (props: SVGProps<SVGElement>) => <CalendarIcon {...props} />,
   },
   {
     name: "Rules",
+    path: "/app-rules",
     icon: (props: SVGProps<SVGElement>) => <RulesIcon {...props} />,
   },
   {
     name: "Settings",
+    path: "/account-settings",
     icon: (props: SVGProps<SVGElement>) => <SettingsIcon {...props} />,
   },
   {
     name: "Support",
+    path: "/",
     icon: (props: SVGProps<SVGElement>) => <SupportIcon {...props} />,
   },
 ];
@@ -48,13 +54,15 @@ const ResponsiveMenu = ({ className }: Props) => {
       <SheetContent className="bg-greenprimary flex flex-col justify-between border-none w-auto max-h-screen">
         <ul className="flex flex-col my-5 text-white">
           {MenuLinks.map((link, idx) => (
-            <li
-              key={idx}
-              className="flex gap-7 rounded-lg p-3 items-center min-w-60 hover:bg-greenaccent cursor-pointer"
-            >
-              <link.icon fill={"#79CD00"} width={20} height={20} />
-              <span>{link.name}</span>
-            </li>
+            <Link href={link.path} key={idx}>
+              <li
+                key={idx}
+                className="flex gap-7 rounded-lg p-3 items-center min-w-60 hover:bg-greenaccent cursor-pointer"
+              >
+                <link.icon fill={"#79CD00"} width={20} height={20} />
+                <span>{link.name}</span>
+              </li>
+            </Link>
           ))}
         </ul>
         <div className="flex text-gray-800 mt-auto w-full">
