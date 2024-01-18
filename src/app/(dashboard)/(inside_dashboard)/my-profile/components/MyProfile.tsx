@@ -4,7 +4,7 @@ import ProfileTabs from "./ProfileTabs";
 const UserProfile = () => {
   return (
     <>
-      <div className="rounded-2xl bg-greendarkest p-6 w-2/3 max-lg:w-full flex-col gap-7">
+      <div className="rounded-2xl container-drop-shadow bg-greendarkest p-6 w-2/3 max-lg:w-full flex-col gap-7">
         <div className="flex items-center gap-5">
           <div className="rounded-full">
             <Image
