@@ -9,28 +9,32 @@ import { useLoginMutation } from "@/api/Authentication/useLoginMutation";
 import { toast } from "@/core/ui/use-toast";
 import * as Yup from "yup";
 import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import { useRouter } from "next/navigation";
+
 const LoginForm = () => {
   const { mutateAsync } = useLoginMutation();
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    validationSchema: Yup.object().shape({
-      email: Yup.string().email().required("Required"),
-      password: Yup.string().required("Required"),
-    }),
+    // validationSchema: Yup.object().shape({
+    //   email: Yup.string().email().required("Required"),
+    //   password: Yup.string().required("Required"),
+    // }),
     onSubmit: async (values) => {
-      try {
-        await mutateAsync([values]);
-      } catch (e) {
-        console.log(e);
-        toast({
-          title: "Error",
-          description: "Invalid Credentials",
-          variant: "default",
-        });
-      }
+      router.push("/");
+      // try {
+      //   await mutateAsync([values]);
+      // } catch (e) {
+      //   console.log(e);
+      //   toast({
+      //     title: "Error",
+      //     description: "Invalid Credentials",
+      //     variant: "default",
+      //   });
+      // }
     },
   });
 
