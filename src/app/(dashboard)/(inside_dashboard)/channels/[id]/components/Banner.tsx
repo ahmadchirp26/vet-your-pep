@@ -28,7 +28,7 @@ const Banner = () => {
           height: "200px", // Optional: Set the height
         }}
       >
-        <div className="rounded-full w-40 h-40 bg-red-500 absolute m-5 ">
+        <div className="rounded-full w-40 h-40  absolute m-5 ">
           <Image
             src={"/assets/banner_profile_image.png"}
             alt="profile_picture"

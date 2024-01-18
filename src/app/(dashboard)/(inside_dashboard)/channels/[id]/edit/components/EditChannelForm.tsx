@@ -45,11 +45,11 @@ const EditChannel = () => {
               placeholder="Enter Group Name"
               onChange={formik.handleChange}
               value={formik.values.groupName}
-              className="bg-greenaccent rounded-3xl outline-none  border-none placeholder:text-graylight h-14"
+              className="bg-greenaccent rounded-3xl outline-none  border-none placeholder:text-white h-14"
             />
             <Select>
-              <SelectTrigger className="w-full h-14 text-graylight">
-                <SelectValue placeholder="Select Channel" />
+              <SelectTrigger className="w-full h-14 text-white">
+                <SelectValue placeholder="Select Visibility" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="Public">Public</SelectItem>
