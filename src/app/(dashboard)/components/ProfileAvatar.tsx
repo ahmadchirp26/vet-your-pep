@@ -1,6 +1,7 @@
 "use client";
 import { useLogoutMutation } from "@/api/Authentication/useLogoutMutation";
 import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import { cn } from "@/core/lib/helper";
 import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
 import { Button } from "@/core/ui/button";
 import {
@@ -11,31 +12,37 @@ import {
 } from "@/core/ui/dropdown-menu";
 import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
 
-export function ProfileAvatar({ online = true }) {
+interface Props {
+  className?: string;
+}
+export function ProfileAvatar({ className }: Props) {
   const { data } = useAuthSessionContext();
   const { mutate, status } = useLogoutMutation();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+        <Button
+          variant="ghost"
+          className={cn("flex gap-2 hover:bg-secondary/20", className)}
+        >
+          <div className="relative">
             <Avatar className="h-8 w-8">
               <AvatarImage src="/avatars/01.png" alt="@shadcn" />
               <AvatarFallback className="capitalize">
                 {data?.email.charAt(0)}
               </AvatarFallback>
             </Avatar>
-            {online && (
+            {true && (
               <div className="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full"></div>
             )}
-          </Button>
-          <div className="flex flex-col">
-            <span className="text-white font-bold text-sm">{data?.email}</span>
-            <span className="text-graydark text-sm">
-              {online ? "Online" : "Offline"}
-            </span>
           </div>
-        </div>
+          <div className="flex flex-col flex-1 items-start justify-start">
+            <p className="text-white font-bold text-sm overflow-ellipsis">
+              {data?.email.split("@")[0]}
+            </p>
+            <p className="text-graydark text-sm">{"Offline"}</p>
+          </div>
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="w-56 bg-greendarkest cursor-pointer border-none text-white"

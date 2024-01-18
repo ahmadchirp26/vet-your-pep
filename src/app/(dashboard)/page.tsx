@@ -5,13 +5,11 @@ import OnlineFriends from "@/Features/OnlineFriends";
 import ProfileCard from "@/Features/ProfileCard";
 
 export default function HomePage() {
-  console.log("Hello World");
   return (
     <>
       <div className="flex gap-3 p-4 max-sm:p-1  ">
         <div className="flex flex-col gap-4 min-w-[220px] max-md:hidden max-xl:min-w-[170px] max-lg:min-w-[150px]">
           <ProfileCard />
-
           <AllChannels />
         </div>
         <div className="flex max-md:flex-col gap-3  ">
