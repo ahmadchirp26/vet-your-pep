@@ -135,14 +135,10 @@ body {
 
   .register-background {
     background-image: url(../../public/assets/register.png);
-    height: 100%;
-    width: 100%;
   }
 
   .login-background {
     background-image: url(../../public/assets/login.png);
-    height: 100%;
-    width: 100%;
   }
 
   .search-drop-shadow {
