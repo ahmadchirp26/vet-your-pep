@@ -1,27 +1,25 @@
-import Image from "next/image";
 import { ProfileAvatar } from "./ProfileAvatar";
+import { cn } from "@/core/lib/helper";
+import { NotificationIcon } from "@/core/icons/NotificationIcon";
+import { ChatIcon } from "@/core/icons/ChatIcon";
 
-const AuthMenu = () => {
+interface Props {
+  className?: string;
+}
+const AuthMenu = ({ className }: Props) => {
   return (
-    <>
-      <div className="rounded-full bg-greendarkest p-5 w-60 flex-shrink-0 h-12 flex items-center gap-5 container-drop-shadow">
-        <Image
-          src={"/assets/notification_icon.svg"}
-          width={22}
-          height={22}
-          alt="notification_icon"
-          className="cursor-pointer"
-        />
-        <Image
-          src={"/assets/chat_icon.svg"}
-          width={22}
-          height={22}
-          alt="chat_icon"
-          className="cursor-pointer"
-        />
-        <ProfileAvatar />
+    <div
+      className={cn(
+        "rounded-full bg-greendarkest px-5 py-2 flex-shrink-0 flex items-center max-h-12 gap-1 container-drop-shadow",
+        className,
+      )}
+    >
+      <div className="flex gap-4">
+        <NotificationIcon className="w-6 h-6" />
+        <ChatIcon className="w-6 h-6" />
       </div>
-    </>
+      <ProfileAvatar />
+    </div>
   );
 };
 
