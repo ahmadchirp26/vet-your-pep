@@ -1,7 +1,4 @@
 import Image, { type StaticImageData } from "next/image";
-
-import { Button } from "@/core/ui/button";
-
 interface OnlineAvatarProps {
   friend: {
     image: StaticImageData;
@@ -10,7 +7,7 @@ interface OnlineAvatarProps {
 
 export function OnlineAvatar({ friend }: OnlineAvatarProps) {
   return (
-    <div className="flex items-center gap-2 mt-5 max-md:m-1">
+    <div className="flex items-center gap-2">
       <div className="relative h-10 w-10 rounded-full">
         <Image src={friend.image} alt="avatar" />
 

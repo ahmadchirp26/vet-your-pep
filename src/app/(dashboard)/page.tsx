@@ -12,7 +12,7 @@ export default function HomePage() {
           <ProfileCard />
           <AllChannels />
         </div>
-        <div className="flex max-md:flex-col gap-3  ">
+        <div className="flex max-md:flex-col gap-3 overflow-auto">
           <div className="max-md:order-2">
             <FeedPosts />
           </div>
@@ -20,7 +20,7 @@ export default function HomePage() {
           <div className="max-lg:hidden">
             <NewChannels />
           </div>
-          <div className="max-md:order-1">
+          <div className="max-md:order-1 max-md:overflow-auto">
             <OnlineFriends />
           </div>
         </div>
