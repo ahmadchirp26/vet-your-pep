@@ -24,7 +24,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         <SearchBar className="flex-1" />
         <div className="flex items-center gap-2">
           <AuthMenu className="hidden sm:flex" />
-          <ResponsiveMenu className="lg:hidden" />
+          <ResponsiveMenu className="sm:hidden" />
         </div>
       </div>
       <div className="flex">
