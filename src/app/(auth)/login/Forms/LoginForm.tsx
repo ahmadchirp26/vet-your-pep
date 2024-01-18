@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const { mutateAsync } = useLoginMutation();
-  const router = useRouter()
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -24,7 +24,7 @@ const LoginForm = () => {
     //   password: Yup.string().required("Required"),
     // }),
     onSubmit: async (values) => {
-      router.push('/')
+      router.push("/");
       // try {
       //   await mutateAsync([values]);
       // } catch (e) {

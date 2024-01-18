@@ -20,7 +20,7 @@ interface Props {
 export function ProfileAvatar({ className }: Props) {
   const { data } = useAuthSessionContext();
   const { mutate, status } = useLogoutMutation();
-  const router = useRouter()
+  const router = useRouter();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -61,7 +61,7 @@ export function ProfileAvatar({ className }: Props) {
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => {
             // mutate();
-            router.push("/login")
+            router.push("/login");
           }}
           disabled={status === "pending"}
         >

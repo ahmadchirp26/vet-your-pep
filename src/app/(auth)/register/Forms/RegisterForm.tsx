@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
   const { mutateAsync } = useCreateAccountMutation();
-  const router = useRouter()
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -38,7 +38,7 @@ const RegisterForm = () => {
     //     }),
     // }),
     onSubmit: async (values) => {
-      router.push("/register/upload-image")
+      router.push("/register/upload-image");
       // try {
       //   await mutateAsync([
       //     {
