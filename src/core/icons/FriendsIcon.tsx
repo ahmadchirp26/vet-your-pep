@@ -1,11 +1,11 @@
 import { cn } from "../lib/helper";
 
 interface Props {
-    className?: string;
+  className?: string;
 }
-export const FriendsIcon = ({className}:Props) => (
+export const FriendsIcon = ({ className }: Props) => (
   <svg
-    className={cn('w-8 h-8', className)}
+    className={cn("w-8 h-8", className)}
     viewBox="0 0 39 28"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
