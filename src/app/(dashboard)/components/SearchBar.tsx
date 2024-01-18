@@ -10,7 +10,7 @@ const SearchBar = ({ className }: Props) => {
     <div
       className={cn(
         "border border-white-500 rounded-full w-full max-h-12 flex items-center p-3 search-drop-shadow",
-        className
+        className,
       )}
     >
       <SearchIcon />
