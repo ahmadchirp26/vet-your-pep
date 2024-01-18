@@ -12,6 +12,7 @@ import {
 } from "@/core/ui/dropdown-menu";
 import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Props {
   className?: string;
@@ -19,6 +20,7 @@ interface Props {
 export function ProfileAvatar({ className }: Props) {
   const { data } = useAuthSessionContext();
   const { mutate, status } = useLogoutMutation();
+  const router = useRouter()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -58,7 +60,8 @@ export function ProfileAvatar({ className }: Props) {
         <DropdownMenuItem
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => {
-            mutate();
+            // mutate();
+            router.push("/login")
           }}
           disabled={status === "pending"}
         >
