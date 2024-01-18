@@ -5,7 +5,7 @@ const FeedPosts = () => {
   const postArray = posts;
   return (
     <>
-      <div className="container-drop-shadow bg-greendarkest w-full rounded-3xl p-4 gap-3">
+      <div className="container-drop-shadow bg-greendarkest w-full rounded-3xl p-4 gap-3 ">
         <NewPost />
         {postArray.map((post, index) => (
           <PostCard key={index} post={post} />

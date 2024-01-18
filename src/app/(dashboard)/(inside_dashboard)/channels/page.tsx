@@ -18,9 +18,9 @@ const Channels = () => {
 
   return (
     <>
-      <div className="flex  gap-5 mt-3 p-3 max-sm:flex-col max-sm:p-4 w-full">
-        <div className="bg-greendarkest w-full h-full flex flex-col rounded-2xl p-4">
-          <div className="flex items-center justify-between mt-2">
+      <div className="flex  gap-5 mt-3 p-3 max-sm:flex-col max-sm:p-4 w-full ">
+        <div className="bg-greendarkest w-full h-full flex flex-col rounded-2xl p-4 container-drop-shadow ">
+          <div className="flex items-center justify-between mt-2 c">
             <span className="text-white font-bold">All Channels</span>
             {!activeSearch ? (
               <Image
@@ -48,7 +48,7 @@ const Channels = () => {
             ))}
           </div>
         </div>
-        <div className="bg-greendarkest w-full h-full flex flex-col rounded-2xl p-4">
+        <div className="bg-greendarkest w-full h-full flex flex-col rounded-2xl p-4 container-drop-shadow ">
           <div className="flex  mt-4">
             <span className="text-white font-bold">My Channels</span>
           </div>

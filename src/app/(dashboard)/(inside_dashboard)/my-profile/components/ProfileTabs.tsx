@@ -7,7 +7,7 @@ const ProfileTabs = () => {
   return (
     <>
       <Tabs defaultValue="posts" className="w-full ">
-        <TabsList className="w-full flex justify-evenly rounded-full p-2  h-16">
+        <TabsList className="w-full flex justify-evenly rounded-full max-sm:rounded-md p-2  h-16">
           <TabsTrigger value="posts">
             <div className="flex flex-col items-center">
               <span className="text-graydark">45</span>

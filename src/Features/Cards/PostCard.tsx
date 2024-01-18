@@ -130,7 +130,7 @@ const PostCard = ({ post }: PostCardProps) => {
               width={20}
               height={20}
             />
-            <span className="text-graylight max-lg:text-sm">
+            <span className="text-graylight max-lg:text-sm ">
               {post.comments} comments{" "}
             </span>
           </div>

@@ -28,7 +28,7 @@ const Banner = () => {
           height: "200px", // Optional: Set the height
         }}
       >
-        <div className="rounded-full w-40 h-40  absolute m-5 ">
+        <div className="rounded-full w-40 h-40  absolute m-5 max-sm:w-28 max-sm:h-28 ">
           <Image
             src={"/assets/banner_profile_image.png"}
             alt="profile_picture"
@@ -87,7 +87,9 @@ const Banner = () => {
           )}
         </div>
         <div className="absolute bottom-5 right-5 flex flex-col">
-          <span className="text-white font-bold text-4xl">AI Discussion</span>
+          <span className="text-white font-bold text-4xl max-lg:text-2xl max-sm:text-xl">
+            AI Discussion
+          </span>
           <span className="text-greensharp text-right">Public Group</span>
         </div>
       </div>

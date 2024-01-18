@@ -1,6 +1,7 @@
 import { Button } from "@/core/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { FriendsIcon } from "@/core/icons/FriendsIcon";
 
 const ProfileCard = () => {
   return (
@@ -22,12 +23,7 @@ const ProfileCard = () => {
 
         <div className="bg-greendarkest rounded-b-3xl  p-4 flex flex-col gap-5">
           <div className="flex gap-2 items-center">
-            <Image
-              src={"/assets/friends_icon.svg"}
-              width={25}
-              height={25}
-              alt="friends_icon"
-            />
+            <FriendsIcon className="w-6 h-6" />
             <span className="text-graylight text-sm">45 friends</span>
           </div>
           <div className="bg-greenaccent p-2 w-full justify-center rounded-3xl gap-2 flex items-center">
