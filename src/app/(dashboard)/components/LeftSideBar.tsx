@@ -19,7 +19,7 @@ const LeftSideBar = () => {
   useEffect(() => {
     // Extract route parameter and set active icon accordingly
     const routeParam = pathname.replace("/", "");
-    console.log(routeParam);
+    // console.log(routeParam);
     setActiveIcon(routeParam || "home");
   }, [pathname]);
 

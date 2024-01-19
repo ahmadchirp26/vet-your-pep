@@ -14,7 +14,7 @@ const VerifyCodeForm = () => {
 
     onSubmit: (values) => {
       // Handle form submission
-      console.log("Form Values", values);
+      // console.log("Form Values", values);
     },
   });
 
