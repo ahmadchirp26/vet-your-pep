@@ -285,3 +285,21 @@ export const blockList = [
     profileAvatar: OnlineFriend3,
   },
 ];
+
+export const eventStepper = [
+  {
+    date: "05 Feb 2024 4:00 PM",
+    eventTitle: "The Beat Box",
+    venue: "online",
+  },
+  {
+    date: "09 Feb 2024 4:00 PM",
+    eventTitle: "The Concert",
+    venue: "online",
+  },
+  {
+    date: "10 Feb 2024 4:00 PM",
+    eventTitle: "Workshop",
+    venue: "online",
+  },
+];

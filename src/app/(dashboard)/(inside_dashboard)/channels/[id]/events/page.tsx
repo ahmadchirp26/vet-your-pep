@@ -1,6 +1,7 @@
 import AllChannels from "@/Features/AllChannels";
 import ProfileCard from "@/Features/ProfileCard";
 import EventCalendar from "./components/EventCalendar";
+import EventStepper from "./components/EventStepper";
 
 const Events = () => {
   return (
@@ -11,8 +12,13 @@ const Events = () => {
 
           <AllChannels />
         </div>
-        <div className="flex gap-3 w-full max-md:justify-center max-sm:flex-col">
-          <EventCalendar />
+        <div className="flex gap-3 w-full max-md:justify-center max-lg:flex-col">
+          <div className="max-lg:order-2">
+            <EventCalendar />
+          </div>
+          <div className="max-lg:order-1">
+            <EventStepper />
+          </div>
           {/* <div className="text-red-500">events stepper</div> */}
         </div>
       </div>
