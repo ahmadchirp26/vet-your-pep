@@ -78,7 +78,7 @@ const CommentsSection = ({ container }: Props) => {
               <AccordionContent>
                 <CommentsSection_ />
               </AccordionContent>,
-              container
+              container,
             )
           ) : (
             <AccordionContent>

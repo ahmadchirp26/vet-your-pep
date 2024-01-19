@@ -1,7 +1,7 @@
 import { cn } from "../lib/helper";
 
 type Props = { className?: string };
-const CommentIcon = ({className}:Props) => (
+const CommentIcon = ({ className }: Props) => (
   <svg
     className={cn("w-5 h-5", className)}
     viewBox="0 0 21 21"

@@ -47,7 +47,7 @@ const PostCard = ({ post }: PostCardProps) => {
             <span className="text-gray-300 text-xs truncate">
               Posted on {post.group}
             </span>
-            <span className = "text-graylight text-xs">{post.postedTime}</span>
+            <span className="text-graylight text-xs">{post.postedTime}</span>
           </div>
         </div>
         <DropdownMenu>
@@ -85,8 +85,7 @@ const PostCard = ({ post }: PostCardProps) => {
         ref={(div) => {
           setCommentSectionsDropdown(div);
         }}
-
-        style = {{marginTop: "0"}}
+        style={{ marginTop: "0" }}
       ></div>
     </div>
   );

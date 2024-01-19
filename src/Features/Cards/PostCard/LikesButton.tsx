@@ -56,7 +56,7 @@ const LikesButton = () => {
             }}
           />
           <DialogTrigger asChild>
-            <div className = "flex gap-2">
+            <div className="flex gap-2">
               <span className="text-graylight sm:text-sm">20</span>
               <span className="hidden sm:block">Likes</span>
             </div>
