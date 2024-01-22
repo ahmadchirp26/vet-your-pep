@@ -292,6 +292,7 @@ export const eventStepper = [
     eventTitle: "The Beat Box",
     venue: "online",
   },
+
   {
     date: "09 Feb 2024 4:00 PM",
     eventTitle: "The Concert",
