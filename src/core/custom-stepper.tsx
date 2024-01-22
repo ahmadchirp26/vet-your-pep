@@ -1,4 +1,5 @@
 // CustomStepper.tsx
+import Link from "next/link";
 import React from "react";
 
 interface CustomStepperProps {
@@ -19,7 +20,9 @@ const CustomStepper: React.FC<CustomStepperProps> = ({
         <span className="mb-1 text-xs font-normal leading-none text-graylight">
           {date}
         </span>
-        <span className="text-lg   text-white">{title}</span>
+        <Link href={"/channels/:id/events/:event_id"}>
+          <span className="text-lg   text-white">{title}</span>
+        </Link>
         <span className="mb-4 text-sm font-normal text-greensharp">
           {description}
         </span>
