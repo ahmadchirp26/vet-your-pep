@@ -299,7 +299,7 @@ export const eventStepper = [
     venue: "online",
   },
   {
-    date: "10 Feb 2024 4:00 PM",
+    date: "25 Jan 2024 4:00 PM",
     eventTitle: "Workshop",
     venue: "online",
   },
