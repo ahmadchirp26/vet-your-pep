@@ -6,6 +6,8 @@ module.exports = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./node_modules/rizzui/dist/*.{js,ts,jsx,tsx}",
+    "./node_modules/rizzui/dist/*.{js,ts,jsx,tsx}",
   ],
   prefix: "",
   theme: {
@@ -128,5 +130,10 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp"), require("tailwindcss-animate")],
+  plugins: [
+    require("@tailwindcss/line-clamp"),
+    require("tailwindcss-animate"),
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/forms"),
+  ],
 };

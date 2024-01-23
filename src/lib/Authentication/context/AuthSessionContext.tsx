@@ -22,7 +22,7 @@ export const AuthSessionProvider = ({ children }: PropsWithChildren) => {
     const setSessionState = () => {
       getSession({ shouldBroadcast: false })
         .then((session) => {
-          console.log(session);
+          // console.log(session);
           setState({
             data: session,
             status: session === null ? "unauthenticated" : "authenticated",
