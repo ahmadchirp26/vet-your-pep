@@ -137,6 +137,52 @@ export const posts = [
   // Add more posts as needed
 ];
 
+export const Notifications = [
+  {
+    profileAvatar: OnlineFriend1,
+    notificationContent: "You are selected as an admin of The Beat Box",
+    date: "11-12-2023",
+  },
+  {
+    profileAvatar: OnlineFriend2,
+    notificationContent: "John Deo accepted your following request",
+    date: "11-12-2023",
+  },
+  {
+    profileAvatar: OnlineFriend3,
+    notificationContent: "Sara requested to follow you",
+    date: "11-12-2023",
+  },
+  {
+    profileAvatar: OnlineFriend4,
+    notificationContent: "Your booking is confirmed",
+    date: "11-12-2023",
+  },
+];
+
+export const FriendRequests = [
+  {
+    profileAvatar: OnlineFriend1,
+    requestContent: "John wants to send you follow request",
+    date: "11-12-2023",
+  },
+  {
+    profileAvatar: OnlineFriend2,
+    requestContent: "Sara Deo wants to send you follow request",
+    date: "11-12-2023",
+  },
+  {
+    profileAvatar: OnlineFriend3,
+    requestContent: "Mitchell wants to send you follow request",
+    date: "11-12-2023",
+  },
+  {
+    profileAvatar: OnlineFriend4,
+    requestContent: "Yango wants to send you follow request",
+    date: "11-12-2023",
+  },
+];
+
 //
 
 export const profilePosts = [
