@@ -2,6 +2,8 @@ import { ProfileAvatar } from "./ProfileAvatar";
 import { cn } from "@/core/lib/helper";
 import { NotificationIcon } from "@/core/icons/NotificationIcon";
 import { ChatIcon } from "@/core/icons/ChatIcon";
+import { Popover, PopoverContent, PopoverTrigger } from "@/core/ui/popover";
+import Notifications from "@/Features/Notifications";
 
 interface Props {
   className?: string;
@@ -16,7 +18,14 @@ const AuthMenu = ({ className }: Props) => {
     >
       <div className="flex gap-4">
         <ChatIcon className="w-6 h-6" />
-        <NotificationIcon className="w-6 h-6" />
+        <Popover>
+          <PopoverTrigger>
+            <NotificationIcon className="w-6 h-6 " />
+          </PopoverTrigger>
+          <PopoverContent className="mt-4">
+            <Notifications />
+          </PopoverContent>
+        </Popover>
       </div>
       <ProfileAvatar />
     </div>
