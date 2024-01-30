@@ -31,7 +31,7 @@ const PostCard = ({ post }: PostCardProps) => {
   const [commentSectionsDropdown, setCommentSectionsDropdown] =
     useState<HTMLDivElement | null>(null);
   return (
-    <div className="border border-white rounded-3xl p-4 space-y-4 flex flex-col">
+    <div className="border border-white rounded-3xl p-4 space-y-4 flex flex-col mt-5">
       <div className="flex justify-between items-center">
         <div className="flex items-start gap-3">
           <div className="rounded-full w-12 h-12 mt-1">
