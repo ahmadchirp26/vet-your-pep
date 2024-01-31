@@ -7,14 +7,20 @@ import SearchBar from "@/app/(dashboard)/components/SearchBar";
 import { channels } from "@/data/facebackend";
 import ChannelCard from "@/Features/Cards/ChannelCard";
 import AllChannelCard from "./components/AllChannelCard";
+import Link from "next/link";
 
 const Channels = () => {
   const channelsArray = channels;
   const [activeSearch, setActiveSearch] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = () => {
     setActiveSearch(!activeSearch);
   };
+
+  const filteredChannels = channelsArray.filter((channel) =>
+    channel.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
@@ -33,18 +39,20 @@ const Channels = () => {
               />
             ) : (
               <div className="w-[300px]">
-                <SearchBar />
+                <SearchBar setSearchTerm={setSearchTerm} />
               </div>
             )}
           </div>
           <div className="mt-3 flex w-full flex-wrap gap-7 justify-center items-center ">
-            {channelsArray.map((channel, index) => (
-              <AllChannelCard
-                key={index}
-                channel={channel}
-                showJoinButton={true}
-                ButtonText="Join"
-              />
+            {filteredChannels.map((channel, index) => (
+              <Link key={index} href={"/channels/:id"} className="">
+                <AllChannelCard
+                  key={index}
+                  channel={channel}
+                  showJoinButton={true}
+                  ButtonText="Join"
+                />
+              </Link>
             ))}
           </div>
         </div>
