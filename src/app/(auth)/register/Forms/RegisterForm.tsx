@@ -36,6 +36,7 @@ const RegisterForm = () => {
         }),
     }),
     onSubmit: async (values) => {
+      router.push("/register/upload-image");
       try {
         await mutateAsync([
           {

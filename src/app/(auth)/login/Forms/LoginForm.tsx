@@ -9,8 +9,11 @@ import { useLoginMutation } from "@/api/Authentication/useLoginMutation";
 import { toast } from "@/core/ui/use-toast";
 import * as Yup from "yup";
 import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import { useRouter } from "next/navigation";
+
 const LoginForm = () => {
   const { mutateAsync } = useLoginMutation();
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -20,7 +23,9 @@ const LoginForm = () => {
       email: Yup.string().email().required("Required"),
       password: Yup.string().required("Required"),
     }),
+
     onSubmit: async (values) => {
+      router.push("/");
       try {
         await mutateAsync([values]);
       } catch (e) {
