@@ -17,19 +17,19 @@ const UploadImageForm = () => {
     initialValues,
     onSubmit: (values: any) => {
       router.push("/");
-      // // Implement your image upload logic here
-      // if (values.image) {
-      //   const formData = new FormData();
-      //   formData.append("image", values.image);
+      // Implement your image upload logic here
+      if (values.image) {
+        const formData = new FormData();
+        formData.append("image", values.image);
 
-      //   // Log the image data to the console
-      //   console.log("Image data:", values.image);
+        // Log the image data to the console
+        console.log("Image data:", values.image);
 
-      //   // Reset the form after upload
-      //   formik.resetForm();
-      // } else {
-      //   console.error("No image selected for upload.");
-      // }
+        // Reset the form after upload
+        formik.resetForm();
+      } else {
+        console.error("No image selected for upload.");
+      }
     },
   });
 

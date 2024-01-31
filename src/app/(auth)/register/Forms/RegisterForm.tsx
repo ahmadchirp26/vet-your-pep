@@ -23,39 +23,39 @@ const RegisterForm = () => {
       confirmPassword: "",
     },
 
-    // validationSchema: Yup.object({
-    //   email: Yup.string()
-    //     .email("Invalid email address")
-    //     .required("Email is required"),
-    //   firstName: Yup.string().required("First Name is required"),
-    //   lastName: Yup.string().required("Last Name is required"),
-    //   phoneNumber: Yup.string().required("Phone Number is required"),
-    //   password: Yup.string().required("Password is required"),
-    //   confirmPassword: Yup.string()
-    //     .required("Confirm Password is required")
-    //     .test("passwords-match", "Passwords must match", function (value) {
-    //       return this.parent.password === value;
-    //     }),
-    // }),
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      firstName: Yup.string().required("First Name is required"),
+      lastName: Yup.string().required("Last Name is required"),
+      phoneNumber: Yup.string().required("Phone Number is required"),
+      password: Yup.string().required("Password is required"),
+      confirmPassword: Yup.string()
+        .required("Confirm Password is required")
+        .test("passwords-match", "Passwords must match", function (value) {
+          return this.parent.password === value;
+        }),
+    }),
     onSubmit: async (values) => {
       router.push("/register/upload-image");
-      // try {
-      //   await mutateAsync([
-      //     {
-      //       email: values.email,
-      //       firstName: values.firstName,
-      //       lastName: values.lastName,
-      //       password: values.password,
-      //     },
-      //   ]);
-      // } catch (error: any) {
-      //   console.log(error);
-      //   toast({
-      //     title: "Error",
-      //     description: error.message,
-      //     variant: "destructive",
-      //   });
-      // }
+      try {
+        await mutateAsync([
+          {
+            email: values.email,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            password: values.password,
+          },
+        ]);
+      } catch (error: any) {
+        console.log(error);
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     },
   });
 

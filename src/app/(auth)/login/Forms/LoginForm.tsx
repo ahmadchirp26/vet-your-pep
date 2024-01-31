@@ -19,22 +19,22 @@ const LoginForm = () => {
       email: "",
       password: "",
     },
-    // validationSchema: Yup.object().shape({
-    //   email: Yup.string().email().required("Required"),
-    //   password: Yup.string().required("Required"),
-    // }),
+    validationSchema: Yup.object().shape({
+      email: Yup.string().email().required("Required"),
+      password: Yup.string().required("Required"),
+    }),
     onSubmit: async (values) => {
       router.push("/");
-      // try {
-      //   await mutateAsync([values]);
-      // } catch (e) {
-      //   console.log(e);
-      //   toast({
-      //     title: "Error",
-      //     description: "Invalid Credentials",
-      //     variant: "default",
-      //   });
-      // }
+      try {
+        await mutateAsync([values]);
+      } catch (e) {
+        console.log(e);
+        toast({
+          title: "Error",
+          description: "Invalid Credentials",
+          variant: "default",
+        });
+      }
     },
   });
 
