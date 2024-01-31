@@ -1,9 +1,12 @@
+"use client";
+
 import { Button } from "@/core/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { FriendsIcon } from "@/core/icons/FriendsIcon";
-
+import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
 const ProfileCard = () => {
+  const { data } = useAuthSessionContext();
   return (
     <>
       <div className="flex flex-col rounded-3xl container-drop-shadow">
@@ -17,7 +20,7 @@ const ProfileCard = () => {
             />
           </div>
           <div>
-            <span className="text-white font-bold">John Doe</span>
+            <span className="text-white font-bold">{`${data?.firstName} ${data?.lastName}`}</span>
           </div>
         </div>
 

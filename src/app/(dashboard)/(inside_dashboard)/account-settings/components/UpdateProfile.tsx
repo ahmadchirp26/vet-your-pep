@@ -7,17 +7,33 @@ import { Button } from "@/core/ui/button";
 import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
 import { useState } from "react";
 
+import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
+import useUpdateCustomerMutation from "@/api/AccountSettings/useUpdateCustomerMutation";
+
 const UpdateProfile = () => {
+  const { data } = useCustomerDataQuery();
+  const { mutateAsync } = useUpdateCustomerMutation();
+
   const [imageURL, setImageURL] = useState(null);
   const formik = useFormik({
     initialValues: {
-      email: "",
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
+      email: data?.getCustomerData.email ?? "",
+      firstName: data?.getCustomerData.firstName ?? "",
+      lastName: data?.getCustomerData.lastName ?? "",
+      phoneNumber: data?.getCustomerData.cellPhone ?? "",
     },
+    enableReinitialize: true,
     onSubmit: async (values) => {
-      console.log(values);
+      try {
+        await mutateAsync({
+          input: {
+            firstName: values.firstName,
+            lastName: values.lastName,
+
+            cellPhone: values.phoneNumber,
+          },
+        });
+      } catch (e) {}
     },
   });
 
@@ -86,7 +102,9 @@ const UpdateProfile = () => {
             </div>
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-2">
-                <span className="text-white font-bold text-xl">John Doe</span>
+                <span className="text-white font-bold text-xl">
+                  {`${data?.getCustomerData.firstName} ${data?.getCustomerData.lastName}`}
+                </span>
                 <Image
                   src={"/assets/verified_icon.svg"}
                   alt="verified_icon"
@@ -102,7 +120,7 @@ const UpdateProfile = () => {
                   width={13}
                 />
                 <span className="text-graylight text-sm">
-                  johndeo@gmail.com
+                  {data?.getCustomerData.email}
                 </span>
               </div>
               <div className="flex items-center gap-2">
@@ -112,7 +130,9 @@ const UpdateProfile = () => {
                   height={13}
                   width={13}
                 />
-                <span className="text-graylight text-sm">(123)242-2134</span>
+                <span className="text-graylight text-sm">
+                  {data?.getCustomerData.cellPhone}
+                </span>
               </div>
             </div>
           </div>
@@ -151,6 +171,7 @@ const UpdateProfile = () => {
             placeholder="Email Address"
             onChange={formik.handleChange}
             value={formik.values.email}
+            readOnly
             className="bg-greenaccent rounded-full outline-none h-12  border-none placeholder:text-graylight "
           />
           <Input

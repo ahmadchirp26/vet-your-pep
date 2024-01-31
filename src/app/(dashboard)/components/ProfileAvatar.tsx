@@ -39,7 +39,7 @@ export function ProfileAvatar({ className }: Props) {
           </div>
           <div className="flex flex-col flex-1 items-start justify-start">
             <p className="text-white font-bold text-sm overflow-ellipsis">
-              {data?.email.split("@")[0]}
+              {`${data?.firstName} ${data?.lastName}`}
             </p>
             <p className="text-graydark text-sm">{"Online"}</p>
           </div>

@@ -3,10 +3,12 @@ import React from "react";
 import { useFormik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/core/ui/button";
 
 const UploadImageForm = () => {
+  const router = useRouter();
   const initialValues = {
     image: null,
   };

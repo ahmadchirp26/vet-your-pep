@@ -25,9 +25,9 @@ const LoginForm = () => {
     }),
 
     onSubmit: async (values) => {
-      router.push("/");
       try {
         await mutateAsync([values]);
+        router.push("/");
       } catch (e) {
         console.log(e);
         toast({
