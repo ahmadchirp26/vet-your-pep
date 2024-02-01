@@ -14,7 +14,7 @@ const ProfilePicture = () => {
     useUpdateCustomerMutation();
 
   const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (
-    event,
+    event
   ) => {
     if (!event.target.files?.length) {
       return;
@@ -31,7 +31,7 @@ const ProfilePicture = () => {
               },
             });
           },
-        },
+        }
       );
     }
   };
@@ -58,7 +58,7 @@ const ProfilePicture = () => {
           />
         ) : (
           <Image
-            src={"/assets/upload_image_bg.png"}
+            src={"/assets/dummy_avatar.png"}
             alt="user-profile-pic"
             className="cursor-pointer rounded-full object-cover border-4 border-greensharp"
             height={160}

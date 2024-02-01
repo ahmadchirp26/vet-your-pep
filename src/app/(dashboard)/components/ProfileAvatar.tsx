@@ -10,14 +10,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/core/ui/dropdown-menu";
-import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
+import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
 import Link from "next/link";
 
 interface Props {
   className?: string;
 }
 export function ProfileAvatar({ className }: Props) {
-  const { data } = useAuthSessionContext();
+  const { data } = useCustomerDataQuery();
   const { mutate, status } = useLogoutMutation();
   return (
     <DropdownMenu>
@@ -28,9 +28,17 @@ export function ProfileAvatar({ className }: Props) {
         >
           <div className="relative">
             <Avatar className="h-8 w-8">
-              <AvatarImage src="/avatars/01.png" alt="@shadcn" />
+              {data?.getCustomerData.mediaUrl ? (
+                <AvatarImage
+                  src={data?.getCustomerData.mediaUrl}
+                  alt="@shadcn"
+                />
+              ) : (
+                <AvatarImage src={"/assets/dummy_avatar.png"} alt="@shadcn" />
+              )}
+
               <AvatarFallback className="capitalize">
-                {data?.email.charAt(0)}
+                {data?.getCustomerData.email.charAt(0)}
               </AvatarFallback>
             </Avatar>
             {true && (
@@ -39,7 +47,7 @@ export function ProfileAvatar({ className }: Props) {
           </div>
           <div className="flex flex-col flex-1 items-start justify-start">
             <p className="text-white font-bold text-sm overflow-ellipsis">
-              {`${data?.firstName} ${data?.lastName}`}
+              {`${data?.getCustomerData.firstName} ${data?.getCustomerData.lastName}`}
             </p>
             <p className="text-graydark text-sm">{"Online"}</p>
           </div>
