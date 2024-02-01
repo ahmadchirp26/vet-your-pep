@@ -1,5 +1,6 @@
 import { graphql } from "@/core/lib/react-query-graphql";
 import { useGraphQLQueryProtected } from "../helpers";
+import { env } from "@/env";
 
 const GetCustomerDataQueryDocument = graphql(`
   query getCustomerData {
@@ -22,6 +23,17 @@ const useCustomerDataQuery = () =>
   useGraphQLQueryProtected(
     {
       queryKey: CustomerDataQueryKey,
+      select(data) {
+        return {
+          ...data,
+          getCustomerData: {
+            ...data.getCustomerData,
+            mediaUrl: data.getCustomerData.mediaUrl
+              ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${data.getCustomerData.mediaUrl}`
+              : null,
+          },
+        };
+      },
     },
     GetCustomerDataQueryDocument
   );

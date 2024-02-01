@@ -37,6 +37,8 @@ const useUpdateCustomerMutation = () => {
     {
       mutationKey,
       onMutate([variables]) {
+        console.log("variable", variables);
+
         const previousValue =
           queryClient.getQueryData<useCustomerDataQueryDataType>(
             CustomerDataQueryKey
@@ -44,12 +46,13 @@ const useUpdateCustomerMutation = () => {
         queryClient.setQueryData<useCustomerDataQueryDataType>(
           CustomerDataQueryKey,
           (prev) => {
+            console.log("previous", prev);
             if (!prev) return prev;
             return {
               ...prev,
               getCustomerData: {
                 ...prev.getCustomerData,
-                ...variables,
+                mediaUrl: variables.input.mediaUrl,
               },
             };
           }

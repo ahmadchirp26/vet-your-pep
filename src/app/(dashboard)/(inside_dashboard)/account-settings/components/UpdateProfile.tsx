@@ -9,12 +9,12 @@ import { useState } from "react";
 
 import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
 import useUpdateCustomerMutation from "@/api/AccountSettings/useUpdateCustomerMutation";
+import ProfilePicture from "./ProfilePicture";
 
 const UpdateProfile = () => {
   const { data } = useCustomerDataQuery();
   const { mutateAsync } = useUpdateCustomerMutation();
 
-  const [imageURL, setImageURL] = useState(null);
   const formik = useFormik({
     initialValues: {
       email: data?.getCustomerData.email ?? "",
@@ -37,20 +37,6 @@ const UpdateProfile = () => {
     },
   });
 
-  const handleFileChange = (event: any) => {
-    const file = event.target.files[0]; // Get the first selected file
-
-    // Read the selected image file and set its URL to display it
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        setImageURL(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setImageURL(null); // Clear the image URL if no file is selected
-    }
-  };
   return (
     <FormikProvider value={formik}>
       <form
@@ -61,49 +47,17 @@ const UpdateProfile = () => {
         {/* Email */}
 
         <div className="flex items-center w-full  ">
-          <div className="flex items-center max-md:flex-col max-md:justify-center max-md:items-center w-full gap-5">
-            <div className="rounded-full relative flex justify-center items-center">
-              {imageURL ? (
-                <Image
-                  src={imageURL}
-                  alt="profile_image"
-                  className="h-[100px] w-[100px] cursor-pointer rounded-full object-cover"
-                  height={160}
-                  width={160}
-                />
-              ) : (
-                <Image
-                  src={"/assets/john_doe_image.svg"}
-                  alt="user-profile-pic"
-                  height={160}
-                  width={160}
-                />
-              )}
-
-              <label
-                htmlFor="picture"
-                className="bg-greendarkest rounded-full p-2 absolute cursor-pointer -bottom-3"
-              >
-                <Image
-                  src={"/assets/upload_image_icon.svg"}
-                  alt="user-profile-pic"
-                  height={20}
-                  width={20}
-                />
-              </label>
-
-              <input
-                type="file"
-                id="picture"
-                accept="image/*"
-                className="hidden"
-                onChange={handleFileChange}
-              />
+          <div className="flex items-center gap-1 max-sm:flex-col max-sm:justify-center max-sm:w-full">
+            <div className="flex items-center max-md:flex-col max-md:justify-center max-md:items-center w-full gap-2">
+              <ProfilePicture />
             </div>
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-2">
-                <span className="text-white font-bold text-xl">
-                  {`${data?.getCustomerData.firstName} ${data?.getCustomerData.lastName}`}
+                <span className="text-white font-bold text-xl text-inline">
+                  {data?.getCustomerData.firstName}
+                </span>
+                <span className="text-white font-bold text-xl text-inline">
+                  {data?.getCustomerData.lastName}
                 </span>
                 <Image
                   src={"/assets/verified_icon.svg"}
