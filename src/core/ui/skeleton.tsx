@@ -1,4 +1,4 @@
-import { cn } from "@/core/lib/helper"
+import { cn } from "@/core/lib/helper";
 
 function Skeleton({
   className,
@@ -9,7 +9,7 @@ function Skeleton({
       className={cn("animate-pulse rounded-md bg-muted", className)}
       {...props}
     />
-  )
+  );
 }
 
-export { Skeleton }
+export { Skeleton };

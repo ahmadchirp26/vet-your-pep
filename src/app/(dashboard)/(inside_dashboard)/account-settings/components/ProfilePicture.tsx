@@ -14,7 +14,7 @@ const ProfilePicture = () => {
     useUpdateCustomerMutation();
 
   const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (
-    event
+    event,
   ) => {
     if (!event.target.files?.length) {
       return;
@@ -31,7 +31,7 @@ const ProfilePicture = () => {
               },
             });
           },
-        }
+        },
       );
     }
   };

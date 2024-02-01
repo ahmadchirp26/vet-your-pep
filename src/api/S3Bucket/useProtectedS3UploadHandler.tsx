@@ -21,7 +21,7 @@ const getCustomerUploadURL = (accessToken: string) => {
 
 export const S3UploadHandlerMutationFn = async (
   fileToUpload: File,
-  accessToken: string
+  accessToken: string,
 ) => {
   try {
     const {

@@ -35,7 +35,7 @@ const useCustomerDataQuery = () =>
         };
       },
     },
-    GetCustomerDataQueryDocument
+    GetCustomerDataQueryDocument,
   );
 
 export type useCustomerDataQueryDataType = ReturnType<
