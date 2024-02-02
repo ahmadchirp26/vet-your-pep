@@ -8,8 +8,10 @@ import Image from "next/image";
 import { Checkbox } from "@/core/ui/checkbox";
 import { Button } from "@/core/ui/button";
 import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const router = useRouter();
   const { mutateAsync } = useCreateAccountMutation();
   const formik = useFormik({
     initialValues: {
@@ -36,6 +38,7 @@ const RegisterForm = () => {
         }),
     }),
     onSubmit: async (values) => {
+      router.push("/register/upload-image");
       try {
         await mutateAsync([
           {

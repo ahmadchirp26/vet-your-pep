@@ -1,7 +1,10 @@
+"use client";
 import Image from "next/image";
 import ProfileTabs from "./ProfileTabs";
+import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
 
 const UserProfile = () => {
+  const { data } = useAuthSessionContext();
   return (
     <>
       <div className="rounded-2xl container-drop-shadow bg-greendarkest p-6 w-2/3 max-lg:w-full flex-col gap-7">
@@ -16,7 +19,7 @@ const UserProfile = () => {
           </div>
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
-              <span className="text-white font-bold text-xl">John Doe</span>
+              <span className="text-white font-bold text-xl">{`${data?.firstName} ${data?.lastName}`}</span>
               <Image
                 src={"/assets/verified_icon.svg"}
                 alt="verified_icon"
@@ -31,16 +34,22 @@ const UserProfile = () => {
                 height={13}
                 width={13}
               />
-              <span className="text-graylight text-sm">johndeo@gmail.com</span>
+              <span className="text-graylight text-sm">{data?.email}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Image
-                src={"/assets/phone_icon.svg"}
-                alt="phone_icon"
-                height={13}
-                width={13}
-              />
-              <span className="text-graylight text-sm">(123)242-2134</span>
+              {data?.cellPhone && (
+                <>
+                  <Image
+                    src={"/assets/phone_icon.svg"}
+                    alt="phone_icon"
+                    height={13}
+                    width={13}
+                  />
+                  <span className="text-graylight text-sm">
+                    {data?.cellPhone}
+                  </span>
+                </>
+              )}
             </div>
           </div>
         </div>
