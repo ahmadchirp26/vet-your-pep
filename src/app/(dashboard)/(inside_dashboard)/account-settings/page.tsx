@@ -3,7 +3,6 @@ import { Switch } from "@/core/ui/switch";
 import { blockList } from "@/data/facebackend";
 import BlockListCard from "@/app/(dashboard)/(inside_dashboard)/account-settings/components/BlockListCard";
 import Link from "next/link";
-import UpdateProfile from "./components/UpdateProfile";
 
 const AccountSettings = () => {
   const blockArray = blockList;
@@ -14,10 +13,6 @@ const AccountSettings = () => {
           <span className="text-white font-bold text-lg">Settings</span>
           {/* Alert & Notifications */}
           <div className="flex flex-col p-2 mt-3 gap-3">
-            <span className="text-white font-bold ">Update Profile</span>
-            <div className="h-[1px] bg-graydark w-full"></div>
-
-            <UpdateProfile />
             <span className="text-white font-bold ">
               Alters & Notifications
             </span>

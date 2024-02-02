@@ -10,15 +10,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/core/ui/dropdown-menu";
-import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
+import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface Props {
   className?: string;
 }
 export function ProfileAvatar({ className }: Props) {
-  const { data } = useCustomerDataQuery();
+  const { data } = useAuthSessionContext();
   const { mutate, status } = useLogoutMutation();
+  const router = useRouter();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,17 +30,9 @@ export function ProfileAvatar({ className }: Props) {
         >
           <div className="relative">
             <Avatar className="h-8 w-8">
-              {data?.getCustomerData.mediaUrl ? (
-                <AvatarImage
-                  src={data?.getCustomerData.mediaUrl}
-                  alt="@shadcn"
-                />
-              ) : (
-                <AvatarImage src={"/assets/dummy_avatar.png"} alt="@shadcn" />
-              )}
-
+              <AvatarImage src="/avatars/01.png" alt="@shadcn" />
               <AvatarFallback className="capitalize">
-                {data?.getCustomerData.email.charAt(0)}
+                {data?.email.charAt(0)}
               </AvatarFallback>
             </Avatar>
             {true && (
@@ -47,7 +41,7 @@ export function ProfileAvatar({ className }: Props) {
           </div>
           <div className="flex flex-col flex-1 items-start justify-start">
             <p className="text-white font-bold text-sm overflow-ellipsis">
-              {`${data?.getCustomerData.firstName} ${data?.getCustomerData.lastName}`}
+              {data?.email.split("@")[0]}
             </p>
             <p className="text-graydark text-sm">{"Online"}</p>
           </div>
@@ -66,7 +60,8 @@ export function ProfileAvatar({ className }: Props) {
         <DropdownMenuItem
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => {
-            mutate();
+            // mutate();
+            router.push("/login");
           }}
           disabled={status === "pending"}
         >

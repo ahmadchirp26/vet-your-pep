@@ -37,10 +37,7 @@ const NewPostDialog = ({ isOpen, onClose }: NewPostDialogProps) => {
               </Select>
             </div>
             <div className="w-full">
-              <Textarea
-                placeholder="Write here..."
-                className="mt-3 p-2 outline-none"
-              />
+              <Textarea placeholder="Write here..." className="mt-3 p-2" />
             </div>
             <div className="w-full flex justify-between items-center">
               <div className="flex items-center gap-2">

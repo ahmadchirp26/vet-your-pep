@@ -23,10 +23,8 @@ export default function RootLayout({
       >
         <ReactQueryProvider>
           <AuthSessionProvider>
-            <AuthRedirection>
-              {children}
-              <Toaster />
-            </AuthRedirection>
+            {children}
+            <Toaster />
           </AuthSessionProvider>
         </ReactQueryProvider>
       </body>

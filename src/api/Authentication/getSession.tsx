@@ -10,9 +10,6 @@ export interface UserSession {
   iat: number;
   email: string;
   accessToken: string;
-  firstName: string;
-  lastName: string;
-  cellPhone: string;
 }
 
 export const getSession = async ({ shouldBroadcast }: Params) => {

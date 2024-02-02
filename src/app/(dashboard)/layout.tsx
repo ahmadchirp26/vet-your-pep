@@ -8,7 +8,6 @@ import ResponsiveMenu from "./components/ResponsiveMenu";
 
 import Logo from "../../../public/assets/logo.svg";
 import Link from "next/link";
-import MainSearchBar from "./components/MainSearchBar";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -25,8 +24,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             className="sm:w-20 sm:h-20 w-16 h-16"
           />
         </Link>
-        <MainSearchBar className="flex-1" />
-
+        <SearchBar className="flex-1" />
         <div className="flex items-center gap-2">
           <AuthMenu className="hidden sm:flex" />
           <ResponsiveMenu className="sm:hidden" />

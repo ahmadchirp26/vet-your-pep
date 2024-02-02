@@ -13,7 +13,7 @@ interface LikeCardProps {
 const LikesCard = ({ likes }: LikeCardProps) => {
   return (
     <>
-      <div className="flex gap-3 w-full items-center">
+      <div className="flex gap-3 w-full items-center px-5 mt-3">
         <div className="rounded-full w-12 h-12">
           <Image src={likes.profileAvatar} alt="channel_image" />
         </div>

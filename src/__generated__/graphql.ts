@@ -56,15 +56,12 @@ export type AdminLoginResponse = {
 
 export type Channels = {
   __typename?: "Channels";
-  channelPrice?: Maybe<Scalars["Float"]["output"]>;
-  channelStatus: ChannelsStatus;
   channelsAbout?: Maybe<Scalars["String"]["output"]>;
-  channelsBackgroundImage?: Maybe<Scalars["String"]["output"]>;
   channelsImage?: Maybe<Scalars["String"]["output"]>;
   channelsRule?: Maybe<Scalars["String"]["output"]>;
   channelsTitle: Scalars["String"]["output"];
+  channelsbackgroundImage?: Maybe<Scalars["String"]["output"]>;
   idChannel: Scalars["ID"]["output"];
-  paidStatusEnum: PaidStatusEnum;
   refIdModerator: Scalars["String"]["output"];
 };
 
@@ -72,12 +69,6 @@ export type ChannelsFilterInput = {
   channelsTitle?: InputMaybe<Scalars["String"]["input"]>;
   search?: InputMaybe<Scalars["String"]["input"]>;
 };
-
-/** The status of channels */
-export enum ChannelsStatus {
-  Private = "PRIVATE",
-  Public = "PUBLIC",
-}
 
 export type CreateAdminUserInput = {
   email: Scalars["String"]["input"];
@@ -87,16 +78,14 @@ export type CreateAdminUserInput = {
 };
 
 export type CreateChannelsInput = {
-  channelStatus?: ChannelsStatus;
   channelsAbout?: InputMaybe<Scalars["String"]["input"]>;
   channelsRule?: InputMaybe<Scalars["String"]["input"]>;
   channelsTitle: Scalars["String"]["input"];
   refIdModerator: Scalars["String"]["input"];
-  totalPrice?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type CreateChargeInput = {
-  amount: Scalars["Int"]["input"];
+  amount: Scalars["Float"]["input"];
   customerId: Scalars["String"]["input"];
   paymentMethodId: Scalars["String"]["input"];
 };
@@ -113,8 +102,6 @@ export type Customer = {
   cellPhone?: Maybe<Scalars["String"]["output"]>;
   email: Scalars["String"]["output"];
   firstName: Scalars["String"]["output"];
-  followers?: Maybe<Array<CustomerFollower>>;
-  following?: Maybe<Array<CustomerFollower>>;
   id: Scalars["ID"]["output"];
   isActive?: Maybe<Scalars["Boolean"]["output"]>;
   lastName: Scalars["String"]["output"];
@@ -123,8 +110,6 @@ export type Customer = {
   role: UserRole;
   socialProvider?: Maybe<SocialProvider>;
   stripeCustomerId?: Maybe<Scalars["String"]["output"]>;
-  totalFollowers?: Maybe<Scalars["Int"]["output"]>;
-  totalFollowings?: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type CustomerEmailUpdateResponse = {
@@ -139,14 +124,6 @@ export type CustomerFilterInput = {
   firstName?: InputMaybe<Scalars["String"]["input"]>;
   id?: InputMaybe<Scalars["ID"]["input"]>;
   lastName?: InputMaybe<Scalars["String"]["input"]>;
-  search?: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type CustomerFollower = {
-  __typename?: "CustomerFollower";
-  followers?: Maybe<Customer>;
-  following?: Maybe<Customer>;
-  id: Scalars["Int"]["output"];
 };
 
 export type CustomerLoginOrRegisterResponse = {
@@ -163,8 +140,6 @@ export type ListChannelsInputs = {
 
 export type ListChannelsResponse = {
   __typename?: "ListChannelsResponse";
-  limit: Scalars["Float"]["output"];
-  offset?: Maybe<Scalars["Float"]["output"]>;
   results: Array<Channels>;
   totalRows?: Maybe<Scalars["Float"]["output"]>;
 };
@@ -177,8 +152,6 @@ export type ListCustomersInputs = {
 
 export type ListCustomersResponse = {
   __typename?: "ListCustomersResponse";
-  limit: Scalars["Float"]["output"];
-  offset?: Maybe<Scalars["Float"]["output"]>;
   results: Array<Customer>;
   totalRows?: Maybe<Scalars["Float"]["output"]>;
 };
@@ -203,8 +176,6 @@ export type Mutation = {
   createChannel: SuccessResponse;
   /** This will signup new Customers */
   createCustomer: CustomerLoginOrRegisterResponse;
-  /** This will follow a customer */
-  followCustomer: SuccessResponse;
   /** Admin Login */
   loginAsAdmin: AdminLoginResponse;
   /** Customer Login */
@@ -215,8 +186,6 @@ export type Mutation = {
   saveCustomerMediaUrl: Scalars["String"]["output"];
   /** This will charge the Customer on test stripe */
   testCharge: SuccessResponse;
-  /** This will unfollow a customer */
-  unfollowCustomer: SuccessResponse;
   /** Update admin data */
   updateAdminData: Scalars["String"]["output"];
   /** Update admin email */
@@ -249,10 +218,6 @@ export type MutationCreateCustomerArgs = {
   input: CreateCustomerInput;
 };
 
-export type MutationFollowCustomerArgs = {
-  customerId: Scalars["String"]["input"];
-};
-
 export type MutationLoginAsAdminArgs = {
   input: LoginAdminInput;
 };
@@ -271,10 +236,6 @@ export type MutationSaveCustomerMediaUrlArgs = {
 
 export type MutationTestChargeArgs = {
   chargeInput: CreateChargeInput;
-};
-
-export type MutationUnfollowCustomerArgs = {
-  customerId: Scalars["String"]["input"];
 };
 
 export type MutationUpdateAdminDataArgs = {
@@ -307,16 +268,10 @@ export type MutationUpdateCustomerPasswordArgs = {
 
 export type PageData = {
   __typename?: "PageData";
-  count: Scalars["Int"]["output"];
+  count: Scalars["Float"]["output"];
   limit?: Maybe<Scalars["Int"]["output"]>;
   offset?: Maybe<Scalars["Int"]["output"]>;
 };
-
-/** The status of channels */
-export enum PaidStatusEnum {
-  Free = "FREE",
-  Paid = "PAID",
-}
 
 export type Query = {
   __typename?: "Query";
@@ -330,12 +285,6 @@ export type Query = {
   getCustomerUploadUrl: S3SignedUrlResponse;
   /** The List of Customers with Pagination and filters */
   getCustomersAdmin: ListCustomersResponse;
-  /** Get the followers of the authenticated customer */
-  getFollowers: Array<Customer>;
-  /** Get the followers of the authenticated customer */
-  getFollowingTo: Array<Customer>;
-  /** The List of Customers with filters */
-  searchCustomers: SearchCustomersResponse;
   /** check if email already exist */
   validEmailAdmin: SuccessResponse;
 };
@@ -346,10 +295,6 @@ export type QueryGetAllChannelsWithPaginationArgs = {
 
 export type QueryGetCustomersAdminArgs = {
   input: ListCustomersInputs;
-};
-
-export type QuerySearchCustomersArgs = {
-  search: Scalars["String"]["input"];
 };
 
 export type QueryValidEmailAdminArgs = {
@@ -367,15 +312,9 @@ export type S3SignedUrlResponse = {
   signedUrl: Scalars["String"]["output"];
 };
 
-export type SearchCustomersResponse = {
-  __typename?: "SearchCustomersResponse";
-  message?: Maybe<Scalars["String"]["output"]>;
-  results?: Maybe<Array<Customer>>;
-  totalCount?: Maybe<Scalars["Float"]["output"]>;
-};
-
 /** Social provider types */
 export enum SocialAuthProviders {
+  Facebook = "FACEBOOK",
   Google = "GOOGLE",
 }
 
@@ -422,59 +361,6 @@ export enum UserRole {
   Moderator = "MODERATOR",
   User = "USER",
 }
-
-export type GetCustomerDataQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetCustomerDataQuery = {
-  __typename?: "Query";
-  getCustomerData: {
-    __typename?: "Customer";
-    cellPhone?: string | null;
-    email: string;
-    firstName: string;
-    id: string;
-    isActive?: boolean | null;
-    lastName: string;
-    mediaUrl?: string | null;
-    password: string;
-    stripeCustomerId?: string | null;
-  };
-};
-
-export type UpdateCustomerMutationMutationVariables = Exact<{
-  input: UpdateCustomerInput;
-}>;
-
-export type UpdateCustomerMutationMutation = {
-  __typename?: "Mutation";
-  updateCustomer: {
-    __typename?: "Customer";
-    cellPhone?: string | null;
-    email: string;
-    firstName: string;
-    id: string;
-    isActive?: boolean | null;
-    lastName: string;
-    mediaUrl?: string | null;
-    stripeCustomerId?: string | null;
-    socialProvider?: {
-      __typename?: "SocialProvider";
-      createdDate: any;
-      id: string;
-      provider: SocialAuthProviders;
-      socialId: string;
-    } | null;
-  };
-};
-
-export type SaveCustomerMediaUrlMutationVariables = Exact<{
-  input: Scalars["String"]["input"];
-}>;
-
-export type SaveCustomerMediaUrlMutation = {
-  __typename?: "Mutation";
-  saveCustomerMediaUrl: string;
-};
 
 export type CreateCustomerMutationVariables = Exact<{
   firstName: Scalars["String"]["input"];
@@ -531,192 +417,6 @@ export type ContinueWithSocialSiteMutation = {
   };
 };
 
-export type GetCustomerSignedUrlQueryVariables = Exact<{
-  [key: string]: never;
-}>;
-
-export type GetCustomerSignedUrlQuery = {
-  __typename?: "Query";
-  getCustomerUploadUrl: {
-    __typename?: "S3SignedUrlResponse";
-    fileName: string;
-    signedUrl: string;
-  };
-};
-
-export const GetCustomerDataDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "getCustomerData" },
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "getCustomerData" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "cellPhone" } },
-                { kind: "Field", name: { kind: "Name", value: "email" } },
-                { kind: "Field", name: { kind: "Name", value: "firstName" } },
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "isActive" } },
-                { kind: "Field", name: { kind: "Name", value: "lastName" } },
-                { kind: "Field", name: { kind: "Name", value: "mediaUrl" } },
-                { kind: "Field", name: { kind: "Name", value: "password" } },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "stripeCustomerId" },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetCustomerDataQuery,
-  GetCustomerDataQueryVariables
->;
-export const UpdateCustomerMutationDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "mutation",
-      name: { kind: "Name", value: "updateCustomerMutation" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "input" },
-          },
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "UpdateCustomerInput" },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "updateCustomer" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "input" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "input" },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "cellPhone" } },
-                { kind: "Field", name: { kind: "Name", value: "email" } },
-                { kind: "Field", name: { kind: "Name", value: "firstName" } },
-                { kind: "Field", name: { kind: "Name", value: "id" } },
-                { kind: "Field", name: { kind: "Name", value: "isActive" } },
-                { kind: "Field", name: { kind: "Name", value: "lastName" } },
-                { kind: "Field", name: { kind: "Name", value: "mediaUrl" } },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "socialProvider" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "createdDate" },
-                      },
-                      { kind: "Field", name: { kind: "Name", value: "id" } },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "provider" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "socialId" },
-                      },
-                    ],
-                  },
-                },
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "stripeCustomerId" },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  UpdateCustomerMutationMutation,
-  UpdateCustomerMutationMutationVariables
->;
-export const SaveCustomerMediaUrlDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "mutation",
-      name: { kind: "Name", value: "saveCustomerMediaUrl" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "input" },
-          },
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "saveCustomerMediaUrl" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "fileName" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "input" },
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  SaveCustomerMediaUrlMutation,
-  SaveCustomerMediaUrlMutationVariables
->;
 export const CreateCustomerDocument = {
   kind: "Document",
   definitions: [
@@ -1030,33 +730,4 @@ export const ContinueWithSocialSiteDocument = {
 } as unknown as DocumentNode<
   ContinueWithSocialSiteMutation,
   ContinueWithSocialSiteMutationVariables
->;
-export const GetCustomerSignedUrlDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "getCustomerSignedURL" },
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "getCustomerUploadUrl" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "Field", name: { kind: "Name", value: "fileName" } },
-                { kind: "Field", name: { kind: "Name", value: "signedUrl" } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  GetCustomerSignedUrlQuery,
-  GetCustomerSignedUrlQueryVariables
 >;

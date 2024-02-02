@@ -13,7 +13,7 @@ const EventCard = () => {
         <span className="text-greensharp text-sm text-center">
           05 Dec 2023 4:00 PM
         </span>
-        <Link href="/channels/:id/events">
+        <Link href="/event">
           <Button
             className="rounded-full border border-white bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-30"
             type="button"

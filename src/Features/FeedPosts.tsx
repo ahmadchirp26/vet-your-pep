@@ -4,12 +4,14 @@ import { posts } from "@/data/facebackend";
 const FeedPosts = () => {
   const postArray = posts;
   return (
-    <div className="container-drop-shadow bg-greendarkest w-full rounded-3xl p-4 gap-3 space-y-8">
-      <NewPost />
-      {postArray.map((post, index) => (
-        <PostCard key={index} post={post} />
-      ))}
-    </div>
+    <>
+      <div className="container-drop-shadow bg-greendarkest w-full rounded-3xl p-4 gap-3 ">
+        <NewPost />
+        {postArray.map((post, index) => (
+          <PostCard key={index} post={post} />
+        ))}
+      </div>
+    </>
   );
 };
 
