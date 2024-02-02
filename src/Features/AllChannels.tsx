@@ -10,11 +10,18 @@ import Link from "next/link";
 
 const AllChannels = () => {
   const [activeSearch, setActiveSearch] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  console.log(searchTerm);
   const channelsArray = channels;
 
   const handleSearch = () => {
     setActiveSearch(!activeSearch);
   };
+
+  const filteredChannels = channelsArray.filter((channel) =>
+    channel.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <div className="flex flex-col rounded-3xl container-drop-shadow bg-greendarkest p-4 ">
@@ -31,20 +38,23 @@ const AllChannels = () => {
             />
           </div>
         ) : (
-          <SearchBar />
+          <SearchBar setSearchTerm={setSearchTerm} />
         )}
 
         <div className="mt-3">
-          <Link href="/channels/:id" className="hover:bg-greensharp">
-            {channelsArray.map((channel, index) => (
+          {filteredChannels.map((channel, index) => (
+            <Link
+              key={index}
+              href={"/channels/:id"}
+              className="hover:bg-greensharp"
+            >
               <ChannelCard
-                key={index}
                 channel={channel}
                 showJoinButton={false}
                 isLandingPage={true}
               />
-            ))}
-          </Link>
+            </Link>
+          ))}
         </div>
       </div>
     </>

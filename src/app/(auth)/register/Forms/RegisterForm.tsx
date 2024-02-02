@@ -3,16 +3,18 @@ import { FormikProvider, useFormik } from "formik";
 import { useCreateAccountMutation } from "@/api/Authentication";
 import * as Yup from "yup";
 import { toast } from "@/core/ui/use-toast";
-import { Input } from "@/core/ui/input";
-import Image from "next/image";
 import { Checkbox } from "@/core/ui/checkbox";
 import { Button } from "@/core/ui/button";
 import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
 import { useRouter } from "next/navigation";
+import { InputField } from "@/core/ui/input-field";
+import { RegisterEmailIcon } from "@/core/icons/RegisterEmailIcon";
+import { RegisterPhoneIcon } from "@/core/icons/RegisterPhoneIcon";
+import { RegisterPasswordIcon } from "@/core/icons/RegisterPasswordIcon";
 
 const RegisterForm = () => {
-  const { mutateAsync } = useCreateAccountMutation();
   const router = useRouter();
+  const { mutateAsync } = useCreateAccountMutation();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -23,39 +25,39 @@ const RegisterForm = () => {
       confirmPassword: "",
     },
 
-    // validationSchema: Yup.object({
-    //   email: Yup.string()
-    //     .email("Invalid email address")
-    //     .required("Email is required"),
-    //   firstName: Yup.string().required("First Name is required"),
-    //   lastName: Yup.string().required("Last Name is required"),
-    //   phoneNumber: Yup.string().required("Phone Number is required"),
-    //   password: Yup.string().required("Password is required"),
-    //   confirmPassword: Yup.string()
-    //     .required("Confirm Password is required")
-    //     .test("passwords-match", "Passwords must match", function (value) {
-    //       return this.parent.password === value;
-    //     }),
-    // }),
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      firstName: Yup.string().required("First Name is required"),
+      lastName: Yup.string().required("Last Name is required"),
+      phoneNumber: Yup.string().required("Phone Number is required"),
+      password: Yup.string().required("Password is required"),
+      confirmPassword: Yup.string()
+        .required("Confirm Password is required")
+        .test("passwords-match", "Passwords must match", function (value) {
+          return this.parent.password === value;
+        }),
+    }),
     onSubmit: async (values) => {
       router.push("/register/upload-image");
-      // try {
-      //   await mutateAsync([
-      //     {
-      //       email: values.email,
-      //       firstName: values.firstName,
-      //       lastName: values.lastName,
-      //       password: values.password,
-      //     },
-      //   ]);
-      // } catch (error: any) {
-      //   console.log(error);
-      //   toast({
-      //     title: "Error",
-      //     description: error.message,
-      //     variant: "destructive",
-      //   });
-      // }
+      try {
+        await mutateAsync([
+          {
+            email: values.email,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            password: values.password,
+          },
+        ]);
+      } catch (error: any) {
+        console.log(error);
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
     },
   });
 
@@ -67,110 +69,76 @@ const RegisterForm = () => {
         className="flex flex-col gap-4"
       >
         {/* Email */}
-
-        <div className="flex items-center w-full border-b border-b-graylight ">
-          <Input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email Address"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            className="bg-transparent outline-none  border-none placeholder:text-graylight "
-          />
-          <Image
-            src={"/assets/register_email_icon.svg"}
-            alt="email_icon"
-            width={22}
-            height={22}
-          />
-        </div>
+        <InputField
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          icon={<RegisterEmailIcon className={"w-6 h-6"} />}
+          error={formik.errors.email}
+        />
 
         {/* First Name and Last Name */}
         <div className="flex items-center gap-4 max-md:flex-col">
-          <div className="flex items-center w-full border-b border-b-graylight ">
-            <Input
-              type="text"
-              id="firstName"
-              name="firstName"
-              placeholder="First Name"
-              onChange={formik.handleChange}
-              value={formik.values.firstName}
-              className="bg-transparent outline-none  border-none placeholder:text-graylight"
-            />
-          </div>
-          <div className="flex items-center w-full border-b border-b-graylight ">
-            <Input
-              type="text"
-              id="lastName"
-              name="lastName"
-              placeholder="Last Name"
-              onChange={formik.handleChange}
-              value={formik.values.lastName}
-              className="bg-transparent outline-none  border-none placeholder:text-graylight"
-            />
-          </div>
+          <InputField
+            type="text"
+            id="firstName"
+            name="firstName"
+            placeholder="First Name"
+            onChange={formik.handleChange}
+            value={formik.values.firstName}
+            error={formik.errors.firstName}
+          />
+          <InputField
+            type="text"
+            id="lastName"
+            name="lastName"
+            placeholder="Last Name"
+            onChange={formik.handleChange}
+            value={formik.values.lastName}
+            error={formik.errors.lastName}
+          />
         </div>
 
         {/* Phone Number */}
 
-        <div className="flex items-center w-full border-b border-b-graylight ">
-          <Input
-            type="text"
-            id="phoneNumber"
-            name="phoneNumber"
-            placeholder="Phone Number"
-            onChange={formik.handleChange}
-            value={formik.values.phoneNumber}
-            className="bg-transparent outline-none  border-none placeholder:text-graylight "
-          />
-          <Image
-            src={"/assets/register_phone_icon.svg"}
-            alt="phone_icon"
-            width={18}
-            height={18}
-          />
-        </div>
+        <InputField
+          type="text"
+          id="phoneNumber"
+          name="phoneNumber"
+          placeholder="Phone Number"
+          onChange={formik.handleChange}
+          value={formik.values.phoneNumber}
+          icon={<RegisterPhoneIcon className={"w-6 h-6"} />}
+          error={formik.errors.phoneNumber}
+        />
 
         {/* Password */}
 
-        <div className="flex items-center w-full border-b border-b-graylight ">
-          <Input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            className="bg-transparent outline-none  border-none placeholder:text-graylight "
-          />
-          <Image
-            src={"/assets/register_password_icon.svg"}
-            alt="password_icon"
-            width={22}
-            height={22}
-          />
-        </div>
+        <InputField
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          icon={<RegisterPasswordIcon className={"w-6 h-6"} />}
+          error={formik.errors.password}
+        />
 
         {/* Confirm Password */}
-
-        <div className="flex items-center w-full border-b border-b-graylight ">
-          <Input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            onChange={formik.handleChange}
-            value={formik.values.confirmPassword}
-            className="bg-transparent outline-none  border-none placeholder:text-graylight "
-          />
-          <Image
-            src={"/assets/register_password_icon.svg"}
-            alt="password_icon"
-            width={22}
-            height={22}
-          />
-        </div>
+        <InputField
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          onChange={formik.handleChange}
+          value={formik.values.confirmPassword}
+          icon={<RegisterPasswordIcon className={"w-6 h-6"} />}
+          error={formik.errors.confirmPassword}
+        />
 
         <div className="flex gap-2">
           <Checkbox className="border-greensharp " />

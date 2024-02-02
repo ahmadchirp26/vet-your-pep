@@ -1,22 +1,40 @@
+"use client";
 import Image from "next/image";
 import ProfileTabs from "./ProfileTabs";
 
+import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
+
 const UserProfile = () => {
+  const { data } = useCustomerDataQuery();
+
+  console.log("Data", data);
+
   return (
     <>
       <div className="rounded-2xl container-drop-shadow bg-greendarkest p-6 w-2/3 max-lg:w-full flex-col gap-7">
         <div className="flex items-center gap-5">
           <div className="rounded-full">
-            <Image
-              src={"/assets/john_doe_image.svg"}
-              alt="user-profile-pic"
-              height={100}
-              width={100}
-            />
+            {data?.getCustomerData.mediaUrl ? (
+              <Image
+                src={data?.getCustomerData.mediaUrl}
+                alt="profile_image"
+                className="cursor-pointer rounded-full object-cover border-4 border-greensharp"
+                height={160}
+                width={160}
+              />
+            ) : (
+              <Image
+                src={"/assets/dummy_avatar.png"}
+                alt="user-profile-pic"
+                className="cursor-pointer rounded-full object-cover border-4 border-greensharp"
+                height={160}
+                width={160}
+              />
+            )}
           </div>
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
-              <span className="text-white font-bold text-xl">John Doe</span>
+              <span className="text-white font-bold text-xl">{`${data?.getCustomerData.firstName} ${data?.getCustomerData.lastName}`}</span>
               <Image
                 src={"/assets/verified_icon.svg"}
                 alt="verified_icon"
@@ -31,16 +49,24 @@ const UserProfile = () => {
                 height={13}
                 width={13}
               />
-              <span className="text-graylight text-sm">johndeo@gmail.com</span>
+              <span className="text-graylight text-sm">
+                {data?.getCustomerData.email}
+              </span>
             </div>
             <div className="flex items-center gap-2">
-              <Image
-                src={"/assets/phone_icon.svg"}
-                alt="phone_icon"
-                height={13}
-                width={13}
-              />
-              <span className="text-graylight text-sm">(123)242-2134</span>
+              {data?.getCustomerData.cellPhone && (
+                <>
+                  <Image
+                    src={"/assets/phone_icon.svg"}
+                    alt="phone_icon"
+                    height={13}
+                    width={13}
+                  />
+                  <span className="text-graylight text-sm">
+                    {data?.getCustomerData.cellPhone}
+                  </span>
+                </>
+              )}
             </div>
           </div>
         </div>

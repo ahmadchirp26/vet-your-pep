@@ -50,11 +50,8 @@ const Banner = () => {
           {/* <DropdownMenu>
             <DropdownMenuTrigger className="absolute top-5 right-5 bg-greensharp rounded-3xl flex justify-center items-center cursor-pointer p-2 outline-none">
               {" "}
-              <Image
-                src={"/assets/white_menu_icon.svg"}
-                alt="menu_icon"
-                width={4}
-                height={4}
+              <MoreVerticalIcon 
+                className="text-white cursor-pointer w-4 h-4"
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent

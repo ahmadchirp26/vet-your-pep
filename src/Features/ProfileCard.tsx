@@ -1,23 +1,38 @@
+"use client";
+
 import { Button } from "@/core/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { FriendsIcon } from "@/core/icons/FriendsIcon";
 
+import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
 const ProfileCard = () => {
+  const { data } = useCustomerDataQuery();
   return (
     <>
       <div className="flex flex-col rounded-3xl container-drop-shadow">
-        <div className="bg-greenaccent rounded-t-3xl  flex gap-5 justify-center  p-4 items-center">
+        <div className="bg-greenaccent rounded-t-3xl  flex gap-3 justify-center  p-4 items-center">
           <div className="rounded-full w-12 h-12">
-            <Image
-              src={"/assets/profile_avatar.svg"}
-              width={80}
-              height={80}
-              alt="profile_image"
-            />
+            {data?.getCustomerData.mediaUrl ? (
+              <Image
+                src={data?.getCustomerData.mediaUrl}
+                alt="profile_image"
+                className="cursor-pointer rounded-full object-cover"
+                height={80}
+                width={80}
+              />
+            ) : (
+              <Image
+                src={"/assets/dummy_avatar.png"}
+                alt="user-profile-pic"
+                className="cursor-pointer rounded-full object-cover border-4 border-greensharp"
+                height={80}
+                width={80}
+              />
+            )}
           </div>
           <div>
-            <span className="text-white font-bold">John Doe</span>
+            <span className="text-white font-bold">{`${data?.getCustomerData.firstName} ${data?.getCustomerData.lastName}`}</span>
           </div>
         </div>
 
