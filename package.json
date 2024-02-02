@@ -32,6 +32,7 @@
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tanstack/react-query": "^5.17.12",
     "@uidotdev/usehooks": "^2.4.1",
+    "aws-sdk": "^2.1548.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cookiejs": "^2.1.3",

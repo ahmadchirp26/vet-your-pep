@@ -467,6 +467,15 @@ export type UpdateCustomerMutationMutation = {
   };
 };
 
+export type SaveCustomerMediaUrlMutationVariables = Exact<{
+  input: Scalars["String"]["input"];
+}>;
+
+export type SaveCustomerMediaUrlMutation = {
+  __typename?: "Mutation";
+  saveCustomerMediaUrl: string;
+};
+
 export type CreateCustomerMutationVariables = Exact<{
   firstName: Scalars["String"]["input"];
   lastName: Scalars["String"]["input"];
@@ -519,6 +528,19 @@ export type ContinueWithSocialSiteMutation = {
     __typename?: "CustomerLoginOrRegisterResponse";
     accessToken: string;
     user: { __typename?: "Customer"; id: string; email: string };
+  };
+};
+
+export type GetCustomerSignedUrlQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type GetCustomerSignedUrlQuery = {
+  __typename?: "Query";
+  getCustomerUploadUrl: {
+    __typename?: "S3SignedUrlResponse";
+    fileName: string;
+    signedUrl: string;
   };
 };
 
@@ -646,6 +668,54 @@ export const UpdateCustomerMutationDocument = {
 } as unknown as DocumentNode<
   UpdateCustomerMutationMutation,
   UpdateCustomerMutationMutationVariables
+>;
+export const SaveCustomerMediaUrlDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "saveCustomerMediaUrl" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "input" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "String" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "saveCustomerMediaUrl" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "fileName" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "input" },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  SaveCustomerMediaUrlMutation,
+  SaveCustomerMediaUrlMutationVariables
 >;
 export const CreateCustomerDocument = {
   kind: "Document",
@@ -960,4 +1030,33 @@ export const ContinueWithSocialSiteDocument = {
 } as unknown as DocumentNode<
   ContinueWithSocialSiteMutation,
   ContinueWithSocialSiteMutationVariables
+>;
+export const GetCustomerSignedUrlDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "getCustomerSignedURL" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "getCustomerUploadUrl" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "fileName" } },
+                { kind: "Field", name: { kind: "Name", value: "signedUrl" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  GetCustomerSignedUrlQuery,
+  GetCustomerSignedUrlQueryVariables
 >;

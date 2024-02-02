@@ -17,12 +17,16 @@ const documents = {
     types.GetCustomerDataDocument,
   "\n  mutation updateCustomerMutation($input: UpdateCustomerInput!) {\n    updateCustomer(input: $input) {\n      cellPhone\n      email\n      firstName\n      id\n      isActive\n      lastName\n      mediaUrl\n      socialProvider {\n        createdDate\n        id\n        provider\n        socialId\n      }\n      stripeCustomerId\n    }\n  }\n":
     types.UpdateCustomerMutationDocument,
+  "\n  mutation saveCustomerMediaUrl($input: String!) {\n    saveCustomerMediaUrl(fileName: $input)\n  }\n":
+    types.SaveCustomerMediaUrlDocument,
   "\n  #graphql\n  mutation CreateCustomer(\n    $firstName: String!\n    $lastName: String!\n    $email: String!\n    $password: String!\n  ) {\n    createCustomer(\n      input: {\n        firstName: $firstName\n        lastName: $lastName\n        email: $email\n        password: $password\n      }\n    ) {\n      accessToken\n      user {\n        id\n        email\n        firstName\n        lastName\n      }\n    }\n  }\n":
     types.CreateCustomerDocument,
   "\n  #graphql\n  mutation Login($email: String!, $password: String!) {\n    loginAsCustomer(input: { email: $email, password: $password }) {\n      accessToken\n      user {\n        id\n        email\n        firstName\n        lastName\n      }\n    }\n  }\n":
     types.LoginDocument,
   "\n  mutation continueWithSocialSite($input: RegisterOrLoginSocialInput!) {\n    continueWithSocialSite(input: $input) {\n      user {\n        id\n        email\n      }\n      accessToken\n    }\n  }\n":
     types.ContinueWithSocialSiteDocument,
+  "\n  query getCustomerSignedURL {\n    getCustomerUploadUrl {\n      fileName\n      signedUrl\n    }\n  }\n":
+    types.GetCustomerSignedUrlDocument,
 };
 
 /**
@@ -55,6 +59,12 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
+  source: "\n  mutation saveCustomerMediaUrl($input: String!) {\n    saveCustomerMediaUrl(fileName: $input)\n  }\n",
+): (typeof documents)["\n  mutation saveCustomerMediaUrl($input: String!) {\n    saveCustomerMediaUrl(fileName: $input)\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
   source: "\n  #graphql\n  mutation CreateCustomer(\n    $firstName: String!\n    $lastName: String!\n    $email: String!\n    $password: String!\n  ) {\n    createCustomer(\n      input: {\n        firstName: $firstName\n        lastName: $lastName\n        email: $email\n        password: $password\n      }\n    ) {\n      accessToken\n      user {\n        id\n        email\n        firstName\n        lastName\n      }\n    }\n  }\n",
 ): (typeof documents)["\n  #graphql\n  mutation CreateCustomer(\n    $firstName: String!\n    $lastName: String!\n    $email: String!\n    $password: String!\n  ) {\n    createCustomer(\n      input: {\n        firstName: $firstName\n        lastName: $lastName\n        email: $email\n        password: $password\n      }\n    ) {\n      accessToken\n      user {\n        id\n        email\n        firstName\n        lastName\n      }\n    }\n  }\n"];
 /**
@@ -69,6 +79,12 @@ export function graphql(
 export function graphql(
   source: "\n  mutation continueWithSocialSite($input: RegisterOrLoginSocialInput!) {\n    continueWithSocialSite(input: $input) {\n      user {\n        id\n        email\n      }\n      accessToken\n    }\n  }\n",
 ): (typeof documents)["\n  mutation continueWithSocialSite($input: RegisterOrLoginSocialInput!) {\n    continueWithSocialSite(input: $input) {\n      user {\n        id\n        email\n      }\n      accessToken\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n  query getCustomerSignedURL {\n    getCustomerUploadUrl {\n      fileName\n      signedUrl\n    }\n  }\n",
+): (typeof documents)["\n  query getCustomerSignedURL {\n    getCustomerUploadUrl {\n      fileName\n      signedUrl\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

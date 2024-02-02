@@ -24,9 +24,6 @@ export function useGraphQLQuery<TResult, TVariables>(
 ) {
   return useQuery({
     ...queryOptions,
-    queryKey: variables
-      ? [...queryOptions.queryKey, variables]
-      : queryOptions.queryKey,
     queryFn: async () => {
       return await request(
         env.NEXT_PUBLIC_SERVER_GRAPHQL_URL,

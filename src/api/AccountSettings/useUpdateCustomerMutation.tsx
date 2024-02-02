@@ -37,29 +37,32 @@ const useUpdateCustomerMutation = () => {
     {
       mutationKey,
       onMutate([variables]) {
+        console.log("variable", variables);
+
         const previousValue =
           queryClient.getQueryData<useCustomerDataQueryDataType>(
-            CustomerDataQueryKey
+            CustomerDataQueryKey,
           );
         queryClient.setQueryData<useCustomerDataQueryDataType>(
           CustomerDataQueryKey,
           (prev) => {
+            console.log("previous", prev);
             if (!prev) return prev;
             return {
               ...prev,
               getCustomerData: {
                 ...prev.getCustomerData,
-                ...variables,
+                mediaUrl: variables.input.mediaUrl,
               },
             };
-          }
+          },
         );
         return previousValue;
       },
       onError(error, variables, context) {
         queryClient.setQueryData<useCustomerDataQueryDataType>(
           CustomerDataQueryKey,
-          context
+          context,
         );
         toast({
           title: "Error",
@@ -68,7 +71,7 @@ const useUpdateCustomerMutation = () => {
         });
       },
     },
-    Document
+    Document,
   );
 };
 
