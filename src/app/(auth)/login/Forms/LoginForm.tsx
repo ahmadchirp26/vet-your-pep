@@ -1,15 +1,16 @@
 "use client";
 import React from "react";
 import { FormikProvider, useFormik } from "formik";
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/core/ui/button";
-import { Input } from "@/core/ui/input";
 import { useLoginMutation } from "@/api/Authentication/useLoginMutation";
 import { toast } from "@/core/ui/use-toast";
 import * as Yup from "yup";
 import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
 import { useRouter } from "next/navigation";
+import { InputField } from "@/core/ui/input-field";
+import { RegisterEmailIcon } from "@/core/icons/RegisterEmailIcon";
+import { RegisterPasswordIcon } from "@/core/icons/RegisterPasswordIcon";
 
 const LoginForm = () => {
   const { mutateAsync } = useLoginMutation();
@@ -46,43 +47,26 @@ const LoginForm = () => {
         method="POST"
         className="flex flex-col gap-4"
       >
-        <div className="flex items-center w-full border-b border-b-graylight ">
-          <Input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email Address"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            className="bg-transparent outline-none  border-none placeholder:text-graylight "
-          />
-          <Image
-            src={"/assets/register_email_icon.svg"}
-            alt="email_icon"
-            width={22}
-            height={22}
-          />
-        </div>
-
-        {/* Password */}
-
-        <div className="flex items-center w-full border-b border-b-graylight ">
-          <Input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-            className="bg-transparent outline-none  border-none placeholder:text-graylight "
-          />
-          <Image
-            src={"/assets/register_password_icon.svg"}
-            alt="password_icon"
-            width={22}
-            height={22}
-          />
-        </div>
+        <InputField
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          error={formik.errors.email}
+          icon={<RegisterEmailIcon className="w-6 h-6" />}
+        />
+        <InputField
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          error={formik.errors.password}
+          icon={<RegisterPasswordIcon className="w-6 h-6" />}
+        />
         <Link href="/login/forgot-password">
           <div className="w-full justify-end text-xs text-white flex cursor-pointer">
             Forgot Password?
