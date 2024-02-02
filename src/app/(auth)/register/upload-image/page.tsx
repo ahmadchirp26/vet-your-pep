@@ -4,12 +4,11 @@ import UploadImageForm from "@/app/(auth)/register/Forms/UploadImageForm";
 import BackButton from "@/core/ui/backButton";
 
 export default function UploadImage() {
-  const backHref = "/register";
   return (
     <>
       <div className="flex w-full h-screen p-3 flex-col ">
         <div className="w-full justify-start">
-          <BackButton href={backHref} />
+          <BackButton />
         </div>
         <div className="flex flex-col justify-center items-center gap-2 mt-16">
           <Image src={"/assets/logo.svg"} alt="Logo" width={100} height={100} />

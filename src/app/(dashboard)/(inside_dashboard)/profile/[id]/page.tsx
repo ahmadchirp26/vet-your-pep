@@ -1,5 +1,5 @@
 import AllChannels from "@/Features/AllChannels";
-import UserProfile from "./components/MyProfile";
+import UserProfile from "../components/MyProfile";
 
 const MyProfile = () => {
   return (

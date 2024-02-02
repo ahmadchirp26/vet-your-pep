@@ -4,12 +4,11 @@ import BackButton from "@/core/ui/backButton";
 import VerifyCodeForm from "@/app/(auth)/login/Forms/VerifyCodeForm";
 
 export default function VerifyCode() {
-  const backHref = "/login/forgot-password";
   return (
     <>
       <div className="flex w-full h-screen p-3 flex-col ">
         <div className="w-full justify-start">
-          <BackButton href={backHref} />
+          <BackButton />
         </div>
         <div className="flex flex-col justify-center items-center gap-4 mt-16">
           <Image src={"/assets/logo.svg"} alt="Logo" width={100} height={100} />
