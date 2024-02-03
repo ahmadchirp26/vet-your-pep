@@ -7,7 +7,6 @@ import React from "react";
 
 const ProfilePicture = () => {
   const { data, status: gettingDataStatus } = useCustomerDataQuery();
-  console.log("Media URL", data?.getCustomerData.mediaUrl);
   const { mutate: s3UploadHandler, status: mutatingUploadStatus } =
     useProtectedS3UploadHandler();
   const { mutate: updateCustomerHandler, status: mutatingDataStatus } =
@@ -24,10 +23,9 @@ const ProfilePicture = () => {
         { fileToUpload: event.target.files[0] },
         {
           onSuccess: (data) => {
-            console.log(data);
             updateCustomerHandler({
               input: {
-                mediaUrl: data,
+                profileImage: data,
               },
             });
           },
@@ -48,9 +46,9 @@ const ProfilePicture = () => {
         htmlFor="picture"
         className="rounded-full relative flex justify-center items-center "
       >
-        {data?.getCustomerData.mediaUrl ? (
+        {data?.getCustomerData.profileImage ? (
           <Image
-            src={data?.getCustomerData.mediaUrl}
+            src={data?.getCustomerData.profileImage}
             alt="profile_image"
             className="cursor-pointer rounded-full object-cover border-4 border-greensharp"
             height={160}

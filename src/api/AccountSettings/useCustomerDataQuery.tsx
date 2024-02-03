@@ -11,7 +11,7 @@ const GetCustomerDataQueryDocument = graphql(`
       id
       isActive
       lastName
-      mediaUrl
+      profileImage
       password
       stripeCustomerId
     }
@@ -28,8 +28,8 @@ const useCustomerDataQuery = () =>
           ...data,
           getCustomerData: {
             ...data.getCustomerData,
-            mediaUrl: data.getCustomerData.mediaUrl
-              ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${data.getCustomerData.mediaUrl}`
+            profileImage: data.getCustomerData.profileImage
+              ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${data.getCustomerData.profileImage}`
               : null,
           },
         };

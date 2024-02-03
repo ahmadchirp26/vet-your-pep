@@ -18,7 +18,7 @@ const Document = graphql(`
       id
       isActive
       lastName
-      mediaUrl
+      profileImage
       socialProvider {
         createdDate
         id
@@ -46,13 +46,12 @@ const useUpdateCustomerMutation = () => {
         queryClient.setQueryData<useCustomerDataQueryDataType>(
           CustomerDataQueryKey,
           (prev) => {
-            console.log("previous", prev);
             if (!prev) return prev;
             return {
               ...prev,
               getCustomerData: {
                 ...prev.getCustomerData,
-                mediaUrl: variables.input.mediaUrl,
+                
               },
             };
           },

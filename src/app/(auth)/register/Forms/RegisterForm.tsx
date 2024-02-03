@@ -40,7 +40,6 @@ const RegisterForm = () => {
         }),
     }),
     onSubmit: async (values) => {
-      router.push("/register/upload-image");
       try {
         await mutateAsync([
           {
@@ -50,6 +49,7 @@ const RegisterForm = () => {
             password: values.password,
           },
         ]);
+        router.push("/onboarding/upload-image");
       } catch (error: any) {
         console.log(error);
         toast({
