@@ -12,13 +12,25 @@ import {
 } from "@/core/ui/dropdown-menu";
 import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
 import Link from "next/link";
+import { Skeleton } from "@/core/ui/skeleton";
 
 interface Props {
   className?: string;
 }
 export function ProfileAvatar({ className }: Props) {
-  const { data } = useCustomerDataQuery();
+  const { data, status: customerDataStatus } = useCustomerDataQuery();
   const { mutate, status } = useLogoutMutation();
+  if (customerDataStatus === "pending") {
+    return (
+      <div className="flex gap-2 ml-2">
+        <Skeleton className="h-8 w-8 rounded-full" />
+        <div className="flex flex-col gap-1 flex-1 items-start justify-start">
+          <Skeleton className="w-24 h-4" />
+          <Skeleton className="w-12 h-2" />
+        </div>
+      </div>
+    );
+  }
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,9 +40,9 @@ export function ProfileAvatar({ className }: Props) {
         >
           <div className="relative">
             <Avatar className="h-8 w-8">
-              {data?.getCustomerData.mediaUrl ? (
+              {data?.getCustomerData.profileImage ? (
                 <AvatarImage
-                  src={data?.getCustomerData.mediaUrl}
+                  src={data?.getCustomerData.profileImage}
                   alt="@shadcn"
                 />
               ) : (
