@@ -21,7 +21,7 @@ export default function HomePage() {
             <NewChannels />
           </div>
           <div className="max-md:order-1 max-md:overflow-auto">
-            <OnlineFriends />
+            <OnlineFriends className="flex md:flex-col" />
           </div>
         </div>
       </div>
