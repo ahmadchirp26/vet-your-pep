@@ -21,7 +21,10 @@ const ChannelMembers = () => {
       <div className="bg-greendarkest rounded-3xl p-4 mt-5 container-drop-shadow">
         <div className="flex justify-between">
           <span className="text-white text-sm ">Members (14.1k)</span>
-          <Link href={"/"} className="text-underline text-greensharp text-sm">
+          <Link
+            href={"/channels/:id/members"}
+            className="text-underline text-greensharp text-sm"
+          >
             See all
           </Link>
         </div>
