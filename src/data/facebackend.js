@@ -316,6 +316,39 @@ export const rules = [
   },
 ];
 
+export const channelMembers = [
+  {
+    username: "John Doe",
+    profileAvatar: OnlineFriend1,
+  },
+
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend2,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend3,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend3,
+  },
+  {
+    username: "John Doe",
+    profileAvatar: OnlineFriend4,
+  },
+
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend5,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend6,
+  },
+];
+
 export const blockList = [
   {
     username: "John Doe",
