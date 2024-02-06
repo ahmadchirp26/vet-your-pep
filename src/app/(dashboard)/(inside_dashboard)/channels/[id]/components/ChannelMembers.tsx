@@ -11,11 +11,6 @@ import { channelMembers } from "@/data/facebackend";
 import Link from "next/link";
 
 const ChannelMembers = () => {
-  const pairedMembers = [];
-  for (let i = 0; i < channelMembers.length; i += 2) {
-    pairedMembers.push(channelMembers.slice(i, i + 2));
-  }
-
   return (
     <>
       <div className="bg-greendarkest rounded-3xl p-4 mt-5 container-drop-shadow">
@@ -41,18 +36,16 @@ const ChannelMembers = () => {
 
         <Carousel>
           <CarouselContent>
-            {pairedMembers.map((pair, index) => (
+            {channelMembers.map((member, memberIndex) => (
               <CarouselItem
-                key={index}
-                className="flex justify-center items-center"
+                className="flex justify-center items-center basis-3/3"
+                key={memberIndex}
               >
-                {pair.map((member, memberIndex) => (
-                  <MemberCard
-                    key={memberIndex}
-                    username={member.username}
-                    profileAvatar={member.profileAvatar}
-                  />
-                ))}
+                <MemberCard
+                  key={memberIndex}
+                  username={member.username}
+                  profileAvatar={member.profileAvatar}
+                />
               </CarouselItem>
             ))}
           </CarouselContent>

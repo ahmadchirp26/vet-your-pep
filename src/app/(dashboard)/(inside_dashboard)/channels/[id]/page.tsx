@@ -19,7 +19,7 @@ const ViewChannel = () => {
 
           <AllChannels />
         </div>
-        <div className="flex flex-col gap-3 max-lg:order-2">
+        <div className="flex flex-col  max-lg:order-2">
           <Banner />
           <Tabs defaultValue="Feed" className="w-full lg:hidden">
             <TabsList className="w-full ">
@@ -54,7 +54,7 @@ const ViewChannel = () => {
             </TabsContent>
           </Tabs>
 
-          <div className="flex gap-3 max-lg:flex-col">
+          <div className="flex gap-3 max-lg:flex-col mt-5">
             <div className="flex gap-3 max-lg:hidden">
               <FeedPosts />
             </div>

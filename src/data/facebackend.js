@@ -347,6 +347,46 @@ export const channelMembers = [
     username: "Lius Wigton",
     profileAvatar: OnlineFriend6,
   },
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend5,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend6,
+  },
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend5,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend6,
+  },
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend5,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend6,
+  },
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend5,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend6,
+  },
+  {
+    username: "Tina Fox",
+    profileAvatar: OnlineFriend5,
+  },
+  {
+    username: "Lius Wigton",
+    profileAvatar: OnlineFriend6,
+  },
 ];
 
 export const blockList = [
