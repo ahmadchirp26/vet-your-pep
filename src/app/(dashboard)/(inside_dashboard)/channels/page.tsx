@@ -8,9 +8,12 @@ import { channels } from "@/data/facebackend";
 import ChannelCard from "@/Features/Cards/ChannelCard";
 import AllChannelCard from "./components/AllChannelCard";
 import Link from "next/link";
+import useGetChannels from "@/api/Channels/useGetChannels";
 
 const Channels = () => {
-  const channelsArray = channels;
+  const { data } = useGetChannels();
+  console.log("Data", data?.listChannels.results);
+  const channelsArray = data?.listChannels.results;
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -18,7 +21,7 @@ const Channels = () => {
     setActiveSearch(!activeSearch);
   };
 
-  const filteredChannels = channelsArray.filter((channel) =>
+  const filteredChannels = channelsArray?.filter((channel) =>
     channel.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -44,15 +47,13 @@ const Channels = () => {
             )}
           </div>
           <div className="mt-3 flex w-full flex-wrap gap-7 justify-center items-center ">
-            {filteredChannels.map((channel, index) => (
-              <Link key={index} href={"/channels/:id"} className="">
-                <AllChannelCard
-                  key={index}
-                  channel={channel}
-                  showJoinButton={true}
-                  ButtonText="Join"
-                />
-              </Link>
+            {filteredChannels?.map((channel, index) => (
+              <AllChannelCard
+                key={index}
+                channel={channel}
+                showJoinButton={true}
+                ButtonText="Join"
+              />
             ))}
           </div>
         </div>
@@ -61,7 +62,7 @@ const Channels = () => {
             <span className="text-white font-bold">My Channels</span>
           </div>
           <div className="mt-3 flex flex-col gap-3  ">
-            {channelsArray.map((channel, index) => (
+            {channelsArray?.map((channel, index) => (
               <ChannelCard
                 key={index}
                 channel={channel}

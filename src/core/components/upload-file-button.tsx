@@ -6,7 +6,11 @@ interface Props {
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   buttonComponent: React.ReactNode;
 }
-const UploadFileButton = ({ className, buttonComponent, inputProps = {} }: Props) => {
+const UploadFileButton = ({
+  className,
+  buttonComponent,
+  inputProps = {},
+}: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <div>

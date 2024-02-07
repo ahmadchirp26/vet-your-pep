@@ -27,7 +27,7 @@ const AllChannels = () => {
       <div className="flex flex-col rounded-3xl container-drop-shadow bg-greendarkest p-4 ">
         {!activeSearch ? (
           <div className="flex items-center justify-between mt-2">
-            <span className="text-white font-bold">All Channels</span>
+            <span className="text-white font-bold">My Channels</span>
             <Image
               src={"/assets/search_icon.svg"}
               alt="search_icon"
