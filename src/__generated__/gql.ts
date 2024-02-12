@@ -18,6 +18,8 @@ const documents = {
     "\n  #graphql\n  mutation CreateCustomer(\n    $firstName: String!\n    $lastName: String!\n    $email: String!\n    $password: String!\n  ) {\n    createCustomer(\n      input: {\n        firstName: $firstName\n        lastName: $lastName\n        email: $email\n        password: $password\n      }\n    ) {\n      accessToken\n      user {\n        id\n        email\n        firstName\n        lastName\n      }\n    }\n  }\n": types.CreateCustomerDocument,
     "\n  #graphql\n  mutation Login($email: String!, $password: String!) {\n    loginAsCustomer(input: { email: $email, password: $password }) {\n      accessToken\n      user {\n        id\n        email\n        firstName\n        lastName\n      }\n    }\n  }\n": types.LoginDocument,
     "\n  mutation continueWithSocialSite($input: RegisterOrLoginSocialInput!) {\n    continueWithSocialSite(input: $input) {\n      user {\n        id\n        email\n      }\n      accessToken\n    }\n  }\n": types.ContinueWithSocialSiteDocument,
+    "\n  #graphql\n  query getAllChannelsWithPagination($input: ListChannelsInput!) {\n    listChannels(input: $input) {\n      limit\n      offset\n      totalRows\n      results {\n        id\n        backgroundImage\n        image\n        price\n        rules\n        status\n        title\n        about\n        isPaid\n        members {\n          id\n          paidStatus\n          roleChannel\n        }\n      }\n    }\n  }\n": types.GetAllChannelsWithPaginationDocument,
+    "\n  #graphql\n  mutation JoinChannel($channelId: String!) {\n    joinChannel(channelId: $channelId) {\n      message\n      success\n    }\n  }\n": types.JoinChannelDocument,
     "\n  query getCustomerSignedURL {\n    getCustomerUploadUrl {\n      fileName\n      signedUrl\n    }\n  }\n": types.GetCustomerSignedUrlDocument,
 };
 
@@ -55,6 +57,14 @@ export function graphql(source: "\n  #graphql\n  mutation Login($email: String!,
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation continueWithSocialSite($input: RegisterOrLoginSocialInput!) {\n    continueWithSocialSite(input: $input) {\n      user {\n        id\n        email\n      }\n      accessToken\n    }\n  }\n"): (typeof documents)["\n  mutation continueWithSocialSite($input: RegisterOrLoginSocialInput!) {\n    continueWithSocialSite(input: $input) {\n      user {\n        id\n        email\n      }\n      accessToken\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  #graphql\n  query getAllChannelsWithPagination($input: ListChannelsInput!) {\n    listChannels(input: $input) {\n      limit\n      offset\n      totalRows\n      results {\n        id\n        backgroundImage\n        image\n        price\n        rules\n        status\n        title\n        about\n        isPaid\n        members {\n          id\n          paidStatus\n          roleChannel\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  query getAllChannelsWithPagination($input: ListChannelsInput!) {\n    listChannels(input: $input) {\n      limit\n      offset\n      totalRows\n      results {\n        id\n        backgroundImage\n        image\n        price\n        rules\n        status\n        title\n        about\n        isPaid\n        members {\n          id\n          paidStatus\n          roleChannel\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  #graphql\n  mutation JoinChannel($channelId: String!) {\n    joinChannel(channelId: $channelId) {\n      message\n      success\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  mutation JoinChannel($channelId: String!) {\n    joinChannel(channelId: $channelId) {\n      message\n      success\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
