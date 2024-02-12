@@ -11,9 +11,16 @@ import Link from "next/link";
 import useGetChannels from "@/api/Channels/useGetChannels";
 
 const Channels = () => {
-  const { data } = useGetChannels();
-  console.log("Data", data?.listChannels.results);
-  const channelsArray = data?.listChannels.results;
+  const { data: allChannelsData } = useGetChannels({
+    limit: 100,
+    joined: false,
+  });
+  const { data: myChannelsData } = useGetChannels({ limit: 100, joined: true });
+
+  console.log("All Channels Data", allChannelsData?.listChannels.results);
+  console.log("My Channels Data", myChannelsData?.listChannels.results);
+  const allChannelsArray = allChannelsData?.listChannels.results;
+  const myChannelsArray = myChannelsData?.listChannels.results;
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -21,7 +28,7 @@ const Channels = () => {
     setActiveSearch(!activeSearch);
   };
 
-  const filteredChannels = channelsArray?.filter((channel) =>
+  const filteredChannels = allChannelsArray?.filter((channel) =>
     channel.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -62,7 +69,7 @@ const Channels = () => {
             <span className="text-white font-bold">My Channels</span>
           </div>
           <div className="mt-3 flex flex-col gap-3  ">
-            {channelsArray?.map((channel, index) => (
+            {myChannelsArray?.map((channel, index) => (
               <ChannelCard
                 key={index}
                 channel={channel}

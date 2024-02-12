@@ -1,8 +1,10 @@
 // ChannelCard.tsx
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/core/ui/button";
 import { type APIGetChannelsData } from "@/api/Channels/useGetChannels";
+import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import useJoinChannel from "@/api/Channels/useJoinChannel";
+import { useRouter } from "next/navigation";
 
 interface ChannelCardProps {
   channel: NonNullable<APIGetChannelsData>["listChannels"]["results"][number];
@@ -17,7 +19,8 @@ const ChannelCard = ({
   showJoinButton = true,
   isLandingPage = false,
 }: ChannelCardProps) => {
-  console.log("Channel", channel);
+  const router = useRouter();
+  const joinChannelMutation = useJoinChannel();
   return (
     <>
       <div
@@ -52,14 +55,31 @@ const ChannelCard = ({
               isLandingPage ? "max-xl:ml-0" : "max-md:ml-0"
             }`}
           >
-            <Link href="/channels/:id">
-              <Button
-                className="rounded-full border border-white bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-20"
-                type="button"
-              >
-                {ButtonText}
-              </Button>
-            </Link>
+            {/* <Link href={`channels/${channel.id}`}> */}
+            <Button
+              className="rounded-full border border-white bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-20"
+              type="button"
+              onClick={() =>
+                joinChannelMutation.mutate(
+                  {
+                    channelId: channel.id,
+                  },
+
+                  {
+                    onSuccess: () => {
+                      router.push(`/channels/${channel.id}`);
+                    },
+                  }
+                )
+              }
+            >
+              {joinChannelMutation.status === "pending" ? (
+                <SpinnerCircle />
+              ) : (
+                ButtonText
+              )}
+            </Button>
+            {/* </Link> */}
           </div>
         )}
       </div>

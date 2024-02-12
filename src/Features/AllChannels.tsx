@@ -3,22 +3,26 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import { channels } from "@/data/facebackend";
 import SearchBar from "@/app/(dashboard)/components/SearchBar";
 import ChannelCard from "@/Features/Cards/ChannelCard";
 import Link from "next/link";
+import useGetChannels from "@/api/Channels/useGetChannels";
 
 const AllChannels = () => {
+  const { data } = useGetChannels({
+    limit: 100,
+    joined: true,
+  });
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   console.log(searchTerm);
-  const channelsArray = channels;
+  const allChannelsArray = data?.listChannels.results;
 
   const handleSearch = () => {
     setActiveSearch(!activeSearch);
   };
 
-  const filteredChannels = channelsArray.filter((channel) =>
+  const filteredChannels = allChannelsArray?.filter((channel) =>
     channel.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -42,10 +46,10 @@ const AllChannels = () => {
         )}
 
         <div className="mt-3">
-          {filteredChannels.map((channel, index) => (
+          {filteredChannels?.map((channel, index) => (
             <Link
               key={index}
-              href={"/channels/:id"}
+              href={`channels/${channel.id}`}
               className="hover:bg-greensharp"
             >
               <ChannelCard

@@ -1,3 +1,4 @@
+"use client";
 import { graphql } from "@/core/lib/react-query-graphql";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helper";
@@ -33,8 +34,11 @@ const GET_CHANNELS_ADMIN_QUERY = graphql(`
 
 interface Props {
   limit: number;
+  joined: boolean;
 }
-const useGetChannels = (props: Props | undefined = { limit: 5 }) => {
+const useGetChannels = (
+  props: Props | undefined = { limit: 100, joined: false }
+) => {
   const [paginationParams, setPaginationParams] = useState({
     limit: props.limit,
     offset: 0,
@@ -57,6 +61,7 @@ const useGetChannels = (props: Props | undefined = { limit: 5 }) => {
           filter: {
             search: queryKey[2].q,
           },
+          joined: props.joined,
         },
       });
     },
