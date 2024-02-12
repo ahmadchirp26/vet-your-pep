@@ -17,8 +17,6 @@ const Channels = () => {
   });
   const { data: myChannelsData } = useGetChannels({ limit: 100, joined: true });
 
-  console.log("All Channels Data", allChannelsData?.listChannels.results);
-  console.log("My Channels Data", myChannelsData?.listChannels.results);
   const allChannelsArray = allChannelsData?.listChannels.results;
   const myChannelsArray = myChannelsData?.listChannels.results;
   const [activeSearch, setActiveSearch] = useState(false);

@@ -15,7 +15,6 @@ const AllChannels = () => {
   });
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  console.log(searchTerm);
   const allChannelsArray = data?.listChannels.results;
 
   const handleSearch = () => {
