@@ -1,10 +1,10 @@
 import AllChannels from "@/Features/AllChannels";
 import ProfileCard from "@/Features/ProfileCard";
-import Banner from "../components/Banner";
+import Banner from "../_components/Banner";
 import FeedPosts from "@/Features/FeedPosts";
-import AboutCard from "../components/AboutCard";
-import GroupAdmin from "../components/GroupAdmin";
-import EventCard from "../components/EventCard";
+import AboutCard from "../_components/AboutCard";
+import GroupAdmin from "../_components/GroupAdmin";
+import EventCard from "../_components/EventCard";
 import { Button } from "@/core/ui/button";
 import OnlineFriends from "@/Features/OnlineFriends";
 import EditChannel from "./components/EditChannelForm";

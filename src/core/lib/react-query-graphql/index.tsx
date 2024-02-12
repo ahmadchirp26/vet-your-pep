@@ -98,4 +98,9 @@ export async function requestGraphQl<TResult, TVariables extends Variables>(
   );
 }
 
+export const graphQlRequestHandler = <TResult, TVariables extends Variables>(
+  document: TypedDocumentNode<TResult, TVariables>,
+  ...params: VariablesAndRequestHeadersArgs<TVariables>
+) => request(env.NEXT_PUBLIC_SERVER_GRAPHQL_URL, document, ...params);
+
 export { graphql };

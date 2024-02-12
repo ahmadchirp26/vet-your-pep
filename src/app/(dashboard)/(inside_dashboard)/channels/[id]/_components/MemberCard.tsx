@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from "next/image";
+import Image, { type StaticImageData } from "next/image";
 interface MemberCardProps {
   username: string;
   profileAvatar: StaticImageData; // Assuming 'profileAvatar' is a string representing the image source
