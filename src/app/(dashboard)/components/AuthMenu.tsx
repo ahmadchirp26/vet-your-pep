@@ -1,14 +1,27 @@
+"use client";
 import { ProfileAvatar } from "./ProfileAvatar";
 import { cn } from "@/core/lib/helper";
 import { NotificationIcon } from "@/core/icons/NotificationIcon";
 import { ChatIcon } from "@/core/icons/ChatIcon";
 import { Popover, PopoverContent, PopoverTrigger } from "@/core/ui/popover";
 import Notifications from "@/Features/Notifications";
+import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 interface Props {
   className?: string;
 }
 const AuthMenu = ({ className }: Props) => {
+  const pathname = usePathname();
+
+  const [chatActive, setChatActive] = useState(false);
+
+  const toggleChatActive = () => {
+    setChatActive((prevState) => !prevState);
+  };
+  const isChatRoute = pathname.includes("/chat");
   return (
     <div
       className={cn(
@@ -17,7 +30,13 @@ const AuthMenu = ({ className }: Props) => {
       )}
     >
       <div className="flex gap-4">
-        <ChatIcon className="w-6 h-6" />
+        <Link href={"/chat"}>
+          <ChatIcon
+            className="w-6 h-6 cursor-pointer"
+            fill={isChatRoute ? "#79CD00" : "#265D5E"}
+            onClick={toggleChatActive}
+          />
+        </Link>
         <Popover>
           <PopoverTrigger>
             <NotificationIcon className="w-6 h-6 " />
