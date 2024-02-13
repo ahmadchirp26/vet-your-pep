@@ -14,9 +14,9 @@ import { graphQlRequestHandler, graphql } from "@/core/lib/react-query-graphql";
 import { QueryClient } from "@tanstack/react-query";
 import { channelKeys } from "../query-keys";
 
-const GET_JOINED_CHANNELS = graphql(`
+const GET_JOINED_CHANNELS_2 = graphql(`
   #graphql
-  query getAllChannelsWithPagination($input: ListChannelsInput!) {
+  query getAllChannelsWithPagination2($input: ListChannelsInput!) {
     listChannels(input: $input) {
       limit
       offset
@@ -46,7 +46,7 @@ export const prefetchJoinedChannelsServerSide = async (queryClient = new QueryCl
         queryKey: channelKeys.listJoined({ limit: 100, offset: 0 ,joined: true}),
         queryFn: () =>
           graphQlRequestHandler(
-            GET_JOINED_CHANNELS,
+            GET_JOINED_CHANNELS_2,
             { 
               input: {
                 limit: 100,

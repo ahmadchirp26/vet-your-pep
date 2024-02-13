@@ -1,30 +1,49 @@
-'use client';
-import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helpers";
-import {  graphql } from "@/core/lib/react-query-graphql";
+"use client";
+import { graphql } from "@/core/lib/react-query-graphql";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helper";
 import { useState } from "react";
-import { channelKeys } from "../query-keys";
+import { channelKeys } from "./query-keys";
 
-export const GET_JOINED_CHANNELS = graphql(`
+const GET_CHANNELS_ADMIN_QUERY = graphql(`
   #graphql
-  query getAllChannelsWithPagination3($input: ListChannelsInput!) {
+  query getAllChannelsWithPagination($input: ListChannelsInput!) {
     listChannels(input: $input) {
       limit
       offset
       totalRows
       results {
         id
+        backgroundImage
+        image
+        price
+        rules
+        status
         title
+        about
+        isPaid
+        members {
+          id
+          paidStatus
+          roleChannel
+        }
       }
     }
   }
 `);
 
-export const useJoinedChannels = (props = { limit: 100 }) => {
+interface Props {
+  limit: number;
+  joined: boolean;
+}
+const useGetChannels = (
+  props: Props | undefined = { limit: 100, joined: false }
+) => {
   const [paginationParams, setPaginationParams] = useState({
     limit: props.limit,
     offset: 0,
   });
+  const [searchQuery, setSearchQuery] = useState<string | undefined>(undefined);
 
   // Getting Graphql request handler with Auth headers
   const protectedRequestHandler = useGraphQLRequestHandlerProtected();
@@ -32,13 +51,17 @@ export const useJoinedChannels = (props = { limit: 100 }) => {
   const response = useQuery({
     // Following two lines are for pagination
     placeholderData: keepPreviousData,
-    queryKey: channelKeys.listJoined({ ...paginationParams, joined: true }),
+    queryKey: channelKeys.list({ ...paginationParams, q: searchQuery }),
     queryFn: ({ queryKey }) => {
-      return protectedRequestHandler(GET_JOINED_CHANNELS, {
+      return protectedRequestHandler(GET_CHANNELS_ADMIN_QUERY, {
+        // Following params are important for pagination
         input: {
           limit: queryKey[2].limit,
           offset: queryKey[2].offset,
-          joined: queryKey[2].joined,
+          filter: {
+            search: queryKey[2].q,
+          },
+          joined: props.joined,
         },
       });
     },
@@ -101,6 +124,18 @@ export const useJoinedChannels = (props = { limit: 100 }) => {
         });
       },
     },
+    filters: {
+      searchQuery,
+      setSearchQuery: (q?: string) => {
+        setSearchQuery(q);
+        setPaginationParams({
+          limit: paginationParamsExtended.limit,
+          offset: 0,
+        });
+      },
+    },
   };
 };
 
+export default useGetChannels;
+export type APIGetChannelsData = ReturnType<typeof useGetChannels>["data"];

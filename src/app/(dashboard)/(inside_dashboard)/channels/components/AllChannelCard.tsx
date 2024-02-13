@@ -1,16 +1,13 @@
 // ChannelCard.tsx
-import Image, { type StaticImageData } from "next/image";
-import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/core/ui/button";
-
-interface Channel {
-  image: StaticImageData;
-  title: string;
-  members: string;
-}
+import useJoinChannel from "@/api/Channels/useJoinChannel";
+import { type APIGetChannelsData } from "@/api/Channels/useGetChannels";
+import { useRouter } from "next/navigation";
+import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
 
 interface ChannelCardProps {
-  channel: Channel;
+  channel: NonNullable<APIGetChannelsData>["listChannels"]["results"][number];
   showJoinButton?: boolean;
   ButtonText?: string;
 }
@@ -20,29 +17,55 @@ const AllChannelCard = ({
   ButtonText,
   showJoinButton = true,
 }: ChannelCardProps) => {
+  const router = useRouter();
+  const joinChannelMutation = useJoinChannel();
   return (
     <>
       <div className="flex gap-3 w-[150px] justify-center  mt-5 ">
         <div className="flex flex-col gap-1 items-center justify-center">
           <div className="rounded-full w-16 h-16">
-            <Image src={channel.image} alt="channel_image" />
+            {channel.image ? (
+              <Image src={channel.image} alt="channel_image" />
+            ) : (
+              <Image
+                src={"/assets/logo.svg"}
+                alt="channel_image"
+                width={100}
+                height={100}
+              />
+            )}
           </div>
 
           <span className="font-bold text-white">{channel.title}</span>
           <span className="text-graylight text-sm">
-            {channel.members} members
+            {channel.members?.length ?? 0} members
           </span>
 
           {showJoinButton && (
             <div className="flex justify-center mt-2">
-              <Link href="/channels/:id">
-                <Button
-                  className="rounded-full border border-white bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-20"
-                  type="button"
-                >
-                  {ButtonText}
-                </Button>
-              </Link>
+              <Button
+                className="rounded-full border border-white bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-20"
+                type="button"
+                onClick={() =>
+                  joinChannelMutation.mutate(
+                    {
+                      channelId: channel.id,
+                    },
+
+                    {
+                      onSuccess: () => {
+                        router.push(`/channels/${channel.id}`);
+                      },
+                    }
+                  )
+                }
+              >
+                {joinChannelMutation.status === "pending" ? (
+                  <SpinnerCircle />
+                ) : (
+                  ButtonText
+                )}
+              </Button>
             </div>
           )}
         </div>
