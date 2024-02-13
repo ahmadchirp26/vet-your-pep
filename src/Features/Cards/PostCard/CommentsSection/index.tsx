@@ -6,7 +6,7 @@ import {
   AccordionItem,
 } from "@/core/ui/accordion";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import React from "react";
+import React, { PropsWithoutRef } from "react";
 import { createPortal } from "react-dom";
 import { comments } from "@/data/facebackend";
 import { Input } from "@/core/ui/input";
@@ -16,15 +16,18 @@ import { Drawer, DrawerContent, DrawerTrigger } from "@/core/ui/drawer";
 import CommentsCard from "./CommentsCard";
 import { ScrollArea } from "@/core/ui/scroll-area";
 
-const CommentsSection_ = () => {
-  const commentsArray = comments;
+interface CommentsSection_Props {
+  comments:Array<React.ComponentProps<typeof CommentsCard>>
+}
+
+const CommentsSection_ = ({comments}:CommentsSection_Props) => {
 
   return (
     <div className="border-t-greensharp border-t px-2 py-4 mt-4">
       <ScrollArea>
         <div className="space-y-3">
-          {commentsArray.map((comment, index) => (
-            <CommentsCard key={index} comment={comment} />
+          {comments.map((comment, index) => (
+            <CommentsCard key={index} {...comment} />
           ))}
         </div>
       </ScrollArea>
@@ -49,10 +52,10 @@ const CommentsSection_ = () => {
   );
 };
 
-interface Props {
+interface Props extends CommentsSection_Props {
   container?: HTMLDivElement | null;
 }
-const CommentsSection = ({ container }: Props) => {
+const CommentsSection = ({ container, comments }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   if (isDesktop) {
     return (
@@ -76,13 +79,13 @@ const CommentsSection = ({ container }: Props) => {
           {container ? (
             createPortal(
               <AccordionContent>
-                <CommentsSection_ />
+                <CommentsSection_ comments={comments} />
               </AccordionContent>,
-              container,
+              container
             )
           ) : (
             <AccordionContent>
-              <CommentsSection_ />
+              <CommentsSection_ comments={comments} />
             </AccordionContent>
           )}
         </AccordionItem>
@@ -99,7 +102,7 @@ const CommentsSection = ({ container }: Props) => {
         </div>
       </DrawerTrigger>
       <DrawerContent>
-        <CommentsSection_ />
+        <CommentsSection_ comments={comments} />
       </DrawerContent>
     </Drawer>
   );

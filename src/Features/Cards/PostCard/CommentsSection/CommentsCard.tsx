@@ -1,28 +1,27 @@
-import Image, { type StaticImageData } from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
+import { CalculatePostTime } from "@/core/utils/calculate-post-time";
 
-interface Comments {
-  profileAvatar: StaticImageData;
-  username: string;
-  postedTime: string;
+
+interface Props {
+  postedBy: {
+    username: string;
+    profileImage?: string;
+  };
+  postedDate: Date;
   commentContent: string;
 }
 
-interface CommentsCardProps {
-  comment: Comments;
-}
-
-const CommentsCard = ({ comment }: CommentsCardProps) => {
+const CommentsCard = (comment: Props) => {
   return (
     <div className="flex gap-3 items-start">
-      <Image
-        className="rounded-full w-8 h-8 mt-1"
-        src={comment.profileAvatar}
-        alt="profile_image"
-      />
+      <Avatar>
+        <AvatarImage src={comment.postedBy.profileImage} alt="profile_image" />
+        <AvatarFallback>{comment.postedBy.username}</AvatarFallback>
+      </Avatar>
       <div className="space-y-1">
         <div className="flex gap-2 items-baseline">
-          <span className="text-white">{comment.username}</span>
-          <span className="text-xs text-gray-500">{comment.postedTime}</span>
+          <span className="text-white">{comment.postedBy.username}</span>
+          <span className="text-xs text-gray-500">{CalculatePostTime(comment.postedDate)}</span>
         </div>
         <p className="text-graylight text-sm mt-4">{comment.commentContent}</p>
       </div>
