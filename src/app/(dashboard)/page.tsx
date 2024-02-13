@@ -1,5 +1,4 @@
 import AllChannels from "@/Features/AllChannels";
-import FeedPosts from "@/Features/FeedPosts";
 import NewChannels from "@/Features/NewChannels";
 import OnlineFriends from "@/Features/OnlineFriends";
 import ProfileCard from "@/Features/ProfileCard";
@@ -14,7 +13,7 @@ export default function HomePage() {
         </div>
         <div className="flex max-md:flex-col gap-3 overflow-auto ">
           <div className="max-md:order-2">
-            <FeedPosts />
+            {/* <FeedPosts channelId="s"/> */}
           </div>
 
           <div className="max-lg:hidden">

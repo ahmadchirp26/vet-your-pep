@@ -13,6 +13,10 @@ const config = {
         hostname: env.env.NEXT_PUBLIC_AWS_S3_FILE_HOST,
         protocol: "https",
       },
+      {
+        hostname:'placehold.co',
+        protocol: "https",
+      }
     ],
   },
 };

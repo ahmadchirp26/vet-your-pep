@@ -1,7 +1,6 @@
 import { AuthBroadcastChannel } from "@/lib/Authentication/AuthBroadcastChannel";
 import cookie from "cookiejs";
 import { jwtDecode } from "jwt-decode";
-
 interface Params {
   shouldBroadcast?: boolean;
 }
@@ -30,3 +29,4 @@ export const getSession = async ({ shouldBroadcast }: Params) => {
     accessToken: accessToken,
   };
 };
+

@@ -2,10 +2,10 @@
 
 import { channelMembers } from "@/data/facebackend";
 import Image from "next/image";
-import MemberCard from "../components/MemberCard";
+import MemberCard from "../_components/MemberCard";
 import SearchBar from "@/app/(dashboard)/components/SearchBar";
 import { useState } from "react";
-import AboutCard from "../components/AboutCard";
+import AboutCard from "../_components/AboutCard";
 import AllChannels from "@/Features/AllChannels";
 
 const Members = () => {

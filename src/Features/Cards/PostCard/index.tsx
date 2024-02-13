@@ -1,5 +1,5 @@
 "use client";
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,43 +11,42 @@ import LikesButton from "./LikesButton";
 import { useState } from "react";
 import CommentsSection from "./CommentsSection";
 import PostContent from "./PostContent";
+import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
+import { CalculatePostTime } from "@/core/utils/calculate-post-time";
 
-interface Post {
-  profileImage: StaticImageData;
-  username: string;
+interface Props {
+  postedBy: {
+    profileImage?: string;
+    username: string;
+  };
   postContent: string;
-  postedTime: string;
-  group: string;
-  postImage: StaticImageData;
+  postedTime: Date;
+  channel: string;
+  postImages: Array<string>;
   likes: string;
-  comments: string;
+  comments: React.ComponentProps<typeof CommentsSection>["comments"];
 }
 
-interface PostCardProps {
-  post: Post;
-}
-
-const PostCard = ({ post }: PostCardProps) => {
+const PostCard = (post: Props) => {
   const [commentSectionsDropdown, setCommentSectionsDropdown] =
     useState<HTMLDivElement | null>(null);
+
   return (
     <div className="border border-white rounded-3xl p-4 space-y-4 flex flex-col mt-5">
       <div className="flex justify-between items-center">
         <div className="flex items-start gap-3">
-          <div className="rounded-full w-12 h-12 mt-1">
-            <Image
-              src={post.profileImage}
-              alt="avatar"
-              width={50}
-              height={50}
-            />
-          </div>
+          <Avatar>
+            <AvatarImage src={post.postedBy.profileImage} alt="profile_image" />
+            <AvatarFallback>{post.postedBy.username}</AvatarFallback>
+          </Avatar>
           <div className="flex flex-col">
-            <span className="text-white font-bold">{post.username}</span>
+            <span className="text-white font-bold">{post.postedBy.username}</span>
             <span className="text-gray-300 text-xs truncate">
-              Posted on {post.group}
+              Posted on {post.channel}
             </span>
-            <span className="text-graylight text-xs">{post.postedTime}</span>
+            <span className="text-graylight text-xs">
+              {CalculatePostTime(post.postedTime)}
+            </span>
           </div>
         </div>
         <DropdownMenu>
@@ -70,16 +69,22 @@ const PostCard = ({ post }: PostCardProps) => {
       </div>
       <PostContent content={post.postContent} />
       <div className="w-full relative h-[350px]">
-        <Image
-          src={post.postImage}
-          alt="post_image"
-          layout="fill"
-          className="rounded-xl"
-        />
+        {post.postImages.map((image, index) => (
+          <Image
+            key={index}
+            src={image}
+            alt="post_image"
+            layout="fill"
+            className="rounded-xl"
+          />
+        ))}
       </div>
       <div className="flex gap-5 items-center">
         <LikesButton />
-        <CommentsSection container={commentSectionsDropdown} />
+        <CommentsSection
+          comments={post.comments}
+          container={commentSectionsDropdown}
+        />
       </div>
       <div
         ref={(div) => {
