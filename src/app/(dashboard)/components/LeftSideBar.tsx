@@ -23,8 +23,20 @@ const LeftSideBar = () => {
     setActiveIcon(routeParam || "home");
   }, [pathname]);
 
-  const handleIconClick = (icon: any) => {
-    setActiveIcon(icon === activeIcon ? null : icon);
+  const handleIconClick = (icon: string) => {
+    setActiveIcon(icon);
+    if (icon === "support") {
+      redirectToGmail(); // Call redirectToGmail when support icon is clicked
+    }
+  };
+
+  const redirectToGmail = () => {
+    // Construct the Gmail chat URL with the recipient email
+    const recipientEmail = "support@vetyourpep.com";
+    const gmailChatURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipientEmail}`;
+
+    // Open the Gmail chat URL in a new window
+    window.open(gmailChatURL, "_blank");
   };
 
   const isIconActive = (icon: any) => icon === activeIcon;
@@ -64,11 +76,13 @@ const LeftSideBar = () => {
             height={33}
           />
         </Link>
+
         <SupportIcon
           fill={isIconActive("support") ? "#79CD00" : "#ACACAC"}
           onClick={() => handleIconClick("support")}
           width={33}
           height={33}
+          className="cursor-pointer"
         />
       </div>
     </div>
