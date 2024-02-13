@@ -1,3 +1,4 @@
+'use client';
 import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
 import { type TypedDocumentNode } from "@graphql-typed-document-node/core";
 import { type Variables } from "graphql-request";

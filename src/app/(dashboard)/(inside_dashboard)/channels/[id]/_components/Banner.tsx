@@ -10,6 +10,7 @@ interface Props {
 }
 const Banner = ({ channelId, className }: Props) => {
   const { data, status } = useGetChannel(channelId);
+  console.log("s", data)
   if (status === "pending") {
     //[Todo]: add skeleton
     return <p>{"Loading..."}</p>;

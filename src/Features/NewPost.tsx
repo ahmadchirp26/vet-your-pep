@@ -2,9 +2,9 @@
 import { Button } from "@/core/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/core/ui/dialog";
 import { Input } from "@/core/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/core/ui/select";
 import { Textarea } from "@/core/ui/textarea";
 import Image from "next/image";
+import SelectChannel from "./SelectChannel";
 
 const NewPost = () => {
   return (
@@ -30,18 +30,7 @@ const NewPost = () => {
         <div className="flex flex-col gap-3">
           <div className="flex justify-between items-center">
             <span className="text-white font-bold">What's on your mind</span>
-            <Select>
-              <SelectTrigger className="w-[160px] h-[35px]">
-                <SelectValue placeholder="Select Channel" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="AI Discussion">AI Discussion</SelectItem>
-                <SelectItem value="Education">Education</SelectItem>
-                <SelectItem value="Fitness & Lifestyle">
-                  Fitness & Lifestyle
-                </SelectItem>
-              </SelectContent>
-            </Select>
+            <SelectChannel />
           </div>
           <div className="w-full">
             <Textarea

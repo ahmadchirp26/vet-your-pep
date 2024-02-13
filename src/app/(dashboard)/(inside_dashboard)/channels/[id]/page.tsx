@@ -1,11 +1,19 @@
-import { getChannelByIdServerFetch } from "@/api/Channels/useGetChannel";
-import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
 import ChannelViewTemplate from "./_templates/ChannelViewTemplate";
+import { fetchChannelServerSide } from "@/api/Channels/useGetChannel";
+import {prefetchJoinedChannelsServerSide} from "@/api/Channels/useJoinedChannels";
 
 const ViewChannel = async (props: { params: { id: string } }) => {
-  const response = await getChannelByIdServerFetch(props.params.id);
+  const queryClient = new QueryClient();
+  await fetchChannelServerSide(props.params.id, queryClient);
+  //[Todo]: move this prefetch to some other componnent
+  await prefetchJoinedChannelsServerSide(queryClient);
   return (
-    <HydrationBoundary state={dehydrate(response.queryClient)}>
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <ChannelViewTemplate channelId={props.params.id} />
     </HydrationBoundary>
   );

@@ -2,9 +2,9 @@ import { graphQlRequestHandler, graphql } from "@/core/lib/react-query-graphql";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import { channelKeys } from "./query-keys";
 import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helpers";
-import { getSessionServerSide } from "../Authentication/getSessionServerSide";
 import { type ClientError } from "graphql-request";
 import { notFound } from "next/navigation";
+import { getSessionServerAction } from "../Authentication/getSessionServerAction";
 
 const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
   #graphql
@@ -71,8 +71,11 @@ export const useGetChannel = (id: string) => {
   });
 };
 
-export const getChannelByIdServerFetch = async (id: string) => {
-  const token = getSessionServerSide();
+// Following function should be used only in server side, but if it is used in client side there are no issues
+// However, as it uses graphQLRequestHandler, it can be declared as a server action
+// because of the error:'You cannot dot into a client module from a server component'
+export const fetchChannelServerSide = async (id: string, queryClient = new QueryClient) => {
+  const token = await getSessionServerAction()
   if (!token) {
     throw {
       status: 401,
@@ -82,7 +85,6 @@ export const getChannelByIdServerFetch = async (id: string) => {
   const authourizationHeaders = new Headers({
     Authorization: `Bearer ${token.accessToken}`,
   });
-  const queryClient = new QueryClient();
   try {
     const data = await queryClient.fetchQuery({
       queryKey: channelKeys.detail(id),
@@ -99,6 +101,7 @@ export const getChannelByIdServerFetch = async (id: string) => {
     };
   } catch (e) {
     const graphQLError = e as ClientError;
+    console.log(e)
     // @ts-expect-error @ts-ignore
     if (graphQLError?.response?.errors?.[0]?.statusCode === 400) {
       return notFound();

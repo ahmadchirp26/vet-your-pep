@@ -1,3 +1,5 @@
+import { type ListChannelsInput } from "@/__generated__/graphql";
+
 interface PaginationProps {
   limit: number;
   offset: number;
@@ -10,4 +12,6 @@ export const channelKeys = {
   list: (filters: PaginationProps & ListsFilter) =>
     [...channelKeys.all, "lists", filters] as const,
   detail: (id: string) => [...channelKeys.all, id] as const,
+  listJoined: (filters: ListChannelsInput) =>
+    [...channelKeys.all, "lists", filters] as const,
 };

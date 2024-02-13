@@ -1,3 +1,4 @@
+'use client';
 import NewPost from "@/Features/NewPost";
 import PostCard from "@/Features/Cards/PostCard";
 import { useGetChannel } from "@/api/Channels/useGetChannel";
