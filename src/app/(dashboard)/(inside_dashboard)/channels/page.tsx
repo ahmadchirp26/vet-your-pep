@@ -1,13 +1,9 @@
 "use client";
-
 import { useState } from "react";
 import Image from "next/image";
-
 import SearchBar from "@/app/(dashboard)/components/SearchBar";
-import { channels } from "@/data/facebackend";
 import ChannelCard from "@/Features/Cards/ChannelCard";
 import AllChannelCard from "./components/AllChannelCard";
-import Link from "next/link";
 import useGetChannels from "@/api/Channels/useGetChannels";
 
 const Channels = () => {
@@ -16,9 +12,8 @@ const Channels = () => {
     joined: false,
   });
   const { data: myChannelsData } = useGetChannels({ limit: 100, joined: true });
-
-  const allChannelsArray = allChannelsData?.listChannels.results;
-  const myChannelsArray = myChannelsData?.listChannels.results;
+  const allChannelsArray = allChannelsData?.getMyChannels.results;
+  const myChannelsArray = myChannelsData?.getMyChannels.results;
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
