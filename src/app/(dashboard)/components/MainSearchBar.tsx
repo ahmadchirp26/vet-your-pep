@@ -44,9 +44,9 @@ const MainSearchBar = ({ className }: Props) => {
           <SpinnerCircle />
         </div>
       )}
-      {isError && <div>Error fetching data</div>}
-      {data?.searchCustomers?.results && (
-        <div className="absolute top-20 w-1/2 bg-greendarkest p-2  rounded-2xl space-y-2 z-">
+      {/* {isError && <div>Error fetching data</div>} */}
+      {data && data.searchCustomers && data.searchCustomers.results && (
+        <div className="absolute top-20 w-1/2 bg-greendarkest p-2  rounded-2xl space-y-2 z-10">
           {data.searchCustomers.results.map((user) => (
             <div
               key={user.id}

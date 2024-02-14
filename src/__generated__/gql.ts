@@ -24,6 +24,7 @@ const documents = {
     "\n  #graphql\n  query getAllChannelsWithPagination3($input: ListChannelsInput!) {\n    listChannels(input: $input) {\n      limit\n      offset\n      totalRows\n      results {\n        id\n        title\n      }\n    }\n  }\n": types.GetAllChannelsWithPagination3Document,
     "\n  #graphql\n  query getAllChannelsWithPagination2($input: ListChannelsInput!) {\n    listChannels(input: $input) {\n      limit\n      offset\n      totalRows\n      results {\n        id\n        title\n      }\n    }\n  }\n": types.GetAllChannelsWithPagination2Document,
     "\n  query getCustomerSignedURL {\n    getCustomerUploadUrl {\n      fileName\n      signedUrl\n    }\n  }\n": types.GetCustomerSignedUrlDocument,
+    "\n  query SearchCustomers($search: String!) {\n    searchCustomers(search: $search) {\n      totalCount\n      results {\n        cellPhone\n        email\n        firstName\n        id\n        isActive\n        lastName\n        profileImage\n        password\n        role\n        stripeCustomerId\n        totalFollowers\n        totalFollowings\n      }\n    }\n  }\n": types.SearchCustomersDocument,
 };
 
 /**
@@ -84,6 +85,10 @@ export function graphql(source: "\n  #graphql\n  query getAllChannelsWithPaginat
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query getCustomerSignedURL {\n    getCustomerUploadUrl {\n      fileName\n      signedUrl\n    }\n  }\n"): (typeof documents)["\n  query getCustomerSignedURL {\n    getCustomerUploadUrl {\n      fileName\n      signedUrl\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query SearchCustomers($search: String!) {\n    searchCustomers(search: $search) {\n      totalCount\n      results {\n        cellPhone\n        email\n        firstName\n        id\n        isActive\n        lastName\n        profileImage\n        password\n        role\n        stripeCustomerId\n        totalFollowers\n        totalFollowings\n      }\n    }\n  }\n"): (typeof documents)["\n  query SearchCustomers($search: String!) {\n    searchCustomers(search: $search) {\n      totalCount\n      results {\n        cellPhone\n        email\n        firstName\n        id\n        isActive\n        lastName\n        profileImage\n        password\n        role\n        stripeCustomerId\n        totalFollowers\n        totalFollowings\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
