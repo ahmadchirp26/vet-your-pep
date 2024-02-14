@@ -3,11 +3,11 @@ import Image from "next/image";
 import { Button } from "@/core/ui/button";
 import { type APIGetChannelsData } from "@/api/Channels/useGetChannels";
 import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
-import useJoinChannel from "@/api/Channels/useJoinChannel";
+import useJoinChannelMutation from "@/api/Channels/useJoinChannelMutation";
 import { useRouter } from "next/navigation";
 
 interface ChannelCardProps {
-  channel: NonNullable<APIGetChannelsData>["listChannels"]["results"][number];
+  channel: NonNullable<APIGetChannelsData>["getMyChannels"]["results"][number];
   showJoinButton?: boolean;
   ButtonText?: string;
   isLandingPage?: boolean;
@@ -20,7 +20,7 @@ const ChannelCard = ({
   isLandingPage = false,
 }: ChannelCardProps) => {
   const router = useRouter();
-  const joinChannelMutation = useJoinChannel();
+  const joinChannelMutation = useJoinChannelMutation();
   return (
     <>
       <div
