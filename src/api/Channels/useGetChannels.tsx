@@ -7,25 +7,41 @@ import { channelKeys } from "./query-keys";
 
 const GET_CHANNELS_ADMIN_QUERY = graphql(`
   #graphql
-  query getAllChannelsWithPagination($input: ListChannelsInput!) {
-    listChannels(input: $input) {
+  query GetMyChannels($input: ListChannelsInput!) {
+    getMyChannels(input: $input) {
       limit
       offset
       totalRows
       results {
-        id
+        about
         backgroundImage
+        id
         image
+        isPaid
+        moderatorId
         price
         rules
         status
         title
-        about
-        isPaid
+        totalMembers
         members {
           id
           paidStatus
           roleChannel
+          customer {
+            cellPhone
+            email
+            firstName
+            id
+            isActive
+            lastName
+            password
+            profileImage
+            role
+            stripeCustomerId
+            totalFollowers
+            totalFollowings
+          }
         }
       }
     }
@@ -69,7 +85,7 @@ const useGetChannels = (
 
   const paginationParamsExtended = {
     ...paginationParams,
-    totalRows: response.data?.listChannels.totalRows ?? 0,
+    totalRows: response.data?.getMyChannels.totalRows ?? 0,
   };
 
   return {

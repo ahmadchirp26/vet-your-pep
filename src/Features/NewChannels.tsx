@@ -7,7 +7,8 @@ const NewChannels = () => {
     limit: 100,
     joined: false,
   });
-  const channelsArray = data?.listChannels.results;
+  console.log("Channels Data", data);
+  const channelsArray = data?.getMyChannels.results;
   return (
     <>
       <div className="flex flex-col rounded-3xl container-drop-shadow bg-greendarkest p-4 min-w-[330px] max-xl:min-w-[160px] max-lg:min-w-[140px]">
