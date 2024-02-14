@@ -2,7 +2,7 @@
 import SendbirdApp from "@sendbird/uikit-react/App";
 import "./index.css";
 
-const APP_ID = "16CD5681-56AE-4956-B5BB-48EA1E12C699";
+const APP_ID = "B6F60367-DE85-472F-BFDA-F790A7143E0D";
 const USER_ID = "james";
 const NickName = "James Bond";
 
