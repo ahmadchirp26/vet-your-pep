@@ -7,9 +7,10 @@ import SearchBar from "@/app/(dashboard)/components/SearchBar";
 import ChannelCard from "@/Features/Cards/ChannelCard";
 import Link from "next/link";
 import useGetChannels from "@/api/Channels/useGetChannels";
+import { Skeleton } from "@/core/ui/skeleton";
 
 const AllChannels = () => {
-  const { data } = useGetChannels({
+  const { data, status } = useGetChannels({
     limit: 100,
     joined: true,
   });
@@ -24,6 +25,19 @@ const AllChannels = () => {
   const filteredChannels = allChannelsArray?.filter((channel) =>
     channel.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  if (status === "error") {
+    return (
+      <div className="flex flex-col rounded-3xl container-drop-shadow bg-greendarkest p-4 min-w-[330px] max-xl:min-w-[160px] max-lg:min-w-[140px]">
+        <span className="text-white font-bold mt-3 max-lg:text-center">
+          My Channels
+        </span>
+
+        <span className="mt-5 text-greensharp text-center">
+          Error fetching Channels
+        </span>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -44,21 +58,27 @@ const AllChannels = () => {
           <SearchBar setSearchTerm={setSearchTerm} />
         )}
 
-        <div className="mt-3">
-          {filteredChannels?.map((channel, index) => (
-            <Link
-              key={index}
-              href={`channels/${channel.id}`}
-              className="hover:bg-greensharp"
-            >
-              <ChannelCard
-                channel={channel}
-                showJoinButton={false}
-                isLandingPage={true}
-              />
-            </Link>
-          ))}
-        </div>
+        {status === "pending" ? (
+          <div className=" flex gap-3 justify-center p-4 items-center">
+            <Skeleton className="h-12 w-60 rounded-lg" />
+          </div>
+        ) : (
+          <div className="mt-3">
+            {filteredChannels?.map((channel, index) => (
+              <Link
+                key={index}
+                href={`channels/${channel.id}`}
+                className="hover:bg-greensharp"
+              >
+                <ChannelCard
+                  channel={channel}
+                  showJoinButton={false}
+                  isLandingPage={true}
+                />
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
