@@ -6,9 +6,8 @@ import {
   AccordionItem,
 } from "@/core/ui/accordion";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import React, { PropsWithoutRef } from "react";
+import React from "react";
 import { createPortal } from "react-dom";
-import { comments } from "@/data/facebackend";
 import { Input } from "@/core/ui/input";
 import { Button } from "@/core/ui/button";
 import { useMediaQuery } from "@uidotdev/usehooks";
@@ -69,7 +68,7 @@ const CommentsSection = ({ container, comments }: Props) => {
               <div className="flex gap-2 items-center cursor-pointer">
                 <CommentIcon />
                 <div className="flex gap-1 text-graylight items-baseline">
-                  <span className="sm:text-sm">12</span>
+                  <span className="sm:text-sm">{comments.length}</span>
                   <span className="hidden sm:block">comments</span>
                 </div>
               </div>
@@ -96,7 +95,7 @@ const CommentsSection = ({ container, comments }: Props) => {
       <DrawerTrigger className="flex gap-2 items-center cursor-pointer">
         <CommentIcon />
         <div className="flex gap-1 text-graylight items-baseline">
-          <span className="sm:text-sm">12</span>
+          <span className="sm:text-sm">{comments.length}</span>
           <span className="hidden sm:block">comments</span>
         </div>
       </DrawerTrigger>

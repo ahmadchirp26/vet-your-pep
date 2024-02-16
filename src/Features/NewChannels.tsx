@@ -9,9 +9,9 @@ const NewChannels = () => {
     limit: 100,
     joined: false,
   });
-  const channelsArray = data?.getMyChannels.results;
-
-  if (status === "error") {
+  const channelsArray = data?.getChannels.results;
+  if (status === "pending") {
+    //[Todo]: add a skeleton loader
     return (
       <div className="flex flex-col rounded-3xl container-drop-shadow bg-greendarkest p-4 min-w-[330px] max-xl:min-w-[160px] max-lg:min-w-[140px]">
         <span className="text-white font-bold mt-3 max-lg:text-center">

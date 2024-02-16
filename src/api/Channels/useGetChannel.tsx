@@ -5,6 +5,7 @@ import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helpers";
 import { type ClientError } from "graphql-request";
 import { notFound } from "next/navigation";
 import { getSessionServerAction } from "../Authentication/getSessionServerAction";
+import { env } from "@/env";
 
 const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
   #graphql
@@ -22,14 +23,19 @@ const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
       title
       posts {
         body
-        customer {
-          email
-          firstName
-          lastName
-          id
-          profileImage
-        }
         images
+        comments {
+          content
+          id
+          user {
+            firstName
+            lastName
+            id
+            email
+            profileImage
+          }
+        }
+
         likeCount
         likes {
           id
@@ -68,6 +74,22 @@ export const useGetChannel = (id: string) => {
         input: queryKey[1],
       });
     },
+    select: (data) => {
+      return {
+        ...data,
+        getChannelById: {
+          ...data.getChannelById,
+          posts: data.getChannelById.posts?.map((post) => {
+            return {
+              ...post,
+              images: post.images?.map(
+                (url) => `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${url}`
+              ),
+            };
+          }),
+        },
+      };
+    },
   });
 };
 
@@ -99,7 +121,20 @@ export const fetchChannelServerSide = async (
         ),
     });
     return {
-      data,
+      data: {
+        ...data,
+        getChannelById: {
+          ...data.getChannelById,
+          posts: data.getChannelById.posts?.map((post) => {
+            return {
+              ...post,
+              images: post.images?.map(
+                (url) => `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${url}`
+              ),
+            };
+          }),
+        },
+      },
       queryClient,
     };
   } catch (e) {

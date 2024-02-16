@@ -1,4 +1,4 @@
-import { useJoinedChannels } from "@/api/Channels/useJoinedChannels";
+import useGetChannels from "@/api/Channels/useGetChannels";
 import {
   Select,
   SelectContent,
@@ -9,7 +9,10 @@ import {
 import React from "react";
 
 const SelectChannel = (props: React.ComponentProps<typeof Select>) => {
-  const { data, status } = useJoinedChannels();
+  const { data, status } = useGetChannels({
+    limit: 100,
+    joined: true,
+  });
   if (status === "pending") {
     //[Todo]: Add a skeleton
     return <div>Loading...</div>;
@@ -24,7 +27,7 @@ const SelectChannel = (props: React.ComponentProps<typeof Select>) => {
         <SelectValue placeholder="Select Channel" />
       </SelectTrigger>
       <SelectContent>
-        {data?.listChannels.results.map((channel, index) => (
+        {data?.getChannels.results.map((channel, index) => (
           <SelectItem key={index} value={channel.id}>
             {channel.title}
           </SelectItem>

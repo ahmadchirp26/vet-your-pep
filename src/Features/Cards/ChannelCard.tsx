@@ -7,7 +7,7 @@ import useJoinChannelMutation from "@/api/Channels/useJoinChannelMutation";
 import { useRouter } from "next/navigation";
 
 interface ChannelCardProps {
-  channel: NonNullable<APIGetChannelsData>["getMyChannels"]["results"][number];
+  channel: NonNullable<APIGetChannelsData>["getChannels"]["results"][number];
   showJoinButton?: boolean;
   ButtonText?: string;
   isLandingPage?: boolean;

@@ -8,7 +8,7 @@ import { channelKeys } from "./query-keys";
 const GET_CHANNELS_ADMIN_QUERY = graphql(`
   #graphql
   query getAllChannelsWithPagination($input: ListChannelsInput!) {
-    getMyChannels(input: $input) {
+    getChannels(input: $input) {
       limit
       offset
       totalRows
@@ -73,7 +73,7 @@ const useGetChannels = (
 
   const paginationParamsExtended = {
     ...paginationParams,
-    totalRows: response.data?.getMyChannels.totalRows ?? 0,
+    totalRows: response.data?.getChannels.totalRows ?? 0,
   };
 
   return {

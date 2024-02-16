@@ -12,16 +12,18 @@ const PostContent = ({ content }: Props) => {
       <span className={`text-graylight ${isExpanded ? "" : "line-clamp-4"}`}>
         {content}
       </span>
-      <Button
-        variant={"link"}
-        size={"sm"}
-        className="text-gray-200 font-semibold p-0 inline-block"
-        onClick={() => {
-          setIsExpanded(!isExpanded);
-        }}
-      >
-        {isExpanded ? "Show less" : "Show more"}
-      </Button>
+      {content.length > 120 && (
+        <Button
+          variant={"link"}
+          size={"sm"}
+          className="text-gray-200 font-semibold p-0 inline-block"
+          onClick={() => {
+            setIsExpanded(!isExpanded);
+          }}
+        >
+          {isExpanded ? "Show less" : "Show more"}
+        </Button>
+      )}
     </div>
   );
 };

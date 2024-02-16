@@ -23,14 +23,13 @@ interface Props {
   postedTime: Date;
   channel: string;
   postImages: Array<string>;
-  likes: string;
+  likes: Array<string>;
   comments: React.ComponentProps<typeof CommentsSection>["comments"];
 }
 
 const PostCard = (post: Props) => {
   const [commentSectionsDropdown, setCommentSectionsDropdown] =
     useState<HTMLDivElement | null>(null);
-
   return (
     <div className="border border-white rounded-3xl p-4 space-y-4 flex flex-col mt-5">
       <div className="flex justify-between items-center">
@@ -70,19 +69,30 @@ const PostCard = (post: Props) => {
         </DropdownMenu>
       </div>
       <PostContent content={post.postContent} />
-      <div className="w-full relative h-[350px]">
+      <div className="flex flex-wrap gap-2">
         {post.postImages.map((image, index) => (
-          <Image
-            key={index}
-            src={image}
-            alt="post_image"
-            layout="fill"
-            className="rounded-xl"
-          />
+          <div key={index} className="relative w-40 h-40">
+            <Image
+              src={image}
+              alt="post_image"
+              layout="fill"
+              className="rounded-xl"
+            />
+          </div>
         ))}
       </div>
+
       <div className="flex gap-5 items-center">
-        <LikesButton />
+        <LikesButton
+          isLiked={false}
+          likesArray={post.likes.map((l) => ({
+            profileImage: undefined,
+            username: l,
+          }))}
+          onLike={() => {
+            console.log("l");
+          }}
+        />
         <CommentsSection
           comments={post.comments}
           container={commentSectionsDropdown}

@@ -6,11 +6,11 @@ interface Props {
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   buttonComponent: React.ReactNode;
 }
-const UploadFileButton = ({
+const UploadFileButton = React.forwardRef<HTMLInputElement, Props>(({
   className,
   buttonComponent,
   inputProps = {},
-}: Props) => {
+}, ref) => {
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <div>
@@ -31,6 +31,6 @@ const UploadFileButton = ({
       </div>
     </div>
   );
-};
-
+});
+UploadFileButton.displayName = "UploadFileButton";
 export default UploadFileButton;

@@ -1,9 +1,8 @@
 "use client";
 import LikeIcon from "@/core/icons/LikeIcon";
 import { DialogContent, DialogTrigger, Dialog } from "@/core/ui/dialog";
-import React, { useState } from "react";
+import React from "react";
 import LikesCard from "../LikesCard";
-import { likes } from "@/data/facebackend";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import {
   Drawer,
@@ -13,9 +12,15 @@ import {
   DrawerTrigger,
 } from "@/core/ui/drawer";
 
-const LikesButton = () => {
-  const [isLiked, setLiked] = useState(false);
-  const LikesArray = likes;
+interface Props {
+  isLiked: boolean;
+  likesArray: Array<{
+    profileImage?: string;
+    username: string;
+  }>;
+  onLike: () => void;
+}
+const LikesButton = ({ isLiked, likesArray, onLike }: Props) => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
@@ -25,19 +30,17 @@ const LikesButton = () => {
           <LikeIcon
             fill={isLiked ? "red" : "transparent"}
             stroke={isLiked ? "red" : "#79CD00"}
-            onClick={() => {
-              setLiked(!isLiked);
-            }}
+            onClick={onLike}
           />
           <DialogTrigger asChild>
-            <span className="text-graylight max-lg:text-sm">20 Likes</span>
+            <span className="text-graylight max-lg:text-sm">{`${likesArray.length} Like${likesArray.length > 1 ? "s" : ""}`}</span>
           </DialogTrigger>
         </div>
         <DialogContent>
           <div className="flex flex-col gap-2">
             <span className="text-white font-bold">All Likes</span>
-            {LikesArray.map((likes, index) => (
-              <LikesCard key={index} likes={likes} />
+            {likesArray.map((userThatLiked, index) => (
+              <LikesCard key={index} userThatLiked={userThatLiked} />
             ))}
           </div>
         </DialogContent>
@@ -51,13 +54,11 @@ const LikesButton = () => {
           <LikeIcon
             fill={isLiked ? "red" : "transparent"}
             stroke={isLiked ? "red" : "#79CD00"}
-            onClick={() => {
-              setLiked(!isLiked);
-            }}
+            onClick={onLike}
           />
           <DialogTrigger asChild>
             <div className="flex gap-2">
-              <span className="text-graylight sm:text-sm">20</span>
+              <span className="text-graylight sm:text-sm">{likesArray.length}</span>
               <span className="hidden sm:block">Likes</span>
             </div>
           </DialogTrigger>
@@ -68,8 +69,8 @@ const LikesButton = () => {
           <DrawerTitle className="font-bold text-white">All Likes</DrawerTitle>
         </DrawerHeader>
         <div className="flex flex-col gap-2 px-4 py-8">
-          {LikesArray.map((likes, index) => (
-            <LikesCard key={index} likes={likes} />
+          {likesArray.map((userThatLiked, index) => (
+            <LikesCard key={index} userThatLiked={userThatLiked} />
           ))}
         </div>
       </DrawerContent>
