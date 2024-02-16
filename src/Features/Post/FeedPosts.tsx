@@ -34,8 +34,9 @@ const FeedPosts = ({ channelId }: Props) => {
               },
             })) ?? []
           }
-          likes={post.likes?.map(l => l.user) ?? []}
+          likes={post.likes?.map((l) => l.user) ?? []}
           postContent={post.body}
+          postId={post.id}
           postImages={post.images ?? []}
           postedTime={new Date()}
           postedBy={{
