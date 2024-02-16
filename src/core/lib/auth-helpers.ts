@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
 import { type TypedDocumentNode } from "@graphql-typed-document-node/core";
 import { type Variables } from "graphql-request";
@@ -12,13 +12,13 @@ export const useGraphQLRequestHandlerProtected = () => {
   });
   return <TResult, TVariables extends Variables>(
     document: TypedDocumentNode<TResult, TVariables>,
-    variables: TVariables
+    variables: TVariables,
   ) =>
     graphQlRequestHandler(
       document,
       ...([
         variables,
         authourizationHeaders,
-      ] as unknown as VariablesAndRequestHeadersArgs<TVariables>)
+      ] as unknown as VariablesAndRequestHeadersArgs<TVariables>),
     );
 };

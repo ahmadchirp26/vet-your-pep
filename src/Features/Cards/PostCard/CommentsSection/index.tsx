@@ -16,11 +16,10 @@ import CommentsCard from "./CommentsCard";
 import { ScrollArea } from "@/core/ui/scroll-area";
 
 interface CommentsSection_Props {
-  comments:Array<React.ComponentProps<typeof CommentsCard>>
+  comments: Array<React.ComponentProps<typeof CommentsCard>>;
 }
 
-const CommentsSection_ = ({comments}:CommentsSection_Props) => {
-
+const CommentsSection_ = ({ comments }: CommentsSection_Props) => {
   return (
     <div className="border-t-greensharp border-t px-2 py-4 mt-4">
       <ScrollArea>
@@ -80,7 +79,7 @@ const CommentsSection = ({ container, comments }: Props) => {
               <AccordionContent>
                 <CommentsSection_ comments={comments} />
               </AccordionContent>,
-              container
+              container,
             )
           ) : (
             <AccordionContent>

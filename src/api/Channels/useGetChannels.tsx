@@ -37,7 +37,7 @@ interface Props {
   joined: boolean;
 }
 const useGetChannels = (
-  props: Props | undefined = { limit: 100, joined: false }
+  props: Props | undefined = { limit: 100, joined: false },
 ) => {
   const [paginationParams, setPaginationParams] = useState({
     limit: props.limit,
@@ -51,7 +51,11 @@ const useGetChannels = (
   const response = useQuery({
     // Following two lines are for pagination
     placeholderData: keepPreviousData,
-    queryKey: channelKeys.listJoined({ ...paginationParams, filter:{search: searchQuery}, joined: props.joined}),
+    queryKey: channelKeys.listJoined({
+      ...paginationParams,
+      filter: { search: searchQuery },
+      joined: props.joined,
+    }),
     queryFn: ({ queryKey }) => {
       return protectedRequestHandler(GET_CHANNELS_ADMIN_QUERY, {
         // Following params are important for pagination
@@ -90,10 +94,10 @@ const useGetChannels = (
           paginationParamsExtended.limit
             ? Math.ceil(
                 paginationParamsExtended.totalRows /
-                  paginationParamsExtended.limit
+                  paginationParamsExtended.limit,
               )
             : 0,
-          1
+          1,
         );
         const newPage = Math.min(Math.max(page, 1), maxPages);
         const newOffset = (newPage - 1) * paginationParamsExtended.limit;
@@ -110,12 +114,12 @@ const useGetChannels = (
         const latestTotalRows = paginationParamsExtended.totalRows;
         const maxPages = Math.max(
           pageSize ? Math.ceil(latestTotalRows / pageSize) : 0,
-          1
+          1,
         );
         // Possible page change due to pageSize change
         const newPage = Math.min(
           Math.max(paginationParams.offset / pageSize + 1, 1),
-          maxPages
+          maxPages,
         );
         const newOffset = (newPage - 1) * pageSize;
         setPaginationParams({

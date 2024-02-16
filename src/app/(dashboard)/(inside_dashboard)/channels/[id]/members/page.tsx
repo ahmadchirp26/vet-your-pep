@@ -12,7 +12,7 @@ const Members = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredMembers = channelMembers.filter((member) =>
-    member.username.toLowerCase().includes(searchTerm.toLowerCase())
+    member.username.toLowerCase().includes(searchTerm.toLowerCase()),
   );
   return (
     <div className="flex gap-5 p-3">
