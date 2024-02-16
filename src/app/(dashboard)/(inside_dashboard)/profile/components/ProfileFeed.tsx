@@ -1,4 +1,4 @@
-import NewPost from "@/Features/NewPost";
+import NewPost from "@/Features/Post";
 import PostCard from "@/Features/Cards/PostCard";
 import { profilePosts } from "@/data/facebackend";
 const ProfileFeed = () => {

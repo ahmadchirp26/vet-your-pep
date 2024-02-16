@@ -4,7 +4,7 @@ import AboutCard from "../_components/AboutCard";
 import AllChannels from "@/Features/AllChannels";
 import Banner from "../_components/Banner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/core/ui/tabs";
-import FeedPosts from "@/Features/FeedPosts";
+import FeedPosts from "@/Features/Post/FeedPosts";
 import GroupAdmin from "../_components/GroupAdmin";
 import ChannelMembers from "../_components/ChannelMembers";
 import { Button } from "@/core/ui/button";

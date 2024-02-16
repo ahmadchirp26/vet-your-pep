@@ -15,7 +15,7 @@ const AllChannels = () => {
   });
   const [activeSearch, setActiveSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const allChannelsArray = data?.getMyChannels.results;
+  const allChannelsArray = data?.getChannels.results;
 
   const handleSearch = () => {
     setActiveSearch(!activeSearch);

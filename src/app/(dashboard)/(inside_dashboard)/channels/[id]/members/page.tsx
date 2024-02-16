@@ -17,7 +17,7 @@ const Members = () => {
   return (
     <div className="flex gap-5 p-3">
       <div className="flex flex-col gap-5 w-[20%] max-lg:hidden">
-        <AboutCard />
+        
         <AllChannels />
       </div>
       <div className="bg-greendarkest rounded-lg p-3 container-drop-shadow w-[80%] max-lg:w-full">

@@ -8,7 +8,7 @@ const NewChannels = () => {
     limit: 100,
     joined: false,
   });
-  const channelsArray = data?.getMyChannels.results;
+  const channelsArray = data?.getChannels.results;
   if (status === "pending") {
     //[Todo]: add a skeleton loader
     return (

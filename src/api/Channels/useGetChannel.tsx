@@ -5,6 +5,7 @@ import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helpers";
 import { type ClientError } from "graphql-request";
 import { notFound } from "next/navigation";
 import { getSessionServerAction } from "../Authentication/getSessionServerAction";
+import { env } from "@/env";
 
 const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
   #graphql
@@ -22,14 +23,19 @@ const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
       title
       posts {
         body
-        customer {
-          email
-          firstName
-          lastName
-          id
-          profileImage
-        }
         images
+        comments {
+          content
+          id
+          user {
+            firstName
+            lastName
+            id
+            email
+            profileImage
+          }
+        }
+
         likeCount
         likes {
           id
@@ -68,14 +74,33 @@ export const useGetChannel = (id: string) => {
         input: queryKey[1],
       });
     },
+    select: (data) => {
+      return {
+        ...data,
+        getChannelById: {
+          ...data.getChannelById,
+          posts: data.getChannelById.posts?.map((post) => {
+            return {
+              ...post,
+              images: post.images?.map(
+                (url) => `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${url}`
+              ),
+            };
+          }),
+        },
+      };
+    },
   });
 };
 
 // Following function should be used only in server side, but if it is used in client side there are no issues
 // However, as it uses graphQLRequestHandler, it can be declared as a server action
 // because of the error:'You cannot dot into a client module from a server component'
-export const fetchChannelServerSide = async (id: string, queryClient = new QueryClient) => {
-  const token = await getSessionServerAction()
+export const fetchChannelServerSide = async (
+  id: string,
+  queryClient = new QueryClient()
+) => {
+  const token = await getSessionServerAction();
   if (!token) {
     throw {
       status: 401,
@@ -96,12 +121,25 @@ export const fetchChannelServerSide = async (id: string, queryClient = new Query
         ),
     });
     return {
-      data,
+      data: {
+        ...data,
+        getChannelById: {
+          ...data.getChannelById,
+          posts: data.getChannelById.posts?.map((post) => {
+            return {
+              ...post,
+              images: post.images?.map(
+                (url) => `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${url}`
+              ),
+            };
+          }),
+        },
+      },
       queryClient,
     };
   } catch (e) {
     const graphQLError = e as ClientError;
-    console.log(e)
+    console.log(e);
     // @ts-expect-error @ts-ignore
     if (graphQLError?.response?.errors?.[0]?.statusCode === 400) {
       return notFound();

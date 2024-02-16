@@ -86,6 +86,18 @@ export enum ChannelUserRole {
   Moderator = 'MODERATOR'
 }
 
+export type Comments = {
+  __typename?: 'Comments';
+  content: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  post: Post;
+  user: Customer;
+};
+
+export type CommentsFilterInputs = {
+  search?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type CreateAdminUserInput = {
   email: Scalars['String']['input'];
   firstName: Scalars['String']['input'];
@@ -108,6 +120,11 @@ export type CreateChargeInput = {
   paymentMethodId: Scalars['String']['input'];
 };
 
+export type CreateCommentInput = {
+  content: Scalars['String']['input'];
+  postId: Scalars['String']['input'];
+};
+
 export type CreateCustomerInput = {
   email: Scalars['String']['input'];
   firstName: Scalars['String']['input'];
@@ -115,10 +132,13 @@ export type CreateCustomerInput = {
   password: Scalars['String']['input'];
 };
 
+export type CreateLikeInput = {
+  postId: Scalars['String']['input'];
+};
+
 export type CreatePostInput = {
   body: Scalars['String']['input'];
   channelId: Scalars['String']['input'];
-  customerId: Scalars['String']['input'];
   images?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
@@ -126,6 +146,7 @@ export type Customer = {
   __typename?: 'Customer';
   cellPhone?: Maybe<Scalars['String']['output']>;
   channels?: Maybe<Array<Channel>>;
+  comments?: Maybe<Array<Comments>>;
   email: Scalars['String']['output'];
   firstName: Scalars['String']['output'];
   followers?: Maybe<Array<CustomerFollower>>;
@@ -193,6 +214,20 @@ export type ListChannelsResponse = {
   totalRows?: Maybe<Scalars['Float']['output']>;
 };
 
+export type ListCommentsInput = {
+  filter?: InputMaybe<CommentsFilterInputs>;
+  limit: Scalars['Float']['input'];
+  offset?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type ListCommentsResponse = {
+  __typename?: 'ListCommentsResponse';
+  limit: Scalars['Float']['output'];
+  offset?: Maybe<Scalars['Float']['output']>;
+  results: Array<Comments>;
+  totalRows?: Maybe<Scalars['Float']['output']>;
+};
+
 export type ListCustomersInputs = {
   filter?: InputMaybe<CustomerFilterInput>;
   limit: Scalars['Float']['input'];
@@ -204,6 +239,20 @@ export type ListCustomersResponse = {
   limit: Scalars['Float']['output'];
   offset?: Maybe<Scalars['Float']['output']>;
   results: Array<Customer>;
+  totalRows?: Maybe<Scalars['Float']['output']>;
+};
+
+export type ListPostsInput = {
+  filter?: InputMaybe<PostFilterInputs>;
+  limit: Scalars['Float']['input'];
+  offset?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type ListPostsResponse = {
+  __typename?: 'ListPostsResponse';
+  limit: Scalars['Float']['output'];
+  offset?: Maybe<Scalars['Float']['output']>;
+  results: Array<Post>;
   totalRows?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -225,10 +274,14 @@ export type Mutation = {
   createAdminUser: SuccessResponse;
   /** This will create new Channel */
   createChannel: SuccessResponse;
+  /** This will create new Comment */
+  createComment: SuccessResponse;
   /** This will signup new Customers */
   createCustomer: CustomerLoginOrRegisterResponse;
   /** This will create new Post */
   createPost: SuccessResponse;
+  /** This will create new Like */
+  createPostLike: SuccessResponse;
   /** This will follow a customer */
   followCustomer: SuccessResponse;
   /** This will create new Channel */
@@ -253,12 +306,18 @@ export type Mutation = {
   updateAdminPassword: SuccessResponse;
   /** This will create new Channel */
   updateChannel: SuccessResponse;
+  /** This will update new Comment */
+  updateComment: SuccessResponse;
   /** This will update Customer */
   updateCustomer: Customer;
   /** Update customer email */
   updateCustomerEmail: CustomerEmailUpdateResponse;
   /** This will update Customer Password */
   updateCustomerPassword: SuccessResponse;
+  /** This will update new Post */
+  updatePost: SuccessResponse;
+  /** This will update new Like */
+  updatePostLike: SuccessResponse;
 };
 
 
@@ -277,6 +336,11 @@ export type MutationCreateChannelArgs = {
 };
 
 
+export type MutationCreateCommentArgs = {
+  input: CreateCommentInput;
+};
+
+
 export type MutationCreateCustomerArgs = {
   input: CreateCustomerInput;
 };
@@ -284,6 +348,11 @@ export type MutationCreateCustomerArgs = {
 
 export type MutationCreatePostArgs = {
   input: CreatePostInput;
+};
+
+
+export type MutationCreatePostLikeArgs = {
+  input: CreateLikeInput;
 };
 
 
@@ -347,6 +416,11 @@ export type MutationUpdateChannelArgs = {
 };
 
 
+export type MutationUpdateCommentArgs = {
+  input: UpdateCommentInput;
+};
+
+
 export type MutationUpdateCustomerArgs = {
   input: UpdateCustomerInput;
 };
@@ -361,6 +435,16 @@ export type MutationUpdateCustomerPasswordArgs = {
   password: Scalars['String']['input'];
 };
 
+
+export type MutationUpdatePostArgs = {
+  input: UpdatePostInput;
+};
+
+
+export type MutationUpdatePostLikeArgs = {
+  input: UpdateLikeInput;
+};
+
 export type PageData = {
   __typename?: 'PageData';
   count: Scalars['Int']['output'];
@@ -372,11 +456,16 @@ export type Post = {
   __typename?: 'Post';
   body: Scalars['String']['output'];
   channel?: Maybe<Channel>;
+  comments?: Maybe<Array<Comments>>;
   customer: Customer;
   id: Scalars['ID']['output'];
   images?: Maybe<Array<Scalars['String']['output']>>;
   likeCount?: Maybe<Scalars['Int']['output']>;
   likes?: Maybe<Array<Likes>>;
+};
+
+export type PostFilterInputs = {
+  search?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Query = {
@@ -385,6 +474,12 @@ export type Query = {
   getChannelById: Channel;
   /** Get S3 bucket Signed Url */
   getChannelUploadUrl: S3SignedUrlResponse;
+  /** The List of Channels user have joined or not with Pagination and filters */
+  getChannels: ListChannelsResponse;
+  /** Get Session Token for Chat SDK */
+  getChatToken: Scalars['String']['output'];
+  /** The List of comments with Pagination and filters */
+  getComments: ListCommentsResponse;
   /** Get the Customer */
   getCustomerData: Customer;
   /** Get S3 bucket Signed Url */
@@ -395,12 +490,10 @@ export type Query = {
   getFollowers: Array<Customer>;
   /** Get the followers of the authenticated customer */
   getFollowing: Array<Customer>;
-  /** The List of Channel user have joined with Pagination and filters */
-  getMyChannels: ListChannelsResponse;
   /** Get S3 bucket Signed Url */
   getPostUploadUrls: Array<S3SignedUrlResponse>;
-  /** The List of Channel with Pagination and filters */
-  listChannels: ListChannelsResponse;
+  /** The List of posts with Pagination and filters */
+  getPosts: ListPostsResponse;
   /** The List of Customers with filters */
   searchCustomers: SearchCustomersResponse;
   /** check if email already exist */
@@ -413,13 +506,18 @@ export type QueryGetChannelByIdArgs = {
 };
 
 
-export type QueryGetCustomersAdminArgs = {
-  input: ListCustomersInputs;
+export type QueryGetChannelsArgs = {
+  input: ListChannelsInput;
 };
 
 
-export type QueryGetMyChannelsArgs = {
-  input: ListChannelsInput;
+export type QueryGetCommentsArgs = {
+  input: ListCommentsInput;
+};
+
+
+export type QueryGetCustomersAdminArgs = {
+  input: ListCustomersInputs;
 };
 
 
@@ -428,8 +526,8 @@ export type QueryGetPostUploadUrlsArgs = {
 };
 
 
-export type QueryListChannelsArgs = {
-  input: ListChannelsInput;
+export type QueryGetPostsArgs = {
+  input: ListPostsInput;
 };
 
 
@@ -494,6 +592,12 @@ export type UpdateChannelInput = {
   title: Scalars['String']['input'];
 };
 
+export type UpdateCommentInput = {
+  commentId: Scalars['ID']['input'];
+  content: Scalars['String']['input'];
+  postId: Scalars['String']['input'];
+};
+
 export type UpdateCustomerInput = {
   cellPhone?: InputMaybe<Scalars['String']['input']>;
   firstName?: InputMaybe<Scalars['String']['input']>;
@@ -501,6 +605,18 @@ export type UpdateCustomerInput = {
   lastName?: InputMaybe<Scalars['String']['input']>;
   profileImage?: InputMaybe<Scalars['String']['input']>;
   stripeCustomerId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdateLikeInput = {
+  likeId: Scalars['ID']['input'];
+  postId: Scalars['String']['input'];
+};
+
+export type UpdatePostInput = {
+  body: Scalars['String']['input'];
+  channelId: Scalars['String']['input'];
+  images?: InputMaybe<Array<Scalars['String']['input']>>;
+  postId: Scalars['ID']['input'];
 };
 
 /** The role of Users */
@@ -551,14 +667,14 @@ export type GetChannelByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetChannelByIdQuery = { __typename?: 'Query', getChannelById: { __typename?: 'Channel', backgroundImage?: string | null, image?: string | null, price?: number | null, about?: string | null, id: string, isPaid: boolean, rules?: string | null, status: ChannelStatus, totalMembers?: number | null, title: string, posts?: Array<{ __typename?: 'Post', body: string, images?: Array<string> | null, likeCount?: number | null, customer: { __typename?: 'Customer', email: string, firstName: string, lastName: string, id: string, profileImage?: string | null }, likes?: Array<{ __typename?: 'Likes', id: string, user: string }> | null }> | null, members?: Array<{ __typename?: 'ChannelMember', id: string, paidStatus: boolean, roleChannel: ChannelUserRole, customer: { __typename?: 'Customer', id: string, firstName: string, lastName: string, email: string, profileImage?: string | null } }> | null, moderator: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } } };
+export type GetChannelByIdQuery = { __typename?: 'Query', getChannelById: { __typename?: 'Channel', backgroundImage?: string | null, image?: string | null, price?: number | null, about?: string | null, id: string, isPaid: boolean, rules?: string | null, status: ChannelStatus, totalMembers?: number | null, title: string, posts?: Array<{ __typename?: 'Post', body: string, images?: Array<string> | null, likeCount?: number | null, comments?: Array<{ __typename?: 'Comments', content: string, id: string, user: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } }> | null, likes?: Array<{ __typename?: 'Likes', id: string, user: string }> | null }> | null, members?: Array<{ __typename?: 'ChannelMember', id: string, paidStatus: boolean, roleChannel: ChannelUserRole, customer: { __typename?: 'Customer', id: string, firstName: string, lastName: string, email: string, profileImage?: string | null } }> | null, moderator: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } } };
 
 export type GetAllChannelsWithPaginationQueryVariables = Exact<{
   input: ListChannelsInput;
 }>;
 
 
-export type GetAllChannelsWithPaginationQuery = { __typename?: 'Query', getMyChannels: { __typename?: 'ListChannelsResponse', limit: number, offset?: number | null, totalRows?: number | null, results: Array<{ __typename?: 'Channel', id: string, backgroundImage?: string | null, image?: string | null, price?: number | null, rules?: string | null, status: ChannelStatus, title: string, about?: string | null, isPaid: boolean, members?: Array<{ __typename?: 'ChannelMember', id: string, paidStatus: boolean, roleChannel: ChannelUserRole }> | null }> } };
+export type GetAllChannelsWithPaginationQuery = { __typename?: 'Query', getChannels: { __typename?: 'ListChannelsResponse', limit: number, offset?: number | null, totalRows?: number | null, results: Array<{ __typename?: 'Channel', id: string, backgroundImage?: string | null, image?: string | null, price?: number | null, rules?: string | null, status: ChannelStatus, title: string, about?: string | null, isPaid: boolean, members?: Array<{ __typename?: 'ChannelMember', id: string, paidStatus: boolean, roleChannel: ChannelUserRole }> | null }> } };
 
 export type JoinChannelMutationVariables = Exact<{
   channelId: Scalars['String']['input'];
@@ -567,24 +683,19 @@ export type JoinChannelMutationVariables = Exact<{
 
 export type JoinChannelMutation = { __typename?: 'Mutation', joinChannel: { __typename?: 'SuccessResponse', message?: string | null, success?: boolean | null } };
 
-export type GetAllChannelsWithPagination3QueryVariables = Exact<{
-  input: ListChannelsInput;
+export type CreatePostMutationVariables = Exact<{
+  input: CreatePostInput;
 }>;
 
 
-export type GetAllChannelsWithPagination3Query = { __typename?: 'Query', listChannels: { __typename?: 'ListChannelsResponse', limit: number, offset?: number | null, totalRows?: number | null, results: Array<{ __typename?: 'Channel', id: string, title: string }> } };
+export type CreatePostMutation = { __typename?: 'Mutation', createPost: { __typename?: 'SuccessResponse', message?: string | null, success?: boolean | null } };
 
-export type GetAllChannelsWithPagination2QueryVariables = Exact<{
-  input: ListChannelsInput;
+export type GetPostUploadUrlsQueryVariables = Exact<{
+  input: Scalars['Float']['input'];
 }>;
 
 
-export type GetAllChannelsWithPagination2Query = { __typename?: 'Query', listChannels: { __typename?: 'ListChannelsResponse', limit: number, offset?: number | null, totalRows?: number | null, results: Array<{ __typename?: 'Channel', id: string, title: string }> } };
-
-export type GetCustomerSignedUrlQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetCustomerSignedUrlQuery = { __typename?: 'Query', getCustomerUploadUrl: { __typename?: 'S3SignedUrlResponse', fileName: string, signedUrl: string } };
+export type GetPostUploadUrlsQuery = { __typename?: 'Query', getPostUploadUrls: Array<{ __typename?: 'S3SignedUrlResponse', fileName: string, signedUrl: string }> };
 
 
 export const GetCustomerDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCustomerData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCustomerData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cellPhone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isActive"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}},{"kind":"Field","name":{"kind":"Name","value":"password"}},{"kind":"Field","name":{"kind":"Name","value":"stripeCustomerId"}}]}}]}}]} as unknown as DocumentNode<GetCustomerDataQuery, GetCustomerDataQueryVariables>;
@@ -592,9 +703,8 @@ export const UpdateCustomerMutationDocument = {"kind":"Document","definitions":[
 export const CreateCustomerDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateCustomer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createCustomer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"firstName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"lastName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}}]}}]}}]} as unknown as DocumentNode<CreateCustomerMutation, CreateCustomerMutationVariables>;
 export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"loginAsCustomer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
 export const ContinueWithSocialSiteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"continueWithSocialSite"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RegisterOrLoginSocialInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"continueWithSocialSite"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"accessToken"}}]}}]}}]} as unknown as DocumentNode<ContinueWithSocialSiteMutation, ContinueWithSocialSiteMutationVariables>;
-export const GetChannelByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getChannelById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getChannelById"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"backgroundImage"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isPaid"}},{"kind":"Field","name":{"kind":"Name","value":"rules"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"totalMembers"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"likes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}},{"kind":"Field","name":{"kind":"Name","value":"paidStatus"}},{"kind":"Field","name":{"kind":"Name","value":"roleChannel"}}]}},{"kind":"Field","name":{"kind":"Name","value":"moderator"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}}]}}]} as unknown as DocumentNode<GetChannelByIdQuery, GetChannelByIdQueryVariables>;
-export const GetAllChannelsWithPaginationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllChannelsWithPagination"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ListChannelsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getMyChannels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"limit"}},{"kind":"Field","name":{"kind":"Name","value":"offset"}},{"kind":"Field","name":{"kind":"Name","value":"totalRows"}},{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundImage"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"rules"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"isPaid"}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"paidStatus"}},{"kind":"Field","name":{"kind":"Name","value":"roleChannel"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetAllChannelsWithPaginationQuery, GetAllChannelsWithPaginationQueryVariables>;
+export const GetChannelByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getChannelById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getChannelById"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"backgroundImage"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isPaid"}},{"kind":"Field","name":{"kind":"Name","value":"rules"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"totalMembers"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"likes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}},{"kind":"Field","name":{"kind":"Name","value":"paidStatus"}},{"kind":"Field","name":{"kind":"Name","value":"roleChannel"}}]}},{"kind":"Field","name":{"kind":"Name","value":"moderator"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}}]}}]} as unknown as DocumentNode<GetChannelByIdQuery, GetChannelByIdQueryVariables>;
+export const GetAllChannelsWithPaginationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllChannelsWithPagination"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ListChannelsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getChannels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"limit"}},{"kind":"Field","name":{"kind":"Name","value":"offset"}},{"kind":"Field","name":{"kind":"Name","value":"totalRows"}},{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundImage"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"rules"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"isPaid"}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"paidStatus"}},{"kind":"Field","name":{"kind":"Name","value":"roleChannel"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetAllChannelsWithPaginationQuery, GetAllChannelsWithPaginationQueryVariables>;
 export const JoinChannelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"JoinChannel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"joinChannel"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"channelId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<JoinChannelMutation, JoinChannelMutationVariables>;
-export const GetAllChannelsWithPagination3Document = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllChannelsWithPagination3"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ListChannelsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listChannels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"limit"}},{"kind":"Field","name":{"kind":"Name","value":"offset"}},{"kind":"Field","name":{"kind":"Name","value":"totalRows"}},{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<GetAllChannelsWithPagination3Query, GetAllChannelsWithPagination3QueryVariables>;
-export const GetAllChannelsWithPagination2Document = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllChannelsWithPagination2"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ListChannelsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"listChannels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"limit"}},{"kind":"Field","name":{"kind":"Name","value":"offset"}},{"kind":"Field","name":{"kind":"Name","value":"totalRows"}},{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]} as unknown as DocumentNode<GetAllChannelsWithPagination2Query, GetAllChannelsWithPagination2QueryVariables>;
-export const GetCustomerSignedUrlDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCustomerSignedURL"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCustomerUploadUrl"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"signedUrl"}}]}}]}}]} as unknown as DocumentNode<GetCustomerSignedUrlQuery, GetCustomerSignedUrlQueryVariables>;
+export const CreatePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createPost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreatePostInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createPost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<CreatePostMutation, CreatePostMutationVariables>;
+export const GetPostUploadUrlsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPostUploadUrls"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPostUploadUrls"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"count"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"signedUrl"}}]}}]}}]} as unknown as DocumentNode<GetPostUploadUrlsQuery, GetPostUploadUrlsQueryVariables>;

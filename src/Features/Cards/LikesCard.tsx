@@ -1,24 +1,25 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
 import { Button } from "@/core/ui/button";
-import Image, { type StaticImageData } from "next/image";
 
-interface Likes {
-  profileAvatar: StaticImageData;
-  username: string;
+interface Props {
+  userThatLiked: {
+    profileImage?: string;
+    username: string;
+  }
 }
 
-interface LikeCardProps {
-  likes: Likes;
-}
-
-const LikesCard = ({ likes }: LikeCardProps) => {
+const LikesCard = ({ userThatLiked }: Props) => {
   return (
     <>
       <div className="flex gap-3 w-full items-center">
         <div className="rounded-full w-12 h-12">
-          <Image src={likes.profileAvatar} alt="channel_image" />
+          <Avatar>
+            <AvatarImage src={userThatLiked.profileImage} alt="profile_image" />
+            <AvatarFallback>{userThatLiked.username}</AvatarFallback>
+          </Avatar>
         </div>
 
-        <span className="font-bold text-white"> {likes.username}</span>
+        <span className="font-bold text-white"> {userThatLiked.username}</span>
 
         <div className="ml-auto">
           <Button

@@ -1,5 +1,5 @@
-'use client';
-import NewPost from "@/Features/NewPost";
+"use client";
+import NewPost from "@/Features/Post/NewPost";
 import PostCard from "@/Features/Cards/PostCard";
 import { useGetChannel } from "@/api/Channels/useGetChannel";
 
@@ -19,20 +19,28 @@ const FeedPosts = ({ channelId }: Props) => {
   }
   return (
     <div className="container-drop-shadow bg-greendarkest w-full rounded-3xl p-4 gap-3 space-y-8">
-      <NewPost />
+      <NewPost channelId={channelId} />
       {data.getChannelById.posts?.map((post, index) => (
         <PostCard
           key={index}
           channel={data.getChannelById.title}
-          comments={[]}
-          likes={0 + ''}
+          comments={
+            post.comments?.map((comment) => ({
+              commentContent: comment.content,
+              postedDate: new Date(),
+              postedBy: {
+                profileImage: comment.user.profileImage ?? undefined,
+                username: comment.user.firstName + " " + comment.user.lastName,
+              },
+            })) ?? []
+          }
+          likes={post.likes?.map(l => l.user) ?? []}
           postContent={post.body}
           postImages={post.images ?? []}
           postedTime={new Date()}
           postedBy={{
-            profileImage: post.customer.profileImage ?? undefined,
-            username: post.customer.firstName + ' ' + post.customer.lastName,
-          
+            profileImage: undefined, //post.customer.profileImage ?? undefined,
+            username: "NeedToFix", //post.customer.firstName + ' ' + post.customer.lastName,
           }}
         />
       ))}

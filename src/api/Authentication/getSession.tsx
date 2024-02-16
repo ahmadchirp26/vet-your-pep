@@ -12,6 +12,8 @@ export interface UserSession {
   firstName: string;
   lastName: string;
   cellPhone: string;
+  //Weirdly name sub is used as customer id
+  sub: string;
 }
 
 export const getSession = async ({ shouldBroadcast }: Params) => {
