@@ -8,7 +8,7 @@ interface Props {
   customerId: string;
 }
 
-const ProfileTabs = ({ customerId }: Props) => {
+const ProfileTabs = ({ customerId }: Props{ followers, following, posts }: any) => {
   const { data } = useCustomerByIdDataQuery({ customerId });
   return (
     <>
@@ -66,12 +66,8 @@ const ProfileTabs = ({ customerId }: Props) => {
             />
           ))}
         </TabsContent>
-        <TabsContent value="followers">
-          <MyFollowers />
-        </TabsContent>
-        <TabsContent value="following">
-          <MyFollowing />
-        </TabsContent>
+        <TabsContent value="followers">{/* <MyFollowers /> */}</TabsContent>
+        <TabsContent value="following">{/* <MyFollowing /> */}</TabsContent>
       </Tabs>
     </>
   );
