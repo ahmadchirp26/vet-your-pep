@@ -41,7 +41,9 @@ const ProfileCard = () => {
       <div className="bg-greendarkest rounded-b-3xl  p-4 flex flex-col gap-5">
         <div className="flex gap-2 items-center">
           <FriendsIcon className="w-6 h-6" />
-          <span className="text-graylight text-sm">45 friends</span>
+          <span className="text-graylight text-sm">
+            {data?.getCustomerData?.followers?.length ?? 0} Followers
+          </span>
         </div>
         <div className="bg-greenaccent p-2 w-full justify-center rounded-3xl gap-2 flex items-center">
           <Image

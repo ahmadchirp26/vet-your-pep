@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query getCustomerData {\n    getCustomerData {\n      cellPhone\n      email\n      firstName\n      id\n      isActive\n      lastName\n      profileImage\n      password\n      stripeCustomerId\n    }\n  }\n": types.GetCustomerDataDocument,
+    "\n  query getCustomerData {\n    getCustomerData {\n      cellPhone\n      email\n      firstName\n      id\n      isActive\n      lastName\n      profileImage\n      password\n      stripeCustomerId\n      followers {\n        id\n      }\n      following {\n        id\n      }\n      posts {\n        id\n      }\n    }\n  }\n": types.GetCustomerDataDocument,
     "\n  mutation updateCustomerMutation($input: UpdateCustomerInput!) {\n    updateCustomer(input: $input) {\n      cellPhone\n      email\n      firstName\n      id\n      isActive\n      lastName\n      profileImage\n      socialProvider {\n        createdDate\n        id\n        provider\n        socialId\n      }\n      stripeCustomerId\n    }\n  }\n": types.UpdateCustomerMutationDocument,
     "\n  #graphql\n  mutation CreateCustomer(\n    $firstName: String!\n    $lastName: String!\n    $email: String!\n    $password: String!\n  ) {\n    createCustomer(\n      input: {\n        firstName: $firstName\n        lastName: $lastName\n        email: $email\n        password: $password\n      }\n    ) {\n      accessToken\n      user {\n        id\n        email\n        firstName\n        lastName\n      }\n    }\n  }\n": types.CreateCustomerDocument,
     "\n  #graphql\n  mutation Login($email: String!, $password: String!) {\n    loginAsCustomer(input: { email: $email, password: $password }) {\n      accessToken\n      user {\n        id\n        email\n        firstName\n        lastName\n      }\n    }\n  }\n": types.LoginDocument,
@@ -44,7 +44,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query getCustomerData {\n    getCustomerData {\n      cellPhone\n      email\n      firstName\n      id\n      isActive\n      lastName\n      profileImage\n      password\n      stripeCustomerId\n    }\n  }\n"): (typeof documents)["\n  query getCustomerData {\n    getCustomerData {\n      cellPhone\n      email\n      firstName\n      id\n      isActive\n      lastName\n      profileImage\n      password\n      stripeCustomerId\n    }\n  }\n"];
+export function graphql(source: "\n  query getCustomerData {\n    getCustomerData {\n      cellPhone\n      email\n      firstName\n      id\n      isActive\n      lastName\n      profileImage\n      password\n      stripeCustomerId\n      followers {\n        id\n      }\n      following {\n        id\n      }\n      posts {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  query getCustomerData {\n    getCustomerData {\n      cellPhone\n      email\n      firstName\n      id\n      isActive\n      lastName\n      profileImage\n      password\n      stripeCustomerId\n      followers {\n        id\n      }\n      following {\n        id\n      }\n      posts {\n        id\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

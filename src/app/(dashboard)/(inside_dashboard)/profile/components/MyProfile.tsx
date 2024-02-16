@@ -15,6 +15,9 @@ const UserProfile = () => {
   const { data } = useCustomerDataQuery();
 
   console.log("Data", data);
+  const followers = data?.getCustomerData?.followers?.length ?? 0;
+  const following = data?.getCustomerData?.following?.length ?? 0;
+  const posts = data?.getCustomerData?.posts?.length ?? 0;
 
   return (
     <>
@@ -97,7 +100,7 @@ const UserProfile = () => {
             </div>
           </div>
           <div className="flex flex-col items-center gap-3 max-sm:flex-row">
-            <div className="flex items-center gap-3 p-2 border border-white rounded-2xl w-32 justify-center cursor-pointer">
+            {/* <div className="flex items-center gap-3 p-2 border border-white rounded-2xl w-32 justify-center cursor-pointer">
               <Image
                 src={"/assets/bell_icon.svg"}
                 alt="follow_icon"
@@ -114,11 +117,15 @@ const UserProfile = () => {
                 height={12}
               />
               <span className="text-white">Message</span>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className=" w-full p-4 max-sm:p-0 max-sm:mt-4">
-          <ProfileTabs />
+          <ProfileTabs
+            followers={followers}
+            following={following}
+            posts={posts}
+          />
         </div>
       </div>
     </>

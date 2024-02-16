@@ -23,7 +23,7 @@ const EditProfile = () => {
           <EditChannel />
         </div>
         <div className="max-md:order-1">
-          <OnlineFriends />
+          <OnlineFriends className="flex md:flex-col" />
         </div>
       </div>
     </>
