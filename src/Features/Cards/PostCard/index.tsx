@@ -40,7 +40,9 @@ const PostCard = (post: Props) => {
             <AvatarFallback>{post.postedBy.username}</AvatarFallback>
           </Avatar>
           <div className="flex flex-col">
-            <span className="text-white font-bold">{post.postedBy.username}</span>
+            <span className="text-white font-bold">
+              {post.postedBy.username}
+            </span>
             <span className="text-gray-300 text-xs truncate">
               Posted on {post.channel}
             </span>

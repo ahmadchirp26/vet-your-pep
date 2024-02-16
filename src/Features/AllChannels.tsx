@@ -23,7 +23,7 @@ const AllChannels = () => {
   };
 
   const filteredChannels = allChannelsArray?.filter((channel) =>
-    channel.title.toLowerCase().includes(searchTerm.toLowerCase())
+    channel.title.toLowerCase().includes(searchTerm.toLowerCase()),
   );
   if (status === "error") {
     return (

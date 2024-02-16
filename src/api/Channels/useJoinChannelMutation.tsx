@@ -22,7 +22,7 @@ const useJoinChannelMutation = () => {
         });
       },
     },
-    JOIN_CHANNEL_MUTATION
+    JOIN_CHANNEL_MUTATION,
   );
 };
 

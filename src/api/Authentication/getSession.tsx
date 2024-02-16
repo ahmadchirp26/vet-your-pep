@@ -29,4 +29,3 @@ export const getSession = async ({ shouldBroadcast }: Params) => {
     accessToken: accessToken,
   };
 };
-

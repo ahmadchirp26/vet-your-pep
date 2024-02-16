@@ -1,6 +1,6 @@
-'use client';
+"use client";
 import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helpers";
-import {  graphql } from "@/core/lib/react-query-graphql";
+import { graphql } from "@/core/lib/react-query-graphql";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { channelKeys } from "../query-keys";
@@ -67,10 +67,10 @@ export const useJoinedChannels = (props = { limit: 100 }) => {
           paginationParamsExtended.limit
             ? Math.ceil(
                 paginationParamsExtended.totalRows /
-                  paginationParamsExtended.limit
+                  paginationParamsExtended.limit,
               )
             : 0,
-          1
+          1,
         );
         const newPage = Math.min(Math.max(page, 1), maxPages);
         const newOffset = (newPage - 1) * paginationParamsExtended.limit;
@@ -87,12 +87,12 @@ export const useJoinedChannels = (props = { limit: 100 }) => {
         const latestTotalRows = paginationParamsExtended.totalRows;
         const maxPages = Math.max(
           pageSize ? Math.ceil(latestTotalRows / pageSize) : 0,
-          1
+          1,
         );
         // Possible page change due to pageSize change
         const newPage = Math.min(
           Math.max(paginationParams.offset / pageSize + 1, 1),
-          maxPages
+          maxPages,
         );
         const newOffset = (newPage - 1) * pageSize;
         setPaginationParams({
@@ -103,4 +103,3 @@ export const useJoinedChannels = (props = { limit: 100 }) => {
     },
   };
 };
-
