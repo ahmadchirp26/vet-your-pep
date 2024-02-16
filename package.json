@@ -6,7 +6,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "lint": "next lint",
+    "check-types": "tsc --noemit",
+    "lint": "npm run check-types && next lint",
     "start": "next start",
     "format": "prettier --write src/**/*.{tsx}",
     "prepare": "husky install",
