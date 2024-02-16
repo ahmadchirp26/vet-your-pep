@@ -1,7 +1,7 @@
 "use client";
 import { graphql } from "@/core/lib/react-query-graphql";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helper";
+import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helpers";
 import { useState } from "react";
 import { channelKeys } from "./query-keys";
 

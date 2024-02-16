@@ -19,7 +19,7 @@ const EditProfile = () => {
           <AllChannels />
         </div>
         <div className="flex flex-col gap-3 max-md:order-2 w-full">
-          <Banner />
+          {/* <Banner /> */}
           <EditChannel />
         </div>
         <div className="max-md:order-1">

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
 
 interface ChannelCardProps {
-  channel: NonNullable<APIGetChannelsData>["listChannels"]["results"][number];
+  channel: NonNullable<APIGetChannelsData>["getChannels"]["results"][number];
   showJoinButton?: boolean;
   ButtonText?: string;
 }
