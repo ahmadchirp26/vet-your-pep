@@ -13,6 +13,7 @@ import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionConte
 import PostFileUpload from "./PostFileUpload";
 import { useState } from "react";
 import { toast } from "@/core/ui/use-toast";
+import { cn } from "@/core/lib/helper";
 
 const NewPostFormSchema = z.object({
   body: z.string().min(0, "Post cannot be empty"),
@@ -55,7 +56,7 @@ const NewPostForm = ({ channelId, onSuccess }: Props) => {
       } catch (e) {
         toast({
           title: "Failed to create post",
-          variant: 'destructive',
+          variant: "destructive",
         });
       }
     },
@@ -79,13 +80,26 @@ const NewPostForm = ({ channelId, onSuccess }: Props) => {
           />
         </div>
         <div className="w-full">
-          <Textarea
-            name={"body"}
-            placeholder="Write here..."
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            className="mt-3 p-2 outline-none"
-          />
+          <div className={"relative"}>
+            <div
+              
+            >
+              <Textarea
+                name={"body"}
+                placeholder="Write here..."
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className={cn(
+                  "mt-3 p-2 outline-none border-b border-b-graylight has-[:focus]:border-b-greensharp",
+                  Boolean(formik.errors.body) &&
+                    "border-b-red-800 has-[:focus]:border-b-red-400"
+                )}
+              />
+            </div>
+            {formik.errors.body && (
+              <p className="text-red-400 text-xs mt-1">{formik.errors.body}</p>
+            )}
+          </div>
         </div>
         <div className="w-full flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -109,7 +123,7 @@ const NewPostForm = ({ channelId, onSuccess }: Props) => {
   );
 };
 
-const NewPost = ({ channelId }: {channelId:string}) => {
+const NewPost = ({ channelId }: { channelId: string }) => {
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
