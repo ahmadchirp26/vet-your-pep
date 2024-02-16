@@ -1,5 +1,5 @@
 const config = {
-  schema: "http://localhost:5000/graphql",
+  schema: "https://web-production-3ab92.up.railway.app/graphql",
   documents: ["./src/**/*.{ts,tsx}"],
   generates: {
     "./src/__generated__/": {

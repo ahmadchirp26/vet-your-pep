@@ -1,14 +1,14 @@
 import AllChannels from "@/Features/AllChannels";
 import UserProfile from "../components/MyProfile";
 
-const MyProfile = () => {
+const MyProfile = (props:{params:{id:string}}) => {
   return (
     <>
       <div className=" p-3 flex  gap-4">
         <div className="max-lg:hidden">
           <AllChannels />
         </div>
-        <UserProfile />
+        <UserProfile id = {props.params.id} />
       </div>
     </>
   );

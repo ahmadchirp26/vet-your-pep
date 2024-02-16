@@ -70,7 +70,7 @@ export function ProfileAvatar({ className }: Props) {
         align="end"
         forceMount
       >
-        <Link href="/profile/:id">
+        <Link href={`/profile/${data?.getCustomerData.id}`}>
           <DropdownMenuItem className="cursor-pointer">
             View Profile
           </DropdownMenuItem>
