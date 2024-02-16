@@ -11,6 +11,8 @@ import { Avatar, AvatarImage } from "@/core/ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 const ProfileCard = () => {
   const { data, status } = useCustomerDataQuery();
+  const userId = data?.getCustomerData?.id;
+  console.log("User", userId);
   return (
     <div className="flex flex-col rounded-3xl container-drop-shadow">
       {status === "pending" ? (
@@ -55,7 +57,7 @@ const ProfileCard = () => {
           <span className="text-white">Verified</span>
         </div>
         <div className="flex w-full justify-center items-center">
-          <Link href={"/profile/:id"}>
+          <Link href={`/profile/${userId}`}>
             <Button
               className="rounded-full border border-white  bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-36"
               type="submit"
