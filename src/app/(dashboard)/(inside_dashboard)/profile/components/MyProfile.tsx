@@ -11,8 +11,6 @@ import {
   DropdownMenuTrigger,
 } from "@/core/ui/dropdown-menu";
 import { MoreVerticalIcon } from "lucide-react";
-import { Button } from "@/core/ui/button";
-
 const UserProfile = () => {
   const { data } = useCustomerDataQuery();
 
@@ -42,9 +40,9 @@ const UserProfile = () => {
         <div className="flex items-center justify-between max-sm:flex-col gap-5 mt-5 ">
           <div className="flex items-center gap-5">
             <div className="rounded-full">
-              {data?.getCustomerData.mediaUrl ? (
+              {data?.getCustomerData.profileImage ? (
                 <Image
-                  src={data?.getCustomerData.mediaUrl}
+                  src={data?.getCustomerData.profileImage}
                   alt="profile_image"
                   className="cursor-pointer rounded-full object-cover border-4 border-greensharp"
                   height={160}
