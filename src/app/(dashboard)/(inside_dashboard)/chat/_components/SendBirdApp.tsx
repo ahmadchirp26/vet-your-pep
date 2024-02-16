@@ -2,7 +2,7 @@
 import React from "react";
 import SendbirdApp from "@sendbird/uikit-react/App";
 import './index.css'
-const APP_ID = "B6F60367-DE85-472F-BFDA-F790A7143E0D";
+import { env } from "@/env";
 
 interface Props {
   chatToken: string;
@@ -14,7 +14,7 @@ const SendBirdApp = ({ chatToken,nickname,userId }: Props) => {
   return (
     <div className="w-full h-screen bg-greensharp">
       <SendbirdApp
-        appId={APP_ID}
+        appId={env.NEXT_PUBLIC_SENDGRID_API_KEY}
         userId={userId}
         nickname={nickname}
         accessToken={chatToken}
