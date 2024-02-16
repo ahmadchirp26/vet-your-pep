@@ -13,8 +13,10 @@ import CommentsSection from "./CommentsSection";
 import PostContent from "./PostContent";
 import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
 import { CalculatePostTime } from "@/core/utils/calculate-post-time";
+import { useLikeMutation } from "@/api/Posts/useLikeMutation";
 
 interface Props {
+  postId: string;
   postedBy: {
     profileImage?: string;
     username: string;
@@ -30,6 +32,7 @@ interface Props {
 const PostCard = (post: Props) => {
   const [commentSectionsDropdown, setCommentSectionsDropdown] =
     useState<HTMLDivElement | null>(null);
+  const likeMutation = useLikeMutation();
   return (
     <div className="border border-white rounded-3xl p-4 space-y-4 flex flex-col mt-5">
       <div className="flex justify-between items-center">
@@ -90,7 +93,7 @@ const PostCard = (post: Props) => {
             username: l,
           }))}
           onLike={() => {
-            console.log("l");
+            likeMutation.mutate({ input: { postId: post.postId } });
           }}
         />
         <CommentsSection
