@@ -27,11 +27,11 @@ const imageForm = z.object({
     .optional()
     .refine(
       (files) => files?.[0]?.size <= MAX_FILE_SIZE,
-      `Max image size is 5MB.`
+      `Max image size is 5MB.`,
     )
     .refine(
       (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported."
+      "Only .jpg, .jpeg, .png and .webp formats are supported.",
     ),
 });
 
@@ -41,7 +41,7 @@ const UploadImageForm = () => {
   const { mutate: updateCustomerHandler, status: mutatingDataStatus } =
     useUpdateCustomerMutation();
   const { data, status } = useCustomerDataQuery();
-  const router= useRouter()
+  const router = useRouter();
   const formik = useFormik<z.infer<typeof imageForm>>({
     initialValues: {
       image: undefined,
@@ -52,22 +52,25 @@ const UploadImageForm = () => {
         { fileToUpload: values.image?.[0] },
         {
           onSuccess: (data) => {
-            updateCustomerHandler({
-              input: {
-                profileImage: data,
+            updateCustomerHandler(
+              {
+                input: {
+                  profileImage: data,
+                },
               },
-            }, {
-              onSuccess: () => {
-                toast({
-                  title: "Success",
-                  description: "Profile picture added",
-                  variant: "default",
-                })
-                router.push("/")
-              }
-            });
+              {
+                onSuccess: () => {
+                  toast({
+                    title: "Success",
+                    description: "Profile picture added",
+                    variant: "default",
+                  });
+                  router.push("/");
+                },
+              },
+            );
           },
-        }
+        },
       );
     },
   });

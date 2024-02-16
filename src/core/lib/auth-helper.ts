@@ -10,6 +10,6 @@ export const useGraphQLRequestHandlerProtected = () => {
   });
   return <TResult, TVariables extends Variables>(
     document: TypedDocumentNode<TResult, TVariables>,
-    variables: TVariables
+    variables: TVariables,
   ) => graphQlRequestHandler(document, variables, authourizationHeaders);
 };

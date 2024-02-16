@@ -31,7 +31,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -57,7 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading ? <SpinnerCircle className = "w-4 h-4" /> : props.children}
       </Comp>
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

@@ -5,9 +5,10 @@ import SearchBar from "@/app/(dashboard)/components/SearchBar";
 import ChannelCard from "@/Features/Cards/ChannelCard";
 import AllChannelCard from "./components/AllChannelCard";
 import useGetChannels from "@/api/Channels/useGetChannels";
+import { Skeleton } from "@/core/ui/skeleton";
 
 const Channels = () => {
-  const { data: allChannelsData } = useGetChannels({
+  const { data: allChannelsData, status: allChannelStatus } = useGetChannels({
     limit: 100,
     joined: false,
   });
@@ -22,7 +23,7 @@ const Channels = () => {
   };
 
   const filteredChannels = allChannelsArray?.filter((channel) =>
-    channel.title.toLowerCase().includes(searchTerm.toLowerCase())
+    channel.title.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -46,32 +47,44 @@ const Channels = () => {
               </div>
             )}
           </div>
-          <div className="mt-3 flex w-full flex-wrap gap-7 justify-center items-center ">
-            {filteredChannels?.map((channel, index) => (
-              <AllChannelCard
-                key={index}
-                channel={channel}
-                showJoinButton={true}
-                ButtonText="Join"
-              />
-            ))}
-          </div>
+          {myChannelStatus === "pending" ? (
+            <div className=" flex gap-3 justify-center p-4 items-center">
+              <Skeleton className="h-12 w-80 rounded-lg" />
+            </div>
+          ) : (
+            <div className="mt-3 flex w-full flex-wrap gap-7 justify-center items-center ">
+              {filteredChannels?.map((channel, index) => (
+                <AllChannelCard
+                  key={index}
+                  channel={channel}
+                  showJoinButton={true}
+                  ButtonText="Join"
+                />
+              ))}
+            </div>
+          )}
         </div>
         <div className="bg-greendarkest w-full h-full flex flex-col rounded-2xl p-4 container-drop-shadow ">
           <div className="flex  mt-4">
             <span className="text-white font-bold">My Channels</span>
           </div>
-          <div className="mt-3 flex flex-col gap-3  ">
-            {myChannelsArray?.map((channel, index) => (
-              <ChannelCard
-                key={index}
-                channel={channel}
-                showJoinButton={true}
-                ButtonText="View"
-                isLandingPage={false}
-              />
-            ))}
-          </div>
+          {allChannelStatus === "pending" ? (
+            <div className=" flex gap-3 justify-center p-4 items-center">
+              <Skeleton className="h-12 w-80 rounded-lg" />
+            </div>
+          ) : (
+            <div className="mt-3 flex flex-col gap-3  ">
+              {myChannelsArray?.map((channel, index) => (
+                <ChannelCard
+                  key={index}
+                  channel={channel}
+                  showJoinButton={true}
+                  ButtonText="View"
+                  isLandingPage={false}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>

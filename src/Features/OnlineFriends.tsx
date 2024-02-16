@@ -13,7 +13,7 @@ const OnlineFriends = ({ className }: Props) => {
     <div
       className={cn(
         "flex items-center gap-2 shadow-glow rounded-3xl bg-greendarkest px-2 py-3 overflow-auto",
-        className
+        className,
       )}
     >
       <div className="px-2 flex items-center">
