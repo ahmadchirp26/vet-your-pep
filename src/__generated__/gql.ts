@@ -21,6 +21,7 @@ const documents = {
     "\n  #graphql\n  query getChannelById($input: String!) {\n    getChannelById(input: $input) {\n      backgroundImage\n      image\n      price\n      about\n      id\n      isPaid\n      rules\n      status\n      totalMembers\n      title\n      posts {\n        body\n        images\n        comments {\n          content\n          id\n          user {\n            firstName\n            lastName\n            id\n            email\n            profileImage\n          }\n        }\n\n        likeCount\n        likes {\n          id\n          user\n        }\n      }\n      members {\n        id\n        customer {\n          id\n          firstName\n          lastName\n          email\n          profileImage\n        }\n        paidStatus\n        roleChannel\n      }\n      moderator {\n        firstName\n        lastName\n        id\n        email\n        profileImage\n      }\n    }\n  }\n": types.GetChannelByIdDocument,
     "\n  #graphql\n  query getAllChannelsWithPagination($input: ListChannelsInput!) {\n    getChannels(input: $input) {\n      limit\n      offset\n      totalRows\n      results {\n        id\n        backgroundImage\n        image\n        price\n        rules\n        status\n        title\n        about\n        isPaid\n        members {\n          id\n          paidStatus\n          roleChannel\n        }\n      }\n    }\n  }\n": types.GetAllChannelsWithPaginationDocument,
     "\n  #graphql\n  mutation JoinChannel($channelId: String!) {\n    joinChannel(channelId: $channelId) {\n      message\n      success\n    }\n  }\n": types.JoinChannelDocument,
+    "\n  query GetChatToken {\n    getChatToken\n  }\n": types.GetChatTokenDocument,
     "\n  mutation createPost($input: CreatePostInput!) {\n    createPost(input: $input) {\n      message\n      success\n    }\n  }\n": types.CreatePostDocument,
     "\n  query getPostUploadUrls($input: Float!) {\n    getPostUploadUrls(count: $input) {\n      fileName\n      signedUrl\n    }\n  }\n": types.GetPostUploadUrlsDocument,
     "\n  query getCustomerSignedURL {\n    getCustomerUploadUrl {\n      fileName\n      signedUrl\n    }\n  }\n": types.GetCustomerSignedUrlDocument,
@@ -73,6 +74,10 @@ export function graphql(source: "\n  #graphql\n  query getAllChannelsWithPaginat
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  #graphql\n  mutation JoinChannel($channelId: String!) {\n    joinChannel(channelId: $channelId) {\n      message\n      success\n    }\n  }\n"): (typeof documents)["\n  #graphql\n  mutation JoinChannel($channelId: String!) {\n    joinChannel(channelId: $channelId) {\n      message\n      success\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetChatToken {\n    getChatToken\n  }\n"): (typeof documents)["\n  query GetChatToken {\n    getChatToken\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
