@@ -56,7 +56,7 @@ const AllChannelCard = ({
                       onSuccess: () => {
                         router.push(`/channels/${channel.id}`);
                       },
-                    }
+                    },
                   )
                 }
               >

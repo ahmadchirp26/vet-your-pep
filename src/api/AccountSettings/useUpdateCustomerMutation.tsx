@@ -51,7 +51,6 @@ const useUpdateCustomerMutation = () => {
               ...prev,
               getCustomerData: {
                 ...prev.getCustomerData,
-                
               },
             };
           },

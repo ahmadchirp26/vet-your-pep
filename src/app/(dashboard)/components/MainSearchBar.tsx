@@ -26,7 +26,7 @@ const MainSearchBar = ({ className }: Props) => {
     <div
       className={cn(
         "border border-white-500 rounded-full w-full max-h-12 flex items-center p-3 search-drop-shadow",
-        className
+        className,
       )}
     >
       <SearchIcon />
@@ -45,7 +45,7 @@ const MainSearchBar = ({ className }: Props) => {
         </div>
       )}
       {/* {isError && <div>Error fetching data</div>} */}
-      {data && data.searchCustomers && data.searchCustomers.results && (
+      {data?.searchCustomers?.results && (
         <div className="absolute top-20 w-1/2 bg-greendarkest p-2  rounded-2xl space-y-2 z-10">
           {data.searchCustomers.results.map((user) => (
             <div

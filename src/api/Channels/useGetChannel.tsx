@@ -74,8 +74,11 @@ export const useGetChannel = (id: string) => {
 // Following function should be used only in server side, but if it is used in client side there are no issues
 // However, as it uses graphQLRequestHandler, it can be declared as a server action
 // because of the error:'You cannot dot into a client module from a server component'
-export const fetchChannelServerSide = async (id: string, queryClient = new QueryClient) => {
-  const token = await getSessionServerAction()
+export const fetchChannelServerSide = async (
+  id: string,
+  queryClient = new QueryClient(),
+) => {
+  const token = await getSessionServerAction();
   if (!token) {
     throw {
       status: 401,
@@ -92,7 +95,7 @@ export const fetchChannelServerSide = async (id: string, queryClient = new Query
         graphQlRequestHandler(
           GET_CHANNEL_BY_ID_DOCUMENT,
           { input: id },
-          authourizationHeaders
+          authourizationHeaders,
         ),
     });
     return {
@@ -101,7 +104,7 @@ export const fetchChannelServerSide = async (id: string, queryClient = new Query
     };
   } catch (e) {
     const graphQLError = e as ClientError;
-    console.log(e)
+    console.log(e);
     // @ts-expect-error @ts-ignore
     if (graphQLError?.response?.errors?.[0]?.statusCode === 400) {
       return notFound();

@@ -69,7 +69,7 @@ const ChannelCard = ({
                     onSuccess: () => {
                       router.push(`/channels/${channel.id}`);
                     },
-                  }
+                  },
                 )
               }
             >

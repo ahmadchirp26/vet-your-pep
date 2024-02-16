@@ -5,7 +5,7 @@ import {
 } from "@tanstack/react-query";
 import ChannelViewTemplate from "./_templates/ChannelViewTemplate";
 import { fetchChannelServerSide } from "@/api/Channels/useGetChannel";
-import {prefetchJoinedChannelsServerSide} from "@/api/Channels/useJoinedChannels";
+import { prefetchJoinedChannelsServerSide } from "@/api/Channels/useJoinedChannels";
 
 const ViewChannel = async (props: { params: { id: string } }) => {
   const queryClient = new QueryClient();
