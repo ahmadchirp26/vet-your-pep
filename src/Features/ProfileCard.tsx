@@ -12,7 +12,6 @@ import { AvatarFallback } from "@radix-ui/react-avatar";
 const ProfileCard = () => {
   const { data, status } = useCustomerDataQuery();
   const userId = data?.getCustomerData?.id;
-  console.log("User", userId);
   return (
     <div className="flex flex-col rounded-3xl container-drop-shadow">
       {status === "pending" ? (

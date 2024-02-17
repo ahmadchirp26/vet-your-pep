@@ -13,20 +13,20 @@ import useCustomerByIdDataQuery from "@/api/Customer/useCustomerByIdQuery";
 import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
 
 interface Props {
-  id:string
+  id: string;
 }
 
-const UserProfile = ({id}:Props) => {
-  const {data,status} = useCustomerByIdDataQuery({customerId:id})
-  const {data:userSession, status:userSessionStatus} = useAuthSessionContext()
-  if (status === 'pending' || userSessionStatus === 'loading') {
-    return <div>Loading...</div>
+const UserProfile = ({ id }: Props) => {
+  const { data, status } = useCustomerByIdDataQuery({ customerId: id });
+  const { data: userSession, status: userSessionStatus } =
+    useAuthSessionContext();
+  if (status === "pending" || userSessionStatus === "loading") {
+    return <div>Loading...</div>;
   }
-  if (status === 'error') {
-    return <div>Error</div>
+  if (status === "error") {
+    return <div>Error</div>;
   }
- console.log(data)
-  const isMyProfile = userSession?.sub === id
+  const isMyProfile = userSession?.sub === id;
   return (
     <>
       <div className="rounded-2xl container-drop-shadow bg-greendarkest p-6 w-2/3 max-lg:w-full flex-col gap-7">
@@ -92,15 +92,17 @@ const UserProfile = ({id}:Props) => {
             </div>
           </div>
           <div className="flex flex-col items-center gap-3 max-sm:flex-row">
-            {!isMyProfile && <div className="flex items-center gap-3 p-2 border border-white rounded-2xl w-32 justify-center cursor-pointer">
-              <Image
-                src={"/assets/bell_icon.svg"}
-                alt="follow_icon"
-                width={12}
-                height={12}
-              />
-              <span className="text-white">Follow</span>
-            </div>}
+            {!isMyProfile && (
+              <div className="flex items-center gap-3 p-2 border border-white rounded-2xl w-32 justify-center cursor-pointer">
+                <Image
+                  src={"/assets/bell_icon.svg"}
+                  alt="follow_icon"
+                  width={12}
+                  height={12}
+                />
+                <span className="text-white">Follow</span>
+              </div>
+            )}
             {/* <div className="flex items-center gap-3 p-2 border border-white rounded-2xl w-32 justify-center cursor-pointer">
               <Image
                 src={"/assets/message_icon.svg"}
@@ -113,10 +115,7 @@ const UserProfile = ({id}:Props) => {
           </div>
         </div>
         <div className=" w-full p-4 max-sm:p-0 max-sm:mt-4">
-          <ProfileTabs
-            customerId={id}
-            
-          />
+          <ProfileTabs customerId={id} />
         </div>
       </div>
     </>
