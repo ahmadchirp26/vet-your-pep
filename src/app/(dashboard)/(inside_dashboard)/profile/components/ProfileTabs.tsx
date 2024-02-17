@@ -43,6 +43,7 @@ const ProfileTabs = ({ customerId }: Props) => {
               key={index}
               postId={post.id}
               channel={post.channel?.title ?? "Unknown"}
+              channelId={post.channel?.id ?? ""}
               comments={
                 post.comments?.map((comment) => ({
                   commentContent: comment.content,
