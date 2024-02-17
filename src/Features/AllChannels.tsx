@@ -23,7 +23,7 @@ const AllChannels = () => {
   };
 
   const filteredChannels = allChannelsArray?.filter((channel) =>
-    channel.title.toLowerCase().includes(searchTerm.toLowerCase()),
+    channel.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
   if (status === "error") {
     return (
@@ -67,7 +67,7 @@ const AllChannels = () => {
             {filteredChannels?.map((channel, index) => (
               <Link
                 key={index}
-                href={`channels/${channel.id}`}
+                href={`/channels/${channel.id}`}
                 className="hover:bg-greensharp"
               >
                 <ChannelCard
