@@ -52,11 +52,11 @@ const MainSearchBar = ({ className }: Props) => {
             <Link
               href={`/profile/${user.id}`}
               key={user.id}
-              className="space-y-2"
+              className="space-y-4"
             >
               <div
                 key={user.id}
-                className="flex items-center cursor-pointer hover:bg-greenaccent rounded-xl"
+                className="flex items-center cursor-pointer hover:bg-greenaccent rounded-xl space-y-2"
               >
                 <Avatar className="hover:bg-greenaccent rounded-md cursor-pointer">
                   <AvatarImage
