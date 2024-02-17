@@ -2,6 +2,7 @@ import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helpers";
 import { graphql } from "@/core/lib/react-query-graphql";
 import { env } from "@/env";
 import { useQuery } from "@tanstack/react-query";
+import { customerKeys } from "./query-keys";
 const Document = graphql(`
   query getOtherCustomerData($input: String!) {
     getOtherCustomerData(customerId: $input) {
@@ -58,10 +59,10 @@ interface Props {
 const useCustomerByIdDataQuery = ({ customerId }: Props) => {
   const protectedRequestHandler = useGraphQLRequestHandlerProtected();
   return useQuery({
-    queryKey: ["getOtherCustomerData", { customerId: customerId }],
-    queryFn: () => {
+    queryKey: customerKeys.detail(customerId),
+    queryFn: ({queryKey}) => {
       return protectedRequestHandler(Document, {
-        input: customerId,
+        input: queryKey[1],
       });
     },
     select: (data) => {
@@ -85,4 +86,5 @@ const useCustomerByIdDataQuery = ({ customerId }: Props) => {
     },
   });
 };
+export type APICustomerByIdQueryData = ReturnType<typeof useCustomerByIdDataQuery>['data']
 export default useCustomerByIdDataQuery;

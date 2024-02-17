@@ -23,6 +23,7 @@ const FeedPosts = ({ channelId }: Props) => {
       {data.getChannelById.posts?.map((post, index) => (
         <PostCard
           key={index}
+          channelId={data.getChannelById.id}
           channel={data.getChannelById.title}
           comments={
             post.comments?.map((comment) => ({
@@ -36,7 +37,7 @@ const FeedPosts = ({ channelId }: Props) => {
           }
           likes={
             post.likes?.map((l) => ({
-              id: l.id,
+              id: l.user?.id ?? '',
               profileImage: l.user?.profileImage ?? undefined,
               username: l.user?.firstName + " " + l.user?.lastName,
             })) ?? []
