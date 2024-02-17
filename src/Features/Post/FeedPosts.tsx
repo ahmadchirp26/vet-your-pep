@@ -1,14 +1,39 @@
 "use client";
 import NewPost from "@/Features/Post/NewPost";
 import PostCard from "@/Features/Cards/PostCard";
-import { useGetChannel } from "@/api/Channels/useGetChannel";
 
 interface Props {
-  channelId: string;
+  channelId?: string;
+  status:'pending' | 'error' | 'success';
+  posts?:Array<{
+    id:string;
+    body:string;
+    channel:{
+      id:string;
+      title:string;
+    }
+    comments:Array<{
+      content:string;
+      user:{
+        profileImage?:string;
+        firstName:string;
+        lastName:string;
+      }
+    }>;
+    likes:Array<{
+      user:{
+        id:string;
+        profileImage?:string;
+        firstName:string;
+        lastName:string;
+      }
+    }>;
+    images:Array<string>;
+  }>
 }
 
-const FeedPosts = ({ channelId }: Props) => {
-  const { data, status } = useGetChannel(channelId);
+const FeedPosts = ({ status, posts, channelId }: Props) => {
+  
   if (status === "pending") {
     //[Todo]: Add a skeleton
     return <div>Loading...</div>;
@@ -20,10 +45,11 @@ const FeedPosts = ({ channelId }: Props) => {
   return (
     <div className="container-drop-shadow bg-greendarkest w-full rounded-3xl p-4 gap-3 space-y-8">
       <NewPost channelId={channelId} />
-      {data.getChannelById.posts?.map((post, index) => (
+      {posts?.map((post, index) => (
         <PostCard
           key={index}
-          channel={data.getChannelById.title}
+          channelId={post.channel.id}
+          channel={post.channel.title}
           comments={
             post.comments?.map((comment) => ({
               commentContent: comment.content,
@@ -34,8 +60,15 @@ const FeedPosts = ({ channelId }: Props) => {
               },
             })) ?? []
           }
-          likes={post.likes?.map(l => l.user) ?? []}
+          likes={
+            post.likes?.map((l) => ({
+              id: l.user?.id ?? '',
+              profileImage: l.user?.profileImage ?? undefined,
+              username: l.user?.firstName + " " + l.user?.lastName,
+            })) ?? []
+          }
           postContent={post.body}
+          postId={post.id}
           postImages={post.images ?? []}
           postedTime={new Date()}
           postedBy={{

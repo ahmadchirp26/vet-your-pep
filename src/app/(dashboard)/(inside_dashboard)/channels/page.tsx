@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import SearchBar from "@/app/(dashboard)/components/SearchBar";
+import SearchBar from "@/app/(dashboard)/_components/SearchBar";
 import ChannelCard from "@/Features/Cards/ChannelCard";
 import AllChannelCard from "./components/AllChannelCard";
 import useGetChannels from "@/api/Channels/useGetChannels";

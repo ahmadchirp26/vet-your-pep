@@ -1,6 +1,4 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/core/ui/tabs";
-import MyFollowers from "./MyFollowers";
-import MyFollowing from "./MyFollowing";
 import useCustomerByIdDataQuery from "@/api/Customer/useCustomerByIdQuery";
 import PostCard from "@/Features/Cards/PostCard";
 
@@ -43,6 +41,7 @@ const ProfileTabs = ({ customerId }: Props) => {
           {data?.getOtherCustomerData.user.posts?.map((post, index) => (
             <PostCard
               key={index}
+              postId={post.id}
               channel={post.channel?.title ?? "Unknown"}
               comments={
                 post.comments?.map((comment) => ({
@@ -55,23 +54,23 @@ const ProfileTabs = ({ customerId }: Props) => {
                   },
                 })) ?? []
               }
-              likes={post.likes?.map((l) => l.user) ?? []}
+              likes={post.likes?.map((l) => ({
+                id: l.user?.id ?? "",
+                profileImage: l.user?.profileImage ?? undefined,
+                username: l.user?.firstName + " " + l.user?.lastName,
+              })) ?? []}
               postContent={post.body}
               postImages={post.images ?? []}
               postedTime={new Date()}
               postedBy={{
-                profileImage: undefined, //post.customer.profileImage ?? undefined,
-                username: "NeedToFix", //post.customer.firstName + ' ' + post.customer.lastName,
+                profileImage: undefined,//post.customer.profileImage ?? undefined,
+                username:'AS'// post.customer.firstName + ' ' + post.customer.lastName,
               }}
             />
           ))}
         </TabsContent>
-        <TabsContent value="followers">
-          <MyFollowers />
-        </TabsContent>
-        <TabsContent value="following">
-          <MyFollowing />
-        </TabsContent>
+        <TabsContent value="followers">{/* <MyFollowers /> */}</TabsContent>
+        <TabsContent value="following">{/* <MyFollowing /> */}</TabsContent>
       </Tabs>
     </>
   );

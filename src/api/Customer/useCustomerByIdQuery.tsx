@@ -1,6 +1,8 @@
 import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helpers";
 import { graphql } from "@/core/lib/react-query-graphql";
+import { env } from "@/env";
 import { useQuery } from "@tanstack/react-query";
+import { customerKeys } from "./query-keys";
 const Document = graphql(`
   query getOtherCustomerData($input: String!) {
     getOtherCustomerData(customerId: $input) {
@@ -16,6 +18,7 @@ const Document = graphql(`
         totalFollowings
         createdDate
         posts {
+          id
           body
           images
           channel {
@@ -36,7 +39,13 @@ const Document = graphql(`
           likeCount
           likes {
             id
-            user
+            user {
+              id
+              email
+              firstName
+              lastName
+              profileImage
+            }
           }
         }
       }
@@ -50,12 +59,32 @@ interface Props {
 const useCustomerByIdDataQuery = ({ customerId }: Props) => {
   const protectedRequestHandler = useGraphQLRequestHandlerProtected();
   return useQuery({
-    queryKey: ["getOtherCustomerData", { customerId: customerId }],
-    queryFn: () => {
+    queryKey: customerKeys.detail(customerId),
+    queryFn: ({queryKey}) => {
       return protectedRequestHandler(Document, {
-        input: customerId,
+        input: queryKey[1],
       });
+    },
+    select: (data) => {
+      return {
+        ...data,
+        getOtherCustomerData: {
+          ...data.getOtherCustomerData,
+          user: {
+            ...data.getOtherCustomerData.user,
+            posts: data.getOtherCustomerData.user.posts?.map((post) => {
+              return {
+                ...post,
+                images: post.images?.map(
+                  (url) => `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${url}`
+                ),
+              };
+            }),
+          },
+        },
+      };
     },
   });
 };
+export type APICustomerByIdQueryData = ReturnType<typeof useCustomerByIdDataQuery>['data']
 export default useCustomerByIdDataQuery;

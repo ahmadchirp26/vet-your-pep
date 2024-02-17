@@ -25,7 +25,7 @@ const UserProfile = ({id}:Props) => {
   if (status === 'error') {
     return <div>Error</div>
   }
-
+ console.log(data)
   const isMyProfile = userSession?.sub === id
   return (
     <>
@@ -113,7 +113,10 @@ const UserProfile = ({id}:Props) => {
           </div>
         </div>
         <div className=" w-full p-4 max-sm:p-0 max-sm:mt-4">
-          <ProfileTabs customerId={id} />
+          <ProfileTabs
+            customerId={id}
+            
+          />
         </div>
       </div>
     </>

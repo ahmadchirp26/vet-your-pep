@@ -84,7 +84,7 @@ const PostFileUpload = ({ onUploadedFilesChange, setIsUploading }: Props) => {
     <div>
       <UploadFileButton
         buttonComponent={
-          <Button variant={"ghost"}>
+          <Button variant={"ghost"}  type = {"button"}>
             <PhotoIcon className="w-6 h-6" />
           </Button>
         }

@@ -13,8 +13,12 @@ import CommentsSection from "./CommentsSection";
 import PostContent from "./PostContent";
 import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
 import { CalculatePostTime } from "@/core/utils/calculate-post-time";
+import { useLikeMutation } from "@/api/Posts/useLikeMutation";
+import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
 
 interface Props {
+  postId: string;
+  channelId: string;
   postedBy: {
     profileImage?: string;
     username: string;
@@ -23,13 +27,24 @@ interface Props {
   postedTime: Date;
   channel: string;
   postImages: Array<string>;
-  likes: Array<string>;
+  likes: Array<{
+    id: string;
+    profileImage?: string;
+    username: string;
+  }>;
   comments: React.ComponentProps<typeof CommentsSection>["comments"];
 }
 
 const PostCard = (post: Props) => {
   const [commentSectionsDropdown, setCommentSectionsDropdown] =
     useState<HTMLDivElement | null>(null);
+  const likeMutation = useLikeMutation({ channelId: post.channelId });
+  const { status, data } = useAuthSessionContext();
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+  const isLikedByMe = post.likes.find((l) => l.id === data?.sub);
+  console.log("isLikedByMe", isLikedByMe, post.likes, data?.sub)
   return (
     <div className="border border-white rounded-3xl p-4 space-y-4 flex flex-col mt-5">
       <div className="flex justify-between items-center">
@@ -84,13 +99,16 @@ const PostCard = (post: Props) => {
 
       <div className="flex gap-5 items-center">
         <LikesButton
-          isLiked={false}
+          isLiked={Boolean(isLikedByMe)}
           likesArray={post.likes.map((l) => ({
-            profileImage: undefined,
-            username: l,
+            id: l.id,
+            profileImage: l.profileImage ?? undefined,
+            username: l.username,
           }))}
           onLike={() => {
-            console.log("l");
+            if (!Boolean(isLikedByMe)) {
+              likeMutation.mutate({ input: { postId: post.postId } });
+            }
           }}
         />
         <CommentsSection

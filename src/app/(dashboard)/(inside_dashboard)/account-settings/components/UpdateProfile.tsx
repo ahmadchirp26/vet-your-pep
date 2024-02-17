@@ -51,11 +51,11 @@ const UpdateProfile = () => {
               <ProfilePicture />
             </div>
             <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2">
-                <span className="text-white font-bold text-xl text-inline">
+              <div className="flex items-center gap-2 w-60">
+                <span className="text-white font-bold text-xl ">
                   {data?.getCustomerData.firstName}
                 </span>
-                <span className="text-white font-bold text-xl text-inline">
+                <span className="text-white font-bold text-xl ">
                   {data?.getCustomerData.lastName}
                 </span>
                 <Image
@@ -76,17 +76,19 @@ const UpdateProfile = () => {
                   {data?.getCustomerData.email}
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <Image
-                  src={"/assets/phone_icon.svg"}
-                  alt="phone_icon"
-                  height={13}
-                  width={13}
-                />
-                <span className="text-graylight text-sm">
-                  {data?.getCustomerData.cellPhone}
-                </span>
-              </div>
+              {data?.getCustomerData.cellPhone && (
+                <div className="flex items-center gap-2">
+                  <Image
+                    src={"/assets/phone_icon.svg"}
+                    alt="phone_icon"
+                    height={13}
+                    width={13}
+                  />
+                  <span className="text-graylight text-sm">
+                    {data?.getCustomerData.cellPhone}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         </div>

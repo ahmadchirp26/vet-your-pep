@@ -2,6 +2,7 @@ import AllChannels from "@/Features/AllChannels";
 import NewChannels from "@/Features/NewChannels";
 import OnlineFriends from "@/Features/OnlineFriends";
 import ProfileCard from "@/Features/ProfileCard";
+import AllPostsFeed from "./_components/AllPostsFeed";
 
 export default function HomePage() {
   return (
@@ -13,7 +14,7 @@ export default function HomePage() {
         </div>
         <div className="flex max-md:flex-col gap-3 overflow-auto ">
           <div className="max-md:order-2">
-            {/* <FeedPosts channelId="s"/> */}
+            <AllPostsFeed />
           </div>
 
           <div className="max-lg:hidden">

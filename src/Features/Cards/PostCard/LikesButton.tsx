@@ -11,6 +11,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/core/ui/drawer";
+import { ScrollArea } from "@/core/ui/scroll-area";
 
 interface Props {
   isLiked: boolean;
@@ -39,9 +40,11 @@ const LikesButton = ({ isLiked, likesArray, onLike }: Props) => {
         <DialogContent>
           <div className="flex flex-col gap-2">
             <span className="text-white font-bold">All Likes</span>
-            {likesArray.map((userThatLiked, index) => (
-              <LikesCard key={index} userThatLiked={userThatLiked} />
-            ))}
+            <ScrollArea className = "max-h-[40vh]">
+              {likesArray.map((userThatLiked, index) => (
+                <LikesCard key={index} userThatLiked={userThatLiked} />
+              ))}
+            </ScrollArea>
           </div>
         </DialogContent>
       </Dialog>
@@ -58,7 +61,9 @@ const LikesButton = ({ isLiked, likesArray, onLike }: Props) => {
           />
           <DialogTrigger asChild>
             <div className="flex gap-2">
-              <span className="text-graylight sm:text-sm">{likesArray.length}</span>
+              <span className="text-graylight sm:text-sm">
+                {likesArray.length}
+              </span>
               <span className="hidden sm:block">Likes</span>
             </div>
           </DialogTrigger>
