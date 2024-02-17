@@ -3,7 +3,7 @@
 import { channelMembers } from "@/data/facebackend";
 import Image from "next/image";
 import MemberCard from "../_components/MemberCard";
-import SearchBar from "@/app/(dashboard)/components/SearchBar";
+import SearchBar from "@/app/(dashboard)/_components/SearchBar";
 import { useState } from "react";
 import AboutCard from "../_components/AboutCard";
 import AllChannels from "@/Features/AllChannels";

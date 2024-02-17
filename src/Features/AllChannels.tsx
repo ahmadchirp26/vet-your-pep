@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import SearchBar from "@/app/(dashboard)/components/SearchBar";
+import SearchBar from "@/app/(dashboard)/_components/SearchBar";
 import ChannelCard from "@/Features/Cards/ChannelCard";
 import Link from "next/link";
 import useGetChannels from "@/api/Channels/useGetChannels";
