@@ -25,11 +25,8 @@ const UserProfile = ({id}:Props) => {
   if (status === 'error') {
     return <div>Error</div>
   }
-
-  const isMyProfile = userSession?.sub === id  const followers = data?.getCustomerData?.followers?.length ?? 0;
-  const following = data?.getCustomerData?.following?.length ?? 0;
-  const posts = data?.getCustomerData?.posts?.length ?? 0;
-
+ console.log(data)
+  const isMyProfile = userSession?.sub === id
   return (
     <>
       <div className="rounded-2xl container-drop-shadow bg-greendarkest p-6 w-2/3 max-lg:w-full flex-col gap-7">
@@ -112,14 +109,13 @@ const UserProfile = ({id}:Props) => {
                 height={12}
               />
               <span className="text-white">Message</span>
-            </div> */} */}
+            </div> */}
           </div>
         </div>
         <div className=" w-full p-4 max-sm:p-0 max-sm:mt-4">
           <ProfileTabs
-            followers={followers}
-            following={following}
-            posts={posts}
+            customerId={id}
+            
           />
         </div>
       </div>

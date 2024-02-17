@@ -1,5 +1,6 @@
 import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helpers";
 import { graphql } from "@/core/lib/react-query-graphql";
+import { env } from "@/env";
 import { useQuery } from "@tanstack/react-query";
 const Document = graphql(`
   query getOtherCustomerData($input: String!) {
@@ -16,6 +17,7 @@ const Document = graphql(`
         totalFollowings
         createdDate
         posts {
+          id
           body
           images
           channel {
@@ -36,7 +38,13 @@ const Document = graphql(`
           likeCount
           likes {
             id
-            user
+            user {
+              id
+              email
+              firstName
+              lastName
+              profileImage
+            }
           }
         }
       }
@@ -55,6 +63,25 @@ const useCustomerByIdDataQuery = ({ customerId }: Props) => {
       return protectedRequestHandler(Document, {
         input: customerId,
       });
+    },
+    select: (data) => {
+      return {
+        ...data,
+        getOtherCustomerData: {
+          ...data.getOtherCustomerData,
+          user: {
+            ...data.getOtherCustomerData.user,
+            posts: data.getOtherCustomerData.user.posts?.map((post) => {
+              return {
+                ...post,
+                images: post.images?.map(
+                  (url) => `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${url}`
+                ),
+              };
+            }),
+          },
+        },
+      };
     },
   });
 };

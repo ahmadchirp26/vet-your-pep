@@ -40,6 +40,13 @@ const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
         likeCount
         likes {
           id
+          user {
+            firstName
+            lastName
+            id
+            email
+            profileImage
+          }
         }
       }
       members {
