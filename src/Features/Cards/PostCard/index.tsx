@@ -18,6 +18,7 @@ import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionConte
 
 interface Props {
   postId: string;
+  channelId: string;
   postedBy: {
     profileImage?: string;
     username: string;
@@ -27,7 +28,7 @@ interface Props {
   channel: string;
   postImages: Array<string>;
   likes: Array<{
-    id:string
+    id: string;
     profileImage?: string;
     username: string;
   }>;
@@ -37,12 +38,13 @@ interface Props {
 const PostCard = (post: Props) => {
   const [commentSectionsDropdown, setCommentSectionsDropdown] =
     useState<HTMLDivElement | null>(null);
-  const likeMutation = useLikeMutation();
-  const {status, data}  =useAuthSessionContext()
-  if (status === 'loading') {
-    return <div>Loading...</div>
+  const likeMutation = useLikeMutation({ channelId: post.channelId });
+  const { status, data } = useAuthSessionContext();
+  if (status === "loading") {
+    return <div>Loading...</div>;
   }
-  const isLikedByMe = post.likes.find(l => l.id === data?.sub)
+  const isLikedByMe = post.likes.find((l) => l.id === data?.sub);
+  console.log("isLikedByMe", isLikedByMe, post.likes, data?.sub)
   return (
     <div className="border border-white rounded-3xl p-4 space-y-4 flex flex-col mt-5">
       <div className="flex justify-between items-center">
@@ -99,11 +101,14 @@ const PostCard = (post: Props) => {
         <LikesButton
           isLiked={Boolean(isLikedByMe)}
           likesArray={post.likes.map((l) => ({
+            id: l.id,
             profileImage: l.profileImage ?? undefined,
             username: l.username,
           }))}
           onLike={() => {
-            likeMutation.mutate({ input: { postId: post.postId } });
+            if (!Boolean(isLikedByMe)) {
+              likeMutation.mutate({ input: { postId: post.postId } });
+            }
           }}
         />
         <CommentsSection

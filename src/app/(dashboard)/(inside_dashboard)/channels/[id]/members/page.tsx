@@ -1,7 +1,7 @@
 "use client";
 
 import MemberCard from "../_components/MemberCard";
-import SearchBar from "@/app/(dashboard)/components/SearchBar";
+import SearchBar from "@/app/(dashboard)/_components/SearchBar";
 import { useState } from "react";
 import AllChannels from "@/Features/AllChannels";
 import { useGetChannel } from "@/api/Channels/useGetChannel";

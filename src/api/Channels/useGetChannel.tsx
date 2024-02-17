@@ -157,3 +157,6 @@ export const fetchChannelServerSide = async (
     };
   }
 };
+
+
+export type APIGetChannelByIdQueryData = ReturnType<typeof useGetChannel>['data']

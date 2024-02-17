@@ -1,11 +1,11 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import AuthMenu from "./components/AuthMenu";
-import LeftSideBar from "./components/LeftSideBar";
-import ResponsiveMenu from "./components/ResponsiveMenu";
+import AuthMenu from "./_components/AuthMenu";
+import LeftSideBar from "./_components/LeftSideBar";
+import ResponsiveMenu from "./_components/ResponsiveMenu";
 import Logo from "../../../public/assets/logo.svg";
 import Link from "next/link";
-import MainSearchBar from "./components/MainSearchBar";
+import MainSearchBar from "./_components/MainSearchBar";
 import { fetchCustomerSendBirdTokenServerSide } from "@/api/SendBird/useCustomerSendbirdToken";
 
 interface DashboardLayoutProps {
