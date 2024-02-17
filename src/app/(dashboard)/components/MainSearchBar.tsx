@@ -17,7 +17,6 @@ interface Props {
 const MainSearchBar = ({ className }: Props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const { data, isLoading, isError } = useCustomerSearch(searchQuery);
-  console.log(data);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
