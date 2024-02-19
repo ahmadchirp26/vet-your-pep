@@ -16,10 +16,13 @@ interface Props {
 
 const MainSearchBar = ({ className }: Props) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [profileLinkClicked, setProfileLinkClicked] = useState(false);
+
   const { data, isLoading, isError } = useCustomerSearch(searchQuery);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
+    setProfileLinkClicked(false);
   };
 
   return (
@@ -45,13 +48,14 @@ const MainSearchBar = ({ className }: Props) => {
         </div>
       )}
       {/* {isError && <div>Error fetching data</div>} */}
-      {data?.searchCustomers?.results && (
+      {!profileLinkClicked && data?.searchCustomers?.results && (
         <div className="absolute top-20 w-1/2 bg-greendarkest p-2  rounded-2xl space-y-2 z-10">
           {data.searchCustomers.results.map((user) => (
             <Link
               href={`/profile/${user.id}`}
               key={user.id}
               className="space-y-4"
+              onClick={() => setProfileLinkClicked(true)}
             >
               <div
                 key={user.id}
