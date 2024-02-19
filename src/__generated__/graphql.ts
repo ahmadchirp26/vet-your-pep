@@ -163,6 +163,7 @@ export type CreatePostInput = {
 export type Customer = {
   __typename?: 'Customer';
   cellPhone?: Maybe<Scalars['String']['output']>;
+  channelMembers?: Maybe<Array<Channel>>;
   channels?: Maybe<Array<Channel>>;
   comments?: Maybe<Array<Comments>>;
   createdBy?: Maybe<Scalars['String']['output']>;
@@ -279,6 +280,7 @@ export type ListPostsInput = {
   limit: Scalars['Float']['input'];
   myPosts?: InputMaybe<Scalars['Boolean']['input']>;
   offset?: InputMaybe<Scalars['Float']['input']>;
+  userFeed?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type ListPostsResponse = {
@@ -494,7 +496,7 @@ export type PageData = {
 export type Post = {
   __typename?: 'Post';
   body: Scalars['String']['output'];
-  channel?: Maybe<Channel>;
+  channel: Channel;
   comments?: Maybe<Array<Comments>>;
   createdBy?: Maybe<Scalars['String']['output']>;
   createdDate?: Maybe<Scalars['DateTime']['output']>;
@@ -740,7 +742,7 @@ export type GetOtherCustomerDataQueryVariables = Exact<{
 }>;
 
 
-export type GetOtherCustomerDataQuery = { __typename?: 'Query', getOtherCustomerData: { __typename?: 'OtherCustomerDataResponse', isFollowing: boolean, user: { __typename?: 'Customer', id: string, email: string, firstName: string, lastName: string, profileImage?: string | null, role: UserRole, totalFollowers?: number | null, totalFollowings?: number | null, createdDate?: any | null, posts?: Array<{ __typename?: 'Post', id: string, body: string, images?: Array<string> | null, likeCount?: number | null, channel?: { __typename?: 'Channel', id: string, title: string } | null, comments?: Array<{ __typename?: 'Comments', content: string, id: string, user: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } }> | null, likes?: Array<{ __typename?: 'Likes', id: string, user?: { __typename?: 'Customer', id: string, email: string, firstName: string, lastName: string, profileImage?: string | null } | null }> | null }> | null } } };
+export type GetOtherCustomerDataQuery = { __typename?: 'Query', getOtherCustomerData: { __typename?: 'OtherCustomerDataResponse', isFollowing: boolean, user: { __typename?: 'Customer', id: string, email: string, firstName: string, lastName: string, profileImage?: string | null, role: UserRole, totalFollowers?: number | null, totalFollowings?: number | null, createdDate?: any | null, posts?: Array<{ __typename?: 'Post', id: string, body: string, images?: Array<string> | null, likeCount?: number | null, channel: { __typename?: 'Channel', id: string, title: string }, comments?: Array<{ __typename?: 'Comments', content: string, id: string, user: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } }> | null, likes?: Array<{ __typename?: 'Likes', id: string, user?: { __typename?: 'Customer', id: string, email: string, firstName: string, lastName: string, profileImage?: string | null } | null }> | null }> | null } } };
 
 export type CreatePostMutationVariables = Exact<{
   input: CreatePostInput;
@@ -761,7 +763,7 @@ export type GetUserAllFeedsQueryVariables = Exact<{
 }>;
 
 
-export type GetUserAllFeedsQuery = { __typename?: 'Query', getChannels: { __typename?: 'ListChannelsResponse', limit: number, offset?: number | null, totalRows?: number | null, results: Array<{ __typename?: 'Channel', id: string, title: string, status: ChannelStatus, about?: string | null, posts?: Array<{ __typename?: 'Post', id: string, body: string, images?: Array<string> | null, likeCount?: number | null, channel?: { __typename?: 'Channel', id: string, title: string } | null, comments?: Array<{ __typename?: 'Comments', content: string, id: string, user: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } }> | null, likes?: Array<{ __typename?: 'Likes', id: string, user?: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } | null }> | null }> | null }> } };
+export type GetUserAllFeedsQuery = { __typename?: 'Query', getChannels: { __typename?: 'ListChannelsResponse', limit: number, offset?: number | null, totalRows?: number | null, results: Array<{ __typename?: 'Channel', id: string, title: string, status: ChannelStatus, about?: string | null, posts?: Array<{ __typename?: 'Post', id: string, body: string, images?: Array<string> | null, likeCount?: number | null, channel: { __typename?: 'Channel', id: string, title: string }, comments?: Array<{ __typename?: 'Comments', content: string, id: string, user: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } }> | null, likes?: Array<{ __typename?: 'Likes', id: string, user?: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } | null }> | null }> | null }> } };
 
 export type GetPostUploadUrlsQueryVariables = Exact<{
   input: Scalars['Float']['input'];
