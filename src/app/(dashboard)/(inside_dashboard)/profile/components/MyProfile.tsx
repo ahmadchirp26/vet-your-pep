@@ -32,20 +32,22 @@ const UserProfile = ({ id }: Props) => {
       <div className="rounded-2xl container-drop-shadow bg-greendarkest p-6 w-2/3 max-lg:w-full flex-col gap-7">
         <div className="flex justify-between items-center">
           <BackButton />
-          <DropdownMenu>
-            <DropdownMenuTrigger className="outline-none bg-greenaccent p-2 rounded-full">
-              <MoreVerticalIcon className="text-white cursor-pointer w-4 h-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              className="w-56 bg-greenaccent  text-white outline-none border-none "
-              align="end"
-              forceMount
-            >
-              <DropdownMenuItem className="cursor-pointer">
-                Block
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {!isMyProfile && (
+            <DropdownMenu>
+              <DropdownMenuTrigger className="outline-none bg-greenaccent p-2 rounded-full">
+                <MoreVerticalIcon className="text-white cursor-pointer w-4 h-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="w-56 bg-greenaccent  text-white outline-none border-none "
+                align="end"
+                forceMount
+              >
+                <DropdownMenuItem className="cursor-pointer">
+                  Block
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
         <div className="flex items-center justify-between max-sm:flex-col gap-5 mt-5 ">
           <div className="flex items-center gap-5">
