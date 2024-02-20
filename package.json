@@ -11,8 +11,8 @@
     "start": "next start",
     "format": "prettier --write src/**/*.{tsx}",
     "prepare": "husky install",
-    "graphqlCodegen": "npx graphql-code-generator --config ./src/core/lib/react-query-graphql/codegen.ts",
-    "graphqlCodegen--watch": "npx graphql-code-generator --config ./src/core/lib/react-query-graphql/codegen.ts --watch"
+    "graphqlCodegen": "npx graphql-code-generator --config ./src/lib/react-query-graphql/codegen.ts",
+    "graphqlCodegen--watch": "npx graphql-code-generator --config ./src/lib/react-query-graphql/codegen.ts --watch"
   },
   "dependencies": {
     "@floating-ui/react": "^0.26.6",
