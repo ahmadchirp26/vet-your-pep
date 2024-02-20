@@ -1,8 +1,8 @@
 // ChannelCard.tsx
 import Image from "next/image";
-import { Button } from "@/core/ui/button";
+import { Button } from "@/components/ui/button";
 import { type APIGetChannelsData } from "@/api/Channels/useGetChannels";
-import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
 import useJoinChannelMutation from "@/api/Channels/useJoinChannelMutation";
 import { useRouter } from "next/navigation";
 

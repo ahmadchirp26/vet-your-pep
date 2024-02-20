@@ -2,15 +2,15 @@
 import { FormikProvider, useFormik } from "formik";
 import { useCreateAccountMutation } from "@/api/Authentication";
 import * as Yup from "yup";
-import { toast } from "@/core/ui/use-toast";
-import { Checkbox } from "@/core/ui/checkbox";
-import { Button } from "@/core/ui/button";
-import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import { toast } from "@/components/ui/use-toast";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
 import { useRouter } from "next/navigation";
-import { InputField } from "@/core/ui/input-field";
-import { RegisterEmailIcon } from "@/core/icons/RegisterEmailIcon";
-import { RegisterPhoneIcon } from "@/core/icons/RegisterPhoneIcon";
-import { RegisterPasswordIcon } from "@/core/icons/RegisterPasswordIcon";
+import { InputField } from "@/components/ui/input-field";
+import { RegisterEmailIcon } from "@/components/icons/RegisterEmailIcon";
+import { RegisterPhoneIcon } from "@/components/icons/RegisterPhoneIcon";
+import { RegisterPasswordIcon } from "@/components/icons/RegisterPasswordIcon";
 
 const RegisterForm = () => {
   const router = useRouter();

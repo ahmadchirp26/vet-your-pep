@@ -1,7 +1,7 @@
 import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
 import useUpdateCustomerMutation from "@/api/AccountSettings/useUpdateCustomerMutation";
 import useProtectedS3UploadHandler from "@/api/S3Bucket/useProtectedS3UploadHandler";
-import { Skeleton } from "@/core/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import Image from "next/image";
 import React from "react";
 

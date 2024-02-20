@@ -3,7 +3,7 @@
 import MemberCard from "../_components/MemberCard";
 import SearchBar from "@/app/(dashboard)/_components/SearchBar";
 import { useState } from "react";
-import AllChannels from "@/Features/AllChannels";
+import AllChannels from "@/features/AllChannels";
 import { useGetChannel } from "@/api/Channels/useGetChannel";
 import Link from "next/link";
 

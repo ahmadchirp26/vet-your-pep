@@ -1,6 +1,6 @@
 // EventStepper.tsx
 import React from "react";
-import CustomStepper from "@/core/custom-stepper";
+import CustomStepper from "@/components/custom-stepper";
 import { eventStepper } from "@/data/facebackend";
 
 const EventStepper: React.FC = () => {

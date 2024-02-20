@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import CommentsSection from "./CommentsSection";
-import PostContent from "./PostContent";
-import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
-import { CalculatePostTime } from "@/core/utils/calculate-post-time";
-import PostMedia from "./PostMedia";
-import LikesSection from "./LikesSection";
+import CommentsSection from "@/features/Post/PostCard/CommentsSection";
+import PostContent from "@/features/Post/PostCard/PostContent";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CalculatePostTime } from "@/utils/calculate-post-time";
+import PostMedia from "@/features/Post/PostCard/PostMedia";
+import LikesSection from "@/features/Post/PostCard/LikesSection";
 
 interface Props {
   postId: string;

@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 
 import RegisterForm from "@/app/(auth)/register/Forms/RegisterForm";
-import { Button } from "@/core/ui/button";
+import { Button } from "@/components/ui/button";
 
 export default function Register() {
   return (

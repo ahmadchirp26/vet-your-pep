@@ -1,5 +1,5 @@
 "use client";
-import createGenericContext from "@/core/lib/create-generic-context";
+import createGenericContext from "@/utils/create-generic-context";
 import { useEffect, type PropsWithChildren, useState } from "react";
 import { AuthBroadcastChannel } from "../AuthBroadcastChannel";
 import { getSession } from "@/api/Authentication";

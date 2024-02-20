@@ -1,6 +1,6 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/core/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import useCustomerByIdDataQuery from "@/api/Customer/useCustomerByIdQuery";
-import PostCard from "@/Features/Post/PostCard";
+import PostCard from "@/features/Post/PostCard";
 import MyFollowers from "./MyFollowers";
 
 interface Props {

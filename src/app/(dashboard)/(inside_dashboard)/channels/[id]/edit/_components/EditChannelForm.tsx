@@ -8,15 +8,15 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/core/ui/select";
-import { Button } from "@/core/ui/button";
-import { Input } from "@/core/ui/input";
-import { Textarea } from "@/core/ui/textarea";
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { useGetChannel } from "@/api/Channels/useGetChannel";
 import useUpdateChannelMutation from "@/api/Channels/useUpdateChannelMutation";
 
 import { useState } from "react";
-import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
 import { useRouter } from "next/navigation";
 
 type Props = {

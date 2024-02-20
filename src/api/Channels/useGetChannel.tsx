@@ -1,7 +1,7 @@
-import { graphQlRequestHandler, graphql } from "@/core/lib/react-query-graphql";
+import { graphQlRequestHandler, graphql } from "@/lib/react-query-graphql";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import { channelKeys } from "./query-keys";
-import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helpers";
+import { useGraphQLRequestHandlerProtected } from "@/lib/auth-helpers";
 import { type ClientError } from "graphql-request";
 import { notFound } from "next/navigation";
 import { getSessionServerAction } from "../Authentication/getSessionServerAction";

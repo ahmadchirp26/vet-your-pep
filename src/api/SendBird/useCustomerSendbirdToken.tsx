@@ -1,5 +1,5 @@
-import { graphQlRequestHandler, graphql } from "@/core/lib/react-query-graphql";
-import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helpers";
+import { graphQlRequestHandler, graphql } from "@/lib/react-query-graphql";
+import { useGraphQLRequestHandlerProtected } from "@/lib/auth-helpers";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import { getSessionServerAction } from "../Authentication/getSessionServerAction";
 

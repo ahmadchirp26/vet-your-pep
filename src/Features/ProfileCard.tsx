@@ -1,13 +1,13 @@
 "use client";
 
-import { Button } from "@/core/ui/button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { FriendsIcon } from "@/core/icons/FriendsIcon";
+import { FriendsIcon } from "@/components/icons/FriendsIcon";
 
 import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
-import { Skeleton } from "@/core/ui/skeleton";
-import { Avatar, AvatarImage } from "@/core/ui/avatar";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 const ProfileCard = () => {
   const { data, status } = useCustomerDataQuery();

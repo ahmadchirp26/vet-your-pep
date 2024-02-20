@@ -2,15 +2,15 @@
 import React from "react";
 import { FormikProvider, useFormik } from "formik";
 import Link from "next/link";
-import { Button } from "@/core/ui/button";
+import { Button } from "@/components/ui/button";
 import { useLoginMutation } from "@/api/Authentication/useLoginMutation";
-import { toast } from "@/core/ui/use-toast";
+import { toast } from "@/components/ui/use-toast";
 import * as Yup from "yup";
-import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
 import { useRouter } from "next/navigation";
-import { InputField } from "@/core/ui/input-field";
-import { RegisterEmailIcon } from "@/core/icons/RegisterEmailIcon";
-import { RegisterPasswordIcon } from "@/core/icons/RegisterPasswordIcon";
+import { InputField } from "@/components/ui/input-field";
+import { RegisterEmailIcon } from "@/components/icons/RegisterEmailIcon";
+import { RegisterPasswordIcon } from "@/components/icons/RegisterPasswordIcon";
 
 const LoginForm = () => {
   const { mutateAsync } = useLoginMutation();

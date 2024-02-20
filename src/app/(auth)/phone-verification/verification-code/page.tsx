@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import BackButton from "@/core/ui/backButton";
+import BackButton from "@/components/ui/backButton";
 import PhoneVerifyCodeForm from "@/app/(auth)/login/Forms/PhoneVerifyCodeForm";
 
 export default function VerifyCode() {

@@ -1,4 +1,4 @@
-import FollowerCard from "@/Features/Cards/FollowerCard";
+import FollowerCard from "@/features/Cards/FollowerCard";
 import { followers } from "@/data/facebackend";
 
 const MyFollowers = () => {

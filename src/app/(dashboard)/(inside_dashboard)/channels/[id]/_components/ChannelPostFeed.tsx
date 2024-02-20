@@ -1,4 +1,4 @@
-import FeedPosts from "@/Features/Post/FeedPosts";
+import FeedPosts from "@/features/Post/FeedPosts";
 import { useGetChannel } from "@/api/Channels/useGetChannel";
 import React from "react";
 

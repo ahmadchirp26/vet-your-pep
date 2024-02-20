@@ -1,5 +1,5 @@
-import ReactQueryProvider from "@/core/hoc/ReactQueryProvider";
-import { Toaster } from "@/core/ui/toaster";
+import ReactQueryProvider from "@/components/hoc/ReactQueryProvider";
+import { Toaster } from "@/components/ui/toaster";
 import { AuthSessionProvider } from "@/lib/Authentication/context/AuthSessionContext";
 import AuthRedirection from "@/lib/Authentication/hoc/AuthRedirection";
 import "@/styles/globals.css";

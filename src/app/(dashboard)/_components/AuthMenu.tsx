@@ -1,10 +1,10 @@
 "use client";
 import { ProfileAvatar } from "./ProfileAvatar";
-import { cn } from "@/core/lib/helper";
-import { NotificationIcon } from "@/core/icons/NotificationIcon";
-import { ChatIcon } from "@/core/icons/ChatIcon";
-import { Popover, PopoverContent, PopoverTrigger } from "@/core/ui/popover";
-import Notifications from "@/Features/Notifications";
+import { cn } from "@/utils/cn";
+import { NotificationIcon } from "@/components/icons/NotificationIcon";
+import { ChatIcon } from "@/components/icons/ChatIcon";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import Notifications from "@/features/Notifications";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";

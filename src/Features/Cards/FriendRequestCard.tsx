@@ -1,4 +1,4 @@
-import { Button } from "@/core/ui/button";
+import { Button } from "@/components/ui/button";
 import Image, { type StaticImageData } from "next/image";
 
 interface FriendRequests {

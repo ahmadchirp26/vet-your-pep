@@ -1,5 +1,5 @@
-import { graphql } from "@/core/lib/react-query-graphql";
-import { useGraphQLRequestHandlerProtected } from "@/core/lib/auth-helpers";
+import { graphql } from "@/lib/react-query-graphql";
+import { useGraphQLRequestHandlerProtected } from "@/lib/auth-helpers";
 import { useQuery } from "@tanstack/react-query";
 
 const GET_CUSTOMER_SEARCH_QUERY = graphql(`

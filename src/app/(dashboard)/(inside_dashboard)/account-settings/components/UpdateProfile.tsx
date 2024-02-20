@@ -1,10 +1,10 @@
 "use client";
 
 import { FormikProvider, useFormik } from "formik";
-import { Input } from "@/core/ui/input";
+import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { Button } from "@/core/ui/button";
-import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import { Button } from "@/components/ui/button";
+import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
 
 import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
 import useUpdateCustomerMutation from "@/api/AccountSettings/useUpdateCustomerMutation";

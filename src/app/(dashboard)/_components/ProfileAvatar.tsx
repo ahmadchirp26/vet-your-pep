@@ -1,18 +1,18 @@
 "use client";
 import { useLogoutMutation } from "@/api/Authentication/useLogoutMutation";
-import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
-import { cn } from "@/core/lib/helper";
-import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
-import { Button } from "@/core/ui/button";
+import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
+import { cn } from "@/utils/cn";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/core/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
 import Link from "next/link";
-import { Skeleton } from "@/core/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
   className?: string;

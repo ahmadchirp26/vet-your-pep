@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
 
-import { Button } from "@/core/ui/button";
+import { Button } from "@/components/ui/button";
 
 import Link from "next/link";
 import LoginForm from "@/app/(auth)/login/Forms/LoginForm";

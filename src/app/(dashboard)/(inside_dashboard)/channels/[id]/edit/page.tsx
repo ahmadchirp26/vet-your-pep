@@ -1,6 +1,6 @@
-import AllChannels from "@/Features/AllChannels";
-import ProfileCard from "@/Features/ProfileCard";
-import OnlineFriends from "@/Features/OnlineFriends";
+import AllChannels from "@/features/AllChannels";
+import ProfileCard from "@/features/ProfileCard";
+import OnlineFriends from "@/features/OnlineFriends";
 import EditChannel from "./_components/EditChannelForm";
 
 const EditProfile = (props: { params: { id: string } }) => {

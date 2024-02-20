@@ -1,4 +1,4 @@
-import { graphql } from "@/core/lib/react-query-graphql";
+import { graphql } from "@/lib/react-query-graphql";
 import { useGraphQLQueryProtected } from "../helpers";
 import { env } from "@/env";
 

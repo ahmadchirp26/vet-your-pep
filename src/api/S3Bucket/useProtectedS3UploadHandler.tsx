@@ -1,6 +1,6 @@
 import useAuthSessionContext from "../../lib/Authentication/context/AuthSessionContext";
 import { graphql } from "@/__generated__";
-import { requestGraphQl } from "@/core/lib/react-query-graphql";
+import { requestGraphQl } from "@/lib/react-query-graphql";
 import { useMutation } from "@tanstack/react-query";
 
 const document = graphql(`
