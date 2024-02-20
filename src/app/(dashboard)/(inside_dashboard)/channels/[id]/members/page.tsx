@@ -13,7 +13,7 @@ const Members = (props: { params: { id: string } }) => {
   const { data, status } = useGetChannel(channelId);
 
   const channelMembers = data?.getChannelById?.members;
-  console.log("Channel Members", channelMembers);
+  // console.log("Channel Members", channelMembers);
 
   const filteredMembers = channelMembers?.filter((member) =>
     member.customer.firstName.toLowerCase().includes(searchTerm.toLowerCase())

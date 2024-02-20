@@ -21,6 +21,7 @@ const ChannelCard = ({
 }: ChannelCardProps) => {
   const router = useRouter();
   const joinChannelMutation = useJoinChannelMutation();
+  // console.log("Channel Members", channel);
   return (
     <>
       <div
@@ -69,7 +70,7 @@ const ChannelCard = ({
                     onSuccess: () => {
                       router.push(`/channels/${channel.id}`);
                     },
-                  },
+                  }
                 )
               }
             >

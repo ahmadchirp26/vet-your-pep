@@ -12,7 +12,9 @@ import OnlineFriends from "@/Features/OnlineFriends";
 import EditChannel from "./components/EditChannelForm";
 
 const EditProfile = () => {
-  const params = useParams();
+  const { id } = useParams();
+  const channelId = id;
+  console.log("Channel ID", channelId);
   // console.log(params);
   return (
     <>
@@ -24,7 +26,7 @@ const EditProfile = () => {
         </div>
         <div className="flex flex-col gap-3 max-md:order-2 w-full">
           {/* <Banner /> */}
-          <EditChannel />
+          <EditChannel channelId={channelId} />
         </div>
         <div className="max-md:order-1">
           <OnlineFriends className="flex md:flex-col" />
