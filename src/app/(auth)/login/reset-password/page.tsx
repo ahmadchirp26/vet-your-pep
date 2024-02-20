@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import BackButton from "@/core/ui/backButton";
+import BackButton from "@/components/ui/backButton";
 import ResetPassForm from "@/app/(auth)/login/Forms/ResetPassForm";
 
 export default function ResetPassword() {

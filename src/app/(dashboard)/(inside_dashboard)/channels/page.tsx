@@ -2,10 +2,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import SearchBar from "@/app/(dashboard)/_components/SearchBar";
-import ChannelCard from "@/Features/Cards/ChannelCard";
+import ChannelCard from "@/features/Cards/ChannelCard";
 import AllChannelCard from "./components/AllChannelCard";
 import useGetChannels from "@/api/Channels/useGetChannels";
-import { Skeleton } from "@/core/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Channels = () => {
   const { data: allChannelsData, status: allChannelStatus } = useGetChannels({

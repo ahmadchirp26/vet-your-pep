@@ -1,22 +1,18 @@
 "use client";
-import createGenericContext from "@/core/lib/create-generic-context";
+import createGenericContext from "@/utils/create-generic-context";
 import { useEffect, type PropsWithChildren, useState } from "react";
 import { AuthBroadcastChannel } from "../AuthBroadcastChannel";
 import { getSession } from "@/api/Authentication";
 
 interface AuthSessionContext {
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-  data: Awaited<ReturnType<typeof getSession>> | undefined;
-  status: "loading" | "authenticated" | "unauthenticated";
+  data: Awaited<ReturnType<typeof getSession>>;
+  status: "authenticated" | "unauthenticated";
 }
 const [_useAuthSessionContext, AuthSessionContextProvider] =
   createGenericContext<AuthSessionContext>();
 
-export const AuthSessionProvider = ({ children }: PropsWithChildren) => {
-  const [state, setState] = useState<AuthSessionContext>({
-    data: undefined,
-    status: "loading",
-  });
+export const AuthSessionProvider = ({ children, ...props }: PropsWithChildren<AuthSessionContext>) => {
+  const [state, setState] = useState<AuthSessionContext>(props);
 
   useEffect(() => {
     const setSessionState = () => {

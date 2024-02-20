@@ -1,6 +1,6 @@
 // ChannelCard.tsx
 import Image, { type StaticImageData } from "next/image";
-import { Button } from "@/core/ui/button";
+import { Button } from "@/components/ui/button";
 
 interface Block {
   profileAvatar: StaticImageData;

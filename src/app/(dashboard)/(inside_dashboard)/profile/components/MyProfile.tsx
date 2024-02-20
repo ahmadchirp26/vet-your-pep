@@ -1,18 +1,18 @@
 "use client";
 import Image from "next/image";
 import ProfileTabs from "./ProfileTabs";
-import BackButton from "@/core/ui/backButton";
+import BackButton from "@/components/ui/backButton";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/core/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { MoreVerticalIcon } from "lucide-react";
 import useCustomerByIdDataQuery from "@/api/Customer/useCustomerByIdQuery";
 import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
 import { useFollowMutation } from "@/api/Profile/useFollowFriend";
-import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
 import { useUnFollowMutation } from "@/api/Profile/useUnfollowFriend";
 
 interface Props {

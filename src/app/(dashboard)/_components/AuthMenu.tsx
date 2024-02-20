@@ -1,13 +1,12 @@
 "use client";
 import { ProfileAvatar } from "./ProfileAvatar";
-import { cn } from "@/core/lib/helper";
-import { NotificationIcon } from "@/core/icons/NotificationIcon";
-import { ChatIcon } from "@/core/icons/ChatIcon";
-import { Popover, PopoverContent, PopoverTrigger } from "@/core/ui/popover";
-import Notifications from "@/Features/Notifications";
+import { cn } from "@/utils/cn";
+import { NotificationIcon } from "@/components/icons/NotificationIcon";
+import { ChatIcon } from "@/components/icons/ChatIcon";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import Notifications from "@/features/Notifications";
 import Link from "next/link";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
 interface Props {
@@ -16,7 +15,7 @@ interface Props {
 const AuthMenu = ({ className }: Props) => {
   const pathname = usePathname();
 
-  const [chatActive, setChatActive] = useState(false);
+  const [, setChatActive] = useState(false);
 
   const toggleChatActive = () => {
     setChatActive((prevState) => !prevState);

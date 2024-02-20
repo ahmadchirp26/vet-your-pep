@@ -3,14 +3,14 @@
 import MemberCard from "../_components/MemberCard";
 import SearchBar from "@/app/(dashboard)/_components/SearchBar";
 import { useState } from "react";
-import AllChannels from "@/Features/AllChannels";
+import AllChannels from "@/features/AllChannels";
 import { useGetChannel } from "@/api/Channels/useGetChannel";
 import Link from "next/link";
 
 const Members = (props: { params: { id: string } }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const channelId = props.params.id;
-  const { data, status } = useGetChannel(channelId);
+  const { data } = useGetChannel(channelId);
 
   const channelMembers = data?.getChannelById?.members;
   // console.log("Channel Members", channelMembers);

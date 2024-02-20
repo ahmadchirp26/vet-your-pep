@@ -1,8 +1,8 @@
 "use client";
-import LikeIcon from "@/core/icons/LikeIcon";
-import { DialogContent, DialogTrigger, Dialog } from "@/core/ui/dialog";
+import LikeIcon from "@/components/icons/LikeIcon";
+import { DialogContent, DialogTrigger, Dialog } from "@/components/ui/dialog";
 import React from "react";
-import LikesCard from "./LikesCard";
+import LikesCard from "@/features/Post/PostCard/LikesSection/LikesCard";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import {
   Drawer,
@@ -10,9 +10,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/core/ui/drawer";
-import { ScrollArea } from "@/core/ui/scroll-area";
-import { Button } from "@/core/ui/button";
+} from "@/components/ui/drawer";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
 import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
 import { useLikeMutation } from "@/api/Posts/useLikeMutation";
 import { useUnLikeMutation } from "@/api/Posts/useUnlikeMutation";

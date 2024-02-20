@@ -1,10 +1,10 @@
 // ChannelCard.tsx
 import Image from "next/image";
-import { Button } from "@/core/ui/button";
+import { Button } from "@/components/ui/button";
 import useJoinChannel from "@/api/Channels/useJoinChannelMutation";
 import { type APIGetChannelsData } from "@/api/Channels/useGetChannels";
 import { useRouter } from "next/navigation";
-import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
 
 interface ChannelCardProps {
   channel: NonNullable<APIGetChannelsData>["getChannels"]["results"][number];

@@ -1,5 +1,5 @@
 import { useGraphQLMutationProtected } from "../helpers";
-import { graphql } from "@/core/lib/react-query-graphql";
+import { graphql } from "@/lib/react-query-graphql";
 
 const UPDATE_CHANNEL_MUTATION = graphql(`
   #graphql

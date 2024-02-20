@@ -1,7 +1,7 @@
 "use client";
-import NewPost from "@/Features/Post/NewPost";
-import PostCard, { PostCardSkeleton } from "@/Features/Post/PostCard";
-import { cn } from "@/core/lib/helper";
+import NewPost from "@/features/Post/NewPost";
+import PostCard, { PostCardSkeleton } from "@/features/Post/PostCard";
+import { cn } from "@/utils/cn";
 
 interface Props {
   className?: string;

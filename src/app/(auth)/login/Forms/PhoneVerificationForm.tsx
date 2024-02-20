@@ -3,8 +3,8 @@ import React from "react";
 import { FormikProvider, useFormik } from "formik";
 import Link from "next/link";
 
-import { Button } from "@/core/ui/button";
-import { Input } from "@/core/ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const PhoneVerificationForm = () => {
   const formik = useFormik({
@@ -12,7 +12,7 @@ const PhoneVerificationForm = () => {
       phone_number: "",
     },
 
-    onSubmit: (values) => {
+    onSubmit: () => {
       // Handle form submission
       // console.log("Form Values", values);
     },

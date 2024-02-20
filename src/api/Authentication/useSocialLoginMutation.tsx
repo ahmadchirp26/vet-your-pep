@@ -1,6 +1,6 @@
-import { graphql, useGraphQLMutation } from "@/core/lib/react-query-graphql";
+import { graphql, useGraphQLMutation } from "@/lib/react-query-graphql";
 import { mutateSession } from "./mutateSession";
-import { useToast } from "@/core/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 
 const SocialLoginDocument = graphql(`
   mutation continueWithSocialSite($input: RegisterOrLoginSocialInput!) {

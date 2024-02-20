@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
-import { Button } from "@/core/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   userThatLiked: {

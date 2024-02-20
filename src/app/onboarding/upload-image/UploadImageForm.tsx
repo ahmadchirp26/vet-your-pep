@@ -2,16 +2,16 @@
 import React from "react";
 import { useFormik } from "formik";
 import Image from "next/image";
-import { Button } from "@/core/ui/button";
+import { Button } from "@/components/ui/button";
 import * as z from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
-import UploadFileButton from "@/core/components/upload-file-button";
+import UploadFileButton from "@/components/upload-file-button";
 import useProtectedS3UploadHandler from "@/api/S3Bucket/useProtectedS3UploadHandler";
 import useUpdateCustomerMutation from "@/api/AccountSettings/useUpdateCustomerMutation";
 import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
-import { Skeleton } from "@/core/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from "next/navigation";
-import { toast } from "@/core/ui/use-toast";
+import { toast } from "@/components/ui/use-toast";
 
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = [

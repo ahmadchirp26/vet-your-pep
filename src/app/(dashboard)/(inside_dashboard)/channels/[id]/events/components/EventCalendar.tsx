@@ -1,5 +1,5 @@
 "use client";
-import { Calendar } from "@/core/ui/calendar";
+import { Calendar } from "@/components/ui/calendar";
 import React from "react";
 
 const EventCalendar = () => {
