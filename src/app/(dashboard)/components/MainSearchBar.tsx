@@ -4,7 +4,6 @@ import { cn } from "@/core/lib/helper";
 import { Input } from "@/core/ui/input";
 import { useState } from "react";
 import { useCustomerSearch } from "@/api/SearchCustomer/useCustomerSearch";
-import Image from "next/image";
 import { Avatar, AvatarFallback } from "@/core/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
@@ -50,19 +49,24 @@ const MainSearchBar = ({ className }: Props) => {
           {data.searchCustomers.results.map((user) => (
             <div
               key={user.id}
-              className="flex items-center cursor-pointer hover:bg-greenaccent rounded-xl"
+              className="space-y-4"
             >
-              <Avatar className="hover:bg-greenaccent rounded-md cursor-pointer">
-                <AvatarImage
-                  src={user.profileImage ?? undefined}
-                  alt={user.firstName}
-                />
-                <AvatarFallback>
-                  {user.firstName.charAt(0) + user.lastName.charAt(0)}
-                </AvatarFallback>
-              </Avatar>
-              <div className="text-white p-2  w-full rounded-xl ">{`${user.firstName} ${user.lastName}`}</div>
-            </div>
+              <div
+                key={user.id}
+                className="flex items-center cursor-pointer hover:bg-greenaccent rounded-xl space-y-2"
+              >
+                <Avatar className="hover:bg-greenaccent rounded-md cursor-pointer">
+                  <AvatarImage
+                    src={user.profileImage ?? undefined}
+                    alt={user.firstName}
+                  />
+                  <AvatarFallback>
+                    {user.firstName.charAt(0).toLocaleUpperCase() + user.lastName.toUpperCase().charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="text-white p-2  w-full rounded-xl ">{`${user.firstName} ${user.lastName}`}</div>
+              </div>
+            </Link>
           ))}
         </div>
       )}

@@ -26,8 +26,8 @@ const GroupAdmin = ({ channelId }: Props) => {
             alt={data.getChannelById.moderator.firstName}
           />
           <AvatarFallback>
-            {data.getChannelById.moderator.firstName.charAt(0) +
-              data.getChannelById.moderator.lastName.charAt(0)}
+            {data.getChannelById.moderator.firstName.charAt(0).toLocaleUpperCase() +
+              data.getChannelById.moderator.lastName.toUpperCase().charAt(0)}
           </AvatarFallback>
         </Avatar>
         <p className="text-graylight text-sm">

@@ -1,4 +1,5 @@
 import useGetChannels from "@/api/Channels/useGetChannels";
+import { cn } from "@/core/lib/helper";
 import {
   Select,
   SelectContent,
@@ -6,9 +7,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/core/ui/select";
+import { useField } from "formik";
 import React from "react";
 
-const SelectChannel = (props: React.ComponentProps<typeof Select>) => {
+const SelectChannel = (
+  props: React.ComponentProps<typeof Select> & { name: string }
+) => {
+  const [field, meta, helpers] = useField({ name: props.name });
   const { data, status } = useGetChannels({
     limit: 100,
     joined: true,
@@ -22,8 +27,21 @@ const SelectChannel = (props: React.ComponentProps<typeof Select>) => {
     return <div>Failed to load</div>;
   }
   return (
-    <Select {...props}>
-      <SelectTrigger className="w-[160px] h-[35px]">
+    <Select
+      {...props}
+      name={props.name}
+      onValueChange={(v) => {
+        helpers.setValue(v);
+      }}
+      value={field.value}
+    >
+      <SelectTrigger
+        className={cn(
+          "h-10 px-4 py-2 max-w-48 font-bold",
+          meta.error && "border-2 border-red-600 text-red-400"
+        )}
+        onBlur={field.onBlur}
+      >
         <SelectValue placeholder="Select Channel" />
       </SelectTrigger>
       <SelectContent>

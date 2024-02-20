@@ -22,8 +22,17 @@ const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
       totalMembers
       title
       posts {
+        id
+        createdDate
         body
         images
+        customer {
+          id
+          firstName
+          lastName
+          email
+          profileImage
+        }
         comments {
           content
           id
@@ -39,8 +48,14 @@ const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
         likeCount
         likes {
           id
-          user
-        }
+          user {
+            firstName
+            lastName
+            id
+            email
+            profileImage
+          }
+        } 
       }
       members {
         id
