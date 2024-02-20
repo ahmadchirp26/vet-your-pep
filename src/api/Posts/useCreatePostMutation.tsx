@@ -2,6 +2,7 @@ import { graphql } from "@/core/lib/react-query-graphql";
 import { useGraphQLMutationProtected } from "../helpers";
 import { useQueryClient } from "@tanstack/react-query";
 import { channelKeys } from "../Channels/query-keys";
+import { userAllFeedsKeys } from "./query-keys";
 
 const CREATE_POST_DOCUMENT = graphql(`
   mutation createPost($input: CreatePostInput!) {
@@ -15,7 +16,10 @@ const CREATE_POST_DOCUMENT = graphql(`
 const useCreatePostMutation = () => {
   const queryClient = useQueryClient()
   return useGraphQLMutationProtected({
-    onSuccess:(_, [{input:{channelId}}]) => {
+    onSuccess:async (_, [{input:{channelId}}]) => {
+      await queryClient.invalidateQueries({
+        queryKey:userAllFeedsKeys.all
+      })
       return queryClient.invalidateQueries({
         queryKey:channelKeys.detail(channelId)
       })

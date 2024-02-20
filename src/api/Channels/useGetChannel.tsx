@@ -23,8 +23,16 @@ const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
       title
       posts {
         id
+        createdDate
         body
         images
+        customer {
+          id
+          firstName
+          lastName
+          email
+          profileImage
+        }
         comments {
           content
           id
@@ -47,7 +55,7 @@ const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
             email
             profileImage
           }
-        }
+        } 
       }
       members {
         id
