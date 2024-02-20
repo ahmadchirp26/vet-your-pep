@@ -4,13 +4,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "next build",
+    "build": "npm run graphqlCodegen && next build",
     "dev": "next dev",
     "check-types": "tsc --noemit",
     "lint": "npm run check-types && next lint",
     "start": "next start",
     "format": "prettier --write src/**/*.{tsx}",
     "prepare": "husky install",
+    "graphqlCodegen": "npx graphql-code-generator --config ./src/core/lib/react-query-graphql/codegen.ts",
     "graphqlCodegen--watch": "npx graphql-code-generator --config ./src/core/lib/react-query-graphql/codegen.ts --watch"
   },
   "dependencies": {
