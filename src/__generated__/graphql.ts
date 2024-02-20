@@ -51,6 +51,7 @@ export type Channel = {
   backgroundImage?: Maybe<Scalars['String']['output']>;
   createdBy?: Maybe<Scalars['String']['output']>;
   createdDate?: Maybe<Scalars['DateTime']['output']>;
+  events?: Maybe<Array<Events>>;
   id: Scalars['ID']['output'];
   image?: Maybe<Scalars['String']['output']>;
   isPaid: Scalars['Boolean']['output'];
@@ -144,10 +145,18 @@ export type CreateCommentInput = {
 };
 
 export type CreateCustomerInput = {
+  cellPhone?: InputMaybe<Scalars['String']['input']>;
   email: Scalars['String']['input'];
   firstName: Scalars['String']['input'];
   lastName: Scalars['String']['input'];
   password: Scalars['String']['input'];
+};
+
+export type CreateEventInput = {
+  channelId: Scalars['String']['input'];
+  images?: InputMaybe<Array<Scalars['String']['input']>>;
+  text: Scalars['String']['input'];
+  title: Scalars['String']['input'];
 };
 
 export type CreateLikeInput = {
@@ -163,6 +172,7 @@ export type CreatePostInput = {
 export type Customer = {
   __typename?: 'Customer';
   cellPhone?: Maybe<Scalars['String']['output']>;
+  channelMembers?: Maybe<Array<Channel>>;
   channels?: Maybe<Array<Channel>>;
   comments?: Maybe<Array<Comments>>;
   createdBy?: Maybe<Scalars['String']['output']>;
@@ -178,7 +188,6 @@ export type Customer = {
   password: Scalars['String']['output'];
   posts?: Maybe<Array<Post>>;
   profileImage?: Maybe<Scalars['String']['output']>;
-  role: UserRole;
   socialProvider?: Maybe<SocialProvider>;
   stripeCustomerId?: Maybe<Scalars['String']['output']>;
   totalFollowers?: Maybe<Scalars['Int']['output']>;
@@ -217,6 +226,23 @@ export type CustomerLoginOrRegisterResponse = {
   __typename?: 'CustomerLoginOrRegisterResponse';
   accessToken: Scalars['String']['output'];
   user: Customer;
+};
+
+export type EventFilterInputs = {
+  search?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Events = {
+  __typename?: 'Events';
+  channel: Channel;
+  createdBy?: Maybe<Scalars['String']['output']>;
+  createdDate?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  images?: Maybe<Array<Scalars['String']['output']>>;
+  text: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updatedBy?: Maybe<Scalars['String']['output']>;
+  updatedDate?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type Likes = {
@@ -273,12 +299,27 @@ export type ListCustomersResponse = {
   totalRows?: Maybe<Scalars['Float']['output']>;
 };
 
+export type ListEventsInput = {
+  filter?: InputMaybe<EventFilterInputs>;
+  limit: Scalars['Float']['input'];
+  offset?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type ListEventsResponse = {
+  __typename?: 'ListEventsResponse';
+  limit: Scalars['Float']['output'];
+  offset?: Maybe<Scalars['Float']['output']>;
+  results: Array<Events>;
+  totalRows?: Maybe<Scalars['Float']['output']>;
+};
+
 export type ListPostsInput = {
   customerId?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<PostFilterInputs>;
   limit: Scalars['Float']['input'];
   myPosts?: InputMaybe<Scalars['Boolean']['input']>;
   offset?: InputMaybe<Scalars['Float']['input']>;
+  userFeed?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type ListPostsResponse = {
@@ -311,26 +352,28 @@ export type Mutation = {
   createComment: SuccessResponse;
   /** This will signup new Customers */
   createCustomer: CustomerLoginOrRegisterResponse;
+  /** This will create new Event */
+  createEvent: SuccessResponse;
   /** This will create new Post */
   createPost: SuccessResponse;
-  /** This will create new Like */
-  createPostLike: SuccessResponse;
   /** This will follow a customer */
   followCustomer: SuccessResponse;
   /** This will create new Channel */
   joinChannel: SuccessResponse;
+  /** This will create new Like on Post */
+  likePost: SuccessResponse;
   /** Admin Login */
   loginAsAdmin: AdminLoginResponse;
   /** Customer Login */
   loginAsCustomer: CustomerLoginOrRegisterResponse;
-  /** This will a customer to moderator */
-  makeModerator: SuccessResponse;
   /** This will save/update user profile image in DB */
   saveCustomerMediaUrl: Scalars['String']['output'];
   /** This will charge the Customer on test stripe */
   testCharge: SuccessResponse;
   /** This will unfollow a customer */
   unfollowCustomer: SuccessResponse;
+  /** This will unlike Post */
+  unlikePost: SuccessResponse;
   /** Update admin data */
   updateAdminData: Scalars['String']['output'];
   /** Update admin email */
@@ -347,10 +390,10 @@ export type Mutation = {
   updateCustomerEmail: CustomerEmailUpdateResponse;
   /** This will update Customer Password */
   updateCustomerPassword: SuccessResponse;
+  /** This will update Event */
+  updateEvent: SuccessResponse;
   /** This will update new Post */
   updatePost: SuccessResponse;
-  /** This will update new Like */
-  updatePostLike: SuccessResponse;
 };
 
 
@@ -379,13 +422,13 @@ export type MutationCreateCustomerArgs = {
 };
 
 
-export type MutationCreatePostArgs = {
-  input: CreatePostInput;
+export type MutationCreateEventArgs = {
+  input: CreateEventInput;
 };
 
 
-export type MutationCreatePostLikeArgs = {
-  input: CreateLikeInput;
+export type MutationCreatePostArgs = {
+  input: CreatePostInput;
 };
 
 
@@ -399,6 +442,11 @@ export type MutationJoinChannelArgs = {
 };
 
 
+export type MutationLikePostArgs = {
+  input: CreateLikeInput;
+};
+
+
 export type MutationLoginAsAdminArgs = {
   input: LoginAdminInput;
 };
@@ -406,11 +454,6 @@ export type MutationLoginAsAdminArgs = {
 
 export type MutationLoginAsCustomerArgs = {
   input: LoginCustomerInput;
-};
-
-
-export type MutationMakeModeratorArgs = {
-  input: Scalars['String']['input'];
 };
 
 
@@ -426,6 +469,11 @@ export type MutationTestChargeArgs = {
 
 export type MutationUnfollowCustomerArgs = {
   customerId: Scalars['String']['input'];
+};
+
+
+export type MutationUnlikePostArgs = {
+  input: UpdateLikeInput;
 };
 
 
@@ -469,13 +517,13 @@ export type MutationUpdateCustomerPasswordArgs = {
 };
 
 
-export type MutationUpdatePostArgs = {
-  input: UpdatePostInput;
+export type MutationUpdateEventArgs = {
+  input: UpdateEventInput;
 };
 
 
-export type MutationUpdatePostLikeArgs = {
-  input: UpdateLikeInput;
+export type MutationUpdatePostArgs = {
+  input: UpdatePostInput;
 };
 
 export type OtherCustomerDataResponse = {
@@ -491,10 +539,15 @@ export type PageData = {
   offset?: Maybe<Scalars['Int']['output']>;
 };
 
+export type PartialEventResponse = {
+  __typename?: 'PartialEventResponse';
+  results: Array<Events>;
+};
+
 export type Post = {
   __typename?: 'Post';
   body: Scalars['String']['output'];
-  channel?: Maybe<Channel>;
+  channel: Channel;
   comments?: Maybe<Array<Comments>>;
   createdBy?: Maybe<Scalars['String']['output']>;
   createdDate?: Maybe<Scalars['DateTime']['output']>;
@@ -529,9 +582,15 @@ export type Query = {
   getCustomerUploadUrl: S3SignedUrlResponse;
   /** The List of Customers with Pagination and filters */
   getCustomersAdmin: ListCustomersResponse;
+  /** Get S3 bucket Signed Url */
+  getEventUploadUrls: Array<S3SignedUrlResponse>;
+  /** The List of events with Pagination and filters */
+  getEvents: ListEventsResponse;
+  /** The List of events by channelId */
+  getEventsByChannel: PartialEventResponse;
   /** Get the followers of the authenticated customer */
   getFollowers: Array<Customer>;
-  /** Get the followers of the authenticated customer */
+  /** Get the following of the authenticated customer */
   getFollowing: Array<Customer>;
   /** Get other Customer Data */
   getOtherCustomerData: OtherCustomerDataResponse;
@@ -563,6 +622,21 @@ export type QueryGetCommentsArgs = {
 
 export type QueryGetCustomersAdminArgs = {
   input: ListCustomersInputs;
+};
+
+
+export type QueryGetEventUploadUrlsArgs = {
+  count: Scalars['Float']['input'];
+};
+
+
+export type QueryGetEventsArgs = {
+  input: ListEventsInput;
+};
+
+
+export type QueryGetEventsByChannelArgs = {
+  channelId: Scalars['String']['input'];
 };
 
 
@@ -659,8 +733,15 @@ export type UpdateCustomerInput = {
   stripeCustomerId?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type UpdateEventInput = {
+  channelId: Scalars['String']['input'];
+  eventId: Scalars['ID']['input'];
+  images?: InputMaybe<Array<Scalars['String']['input']>>;
+  text: Scalars['String']['input'];
+  title: Scalars['String']['input'];
+};
+
 export type UpdateLikeInput = {
-  likeId: Scalars['ID']['input'];
   postId: Scalars['String']['input'];
 };
 
@@ -671,16 +752,10 @@ export type UpdatePostInput = {
   postId: Scalars['ID']['input'];
 };
 
-/** The role of Users */
-export enum UserRole {
-  Moderator = 'MODERATOR',
-  User = 'USER'
-}
-
 export type GetCustomerDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCustomerDataQuery = { __typename?: 'Query', getCustomerData: { __typename?: 'Customer', cellPhone?: string | null, email: string, firstName: string, id: string, isActive?: boolean | null, lastName: string, profileImage?: string | null, password: string, stripeCustomerId?: string | null, followers?: Array<{ __typename?: 'CustomerFollower', id: string }> | null, following?: Array<{ __typename?: 'CustomerFollower', id: string }> | null, posts?: Array<{ __typename?: 'Post', id: string }> | null } };
+export type GetCustomerDataQuery = { __typename?: 'Query', getCustomerData: { __typename?: 'Customer', cellPhone?: string | null, email: string, firstName: string, totalFollowers?: number | null, totalFollowings?: number | null, id: string, isActive?: boolean | null, lastName: string, profileImage?: string | null, password: string, stripeCustomerId?: string | null, followers?: Array<{ __typename?: 'CustomerFollower', id: string }> | null, following?: Array<{ __typename?: 'CustomerFollower', id: string }> | null, posts?: Array<{ __typename?: 'Post', id: string }> | null } };
 
 export type UpdateCustomerMutationMutationVariables = Exact<{
   input: UpdateCustomerInput;
@@ -719,7 +794,7 @@ export type GetChannelByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetChannelByIdQuery = { __typename?: 'Query', getChannelById: { __typename?: 'Channel', backgroundImage?: string | null, image?: string | null, price?: number | null, about?: string | null, id: string, isPaid: boolean, rules?: string | null, status: ChannelStatus, totalMembers?: number | null, title: string, posts?: Array<{ __typename?: 'Post', id: string, body: string, images?: Array<string> | null, likeCount?: number | null, comments?: Array<{ __typename?: 'Comments', content: string, id: string, user: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } }> | null, likes?: Array<{ __typename?: 'Likes', id: string, user?: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } | null }> | null }> | null, members?: Array<{ __typename?: 'ChannelMember', id: string, paidStatus: boolean, roleChannel: ChannelUserRole, customer: { __typename?: 'Customer', id: string, firstName: string, lastName: string, email: string, profileImage?: string | null } }> | null, moderator: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } } };
+export type GetChannelByIdQuery = { __typename?: 'Query', getChannelById: { __typename?: 'Channel', backgroundImage?: string | null, image?: string | null, price?: number | null, about?: string | null, id: string, isPaid: boolean, rules?: string | null, status: ChannelStatus, totalMembers?: number | null, title: string, posts?: Array<{ __typename?: 'Post', id: string, createdDate?: any | null, body: string, images?: Array<string> | null, likeCount?: number | null, customer: { __typename?: 'Customer', id: string, firstName: string, lastName: string, email: string, profileImage?: string | null }, comments?: Array<{ __typename?: 'Comments', content: string, id: string, user: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } }> | null, likes?: Array<{ __typename?: 'Likes', id: string, user?: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } | null }> | null }> | null, members?: Array<{ __typename?: 'ChannelMember', id: string, paidStatus: boolean, roleChannel: ChannelUserRole, customer: { __typename?: 'Customer', id: string, firstName: string, lastName: string, email: string, profileImage?: string | null } }> | null, moderator: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } } };
 
 export type GetAllChannelsWithPaginationQueryVariables = Exact<{
   input: ListChannelsInput;
@@ -735,12 +810,26 @@ export type JoinChannelMutationVariables = Exact<{
 
 export type JoinChannelMutation = { __typename?: 'Mutation', joinChannel: { __typename?: 'SuccessResponse', message?: string | null, success?: boolean | null } };
 
+export type UpdateChannelMutationVariables = Exact<{
+  input: UpdateChannelInput;
+}>;
+
+
+export type UpdateChannelMutation = { __typename?: 'Mutation', updateChannel: { __typename?: 'SuccessResponse', message?: string | null, success?: boolean | null } };
+
 export type GetOtherCustomerDataQueryVariables = Exact<{
   input: Scalars['String']['input'];
 }>;
 
 
-export type GetOtherCustomerDataQuery = { __typename?: 'Query', getOtherCustomerData: { __typename?: 'OtherCustomerDataResponse', isFollowing: boolean, user: { __typename?: 'Customer', id: string, email: string, firstName: string, lastName: string, profileImage?: string | null, role: UserRole, totalFollowers?: number | null, totalFollowings?: number | null, createdDate?: any | null, posts?: Array<{ __typename?: 'Post', id: string, body: string, images?: Array<string> | null, likeCount?: number | null, channel?: { __typename?: 'Channel', id: string, title: string } | null, comments?: Array<{ __typename?: 'Comments', content: string, id: string, user: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } }> | null, likes?: Array<{ __typename?: 'Likes', id: string, user?: { __typename?: 'Customer', id: string, email: string, firstName: string, lastName: string, profileImage?: string | null } | null }> | null }> | null } } };
+export type GetOtherCustomerDataQuery = { __typename?: 'Query', getOtherCustomerData: { __typename?: 'OtherCustomerDataResponse', isFollowing: boolean, user: { __typename?: 'Customer', id: string, email: string, firstName: string, lastName: string, profileImage?: string | null, totalFollowers?: number | null, totalFollowings?: number | null, createdDate?: any | null, posts?: Array<{ __typename?: 'Post', id: string, body: string, images?: Array<string> | null, likeCount?: number | null, channel: { __typename?: 'Channel', id: string, title: string }, comments?: Array<{ __typename?: 'Comments', content: string, id: string, user: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } }> | null, likes?: Array<{ __typename?: 'Likes', id: string, user?: { __typename?: 'Customer', id: string, email: string, firstName: string, lastName: string, profileImage?: string | null } | null }> | null }> | null } } };
+
+export type CreateCommentMutationVariables = Exact<{
+  input: CreateCommentInput;
+}>;
+
+
+export type CreateCommentMutation = { __typename?: 'Mutation', createComment: { __typename?: 'SuccessResponse', message?: string | null } };
 
 export type CreatePostMutationVariables = Exact<{
   input: CreatePostInput;
@@ -749,19 +838,40 @@ export type CreatePostMutationVariables = Exact<{
 
 export type CreatePostMutation = { __typename?: 'Mutation', createPost: { __typename?: 'SuccessResponse', message?: string | null, success?: boolean | null } };
 
-export type CreatePostLikeMutationVariables = Exact<{
+export type LikePostMutationVariables = Exact<{
   input: CreateLikeInput;
 }>;
 
 
-export type CreatePostLikeMutation = { __typename?: 'Mutation', createPostLike: { __typename?: 'SuccessResponse', message?: string | null } };
+export type LikePostMutation = { __typename?: 'Mutation', likePost: { __typename?: 'SuccessResponse', message?: string | null } };
+
+export type UnlikePostMutationVariables = Exact<{
+  input: UpdateLikeInput;
+}>;
+
+
+export type UnlikePostMutation = { __typename?: 'Mutation', unlikePost: { __typename?: 'SuccessResponse', message?: string | null } };
 
 export type GetUserAllFeedsQueryVariables = Exact<{
   input: ListChannelsInput;
 }>;
 
 
-export type GetUserAllFeedsQuery = { __typename?: 'Query', getChannels: { __typename?: 'ListChannelsResponse', limit: number, offset?: number | null, totalRows?: number | null, results: Array<{ __typename?: 'Channel', id: string, title: string, status: ChannelStatus, about?: string | null, posts?: Array<{ __typename?: 'Post', id: string, body: string, images?: Array<string> | null, likeCount?: number | null, channel?: { __typename?: 'Channel', id: string, title: string } | null, comments?: Array<{ __typename?: 'Comments', content: string, id: string, user: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } }> | null, likes?: Array<{ __typename?: 'Likes', id: string, user?: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } | null }> | null }> | null }> } };
+export type GetUserAllFeedsQuery = { __typename?: 'Query', getChannels: { __typename?: 'ListChannelsResponse', limit: number, offset?: number | null, totalRows?: number | null, results: Array<{ __typename?: 'Channel', id: string, title: string, status: ChannelStatus, about?: string | null, posts?: Array<{ __typename?: 'Post', id: string, body: string, images?: Array<string> | null, createdDate?: any | null, likeCount?: number | null, channel: { __typename?: 'Channel', id: string, title: string }, comments?: Array<{ __typename?: 'Comments', content: string, id: string, user: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } }> | null, customer: { __typename?: 'Customer', firstName: string, lastName: string, email: string, id: string, profileImage?: string | null }, likes?: Array<{ __typename?: 'Likes', id: string, user?: { __typename?: 'Customer', firstName: string, lastName: string, id: string, email: string, profileImage?: string | null } | null }> | null }> | null }> } };
+
+export type FollowCustomerMutationVariables = Exact<{
+  customerId: Scalars['String']['input'];
+}>;
+
+
+export type FollowCustomerMutation = { __typename?: 'Mutation', followCustomer: { __typename?: 'SuccessResponse', message?: string | null, success?: boolean | null } };
+
+export type UnfollowCustomerMutationVariables = Exact<{
+  customerId: Scalars['String']['input'];
+}>;
+
+
+export type UnfollowCustomerMutation = { __typename?: 'Mutation', unfollowCustomer: { __typename?: 'SuccessResponse', message?: string | null, success?: boolean | null } };
 
 export type GetPostUploadUrlsQueryVariables = Exact<{
   input: Scalars['Float']['input'];
@@ -780,7 +890,7 @@ export type SearchCustomersQueryVariables = Exact<{
 }>;
 
 
-export type SearchCustomersQuery = { __typename?: 'Query', searchCustomers: { __typename?: 'SearchCustomersResponse', totalCount?: number | null, results?: Array<{ __typename?: 'Customer', cellPhone?: string | null, email: string, firstName: string, id: string, isActive?: boolean | null, lastName: string, profileImage?: string | null, password: string, role: UserRole, stripeCustomerId?: string | null, totalFollowers?: number | null, totalFollowings?: number | null }> | null } };
+export type SearchCustomersQuery = { __typename?: 'Query', searchCustomers: { __typename?: 'SearchCustomersResponse', totalCount?: number | null, results?: Array<{ __typename?: 'Customer', cellPhone?: string | null, email: string, firstName: string, id: string, isActive?: boolean | null, lastName: string, profileImage?: string | null, password: string, stripeCustomerId?: string | null, totalFollowers?: number | null, totalFollowings?: number | null }> | null } };
 
 export type GetChatTokenQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -788,19 +898,24 @@ export type GetChatTokenQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetChatTokenQuery = { __typename?: 'Query', getChatToken: string };
 
 
-export const GetCustomerDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCustomerData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCustomerData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cellPhone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isActive"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}},{"kind":"Field","name":{"kind":"Name","value":"password"}},{"kind":"Field","name":{"kind":"Name","value":"stripeCustomerId"}},{"kind":"Field","name":{"kind":"Name","value":"followers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"following"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetCustomerDataQuery, GetCustomerDataQueryVariables>;
+export const GetCustomerDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCustomerData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCustomerData"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cellPhone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"totalFollowers"}},{"kind":"Field","name":{"kind":"Name","value":"totalFollowings"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isActive"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}},{"kind":"Field","name":{"kind":"Name","value":"password"}},{"kind":"Field","name":{"kind":"Name","value":"stripeCustomerId"}},{"kind":"Field","name":{"kind":"Name","value":"followers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"following"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetCustomerDataQuery, GetCustomerDataQueryVariables>;
 export const UpdateCustomerMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateCustomerMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateCustomerInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateCustomer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cellPhone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isActive"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}},{"kind":"Field","name":{"kind":"Name","value":"socialProvider"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createdDate"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"provider"}},{"kind":"Field","name":{"kind":"Name","value":"socialId"}}]}},{"kind":"Field","name":{"kind":"Name","value":"stripeCustomerId"}}]}}]}}]} as unknown as DocumentNode<UpdateCustomerMutationMutation, UpdateCustomerMutationMutationVariables>;
 export const CreateCustomerDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateCustomer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createCustomer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"firstName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"firstName"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"lastName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lastName"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}}]}}]}}]} as unknown as DocumentNode<CreateCustomerMutation, CreateCustomerMutationVariables>;
 export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"loginAsCustomer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accessToken"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
 export const ContinueWithSocialSiteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"continueWithSocialSite"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RegisterOrLoginSocialInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"continueWithSocialSite"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}},{"kind":"Field","name":{"kind":"Name","value":"accessToken"}}]}}]}}]} as unknown as DocumentNode<ContinueWithSocialSiteMutation, ContinueWithSocialSiteMutationVariables>;
-export const GetChannelByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getChannelById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getChannelById"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"backgroundImage"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isPaid"}},{"kind":"Field","name":{"kind":"Name","value":"rules"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"totalMembers"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"likes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}},{"kind":"Field","name":{"kind":"Name","value":"paidStatus"}},{"kind":"Field","name":{"kind":"Name","value":"roleChannel"}}]}},{"kind":"Field","name":{"kind":"Name","value":"moderator"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}}]}}]} as unknown as DocumentNode<GetChannelByIdQuery, GetChannelByIdQueryVariables>;
+export const GetChannelByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getChannelById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getChannelById"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"backgroundImage"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isPaid"}},{"kind":"Field","name":{"kind":"Name","value":"rules"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"totalMembers"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"createdDate"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"likes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}},{"kind":"Field","name":{"kind":"Name","value":"paidStatus"}},{"kind":"Field","name":{"kind":"Name","value":"roleChannel"}}]}},{"kind":"Field","name":{"kind":"Name","value":"moderator"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}}]}}]} as unknown as DocumentNode<GetChannelByIdQuery, GetChannelByIdQueryVariables>;
 export const GetAllChannelsWithPaginationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllChannelsWithPagination"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ListChannelsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getChannels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"limit"}},{"kind":"Field","name":{"kind":"Name","value":"offset"}},{"kind":"Field","name":{"kind":"Name","value":"totalRows"}},{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"backgroundImage"}},{"kind":"Field","name":{"kind":"Name","value":"image"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"rules"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"isPaid"}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"paidStatus"}},{"kind":"Field","name":{"kind":"Name","value":"roleChannel"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetAllChannelsWithPaginationQuery, GetAllChannelsWithPaginationQueryVariables>;
 export const JoinChannelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"JoinChannel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"joinChannel"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"channelId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<JoinChannelMutation, JoinChannelMutationVariables>;
-export const GetOtherCustomerDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOtherCustomerData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getOtherCustomerData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"customerId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isFollowing"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"totalFollowers"}},{"kind":"Field","name":{"kind":"Name","value":"totalFollowings"}},{"kind":"Field","name":{"kind":"Name","value":"createdDate"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"channel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"likes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetOtherCustomerDataQuery, GetOtherCustomerDataQueryVariables>;
+export const UpdateChannelDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateChannel"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateChannelInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateChannel"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<UpdateChannelMutation, UpdateChannelMutationVariables>;
+export const GetOtherCustomerDataDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getOtherCustomerData"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getOtherCustomerData"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"customerId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isFollowing"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}},{"kind":"Field","name":{"kind":"Name","value":"totalFollowers"}},{"kind":"Field","name":{"kind":"Name","value":"totalFollowings"}},{"kind":"Field","name":{"kind":"Name","value":"createdDate"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"channel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"likes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetOtherCustomerDataQuery, GetOtherCustomerDataQueryVariables>;
+export const CreateCommentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createComment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateCommentInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createComment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<CreateCommentMutation, CreateCommentMutationVariables>;
 export const CreatePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createPost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreatePostInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createPost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<CreatePostMutation, CreatePostMutationVariables>;
-export const CreatePostLikeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createPostLike"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateLikeInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createPostLike"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<CreatePostLikeMutation, CreatePostLikeMutationVariables>;
-export const GetUserAllFeedsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserAllFeeds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ListChannelsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getChannels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"limit"}},{"kind":"Field","name":{"kind":"Name","value":"offset"}},{"kind":"Field","name":{"kind":"Name","value":"totalRows"}},{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"channel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"likes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserAllFeedsQuery, GetUserAllFeedsQueryVariables>;
+export const LikePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"likePost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateLikeInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"likePost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<LikePostMutation, LikePostMutationVariables>;
+export const UnlikePostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"unlikePost"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateLikeInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unlikePost"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]} as unknown as DocumentNode<UnlikePostMutation, UnlikePostMutationVariables>;
+export const GetUserAllFeedsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getUserAllFeeds"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ListChannelsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getChannels"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"limit"}},{"kind":"Field","name":{"kind":"Name","value":"offset"}},{"kind":"Field","name":{"kind":"Name","value":"totalRows"}},{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"status"}},{"kind":"Field","name":{"kind":"Name","value":"about"}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"createdDate"}},{"kind":"Field","name":{"kind":"Name","value":"channel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"customer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}},{"kind":"Field","name":{"kind":"Name","value":"likeCount"}},{"kind":"Field","name":{"kind":"Name","value":"likes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetUserAllFeedsQuery, GetUserAllFeedsQueryVariables>;
+export const FollowCustomerDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"FollowCustomer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"customerId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"followCustomer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"customerId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"customerId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<FollowCustomerMutation, FollowCustomerMutationVariables>;
+export const UnfollowCustomerDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UnfollowCustomer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"customerId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unfollowCustomer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"customerId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"customerId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"success"}}]}}]}}]} as unknown as DocumentNode<UnfollowCustomerMutation, UnfollowCustomerMutationVariables>;
 export const GetPostUploadUrlsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getPostUploadUrls"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getPostUploadUrls"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"count"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"signedUrl"}}]}}]}}]} as unknown as DocumentNode<GetPostUploadUrlsQuery, GetPostUploadUrlsQueryVariables>;
 export const GetCustomerSignedUrlDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getCustomerSignedURL"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getCustomerUploadUrl"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fileName"}},{"kind":"Field","name":{"kind":"Name","value":"signedUrl"}}]}}]}}]} as unknown as DocumentNode<GetCustomerSignedUrlQuery, GetCustomerSignedUrlQueryVariables>;
-export const SearchCustomersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SearchCustomers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"search"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"searchCustomers"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"search"},"value":{"kind":"Variable","name":{"kind":"Name","value":"search"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalCount"}},{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cellPhone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isActive"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}},{"kind":"Field","name":{"kind":"Name","value":"password"}},{"kind":"Field","name":{"kind":"Name","value":"role"}},{"kind":"Field","name":{"kind":"Name","value":"stripeCustomerId"}},{"kind":"Field","name":{"kind":"Name","value":"totalFollowers"}},{"kind":"Field","name":{"kind":"Name","value":"totalFollowings"}}]}}]}}]}}]} as unknown as DocumentNode<SearchCustomersQuery, SearchCustomersQueryVariables>;
+export const SearchCustomersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SearchCustomers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"search"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"searchCustomers"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"search"},"value":{"kind":"Variable","name":{"kind":"Name","value":"search"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"totalCount"}},{"kind":"Field","name":{"kind":"Name","value":"results"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cellPhone"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"isActive"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"profileImage"}},{"kind":"Field","name":{"kind":"Name","value":"password"}},{"kind":"Field","name":{"kind":"Name","value":"stripeCustomerId"}},{"kind":"Field","name":{"kind":"Name","value":"totalFollowers"}},{"kind":"Field","name":{"kind":"Name","value":"totalFollowings"}}]}}]}}]}}]} as unknown as DocumentNode<SearchCustomersQuery, SearchCustomersQueryVariables>;
 export const GetChatTokenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetChatToken"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getChatToken"}}]}}]} as unknown as DocumentNode<GetChatTokenQuery, GetChatTokenQueryVariables>;

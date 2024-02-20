@@ -3,14 +3,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/core/lib/helper";
 import { useGetChannel } from "@/api/Channels/useGetChannel";
+import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/core/ui/dropdown-menu";
+import { MoreVerticalIcon } from "lucide-react";
+import { useState } from "react";
+import ChannelRules from "./ChannelRules";
 
 interface Props {
   className?: string;
   channelId: string;
 }
 const Banner = ({ channelId, className }: Props) => {
+  const [isChannelRulesOpen, setIsChannelRulesOpen] = useState(false);
   const { data, status } = useGetChannel(channelId);
-  console.log("s", data);
+  const { data: userData } = useCustomerDataQuery();
+  // console.log("User Data", userData);
+  // console.log("Channel Data", data);
   if (status === "pending") {
     //[Todo]: add skeleton
     return <p>{"Loading..."}</p>;
@@ -29,7 +42,7 @@ const Banner = ({ channelId, className }: Props) => {
         height: "200px", // Optional: Set the height
       }}
     >
-      <div className="absolute rounded-full w-28 h-28 overflow-hidden">
+      <div className="absolute rounded-full w-32 h-32 bottom-5 overflow-hidden">
         <Image
           loader={({ src }) => `https://placehold.co/${src}`}
           src={"112x112/ACACAC/00000?text=Profile"}
@@ -37,18 +50,45 @@ const Banner = ({ channelId, className }: Props) => {
           layout="fill"
         />
       </div>
-      <div>
-        <Link href="/channels/:id/edit" className="cursor-pointer">
-          <div className="absolute top-5 right-5 bg-greensharp rounded-3xl flex justify-center items-center cursor-pointer p-2 outline-none">
-            <Image
-              src={"/assets/pencil_icon.svg"}
-              alt="pencil_icon"
-              width={18}
-              height={18}
-            />
-          </div>
-        </Link>
-      </div>
+      {data?.getChannelById?.moderator?.id === userData?.getCustomerData?.id ? (
+        <div>
+          <Link href={`/channels/${channelId}/edit`} className="cursor-pointer">
+            <div className="absolute top-5 right-5 bg-greensharp rounded-3xl flex justify-center items-center cursor-pointer p-2 outline-none">
+              <Image
+                src={"/assets/pencil_icon.svg"}
+                alt="pencil_icon"
+                width={18}
+                height={18}
+              />
+            </div>
+          </Link>
+        </div>
+      ) : (
+        <div className="absolute top-5 right-5 bg-greensharp rounded-3xl flex justify-center items-center cursor-pointer p-2 outline-none">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="outline-none">
+              <MoreVerticalIcon className="text-white cursor-pointer w-4 h-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              className="w-56 bg-greenaccent  text-white outline-none border-none "
+              align="end"
+              forceMount
+            >
+              <DropdownMenuItem
+                onClick={() => setIsChannelRulesOpen(true)}
+                className="cursor-pointer"
+              >
+                Channel Rules
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <ChannelRules
+            isOpen={isChannelRulesOpen}
+            onClose={() => setIsChannelRulesOpen(false)}
+            channelId={channelId}
+          />
+        </div>
+      )}
       <div className="absolute bottom-5 right-5 flex flex-col">
         <span className="text-white font-bold text-4xl max-lg:text-2xl max-sm:text-xl">
           {data.getChannelById.title}

@@ -22,7 +22,7 @@ const UploadFileButton = React.forwardRef<HTMLInputElement, Props>(({
         {...inputProps}
       />
       <div
-        className={cn("relative", className)}
+        className={cn("relative max-w-max", className)}
         onClick={() => {
           void inputRef.current?.click();
         }}

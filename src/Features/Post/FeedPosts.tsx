@@ -1,49 +1,74 @@
 "use client";
 import NewPost from "@/Features/Post/NewPost";
-import PostCard from "@/Features/Cards/PostCard";
+import PostCard, { PostCardSkeleton } from "@/Features/Post/PostCard";
+import { cn } from "@/core/lib/helper";
 
 interface Props {
+  className?: string;
   channelId?: string;
-  status:'pending' | 'error' | 'success';
-  posts?:Array<{
-    id:string;
-    body:string;
-    channel:{
-      id:string;
-      title:string;
-    }
-    comments:Array<{
-      content:string;
-      user:{
-        profileImage?:string;
-        firstName:string;
-        lastName:string;
-      }
+  status: "pending" | "error" | "success";
+  posts?: Array<{
+    id: string;
+    body: string;
+    createdAt: Date;
+    channel: {
+      id: string;
+      title: string;
+    };
+    customer: {
+      id: string;
+      profileImage?: string;
+      firstName: string;
+      lastName: string;
+    };
+    comments: Array<{
+      content: string;
+      user: {
+        id: string;
+        profileImage?: string;
+        firstName: string;
+        lastName: string;
+      };
     }>;
-    likes:Array<{
-      user:{
-        id:string;
-        profileImage?:string;
-        firstName:string;
-        lastName:string;
-      }
+    likes: Array<{
+      user: {
+        id: string;
+        profileImage?: string;
+        firstName: string;
+        lastName: string;
+      };
     }>;
-    images:Array<string>;
-  }>
+    images: Array<string>;
+  }>;
 }
 
-const FeedPosts = ({ status, posts, channelId }: Props) => {
-  
+const FeedPosts = ({ status, posts, channelId, className }: Props) => {
   if (status === "pending") {
     //[Todo]: Add a skeleton
-    return <div>Loading...</div>;
+    return (
+      <div
+        className={cn(
+          "container-drop-shadow w-full rounded-3xl p-4 space-y-8 w-xs",
+          className
+        )}
+      >
+        <PostCardSkeleton />
+        <PostCardSkeleton />
+      </div>
+    );
   }
   if (status === "error") {
     //[Todo]: handle error
     return <div>Failed to load</div>;
   }
+
   return (
-    <div className="container-drop-shadow bg-greendarkest w-full rounded-3xl p-4 gap-3 space-y-8">
+    <div
+      className={cn(
+        "container-drop-shadow bg-greendarkest w-full rounded-3xl p-4 space-y-8 w-xs",
+        className
+      )}
+    >
       <NewPost channelId={channelId} />
       {posts?.map((post, index) => (
         <PostCard
@@ -55,25 +80,30 @@ const FeedPosts = ({ status, posts, channelId }: Props) => {
               commentContent: comment.content,
               postedDate: new Date(),
               postedBy: {
+                id: comment.user.id,
+                firstName: comment.user.firstName,
+                lastName: comment.user.lastName,
                 profileImage: comment.user.profileImage ?? undefined,
-                username: comment.user.firstName + " " + comment.user.lastName,
               },
             })) ?? []
           }
           likes={
             post.likes?.map((l) => ({
-              id: l.user?.id ?? '',
+              id: l.user?.id ?? "",
               profileImage: l.user?.profileImage ?? undefined,
-              username: l.user?.firstName + " " + l.user?.lastName,
+              firstName: l.user?.firstName ?? "",
+              lastName: l.user?.lastName ?? "",
             })) ?? []
           }
           postContent={post.body}
           postId={post.id}
           postImages={post.images ?? []}
-          postedTime={new Date()}
+          postedTime={post.createdAt}
           postedBy={{
-            profileImage: undefined, //post.customer.profileImage ?? undefined,
-            username: "NeedToFix", //post.customer.firstName + ' ' + post.customer.lastName,
+            id: post.customer.id,
+            firstName: post.customer.firstName,
+            lastName: post.customer.lastName,
+            profileImage: post.customer.profileImage ?? undefined,
           }}
         />
       ))}

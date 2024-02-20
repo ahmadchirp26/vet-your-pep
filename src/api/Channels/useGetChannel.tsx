@@ -23,8 +23,16 @@ const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
       title
       posts {
         id
+        createdDate
         body
         images
+        customer {
+          id
+          firstName
+          lastName
+          email
+          profileImage
+        }
         comments {
           content
           id
@@ -47,7 +55,7 @@ const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
             email
             profileImage
           }
-        }
+        } 
       }
       members {
         id
@@ -146,7 +154,7 @@ export const fetchChannelServerSide = async (
     };
   } catch (e) {
     const graphQLError = e as ClientError;
-    console.log(e);
+    // console.log(e);
     // @ts-expect-error @ts-ignore
     if (graphQLError?.response?.errors?.[0]?.statusCode === 400) {
       return notFound();
@@ -158,5 +166,6 @@ export const fetchChannelServerSide = async (
   }
 };
 
-
-export type APIGetChannelByIdQueryData = ReturnType<typeof useGetChannel>['data']
+export type APIGetChannelByIdQueryData = ReturnType<
+  typeof useGetChannel
+>["data"];

@@ -11,6 +11,9 @@ import {
 import { MoreVerticalIcon } from "lucide-react";
 import useCustomerByIdDataQuery from "@/api/Customer/useCustomerByIdQuery";
 import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
+import { useFollowMutation } from "@/api/Profile/useFollowFriend";
+import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import { useUnFollowMutation } from "@/api/Profile/useUnfollowFriend";
 
 interface Props {
   id: string;
@@ -18,8 +21,11 @@ interface Props {
 
 const UserProfile = ({ id }: Props) => {
   const { data, status } = useCustomerByIdDataQuery({ customerId: id });
+  // console.log("Data", data);
   const { data: userSession, status: userSessionStatus } =
     useAuthSessionContext();
+  const followUserMutation = useFollowMutation();
+  const unfollowUserMutation = useUnFollowMutation();
   if (status === "pending" || userSessionStatus === "loading") {
     return <div>Loading...</div>;
   }
@@ -32,20 +38,22 @@ const UserProfile = ({ id }: Props) => {
       <div className="rounded-2xl container-drop-shadow bg-greendarkest p-6 w-2/3 max-lg:w-full flex-col gap-7">
         <div className="flex justify-between items-center">
           <BackButton />
-          <DropdownMenu>
-            <DropdownMenuTrigger className="outline-none bg-greenaccent p-2 rounded-full">
-              <MoreVerticalIcon className="text-white cursor-pointer w-4 h-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              className="w-56 bg-greenaccent  text-white outline-none border-none "
-              align="end"
-              forceMount
-            >
-              <DropdownMenuItem className="cursor-pointer">
-                Block
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {!isMyProfile && (
+            <DropdownMenu>
+              <DropdownMenuTrigger className="outline-none bg-greenaccent p-2 rounded-full">
+                <MoreVerticalIcon className="text-white cursor-pointer w-4 h-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="w-56 bg-greenaccent  text-white outline-none border-none "
+                align="end"
+                forceMount
+              >
+                <DropdownMenuItem className="cursor-pointer">
+                  Block
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
         <div className="flex items-center justify-between max-sm:flex-col gap-5 mt-5 ">
           <div className="flex items-center gap-5">
@@ -92,15 +100,76 @@ const UserProfile = ({ id }: Props) => {
             </div>
           </div>
           <div className="flex flex-col items-center gap-3 max-sm:flex-row">
-            {!isMyProfile && (
-              <div className="flex items-center gap-3 p-2 border border-white rounded-2xl w-32 justify-center cursor-pointer">
-                <Image
-                  src={"/assets/bell_icon.svg"}
-                  alt="follow_icon"
-                  width={12}
-                  height={12}
-                />
-                <span className="text-white">Follow</span>
+            {!isMyProfile && !data?.getOtherCustomerData.isFollowing && (
+              <div
+                className="flex items-center gap-3 p-2 border border-white rounded-2xl w-32 justify-center cursor-pointer"
+                onClick={() =>
+                  followUserMutation.mutate({
+                    customerId: data?.getOtherCustomerData.user.id,
+                  })
+                }
+              >
+                {followUserMutation.status === "pending" ? (
+                  <SpinnerCircle />
+                ) : (
+                  <>
+                    <Image
+                      src={"/assets/bell_icon.svg"}
+                      alt="follow_icon"
+                      width={12}
+                      height={12}
+                    />
+                    <span className="text-white">Follow</span>
+                  </>
+                )}
+              </div>
+
+              // <div
+              //   className="flex items-center gap-3 p-2 border border-white rounded-2xl w-32 justify-center cursor-pointer"
+              //   onClick={() =>
+              //     unfollowUserMutation.mutate({
+              //       customerId: data?.getOtherCustomerData.user.id,
+              //     })
+              //   }
+              // >
+              //   {unfollowUserMutation.status === "pending" ? (
+              //     <SpinnerCircle />
+              //   ) : (
+              //     <>
+              //       <Image
+              //         src={"/assets/bell_icon.svg"}
+              //         alt="follow_icon"
+              //         width={12}
+              //         height={12}
+              //       />
+              //       <span className="text-white">Unfollow</span>
+              //     </>
+              //   )}
+              // </div>
+            )}
+
+            {data?.getOtherCustomerData.isFollowing && (
+              <div
+                className="flex items-center gap-3 p-2 border border-white rounded-2xl w-32 justify-center cursor-pointer"
+                onClick={() =>
+                  unfollowUserMutation.mutate({
+                    customerId: data?.getOtherCustomerData.user.id,
+                  })
+                }
+              >
+                {unfollowUserMutation.status === "pending" ? (
+                  <SpinnerCircle />
+                ) : (
+                  <>
+                    <Image
+                      src={"/assets/bell_icon.svg"}
+                      alt="follow_icon"
+                      width={12}
+                      height={12}
+                    />
+                    <span className="text-white">Unfollow</span>
+                  </>
+                )}
               </div>
             )}
             {/* <div className="flex items-center gap-3 p-2 border border-white rounded-2xl w-32 justify-center cursor-pointer">

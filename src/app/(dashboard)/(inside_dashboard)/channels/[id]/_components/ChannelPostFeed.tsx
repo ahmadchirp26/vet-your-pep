@@ -16,6 +16,14 @@ const ChannelPostFeed = (props: Props) => {
           body: post.body,
           id: post.id,
           images: post.images ?? [],
+          createdAt: post.createdDate,
+          customer:{
+            id: post.customer?.id ?? '',
+            firstName: post.customer?.firstName ?? '',
+            lastName: post.customer?.lastName ?? '',
+            email: post.customer?.email ?? '',
+            profileImage: post.customer?.profileImage ?? undefined,            
+          },
           likes:
             post.likes?.map((l) => ({
               user: {

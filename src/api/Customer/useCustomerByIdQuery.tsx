@@ -13,7 +13,6 @@ const Document = graphql(`
         firstName
         lastName
         profileImage
-        role
         totalFollowers
         totalFollowings
         createdDate

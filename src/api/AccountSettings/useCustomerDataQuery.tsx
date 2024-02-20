@@ -8,6 +8,8 @@ const GetCustomerDataQueryDocument = graphql(`
       cellPhone
       email
       firstName
+      totalFollowers
+      totalFollowings
       id
       isActive
       lastName

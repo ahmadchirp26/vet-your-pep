@@ -51,8 +51,8 @@ const ChannelMembers = ({ channelId }: Props) => {
                       alt={member.customer.firstName}
                     />
                     <AvatarFallback>
-                      {member.customer.firstName.charAt(0) +
-                        member.customer.lastName.charAt(0)}
+                      {member.customer.firstName.charAt(0).toLocaleUpperCase() +
+                        member.customer.lastName.toUpperCase().charAt(0)}
                     </AvatarFallback>
                   </Avatar>
                 </CarouselItem>

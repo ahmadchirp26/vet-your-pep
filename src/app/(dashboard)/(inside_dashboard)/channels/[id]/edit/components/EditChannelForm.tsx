@@ -1,7 +1,7 @@
 "use client";
 
 import { FormikProvider, useFormik } from "formik";
-import Link from "next/link";
+import toast from "react-hot-toast";
 
 import {
   Select,
@@ -13,21 +13,60 @@ import {
 import { Button } from "@/core/ui/button";
 import { Input } from "@/core/ui/input";
 import { Textarea } from "@/core/ui/textarea";
+import { useGetChannel } from "@/api/Channels/useGetChannel";
+import useUpdateChannelMutation from "@/api/Channels/useUpdateChannelMutation";
 
-const EditChannel = () => {
+import { useState } from "react";
+import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+type Props = {
+  channelId: string;
+};
+
+const EditChannel = ({ channelId }: Props) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  // console.log("Real Channel ID", channelId);
+  const { data, status } = useGetChannel(channelId);
+  const { mutateAsync } = useUpdateChannelMutation();
+
   const formik = useFormik({
     initialValues: {
-      groupName: "",
-      groupVisibility: "",
-      channelRule: "",
-      aboutChannel: "",
+      title: data?.getChannelById.title || "",
+      status: data?.getChannelById.status || "",
+      rules: data?.getChannelById.rules || "",
+      about: data?.getChannelById.about || "",
     },
+    enableReinitialize: true,
 
-    onSubmit: (values) => {
-      // Handle form submission
-      // console.log("Form Values", values);
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      try {
+        await mutateAsync({
+          input: {
+            id: channelId,
+            title: values.title,
+            about: values.about,
+            rules: values.rules,
+          },
+        });
+        toast.success("Channel updated successfully");
+        router.back();
+      } catch (e) {
+        toast.error("Error updating channel");
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
+  if (status === "pending") {
+    return "Loading...";
+  }
+  if (status === "error") {
+    return "Error";
+  }
   return (
     <>
       <div className="bg-greendarkest p-6 rounded-lg">
@@ -41,16 +80,19 @@ const EditChannel = () => {
             <div className="flex items-center w-full gap-2">
               <Input
                 type="text"
-                id="groupName"
-                name="groupName"
-                placeholder="Enter Group Name"
+                id="title"
+                name="title"
+                placeholder="Enter Channel Name"
                 onChange={formik.handleChange}
-                value={formik.values.groupName}
+                value={formik.values.title}
                 className="bg-greenaccent rounded-3xl outline-none  border-none placeholder:text-white h-14"
               />
               <Select>
-                <SelectTrigger className="w-full h-14 text-white">
-                  <SelectValue placeholder="Select Visibility" />
+                <SelectTrigger
+                  className="w-full h-14 text-white"
+                  disabled={true}
+                >
+                  <SelectValue placeholder={formik.values.status} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Public">Public</SelectItem>
@@ -63,8 +105,10 @@ const EditChannel = () => {
               <span className="text-white p-2 ">Channel Rule's</span>
               <Textarea
                 placeholder="Write here..."
-                name="channelRule"
+                name="rules"
                 className="text-white"
+                onChange={formik.handleChange}
+                value={formik.values.rules}
               />
             </div>
 
@@ -73,21 +117,22 @@ const EditChannel = () => {
               <span className="text-white p-2 ">About Channel</span>
               <Textarea
                 placeholder="Write here..."
-                name="aboutChannel"
+                name="about"
                 className="text-white"
+                onChange={formik.handleChange}
+                value={formik.values.about}
               />
             </div>
 
             {/* Submit Button */}
             <div className="flex justify-end items-center mt-2">
-              <Link href="/channels/12">
-                <Button
-                  className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-48"
-                  type="submit"
-                >
-                  Save
-                </Button>
-              </Link>
+              <Button
+                className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-48"
+                type="submit"
+                disabled={isLoading}
+              >
+                {isLoading ? <SpinnerCircle /> : "Save"}
+              </Button>
             </div>
           </form>
         </FormikProvider>

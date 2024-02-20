@@ -5,6 +5,7 @@ import SearchBar from "@/app/(dashboard)/_components/SearchBar";
 import { useState } from "react";
 import AllChannels from "@/Features/AllChannels";
 import { useGetChannel } from "@/api/Channels/useGetChannel";
+import Link from "next/link";
 
 const Members = (props: { params: { id: string } }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,7 +13,7 @@ const Members = (props: { params: { id: string } }) => {
   const { data, status } = useGetChannel(channelId);
 
   const channelMembers = data?.getChannelById?.members;
-  console.log(channelMembers);
+  // console.log("Channel Members", channelMembers);
 
   const filteredMembers = channelMembers?.filter((member) =>
     member.customer.firstName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -34,11 +35,16 @@ const Members = (props: { params: { id: string } }) => {
         </div>
         <div className="flex flex-wrap gap-5 p-5 max-xl:p-3 max-xl:gap-2 max-lg:justify-center max-lg:items-center">
           {filteredMembers?.map((member, index) => (
-            <MemberCard
-              key={index}
-              username={member.customer.firstName}
-              profileAvatar={member.customer.profileImage ?? undefined}
-            />
+            <Link
+              href={`/profile/${member.customer.id}`}
+              key={member.customer.id}
+            >
+              <MemberCard
+                key={index}
+                username={member.customer.firstName}
+                profileAvatar={member.customer.profileImage ?? undefined}
+              />
+            </Link>
           ))}
         </div>
       </div>

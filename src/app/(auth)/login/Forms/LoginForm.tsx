@@ -30,7 +30,7 @@ const LoginForm = () => {
         await mutateAsync([values]);
         router.push("/");
       } catch (e) {
-        console.log(e);
+        // console.log(e);
         toast({
           title: "Error",
           description: "Invalid Credentials",

@@ -15,7 +15,6 @@ const GET_CUSTOMER_SEARCH_QUERY = graphql(`
         lastName
         profileImage
         password
-        role
         stripeCustomerId
         totalFollowers
         totalFollowings

@@ -19,6 +19,7 @@ const GET_USER_ALL_FEEDS = graphql(`
           id
           body
           images
+          createdDate
           channel {
             id
             title
@@ -34,7 +35,13 @@ const GET_USER_ALL_FEEDS = graphql(`
               profileImage
             }
           }
-
+          customer {
+            firstName
+            lastName
+            email
+            id
+            profileImage
+          }
           likeCount
           likes {
             id
@@ -80,5 +87,5 @@ const useUserAllFeed = () => {
     },
   });
 };
-
+export type APIUserAllFeedData = ReturnType<typeof useUserAllFeed>["data"];
 export default useUserAllFeed;
