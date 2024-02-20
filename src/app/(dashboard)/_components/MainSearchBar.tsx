@@ -1,12 +1,12 @@
 "use client";	
-import { SearchIcon } from "@/core/icons/SearchIcon";	
-import { cn } from "@/core/lib/helper";	
-import { Input } from "@/core/ui/input";	
+import { SearchIcon } from "@/components/icons/SearchIcon";	
+import { cn } from "@/utils/cn";	
+import { Input } from "@/components/ui/input";	
 import { useState } from "react";	
 import { useCustomerSearch } from "@/api/SearchCustomer/useCustomerSearch";	
-import { Avatar, AvatarFallback } from "@/core/ui/avatar";	
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";	
 import { AvatarImage } from "@radix-ui/react-avatar";	
-import { SpinnerCircle } from "@/core/icons/SpinnerCircle";	
+import { SpinnerCircle } from "@/components/icons/SpinnerCircle";	
 import Link from "next/link";	
 
 interface Props {	

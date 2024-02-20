@@ -1,7 +1,7 @@
-import AllChannels from "@/Features/AllChannels";
-import NewChannels from "@/Features/NewChannels";
-import OnlineFriends from "@/Features/OnlineFriends";
-import ProfileCard from "@/Features/ProfileCard";
+import AllChannels from "@/features/AllChannels";
+import NewChannels from "@/features/NewChannels";
+import OnlineFriends from "@/features/OnlineFriends";
+import ProfileCard from "@/features/ProfileCard";
 import AllPostsFeed from "./_components/AllPostsFeed";
 
 export default function HomePage() {

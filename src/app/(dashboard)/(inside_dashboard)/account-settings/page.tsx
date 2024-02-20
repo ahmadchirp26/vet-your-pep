@@ -1,5 +1,5 @@
-import { Button } from "@/core/ui/button";
-import { Switch } from "@/core/ui/switch";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
 import { blockList } from "@/data/facebackend";
 import BlockListCard from "@/app/(dashboard)/(inside_dashboard)/account-settings/components/BlockListCard";
 import Link from "next/link";

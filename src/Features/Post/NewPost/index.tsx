@@ -1,19 +1,19 @@
 "use client";
-import { Button } from "@/core/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/core/ui/dialog";
-import { Input } from "@/core/ui/input";
-import { Textarea } from "@/core/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
-import SelectChannel from "./SelectChannel";
+import SelectChannel from "@/features/Post/NewPost/SelectChannel";
 import { FormikProvider, useFormik } from "formik";
 import * as z from "zod";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import useCreatePostMutation from "@/api/Posts/useCreatePostMutation";
 import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
-import PostFileUpload from "./PostFileUpload";
+import PostFileUpload from "@/features/Post/NewPost/PostFileUpload";
 import { useState } from "react";
-import { toast } from "@/core/ui/use-toast";
-import { cn } from "@/core/lib/helper";
+import { toast } from "@/components/ui/use-toast";
+import { cn } from "@/utils/cn";
 import { FrontendAttachmentSchema } from "@/lib/zod-schemas/attachment";
 import S3UploadHandlerMutationFn from "@/api/S3Bucket/S3UploadHandlerMutationFn";
 

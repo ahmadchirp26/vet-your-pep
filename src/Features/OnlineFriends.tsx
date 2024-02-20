@@ -1,7 +1,7 @@
 import { onlineFriends } from "@/data/facebackend";
-import { OnlineAvatar } from "./Cards/OnlineAvatar";
-import { FriendsIcon } from "@/core/icons/FriendsIcon";
-import { cn } from "@/core/lib/helper";
+import { OnlineAvatar } from "@/features/Cards/OnlineAvatar";
+import { FriendsIcon } from "@/components/icons/FriendsIcon";
+import { cn } from "@/utils/cn";
 import { ChevronDownIcon } from "lucide-react";
 
 interface Props {

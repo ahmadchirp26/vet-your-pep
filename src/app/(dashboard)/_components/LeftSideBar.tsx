@@ -4,11 +4,11 @@ import Link from "next/link";
 // import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
-import HomeIcon from "@/core/icons/HomeIcon";
-import CalendarIcon from "@/core/icons/CalendarIcon";
-import RulesIcon from "@/core/icons/RulesIcon";
-import SettingsIcon from "@/core/icons/SettingsIcon";
-import SupportIcon from "@/core/icons/SupportIcon";
+import HomeIcon from "@/components/icons/HomeIcon";
+import CalendarIcon from "@/components/icons/CalendarIcon";
+import RulesIcon from "@/components/icons/RulesIcon";
+import SettingsIcon from "@/components/icons/SettingsIcon";
+import SupportIcon from "@/components/icons/SupportIcon";
 
 const LeftSideBar = () => {
   // const router = useRouter();

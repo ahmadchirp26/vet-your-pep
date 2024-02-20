@@ -1,18 +1,19 @@
 "use client";
 import { useLogoutMutation } from "@/api/Authentication/useLogoutMutation";
-import { SpinnerCircle } from "@/core/icons/SpinnerCircle";
-import { cn } from "@/core/lib/helper";
-import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
-import { Button } from "@/core/ui/button";
+import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
+import { cn } from "@/utils/cn";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/core/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
 import Link from "next/link";
-import { Skeleton } from "@/core/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useRouter } from "next/navigation";
 
 interface Props {
   className?: string;
@@ -20,6 +21,7 @@ interface Props {
 export function ProfileAvatar({ className }: Props) {
   const { data, status: customerDataStatus } = useCustomerDataQuery();
   const { mutate, status } = useLogoutMutation();
+  const router = useRouter()
   if (customerDataStatus === "pending") {
     return (
       <div className="flex gap-2 ml-2">
@@ -78,7 +80,11 @@ export function ProfileAvatar({ className }: Props) {
         <DropdownMenuItem
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => {
-            mutate();
+            mutate(undefined, {
+              onSuccess: () => {
+                router.replace('/login')
+              }
+            });
           }}
           disabled={status === "pending"}
         >

@@ -1,7 +1,7 @@
-import UploadFileButton from "@/core/components/upload-file-button";
-import { PhotoIcon } from "@/core/icons/PhotoIcon";
-import { Button } from "@/core/ui/button";
-import { ScrollArea } from "@/core/ui/scroll-area";
+import UploadFileButton from "@/components/upload-file-button";
+import { PhotoIcon } from "@/components/icons/PhotoIcon";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { type FileSchema } from "@/lib/zod-schemas/attachment";
 import { TrashIcon } from "lucide-react";
 import Image from "next/image";

@@ -3,16 +3,16 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
-} from "@/core/ui/accordion";
+} from "@/components/ui/accordion";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import React from "react";
 import { createPortal } from "react-dom";
 import { useMediaQuery } from "@uidotdev/usehooks";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/core/ui/drawer";
-import CommentsCard from "./CommentsCard";
-import { ScrollArea } from "@/core/ui/scroll-area";
-import CommentForm from "./CommentForm";
-import { Button } from "@/core/ui/button";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import CommentsCard from "@/features/Post/PostCard/CommentsSection/CommentsCard";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import CommentForm from "@/features/Post/PostCard/CommentsSection/CommentForm";
+import { Button } from "@/components/ui/button";
 import { MessageSquareIcon } from "lucide-react";
 
 interface CommentsSection_Props {

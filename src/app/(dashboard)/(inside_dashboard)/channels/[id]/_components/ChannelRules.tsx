@@ -1,5 +1,5 @@
 import { useGetChannel } from "@/api/Channels/useGetChannel";
-import { Dialog, DialogContent } from "@/core/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 interface ChannelRulesProps {
   isOpen: boolean;

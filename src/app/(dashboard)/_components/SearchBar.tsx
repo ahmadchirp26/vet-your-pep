@@ -1,7 +1,7 @@
 "use client";
-import { SearchIcon } from "@/core/icons/SearchIcon";
-import { cn } from "@/core/lib/helper";
-import { Input } from "@/core/ui/input";
+import { SearchIcon } from "@/components/icons/SearchIcon";
+import { cn } from "@/utils/cn";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 interface Props {

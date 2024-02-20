@@ -1,5 +1,5 @@
 import { graphql } from "@/__generated__";
-import { requestGraphQl } from "@/core/lib/react-query-graphql";
+import { requestGraphQl } from "@/lib/react-query-graphql";
 
 const document = graphql(`
   query getPostUploadUrls($input: Float!) {
