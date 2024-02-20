@@ -112,7 +112,7 @@ export const useLikeMutation = ({ channelId }: Props) => {
         }
       },
       onError: (error) => {
-        console.log(error);
+        // console.log(error);
       },
     },
     LIKE_MUTATION

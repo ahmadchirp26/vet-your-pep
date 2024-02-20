@@ -21,7 +21,7 @@ interface Props {
 
 const UserProfile = ({ id }: Props) => {
   const { data, status } = useCustomerByIdDataQuery({ customerId: id });
-  console.log("Data", data);
+  // console.log("Data", data);
   const { data: userSession, status: userSessionStatus } =
     useAuthSessionContext();
   const followUserMutation = useFollowMutation();

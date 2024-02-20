@@ -51,7 +51,7 @@ const RegisterForm = () => {
         ]);
         router.push("/onboarding/upload-image");
       } catch (error: any) {
-        console.log(error);
+        // console.log(error);
         toast({
           title: "Error",
           description: error.message,
