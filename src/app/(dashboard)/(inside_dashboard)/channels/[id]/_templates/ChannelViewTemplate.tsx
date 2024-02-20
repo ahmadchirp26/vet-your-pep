@@ -6,7 +6,6 @@ import Banner from "../_components/Banner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/core/ui/tabs";
 import GroupAdmin from "../_components/GroupAdmin";
 import ChannelMembers from "../_components/ChannelMembers";
-import { Button } from "@/core/ui/button";
 import OnlineFriends from "@/Features/OnlineFriends";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import ChannelPostFeed from "../_components/ChannelPostFeed";

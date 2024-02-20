@@ -10,7 +10,7 @@ const UploadFileButton = React.forwardRef<HTMLInputElement, Props>(({
   className,
   buttonComponent,
   inputProps = {},
-}, ref) => {
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
   return (
     <div>

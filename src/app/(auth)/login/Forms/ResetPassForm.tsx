@@ -13,7 +13,7 @@ const ResetPassForm = () => {
       confirmPassword: "",
     },
 
-    onSubmit: (values) => {
+    onSubmit: () => {
       // Handle form submission
       // console.log("Form Values", values);
     },

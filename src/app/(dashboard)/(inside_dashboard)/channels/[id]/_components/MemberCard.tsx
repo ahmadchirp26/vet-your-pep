@@ -1,4 +1,3 @@
-import Image, { type StaticImageData } from "next/image";
 import { Avatar, AvatarImage, AvatarFallback } from "@/core/ui/avatar";
 
 interface MemberCardProps {

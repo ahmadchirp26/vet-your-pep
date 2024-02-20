@@ -10,7 +10,7 @@ import Link from "next/link";
 const Members = (props: { params: { id: string } }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const channelId = props.params.id;
-  const { data, status } = useGetChannel(channelId);
+  const { data } = useGetChannel(channelId);
 
   const channelMembers = data?.getChannelById?.members;
   // console.log("Channel Members", channelMembers);

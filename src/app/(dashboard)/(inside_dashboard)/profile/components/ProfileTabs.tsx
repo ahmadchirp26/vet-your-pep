@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/core/ui/tabs";
 import useCustomerByIdDataQuery from "@/api/Customer/useCustomerByIdQuery";
-import PostCard from "@/Features/Cards/PostCard";
+import PostCard from "@/Features/Post/PostCard";
 import MyFollowers from "./MyFollowers";
 
 interface Props {
@@ -51,24 +51,28 @@ const ProfileTabs = ({ customerId }: Props) => {
                   postedDate: new Date(),
                   postedBy: {
                     profileImage: comment.user.profileImage ?? undefined,
-                    username:
-                      comment.user.firstName + " " + comment.user.lastName,
+                    firstName: comment.user.firstName,
+                    lastName: comment.user.lastName,
+                    id: comment.user.id,
                   },
                 })) ?? []
               }
               likes={
                 post.likes?.map((l) => ({
-                  id: l.user?.id ?? "",
+                  id: l.user?.id ?? '',
                   profileImage: l.user?.profileImage ?? undefined,
-                  username: l.user?.firstName + " " + l.user?.lastName,
+                  firstName: l.user?.firstName ?? '' ,
+                  lastName: l.user?.lastName ?? '',
                 })) ?? []
               }
               postContent={post.body}
               postImages={post.images ?? []}
               postedTime={new Date()}
               postedBy={{
-                profileImage: undefined, //post.customer.profileImage ?? undefined,
-                username: "AS", // post.customer.firstName + ' ' + post.customer.lastName,
+                profileImage: post.customer.profileImage ?? undefined,
+                firstName: post.customer.firstName,
+                lastName: post.customer.lastName,
+                id: post.customer.id,
               }}
             />
           ))}

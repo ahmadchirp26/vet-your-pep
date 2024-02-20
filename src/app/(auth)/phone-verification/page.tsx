@@ -4,7 +4,6 @@ import BackButton from "@/core/ui/backButton";
 import PhoneVerificationForm from "@/app/(auth)/login/Forms/PhoneVerificationForm";
 
 export default function PhoneVerification() {
-  const backHref = "/account-settings";
   return (
     <>
       <div className="flex w-full h-screen p-3 flex-col ">
