@@ -1,20 +1,19 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-
-import SearchBar from "./components/SearchBar";
-import AuthMenu from "./components/AuthMenu";
-import LeftSideBar from "./components/LeftSideBar";
-import ResponsiveMenu from "./components/ResponsiveMenu";
-
+import AuthMenu from "./_components/AuthMenu";
+import LeftSideBar from "./_components/LeftSideBar";
+import ResponsiveMenu from "./_components/ResponsiveMenu";
 import Logo from "../../../public/assets/logo.svg";
 import Link from "next/link";
-import MainSearchBar from "./components/MainSearchBar";
+import MainSearchBar from "./_components/MainSearchBar";
+import { fetchCustomerSendBirdTokenServerSide } from "@/api/SendBird/useCustomerSendbirdToken";
 
 interface DashboardLayoutProps {
   children: ReactNode;
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+const DashboardLayout: React.FC<DashboardLayoutProps> = async ({ children }) => {
+  await fetchCustomerSendBirdTokenServerSide()
   return (
     <div className="h-full space-y-4 w-full">
       <div className="flex gap-4 items-center p-2">

@@ -70,10 +70,11 @@ const FeedPosts = ({ status, posts, channelId, className }: Props) => {
       )}
     >
       <NewPost channelId={channelId} />
-      {data.getChannelById.posts?.map((post, index) => (
+      {posts?.map((post, index) => (
         <PostCard
           key={index}
-          channel={data.getChannelById.title}
+          channelId={post.channel.id}
+          channel={post.channel.title}
           comments={
             post.comments?.map((comment) => ({
               commentContent: comment.content,
@@ -95,6 +96,7 @@ const FeedPosts = ({ status, posts, channelId, className }: Props) => {
             })) ?? []
           }
           postContent={post.body}
+          postId={post.id}
           postImages={post.images ?? []}
           postedTime={post.createdAt}
           postedBy={{

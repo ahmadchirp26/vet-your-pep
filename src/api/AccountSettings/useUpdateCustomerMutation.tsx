@@ -37,11 +37,9 @@ const useUpdateCustomerMutation = () => {
     {
       mutationKey,
       onMutate([variables]) {
-        console.log("variable", variables);
-
         const previousValue =
           queryClient.getQueryData<useCustomerDataQueryDataType>(
-            CustomerDataQueryKey,
+            CustomerDataQueryKey
           );
         queryClient.setQueryData<useCustomerDataQueryDataType>(
           CustomerDataQueryKey,
@@ -51,16 +49,17 @@ const useUpdateCustomerMutation = () => {
               ...prev,
               getCustomerData: {
                 ...prev.getCustomerData,
+                ...(variables.input as NonNullable<useCustomerDataQueryDataType>["getCustomerData"]),
               },
             };
-          },
+          }
         );
         return previousValue;
       },
       onError(error, variables, context) {
         queryClient.setQueryData<useCustomerDataQueryDataType>(
           CustomerDataQueryKey,
-          context,
+          context
         );
         toast({
           title: "Error",
@@ -69,7 +68,7 @@ const useUpdateCustomerMutation = () => {
         });
       },
     },
-    Document,
+    Document
   );
 };
 

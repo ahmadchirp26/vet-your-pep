@@ -31,7 +31,7 @@ const RegisterForm = () => {
         .required("Email is required"),
       firstName: Yup.string().required("First Name is required"),
       lastName: Yup.string().required("Last Name is required"),
-      phoneNumber: Yup.string().required("Phone Number is required"),
+
       password: Yup.string().required("Password is required"),
       confirmPassword: Yup.string()
         .required("Confirm Password is required")
@@ -47,12 +47,11 @@ const RegisterForm = () => {
             firstName: values.firstName,
             lastName: values.lastName,
             password: values.password,
-            cellPhone: values.phoneNumber,
           },
         ]);
         router.push("/onboarding/upload-image");
       } catch (error: any) {
-        console.log(error);
+        // console.log(error);
         toast({
           title: "Error",
           description: error.message,

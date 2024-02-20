@@ -4,12 +4,12 @@ import AboutCard from "../_components/AboutCard";
 import AllChannels from "@/Features/AllChannels";
 import Banner from "../_components/Banner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/core/ui/tabs";
-import FeedPosts from "@/Features/Post/FeedPosts";
 import GroupAdmin from "../_components/GroupAdmin";
 import ChannelMembers from "../_components/ChannelMembers";
 import { Button } from "@/core/ui/button";
 import OnlineFriends from "@/Features/OnlineFriends";
 import { useMediaQuery } from "@uidotdev/usehooks";
+import ChannelPostFeed from "../_components/ChannelPostFeed";
 
 type Props = {
   channelId: string;
@@ -31,14 +31,14 @@ const ChannelViewTemplate = (props: Props) => {
         {isMediumDeviceAndLarge ? (
           <div className="flex items-start space-x-3 mt-4">
             <div className="flex gap-3 flex-1">
-              <FeedPosts channelId={props.channelId} />
+              <ChannelPostFeed channelId={props.channelId} />
             </div>
             <div className="space-y-3">
               <GroupAdmin channelId={props.channelId} />
               <ChannelMembers channelId={props.channelId} />
-              <Button className="bg-[#FF0000] font-bold container-drop-shadow rounded-3xl w-full hover:bg-red-700">
+              {/* <Button className="bg-[#FF0000] font-bold container-drop-shadow rounded-3xl w-full hover:bg-red-700">
                 Report Group
-              </Button>
+              </Button> */}
             </div>
           </div>
         ) : (
@@ -64,7 +64,7 @@ const ChannelViewTemplate = (props: Props) => {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="Feed">
-              <FeedPosts channelId={props.channelId} />
+              <ChannelPostFeed channelId={props.channelId} />
             </TabsContent>
             <TabsContent value="Members" className="gap-5">
               <GroupAdmin channelId={props.channelId} />

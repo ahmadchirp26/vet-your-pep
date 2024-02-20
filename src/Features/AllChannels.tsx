@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import SearchBar from "@/app/(dashboard)/components/SearchBar";
+import SearchBar from "@/app/(dashboard)/_components/SearchBar";
 import ChannelCard from "@/Features/Cards/ChannelCard";
 import Link from "next/link";
 import useGetChannels from "@/api/Channels/useGetChannels";
@@ -23,7 +23,7 @@ const AllChannels = () => {
   };
 
   const filteredChannels = allChannelsArray?.filter((channel) =>
-    channel.title.toLowerCase().includes(searchTerm.toLowerCase()),
+    channel.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
   if (status === "error") {
     return (
@@ -43,7 +43,7 @@ const AllChannels = () => {
     <>
       <div className="flex flex-col rounded-3xl container-drop-shadow bg-greendarkest p-4 ">
         {!activeSearch ? (
-          <div className="flex items-center justify-between mt-2">
+          <div className="flex items-center justify-between mt-2 gap-2">
             <span className="text-white font-bold">My Channels</span>
             <Image
               src={"/assets/search_icon.svg"}
@@ -67,7 +67,7 @@ const AllChannels = () => {
             {filteredChannels?.map((channel, index) => (
               <Link
                 key={index}
-                href={`channels/${channel.id}`}
+                href={`/channels/${channel.id}`}
                 className="hover:bg-greensharp"
               >
                 <ChannelCard

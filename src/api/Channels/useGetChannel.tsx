@@ -113,7 +113,7 @@ export const useGetChannel = (id: string) => {
 // because of the error:'You cannot dot into a client module from a server component'
 export const fetchChannelServerSide = async (
   id: string,
-  queryClient = new QueryClient(),
+  queryClient = new QueryClient()
 ) => {
   const token = await getSessionServerAction();
   if (!token) {
@@ -132,7 +132,7 @@ export const fetchChannelServerSide = async (
         graphQlRequestHandler(
           GET_CHANNEL_BY_ID_DOCUMENT,
           { input: id },
-          authourizationHeaders,
+          authourizationHeaders
         ),
     });
     return {
@@ -154,7 +154,7 @@ export const fetchChannelServerSide = async (
     };
   } catch (e) {
     const graphQLError = e as ClientError;
-    console.log(e);
+    // console.log(e);
     // @ts-expect-error @ts-ignore
     if (graphQLError?.response?.errors?.[0]?.statusCode === 400) {
       return notFound();
@@ -165,3 +165,7 @@ export const fetchChannelServerSide = async (
     };
   }
 };
+
+export type APIGetChannelByIdQueryData = ReturnType<
+  typeof useGetChannel
+>["data"];

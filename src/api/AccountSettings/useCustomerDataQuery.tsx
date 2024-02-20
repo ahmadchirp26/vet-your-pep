@@ -8,12 +8,23 @@ const GetCustomerDataQueryDocument = graphql(`
       cellPhone
       email
       firstName
+      totalFollowers
+      totalFollowings
       id
       isActive
       lastName
       profileImage
       password
       stripeCustomerId
+      followers {
+        id
+      }
+      following {
+        id
+      }
+      posts {
+        id
+      }
     }
   }
 `);
@@ -35,7 +46,7 @@ const useCustomerDataQuery = () =>
         };
       },
     },
-    GetCustomerDataQueryDocument,
+    GetCustomerDataQueryDocument
   );
 
 export type useCustomerDataQueryDataType = ReturnType<

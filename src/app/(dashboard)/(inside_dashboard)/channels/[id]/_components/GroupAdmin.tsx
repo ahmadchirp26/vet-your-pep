@@ -1,5 +1,6 @@
 import { useGetChannel } from "@/api/Channels/useGetChannel";
 import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
+import Link from "next/link";
 
 interface Props {
   channelId: string;

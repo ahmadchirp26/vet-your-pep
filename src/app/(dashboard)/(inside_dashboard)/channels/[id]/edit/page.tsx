@@ -1,3 +1,4 @@
+"use client";
 import AllChannels from "@/Features/AllChannels";
 import ProfileCard from "@/Features/ProfileCard";
 import Banner from "../_components/Banner";
@@ -6,10 +7,15 @@ import AboutCard from "../_components/AboutCard";
 import GroupAdmin from "../_components/GroupAdmin";
 import EventCard from "../_components/EventCard";
 import { Button } from "@/core/ui/button";
+import { useParams } from "next/navigation";
 import OnlineFriends from "@/Features/OnlineFriends";
 import EditChannel from "./components/EditChannelForm";
 
 const EditProfile = () => {
+  const { id } = useParams();
+  const channelId = id;
+  console.log("Channel ID", channelId);
+  // console.log(params);
   return (
     <>
       <div className="p-3 flex gap-5 max-md:flex-col">
@@ -19,11 +25,11 @@ const EditProfile = () => {
           <AllChannels />
         </div>
         <div className="flex flex-col gap-3 max-md:order-2 w-full">
-          <Banner />
-          <EditChannel />
+          {/* <Banner /> */}
+          <EditChannel channelId={channelId} />
         </div>
         <div className="max-md:order-1">
-          <OnlineFriends />
+          <OnlineFriends className="flex md:flex-col" />
         </div>
       </div>
     </>

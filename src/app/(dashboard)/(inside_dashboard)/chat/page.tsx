@@ -1,21 +1,27 @@
-"use client";
-import SendbirdApp from "@sendbird/uikit-react/App";
-import "./index.css";
-
-const APP_ID = "16CD5681-56AE-4956-B5BB-48EA1E12C699";
-const USER_ID = "james";
-const NickName = "James Bond";
+'use client';
+import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
+import SendBirdApp from "./_components/SendBirdApp";
+import { useCustomerSendbirdToken } from "@/api/SendBird/useCustomerSendbirdToken";
 
 const Chat = () => {
+  const {data:userSession, status:userSessionStatus} = useAuthSessionContext();
+  const {data:sendBirdToken, status:sendBirdStatus} = useCustomerSendbirdToken()
+  if (userSessionStatus === "loading" || sendBirdStatus === "pending") {
+    return <div>Loading...</div>;
+  }
+  if (!userSession) {
+    return <div>Unauthorized</div>;
+  }
+  if (!sendBirdToken) {
+    return <div>Error</div>;
+  }
+
   return (
-    <div className="w-full  h-screen bg-greensharp">
-      <SendbirdApp
-        appId={APP_ID}
-        userId={USER_ID} // Specify your user ID.
-        nickname={NickName}
-        theme="dark"
-      />
-    </div>
+    <SendBirdApp
+      nickname={userSession.firstName + " " + userSession.lastName}
+      userId={userSession.sub}
+      chatToken={sendBirdToken.getChatToken}
+    />
   );
 };
 
