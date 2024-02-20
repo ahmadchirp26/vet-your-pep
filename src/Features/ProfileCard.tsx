@@ -11,6 +11,7 @@ import { Avatar, AvatarImage } from "@/core/ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 const ProfileCard = () => {
   const { data, status } = useCustomerDataQuery();
+  // console.log("Customer Data", data);
   const userId = data?.getCustomerData?.id;
   return (
     <div className="flex flex-col rounded-3xl container-drop-shadow">
@@ -43,7 +44,7 @@ const ProfileCard = () => {
         <div className="flex gap-2 items-center">
           <FriendsIcon className="w-6 h-6" />
           <span className="text-graylight text-sm">
-            {data?.getCustomerData?.followers?.length ?? 0} Followers
+            {data?.getCustomerData?.totalFollowers ?? 0} Followers
           </span>
         </div>
         <div className="bg-greenaccent p-2 w-full justify-center rounded-3xl gap-2 flex items-center">

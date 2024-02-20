@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/core/ui/tabs";
 import useCustomerByIdDataQuery from "@/api/Customer/useCustomerByIdQuery";
 import PostCard from "@/Features/Cards/PostCard";
+import MyFollowers from "./MyFollowers";
 
 interface Props {
   customerId: string;
@@ -55,22 +56,26 @@ const ProfileTabs = ({ customerId }: Props) => {
                   },
                 })) ?? []
               }
-              likes={post.likes?.map((l) => ({
-                id: l.user?.id ?? "",
-                profileImage: l.user?.profileImage ?? undefined,
-                username: l.user?.firstName + " " + l.user?.lastName,
-              })) ?? []}
+              likes={
+                post.likes?.map((l) => ({
+                  id: l.user?.id ?? "",
+                  profileImage: l.user?.profileImage ?? undefined,
+                  username: l.user?.firstName + " " + l.user?.lastName,
+                })) ?? []
+              }
               postContent={post.body}
               postImages={post.images ?? []}
               postedTime={new Date()}
               postedBy={{
-                profileImage: undefined,//post.customer.profileImage ?? undefined,
-                username:'AS'// post.customer.firstName + ' ' + post.customer.lastName,
+                profileImage: undefined, //post.customer.profileImage ?? undefined,
+                username: "AS", // post.customer.firstName + ' ' + post.customer.lastName,
               }}
             />
           ))}
         </TabsContent>
-        <TabsContent value="followers">{/* <MyFollowers /> */}</TabsContent>
+        <TabsContent value="followers">
+          <MyFollowers />
+        </TabsContent>
         <TabsContent value="following">{/* <MyFollowing /> */}</TabsContent>
       </Tabs>
     </>

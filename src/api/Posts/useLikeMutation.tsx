@@ -8,8 +8,8 @@ import { channelKeys } from "../Channels/query-keys";
 import { type APIGetChannelByIdQueryData } from "../Channels/useGetChannel";
 
 const LIKE_MUTATION = graphql(`
-  mutation createPostLike($input: CreateLikeInput!) {
-    createPostLike(input: $input) {
+  mutation LikePost($input: CreateLikeInput!) {
+    likePost(input: $input) {
       message
     }
   }
@@ -74,36 +74,40 @@ export const useLikeMutation = ({ channelId }: Props) => {
               : undefined
         );
         if (channelId) {
-          queryClient.setQueryData<APIGetChannelByIdQueryData>(channelKeys.detail(channelId), (prev) =>
-            prev ? {
-              ...prev,
-              getChannelById: {
-                ...prev.getChannelById,
-                posts: prev.getChannelById.posts?.map((post) => {
-                  if (post.id === postId) {
-                    return {
-                      ...post,
-                      likeCount: (post.likeCount ?? 0) + 1,
-                      likes: post.likes
-                        ? [...post.likes, { id: userId }]
-                        : [
-                            {
-                              id: userId,
-                              user: {
-                                id: userId,
-                                email: data.email,
-                                firstName: data.firstName,
-                                lastName: data.lastName,
-                                profileImage: data.profileImage,
-                              },
-                            },
-                          ],
-                    };
+          queryClient.setQueryData<APIGetChannelByIdQueryData>(
+            channelKeys.detail(channelId),
+            (prev) =>
+              prev
+                ? {
+                    ...prev,
+                    getChannelById: {
+                      ...prev.getChannelById,
+                      posts: prev.getChannelById.posts?.map((post) => {
+                        if (post.id === postId) {
+                          return {
+                            ...post,
+                            likeCount: (post.likeCount ?? 0) + 1,
+                            likes: post.likes
+                              ? [...post.likes, { id: userId }]
+                              : [
+                                  {
+                                    id: userId,
+                                    user: {
+                                      id: userId,
+                                      email: data.email,
+                                      firstName: data.firstName,
+                                      lastName: data.lastName,
+                                      profileImage: data.profileImage,
+                                    },
+                                  },
+                                ],
+                          };
+                        }
+                        return post;
+                      }),
+                    },
                   }
-                  return post;
-                }),
-              },
-            } : undefined
+                : undefined
           );
         }
       },
