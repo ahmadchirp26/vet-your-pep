@@ -20,6 +20,12 @@ const Document = graphql(`
           id
           body
           images
+          customer {
+            id
+            firstName
+            lastName
+            profileImage
+          }
           channel {
             id
             title
