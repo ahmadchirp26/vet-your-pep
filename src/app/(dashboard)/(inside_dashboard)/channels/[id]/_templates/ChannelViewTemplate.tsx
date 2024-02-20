@@ -36,9 +36,9 @@ const ChannelViewTemplate = (props: Props) => {
             <div className="space-y-3">
               <GroupAdmin channelId={props.channelId} />
               <ChannelMembers channelId={props.channelId} />
-              <Button className="bg-[#FF0000] font-bold container-drop-shadow rounded-3xl w-full hover:bg-red-700">
+              {/* <Button className="bg-[#FF0000] font-bold container-drop-shadow rounded-3xl w-full hover:bg-red-700">
                 Report Group
-              </Button>
+              </Button> */}
             </div>
           </div>
         ) : (

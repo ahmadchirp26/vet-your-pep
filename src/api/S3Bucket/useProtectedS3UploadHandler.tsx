@@ -21,7 +21,7 @@ const getCustomerUploadURL = (accessToken: string) => {
 
 export const S3UploadHandlerMutationFn = async (
   fileToUpload: File,
-  accessToken: string,
+  accessToken: string
 ) => {
   try {
     const {
@@ -33,7 +33,7 @@ export const S3UploadHandlerMutationFn = async (
     });
     return fileName;
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     throw new Error("Something went wrong");
   }
 };
