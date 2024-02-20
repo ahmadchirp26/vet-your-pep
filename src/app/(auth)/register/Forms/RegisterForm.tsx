@@ -31,7 +31,7 @@ const RegisterForm = () => {
         .required("Email is required"),
       firstName: Yup.string().required("First Name is required"),
       lastName: Yup.string().required("Last Name is required"),
-      phoneNumber: Yup.string().required("Phone Number is required"),
+
       password: Yup.string().required("Password is required"),
       confirmPassword: Yup.string()
         .required("Confirm Password is required")
