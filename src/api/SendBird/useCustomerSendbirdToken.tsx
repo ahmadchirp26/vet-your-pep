@@ -1,7 +1,7 @@
 import { graphQlRequestHandler, graphql } from "@/lib/react-query-graphql";
 import { useGraphQLRequestHandlerProtected } from "@/lib/auth-helpers";
 import { QueryClient, useQuery } from "@tanstack/react-query";
-import { getSessionServerAction } from "../Authentication/getSessionServerAction";
+import { getSessionServerAction } from "../../lib/Authentication/server-actions/getSessionServerAction";
 
 const GetChatToken = graphql(`
   query GetChatToken {

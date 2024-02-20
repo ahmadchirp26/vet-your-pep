@@ -4,7 +4,7 @@ import { channelKeys } from "./query-keys";
 import { useGraphQLRequestHandlerProtected } from "@/lib/auth-helpers";
 import { type ClientError } from "graphql-request";
 import { notFound } from "next/navigation";
-import { getSessionServerAction } from "../Authentication/getSessionServerAction";
+import { getSessionServerAction } from "../../lib/Authentication/server-actions/getSessionServerAction";
 import { env } from "@/env";
 
 const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`

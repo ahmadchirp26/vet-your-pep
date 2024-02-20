@@ -13,6 +13,7 @@ import {
 import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useRouter } from "next/navigation";
 
 interface Props {
   className?: string;
@@ -20,6 +21,7 @@ interface Props {
 export function ProfileAvatar({ className }: Props) {
   const { data, status: customerDataStatus } = useCustomerDataQuery();
   const { mutate, status } = useLogoutMutation();
+  const router = useRouter()
   if (customerDataStatus === "pending") {
     return (
       <div className="flex gap-2 ml-2">
@@ -78,7 +80,11 @@ export function ProfileAvatar({ className }: Props) {
         <DropdownMenuItem
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => {
-            mutate();
+            mutate(undefined, {
+              onSuccess: () => {
+                router.replace('/login')
+              }
+            });
           }}
           disabled={status === "pending"}
         >

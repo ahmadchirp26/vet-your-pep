@@ -1,6 +1,6 @@
 "use server";
 import { cookies } from "next/headers";
-import { type UserSession } from "./getSession";
+import { type UserSession } from "../../../api/Authentication/getSession";
 import { jwtDecode } from "jwt-decode";
 
 export const getSessionServerAction = async () => {

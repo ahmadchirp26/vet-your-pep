@@ -1,7 +1,8 @@
+import { getSessionServerAction } from "@/lib/Authentication/server-actions/getSessionServerAction";
 import ReactQueryProvider from "@/components/hoc/ReactQueryProvider";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthSessionProvider } from "@/lib/Authentication/context/AuthSessionContext";
-import AuthRedirection from "@/lib/Authentication/hoc/AuthRedirection";
+import { type PropsWithChildren } from "react";
 import "@/styles/globals.css";
 
 export const metadata = {
@@ -10,23 +11,18 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/assets/logo.svg" }],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout({ children }: PropsWithChildren) {
+  const session = await getSessionServerAction();
   return (
     <html lang="en">
-      <body
-        suppressHydrationWarning={true}
-        className="min-h-screen max-w-screen-2xl mx-auto w-full layout-gradient"
-      >
+      <body className="min-h-screen max-w-screen-2xl mx-auto w-full layout-gradient">
         <ReactQueryProvider>
-          <AuthSessionProvider>
-            <AuthRedirection>
-              {children}
-              <Toaster />
-            </AuthRedirection>
+          <AuthSessionProvider
+            data={session}
+            status={session === null ? "unauthenticated" : "authenticated"}
+          >
+            {children}
+            <Toaster />
           </AuthSessionProvider>
         </ReactQueryProvider>
       </body>
