@@ -79,6 +79,32 @@ const useUserAllFeed = () => {
           .flat()
           .map((post) => ({
             ...post,
+            comments: post.comments?.map((comment) => ({
+              ...comment,
+              user: {
+                ...comment.user,
+                profileImage: comment.user.profileImage
+                  ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${comment.user.profileImage}`
+                  : undefined,
+              },
+            })),
+            customer: {
+              ...post.customer,
+              profileImage: post.customer.profileImage
+                ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${post.customer.profileImage}`
+                : undefined,
+            },
+            likes: post.likes?.map((like) => ({
+              ...like,
+              user: like.user
+                ? {
+                    ...like.user,
+                    profileImage: like.user.profileImage
+                      ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${like.user.profileImage}`
+                      : undefined,
+                  }
+                : null,
+            })),
             images: post.images?.map(
               (url) => `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${url}`
             ),
