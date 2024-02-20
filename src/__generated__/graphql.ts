@@ -28,6 +28,7 @@ export type Admin = {
   isActive?: Maybe<Scalars['Boolean']['output']>;
   lastName: Scalars['String']['output'];
   password: Scalars['String']['output'];
+  platFormRules?: Maybe<Array<PlatFormRules>>;
   profileImage?: Maybe<Scalars['String']['output']>;
   updatedBy?: Maybe<Scalars['String']['output']>;
   updatedDate?: Maybe<Scalars['DateTime']['output']>;
@@ -161,6 +162,11 @@ export type CreateEventInput = {
 
 export type CreateLikeInput = {
   postId: Scalars['String']['input'];
+};
+
+export type CreatePlatFormRulesInput = {
+  rules?: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type CreatePostInput = {
@@ -313,6 +319,20 @@ export type ListEventsResponse = {
   totalRows?: Maybe<Scalars['Float']['output']>;
 };
 
+export type ListPlatFormRulesInput = {
+  filter?: InputMaybe<PlatFormRulesFilterInputs>;
+  limit: Scalars['Float']['input'];
+  offset?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type ListPlatFormRulesResponse = {
+  __typename?: 'ListPlatFormRulesResponse';
+  limit: Scalars['Float']['output'];
+  offset?: Maybe<Scalars['Float']['output']>;
+  results: Array<PlatFormRules>;
+  totalRows?: Maybe<Scalars['Float']['output']>;
+};
+
 export type ListPostsInput = {
   customerId?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<PostFilterInputs>;
@@ -354,6 +374,8 @@ export type Mutation = {
   createCustomer: CustomerLoginOrRegisterResponse;
   /** This will create new Event */
   createEvent: SuccessResponse;
+  /** Create new plate form rules */
+  createPlatFormRule: PlatFormRules;
   /** This will create new Post */
   createPost: SuccessResponse;
   /** This will follow a customer */
@@ -392,6 +414,8 @@ export type Mutation = {
   updateCustomerPassword: SuccessResponse;
   /** This will update Event */
   updateEvent: SuccessResponse;
+  /** This will update Event */
+  updatePlatFormRule: PlatFormRules;
   /** This will update new Post */
   updatePost: SuccessResponse;
 };
@@ -424,6 +448,11 @@ export type MutationCreateCustomerArgs = {
 
 export type MutationCreateEventArgs = {
   input: CreateEventInput;
+};
+
+
+export type MutationCreatePlatFormRuleArgs = {
+  input: CreatePlatFormRulesInput;
 };
 
 
@@ -522,6 +551,11 @@ export type MutationUpdateEventArgs = {
 };
 
 
+export type MutationUpdatePlatFormRuleArgs = {
+  input: UpdatePlatFormRulesInput;
+};
+
+
 export type MutationUpdatePostArgs = {
   input: UpdatePostInput;
 };
@@ -542,6 +576,23 @@ export type PageData = {
 export type PartialEventResponse = {
   __typename?: 'PartialEventResponse';
   results: Array<Events>;
+};
+
+export type PlatFormRules = {
+  __typename?: 'PlatFormRules';
+  admin: Admin;
+  createdBy?: Maybe<Scalars['String']['output']>;
+  createdDate?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  rules: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  updatedBy?: Maybe<Scalars['String']['output']>;
+  updatedDate?: Maybe<Scalars['DateTime']['output']>;
+};
+
+export type PlatFormRulesFilterInputs = {
+  search?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Post = {
@@ -594,6 +645,8 @@ export type Query = {
   getFollowing: Array<Customer>;
   /** Get other Customer Data */
   getOtherCustomerData: OtherCustomerDataResponse;
+  /** The List of PlatForm rules Pagination and filters */
+  getPlatFormRules: ListPlatFormRulesResponse;
   /** Get S3 bucket Signed Url */
   getPostUploadUrls: Array<S3SignedUrlResponse>;
   /** The List of posts with Pagination and filters */
@@ -642,6 +695,11 @@ export type QueryGetEventsByChannelArgs = {
 
 export type QueryGetOtherCustomerDataArgs = {
   customerId: Scalars['String']['input'];
+};
+
+
+export type QueryGetPlatFormRulesArgs = {
+  input: ListPlatFormRulesInput;
 };
 
 
@@ -743,6 +801,12 @@ export type UpdateEventInput = {
 
 export type UpdateLikeInput = {
   postId: Scalars['String']['input'];
+};
+
+export type UpdatePlatFormRulesInput = {
+  platFormRulesId: Scalars['ID']['input'];
+  rules?: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 export type UpdatePostInput = {
