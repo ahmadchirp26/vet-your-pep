@@ -1,5 +1,4 @@
-import Image, { type StaticImageData } from "next/image";
-import { Avatar, AvatarImage, AvatarFallback } from "@/core/ui/avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface MemberCardProps {
   username: string;

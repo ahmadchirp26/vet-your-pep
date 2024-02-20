@@ -1,7 +1,7 @@
 import {
   useGraphQLMutation,
   useGraphQLQuery,
-} from "@/core/lib/react-query-graphql";
+} from "@/lib/react-query-graphql";
 import useAuthSessionContext from "@/lib/Authentication/context/AuthSessionContext";
 import { type Variables } from "graphql-request";
 import {

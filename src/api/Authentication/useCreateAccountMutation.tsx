@@ -1,5 +1,5 @@
-import { graphql, useGraphQLMutation } from "@/core/lib/react-query-graphql";
-import { useToast } from "@/core/ui/use-toast";
+import { graphql, useGraphQLMutation } from "@/lib/react-query-graphql";
+import { useToast } from "@/components/ui/use-toast";
 import { mutateSession } from "./mutateSession";
 
 const CreateCustomerMutationDocument = graphql(`

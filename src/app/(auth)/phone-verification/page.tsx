@@ -1,10 +1,9 @@
 import Image from "next/image";
 
-import BackButton from "@/core/ui/backButton";
+import BackButton from "@/components/ui/backButton";
 import PhoneVerificationForm from "@/app/(auth)/login/Forms/PhoneVerificationForm";
 
 export default function PhoneVerification() {
-  const backHref = "/account-settings";
   return (
     <>
       <div className="flex w-full h-screen p-3 flex-col ">

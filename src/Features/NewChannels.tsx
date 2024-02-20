@@ -1,7 +1,7 @@
 "use client";
-import ChannelCard from "@/Features/Cards/ChannelCard";
+import ChannelCard from "@/features/Cards/ChannelCard";
 import useGetChannels from "@/api/Channels/useGetChannels";
-import { Skeleton } from "@/core/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const NewChannels = () => {
   const { data, status } = useGetChannels({

@@ -1,5 +1,5 @@
 'use client';
-import FeedPosts from '@/Features/Post/FeedPosts'
+import FeedPosts from '@/features/Post/FeedPosts'
 import useUserAllFeed from '@/api/Posts/useUserAllFeed';
 import React from 'react'
 

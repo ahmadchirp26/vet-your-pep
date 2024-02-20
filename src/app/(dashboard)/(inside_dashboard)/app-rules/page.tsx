@@ -1,5 +1,5 @@
-import AllChannels from "@/Features/AllChannels";
-import ProfileCard from "@/Features/ProfileCard";
+import AllChannels from "@/features/AllChannels";
+import ProfileCard from "@/features/ProfileCard";
 import RuleCard from "@/app/(dashboard)/(inside_dashboard)/app-rules/components/RuleCard";
 import { rules } from "@/data/facebackend";
 

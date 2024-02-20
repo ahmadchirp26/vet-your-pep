@@ -1,12 +1,12 @@
 import useGetChannels from "@/api/Channels/useGetChannels";
-import { cn } from "@/core/lib/helper";
+import { cn } from "@/utils/cn";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/core/ui/select";
+} from "@/components/ui/select";
 import { useField } from "formik";
 import React from "react";
 

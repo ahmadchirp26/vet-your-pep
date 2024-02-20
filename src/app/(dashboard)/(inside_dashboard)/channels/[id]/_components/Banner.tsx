@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/core/lib/helper";
+import { cn } from "@/utils/cn";
 import { useGetChannel } from "@/api/Channels/useGetChannel";
 import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
 import {
@@ -9,7 +9,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/core/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { MoreVerticalIcon } from "lucide-react";
 import { useState } from "react";
 import ChannelRules from "./ChannelRules";

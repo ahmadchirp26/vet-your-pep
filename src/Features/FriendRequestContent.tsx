@@ -1,5 +1,5 @@
 import { FriendRequests } from "@/data/facebackend";
-import FriendRequestCard from "./Cards/FriendRequestCard";
+import FriendRequestCard from "@/features/Cards/FriendRequestCard";
 
 const FriendRequestContent = () => {
   const requestsArray = FriendRequests;

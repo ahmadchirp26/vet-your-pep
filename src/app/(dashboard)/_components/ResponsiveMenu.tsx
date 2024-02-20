@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import { Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/core/ui/sheet";
-import HomeIcon from "@/core/icons/HomeIcon";
-import CalendarIcon from "@/core/icons/CalendarIcon";
-import RulesIcon from "@/core/icons/RulesIcon";
-import SettingsIcon from "@/core/icons/SettingsIcon";
-import SupportIcon from "@/core/icons/SupportIcon";
-import { cn } from "@/core/lib/helper";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import HomeIcon from "@/components/icons/HomeIcon";
+import CalendarIcon from "@/components/icons/CalendarIcon";
+import RulesIcon from "@/components/icons/RulesIcon";
+import SettingsIcon from "@/components/icons/SettingsIcon";
+import SupportIcon from "@/components/icons/SupportIcon";
+import { cn } from "@/utils/cn";
 import { ProfileAvatar } from "./ProfileAvatar";
 import { type SVGProps } from "react";
 

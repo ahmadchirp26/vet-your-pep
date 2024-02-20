@@ -1,13 +1,12 @@
 "use client";
 import React from "react";
 import AboutCard from "../_components/AboutCard";
-import AllChannels from "@/Features/AllChannels";
+import AllChannels from "@/features/AllChannels";
 import Banner from "../_components/Banner";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/core/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import GroupAdmin from "../_components/GroupAdmin";
 import ChannelMembers from "../_components/ChannelMembers";
-import { Button } from "@/core/ui/button";
-import OnlineFriends from "@/Features/OnlineFriends";
+import OnlineFriends from "@/features/OnlineFriends";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import ChannelPostFeed from "../_components/ChannelPostFeed";
 

@@ -1,5 +1,5 @@
 import { Notifications } from "@/data/facebackend";
-import NotificationCard from "./Cards/NotificationCard";
+import NotificationCard from "@/features/Cards/NotificationCard";
 
 const NotificationContent = () => {
   const notificationsArray = Notifications;

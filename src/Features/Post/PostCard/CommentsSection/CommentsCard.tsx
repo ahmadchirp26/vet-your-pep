@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/core/ui/avatar";
-import { CalculatePostTime } from "@/core/utils/calculate-post-time";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { CalculatePostTime } from "@/utils/calculate-post-time";
 
 interface Props {
   postedBy: {

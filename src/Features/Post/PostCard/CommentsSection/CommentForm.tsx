@@ -1,6 +1,6 @@
 import useAddCommentToPostMutation from "@/api/Posts/useAddCommentToPostMutation";
-import { Button } from "@/core/ui/button";
-import { Input } from "@/core/ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { FormikProvider, useFormik } from "formik";
 import React from "react";
 import * as z from "zod";
