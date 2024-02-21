@@ -1,7 +1,6 @@
 "use client";
 import { FormikProvider, useFormik } from "formik";
 import toast from "react-hot-toast";
-
 import {
   Select,
   SelectContent,
@@ -14,10 +13,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useGetChannel } from "@/api/Channels/useGetChannel";
 import useUpdateChannelMutation from "@/api/Channels/useUpdateChannelMutation";
-
 import { useState } from "react";
 import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
 import { useRouter } from "next/navigation";
+import Banner from "../../_components/Banner";
 
 type Props = {
   channelId: string;
@@ -66,41 +65,42 @@ const EditChannel = ({ channelId }: Props) => {
     return "Error";
   }
   return (
-    <>
-      <div className="bg-greendarkest p-6 rounded-lg">
-        <FormikProvider value={formik}>
-          <form
-            onSubmit={formik.handleSubmit}
-            className="flex flex-col gap-4 w-full"
-          >
-            {/* Email */}
-
+    <div className="">
+      <FormikProvider value={formik}>
+        <form onSubmit={formik.handleSubmit}>
+          <Banner channelId={channelId} isEditMode={true} />
+          <div className="space-y-6 w-full p-6 rounded-b-lg bg-greendarkest">
             <div className="flex items-center w-full gap-2">
-              <Input
-                type="text"
-                id="title"
-                name="title"
-                placeholder="Enter Channel Name"
-                onChange={formik.handleChange}
-                value={formik.values.title}
-                className="bg-greenaccent rounded-3xl outline-none  border-none placeholder:text-white h-14"
-              />
-              <Select>
-                <SelectTrigger
-                  className="w-full h-14 text-white"
-                  disabled={true}
-                >
-                  <SelectValue placeholder={formik.values.status} />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Public">Public</SelectItem>
-                  <SelectItem value="Private">Private</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="space-y-2 flex-1">
+                {/* <span className="text-white p-2">Channel Title</span> */}
+                <Input
+                  type="text"
+                  id="title"
+                  name="title"
+                  placeholder="Enter Channel Name"
+                  onChange={formik.handleChange}
+                  value={formik.values.title}
+                  className="bg-greenaccent rounded-3xl outline-none  border-none placeholder:text-white h-14"
+                />
+              </div>
+              <div className = "space-y-2 flex-1">
+                {/* <span className="text-white p-2">Channel's Visibility</span> */}
+                <Select>
+                  <SelectTrigger
+                    className="w-full h-14 text-white"
+                    disabled={true}
+                  >
+                    <SelectValue placeholder={formik.values.status} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Public">Public</SelectItem>
+                    <SelectItem value="Private">Private</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-            {/* Channel's Rule */}
-            <div className="flex flex-col gap-1">
-              <span className="text-white p-2 ">Channel Rule's</span>
+            <div className="space-y-2">
+              <span className="text-white p-2">Channel Rule's</span>
               <Textarea
                 placeholder="Write here..."
                 name="rules"
@@ -109,10 +109,8 @@ const EditChannel = ({ channelId }: Props) => {
                 value={formik.values.rules}
               />
             </div>
-
-            {/* About Channel */}
-            <div className="flex flex-col gap-1">
-              <span className="text-white p-2 ">About Channel</span>
+            <div className="space-y-2">
+              <span className="text-white p-2">About Channel</span>
               <Textarea
                 placeholder="Write here..."
                 name="about"
@@ -121,9 +119,7 @@ const EditChannel = ({ channelId }: Props) => {
                 value={formik.values.about}
               />
             </div>
-
-            {/* Submit Button */}
-            <div className="flex justify-end items-center mt-2">
+            <div className="flex justify-end items-center">
               <Button
                 className="rounded-full  bg-greentertiary hover:bg-greenaccent text-white  flex justify-center items-center w-48"
                 type="submit"
@@ -132,10 +128,10 @@ const EditChannel = ({ channelId }: Props) => {
                 {isLoading ? <SpinnerCircle /> : "Save"}
               </Button>
             </div>
-          </form>
-        </FormikProvider>
-      </div>
-    </>
+          </div>
+        </form>
+      </FormikProvider>
+    </div>
   );
 };
 

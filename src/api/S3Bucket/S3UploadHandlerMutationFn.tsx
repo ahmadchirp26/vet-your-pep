@@ -13,7 +13,7 @@ const document = graphql(`
 const S3UploadHandlerMutationFn = async (
   filesToUpload: Array<{ file: File; id: string | number }>,
   accessToken: string,
-  onFileUploadStatusChange: (params: {
+  onFileUploadStatusChange?: (params: {
     id: number | string;
     file: File;
     fileName?: string;
@@ -37,7 +37,7 @@ const S3UploadHandlerMutationFn = async (
             if (!data) {
               throw new Error("No signed url found");
             }
-            onFileUploadStatusChange({
+            onFileUploadStatusChange && onFileUploadStatusChange({
               id: fileToUpload.id,
               file: fileToUpload.file,
               status: "uploading",
@@ -46,7 +46,7 @@ const S3UploadHandlerMutationFn = async (
               method: "PUT",
               body: fileToUpload.file,
             });
-            onFileUploadStatusChange({
+            onFileUploadStatusChange && onFileUploadStatusChange({
               id: fileToUpload.id,
               file: fileToUpload.file,
               fileName: data.fileName,
@@ -54,7 +54,7 @@ const S3UploadHandlerMutationFn = async (
             });
             return data.fileName;
           } catch (e) {
-            onFileUploadStatusChange({
+            onFileUploadStatusChange && onFileUploadStatusChange({
               id: fileToUpload.id,
               file: fileToUpload.file,
               status: "error",

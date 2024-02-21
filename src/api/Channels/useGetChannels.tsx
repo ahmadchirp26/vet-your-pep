@@ -4,6 +4,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useGraphQLRequestHandlerProtected } from "@/lib/auth-helpers";
 import { useState } from "react";
 import { channelKeys } from "./query-keys";
+import { env } from "@/env";
 
 const GET_CHANNELS_ADMIN_QUERY = graphql(`
   #graphql
@@ -69,6 +70,23 @@ const useGetChannels = (
           joined: queryKey[2].joined,
         },
       });
+    },
+    select(data) {
+      return {
+        ...data,
+        getChannels: {
+          ...data.getChannels,
+          results: data.getChannels.results.map((channel) => ({
+            ...channel,
+            image: channel.image
+              ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${channel.image}`
+              : undefined,
+            backgroundImage: channel.backgroundImage
+              ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${channel.backgroundImage}`
+              : undefined,
+          })),
+        }
+      };
     },
   });
 

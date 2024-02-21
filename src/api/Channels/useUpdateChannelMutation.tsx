@@ -1,5 +1,7 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useGraphQLMutationProtected } from "../helpers";
 import { graphql } from "@/lib/react-query-graphql";
+import { channelKeys } from "./query-keys";
 
 const UPDATE_CHANNEL_MUTATION = graphql(`
   #graphql
@@ -11,7 +13,25 @@ const UPDATE_CHANNEL_MUTATION = graphql(`
   }
 `);
 
-const useUpdateChannelMutation = () =>
-  useGraphQLMutationProtected({}, UPDATE_CHANNEL_MUTATION);
+const useUpdateChannelMutation = () => {
+  const queryClient = useQueryClient();
+  return useGraphQLMutationProtected(
+    {
+      onSuccess(
+        _,
+        [
+          {
+            input: { id },
+          },
+        ]
+      ) {
+        return queryClient.invalidateQueries({
+          queryKey: channelKeys.detail(id),
+        });
+      },
+    },
+    UPDATE_CHANNEL_MUTATION
+  );
+};
 
 export default useUpdateChannelMutation;
