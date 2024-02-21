@@ -4,9 +4,9 @@ import SendBirdApp from "./_components/SendBirdApp";
 import { useCustomerSendbirdToken } from "@/api/SendBird/useCustomerSendbirdToken";
 
 const Chat = () => {
-  const {data:userSession, status:userSessionStatus} = useAuthSessionContext();
+  const {data:userSession} = useAuthSessionContext();
   const {data:sendBirdToken, status:sendBirdStatus} = useCustomerSendbirdToken()
-  if (userSessionStatus === "loading" || sendBirdStatus === "pending") {
+  if (sendBirdStatus === "pending") {
     return <div>Loading...</div>;
   }
   if (!userSession) {
