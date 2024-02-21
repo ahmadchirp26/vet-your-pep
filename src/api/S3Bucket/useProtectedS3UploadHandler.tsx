@@ -49,7 +49,7 @@ const useProtectedS3UploadHandler = () => {
     },
   });
   return {
-    isReady: status !== "loading",
+    isReady: true,
     ...mutation,
   };
 };
