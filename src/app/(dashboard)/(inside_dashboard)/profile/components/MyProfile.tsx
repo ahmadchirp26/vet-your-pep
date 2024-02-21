@@ -26,7 +26,7 @@ const UserProfile = ({ id }: Props) => {
     useAuthSessionContext();
   const followUserMutation = useFollowMutation();
   const unfollowUserMutation = useUnFollowMutation();
-  if (status === "pending" || userSessionStatus === "loading") {
+  if (status === "pending") {
     return <div>Loading...</div>;
   }
   if (status === "error") {
@@ -38,7 +38,7 @@ const UserProfile = ({ id }: Props) => {
       <div className="rounded-2xl container-drop-shadow bg-greendarkest p-6 w-2/3 max-lg:w-full flex-col gap-7">
         <div className="flex justify-between items-center">
           <BackButton />
-          {!isMyProfile && (
+          {/* {!isMyProfile && (
             <DropdownMenu>
               <DropdownMenuTrigger className="outline-none bg-greenaccent p-2 rounded-full">
                 <MoreVerticalIcon className="text-white cursor-pointer w-4 h-4" />
@@ -53,16 +53,19 @@ const UserProfile = ({ id }: Props) => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          )}
+          )} */}
         </div>
         <div className="flex items-center justify-between max-sm:flex-col gap-5 mt-5 ">
           <div className="flex items-center gap-5">
-            <div className="rounded-full">
+            <div
+              className="rounded-full border-4 border-greensharp"
+              style={{ width: 160, height: 160, overflow: "hidden" }}
+            >
               {data?.getOtherCustomerData.user.profileImage ? (
                 <Image
                   src={data?.getOtherCustomerData.user.profileImage}
                   alt="profile_image"
-                  className="cursor-pointer rounded-full object-cover border-4 border-greensharp"
+                  className="cursor-pointer rounded-full object-cover "
                   height={160}
                   width={160}
                 />

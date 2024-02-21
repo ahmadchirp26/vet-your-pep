@@ -27,11 +27,11 @@ const imageForm = z.object({
     .optional()
     .refine(
       (files) => files?.[0]?.size <= MAX_FILE_SIZE,
-      `Max image size is 5MB.`,
+      `Max image size is 5MB.`
     )
     .refine(
       (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported.",
+      "Only .jpg, .jpeg, .png and .webp formats are supported."
     ),
 });
 
@@ -67,10 +67,10 @@ const UploadImageForm = () => {
                   });
                   router.push("/");
                 },
-              },
+              }
             );
           },
-        },
+        }
       );
     },
   });
@@ -89,22 +89,22 @@ const UploadImageForm = () => {
           <Skeleton className="w-28 h-28 bg-greenprimary-foreground" />
         ) : (
           <UploadFileButton
-            className="flex justify-center items-center cursor-pointer w-28 h-28 bg-greenprimary rounded-2xl"
+            className="flex justify-center items-center cursor-pointer w-full h-full bg-greenprimary rounded-3xl px-8 py-8"
             buttonComponent={
               imagePreview ? (
                 <Image
                   src={imagePreview}
                   alt="Selected"
                   className="rounded-full"
-                  width={60}
-                  height={60}
+                  width={80}
+                  height={80}
                 />
               ) : (
                 <Image
                   src={"/assets/upload_icon.svg"}
                   alt="upload_icon"
-                  width={60}
-                  height={60}
+                  width={40}
+                  height={40}
                 />
               )
             }

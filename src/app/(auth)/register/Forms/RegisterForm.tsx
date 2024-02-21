@@ -31,6 +31,9 @@ const RegisterForm = () => {
         .required("Email is required"),
       firstName: Yup.string().required("First Name is required"),
       lastName: Yup.string().required("Last Name is required"),
+      phoneNumber: Yup.string()
+        .max(15, "Phone number must not exceed 15 characters")
+        .matches(/^[0-9]+$/, "Phone number must contain only numbers"),
 
       password: Yup.string().required("Password is required"),
       confirmPassword: Yup.string()
@@ -47,6 +50,7 @@ const RegisterForm = () => {
             firstName: values.firstName,
             lastName: values.lastName,
             password: values.password,
+            cellPhone: values.phoneNumber,
           },
         ]);
         router.push("/onboarding/upload-image");
