@@ -23,7 +23,7 @@ body {
 
     /*  */
 
-    --greensharp: 85, 100%, 40%, 1;
+    --greensharp: 85 100% 40%;
     --greensharp-foreground: 85, 100%, 40%, 1;
 
     --greendark: 135, 68%, 65%, 1;
