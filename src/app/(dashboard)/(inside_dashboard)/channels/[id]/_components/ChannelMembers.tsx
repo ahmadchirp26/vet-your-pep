@@ -38,23 +38,28 @@ const ChannelMembers = ({ channelId }: Props) => {
           </Link>
         </div>
         {data.getChannelById.members?.length && (
-          <Carousel>
+          <Carousel className="mt-3">
             <CarouselContent>
               {data.getChannelById.members.map((member, memberIndex) => (
                 <CarouselItem
                   className="flex justify-center items-center basis-3/3"
                   key={memberIndex}
                 >
-                  <Avatar className="hover:bg-greenaccent rounded-md cursor-pointer">
-                    <AvatarImage
-                      src={member.customer.profileImage ?? undefined}
-                      alt={member.customer.firstName}
-                    />
-                    <AvatarFallback>
-                      {member.customer.firstName.charAt(0).toLocaleUpperCase() +
-                        member.customer.lastName.toUpperCase().charAt(0)}
-                    </AvatarFallback>
-                  </Avatar>
+                  <Link href={`/profile/${member.customer.id}`}>
+                    <Avatar className="hover:bg-greenaccent rounded-md cursor-pointer ">
+                      <AvatarImage
+                        src={member.customer.profileImage ?? undefined}
+                        alt={member.customer.firstName}
+                        className="rounded-full"
+                      />
+                      <AvatarFallback>
+                        {member.customer.firstName
+                          .charAt(0)
+                          .toLocaleUpperCase() +
+                          member.customer.lastName.toUpperCase().charAt(0)}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Link>
                 </CarouselItem>
               ))}
             </CarouselContent>
