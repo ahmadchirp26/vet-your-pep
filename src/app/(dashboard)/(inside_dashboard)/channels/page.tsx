@@ -6,13 +6,17 @@ import ChannelCard from "@/features/Cards/ChannelCard";
 import AllChannelCard from "./components/AllChannelCard";
 import useGetChannels from "@/api/Channels/useGetChannels";
 import { Skeleton } from "@/components/ui/skeleton";
+import Link from "next/link";
 
 const Channels = () => {
   const { data: allChannelsData, status: allChannelStatus } = useGetChannels({
     limit: 100,
     joined: false,
   });
-  const { data: myChannelsData, status:myChannelStatus } = useGetChannels({ limit: 100, joined: true });
+  const { data: myChannelsData, status: myChannelStatus } = useGetChannels({
+    limit: 100,
+    joined: true,
+  });
   const allChannelsArray = allChannelsData?.getChannels.results;
   const myChannelsArray = myChannelsData?.getChannels.results;
   const [activeSearch, setActiveSearch] = useState(false);
@@ -23,7 +27,7 @@ const Channels = () => {
   };
 
   const filteredChannels = allChannelsArray?.filter((channel) =>
-    channel.title.toLowerCase().includes(searchTerm.toLowerCase()),
+    channel.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -75,13 +79,15 @@ const Channels = () => {
           ) : (
             <div className="mt-3 flex flex-col gap-3  ">
               {myChannelsArray?.map((channel, index) => (
-                <ChannelCard
-                  key={index}
-                  channel={channel}
-                  showJoinButton={true}
-                  ButtonText="View"
-                  isLandingPage={false}
-                />
+                <Link href={`channels/${channel.id}`} key={channel.id}>
+                  <ChannelCard
+                    key={index}
+                    channel={channel}
+                    showJoinButton={false}
+                    ButtonText="View"
+                    isLandingPage={false}
+                  />
+                </Link>
               ))}
             </div>
           )}
