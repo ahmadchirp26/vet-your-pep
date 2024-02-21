@@ -1,10 +1,13 @@
+"use client";
 import AllChannels from "@/features/AllChannels";
 import ProfileCard from "@/features/ProfileCard";
+import { usePlatformRules } from "@/api/PlatformRules/usePlatformRules";
 import RuleCard from "@/app/(dashboard)/(inside_dashboard)/app-rules/components/RuleCard";
-import { rules } from "@/data/facebackend";
 
 const AppRules = () => {
-  const RulesArray = rules;
+  const { data } = usePlatformRules();
+  console.log("Rules", data?.getPlatFormRules?.results);
+  const RulesArray = data?.getPlatFormRules?.results;
   return (
     <>
       <div className="flex p-4 gap-4">
@@ -12,8 +15,8 @@ const AppRules = () => {
           <ProfileCard />
           <AllChannels />
         </div>
-        <div className="bg-greendarkest rounded-2xl p-4 container-drop-shadow ">
-          {RulesArray.map((rule, index) => (
+        <div className="bg-greendarkest rounded-2xl p-4 container-drop-shadow w-full">
+          {RulesArray?.map((rule, index) => (
             <RuleCard key={index} rule={rule} />
           ))}
         </div>
