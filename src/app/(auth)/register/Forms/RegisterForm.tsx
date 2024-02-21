@@ -47,6 +47,7 @@ const RegisterForm = () => {
             firstName: values.firstName,
             lastName: values.lastName,
             password: values.password,
+            cellPhone: values.phoneNumber,
           },
         ]);
         router.push("/onboarding/upload-image");
