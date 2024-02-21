@@ -21,11 +21,11 @@ const ChannelCard = ({
 }: ChannelCardProps) => {
   const router = useRouter();
   const joinChannelMutation = useJoinChannelMutation();
-  console.log("Channel Members", channel);
+
   return (
     <>
       <div
-        className={`flex gap-3 w-full items-center mt-5 ${
+        className={`flex gap-3 w-full items-center mt-5 hover:bg-greenaccent rounded-md p-2 ${
           isLandingPage
             ? "max-xl:flex-col max-xl:justify-center"
             : "max-md:flex-col max-md:justify-center "
