@@ -86,7 +86,7 @@ export const useGetChannel = (id: string) => {
     queryKey: channelKeys.detail(id),
     queryFn: ({ queryKey }) => {
       return protectedRequestHandler(GET_CHANNEL_BY_ID_DOCUMENT, {
-        input: queryKey[1],
+        input: queryKey.length === 3 ? queryKey[2] : '',
       });
     },
     select: (data) => {

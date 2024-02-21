@@ -21,32 +21,38 @@ const ChannelCard = ({
 }: ChannelCardProps) => {
   const router = useRouter();
   const joinChannelMutation = useJoinChannelMutation();
-  // console.log("Channel Members", channel);
+
   return (
     <>
       <div
-        className={`flex gap-3 w-full items-center mt-5 ${
+        className={`flex gap-3 w-full items-center mt-5 hover:bg-greenaccent rounded-md p-2 ${
           isLandingPage
             ? "max-xl:flex-col max-xl:justify-center"
             : "max-md:flex-col max-md:justify-center "
         }`}
       >
-        <div className="rounded-full w-16 h-16">
+        <div className="rounded-full relative w-16 h-16">
           {channel.image ? (
-            <Image src={channel.image} alt="channel_image" />
+            <Image
+              className={"rounded-full"}
+              layout={"fill"}
+              src={channel.image}
+              alt="channel_image"
+            />
           ) : (
             <Image
               src={"/assets/logo.svg"}
               alt="channel_image"
-              width={100}
-              height={100}
+              objectFit="cover"
+              layout={"fill"}
+              className="rounded-full"
             />
           )}
         </div>
         <div className="flex flex-col gap-1 max-xl:text-center">
           <span className="font-bold text-white">{channel.title}</span>
           <span className="text-graylight text-sm">
-            {channel.members?.length} members
+            {channel.totalMembers} members
           </span>
         </div>
 

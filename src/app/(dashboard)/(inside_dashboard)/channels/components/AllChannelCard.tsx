@@ -23,15 +23,22 @@ const AllChannelCard = ({
     <>
       <div className="flex gap-3 w-[150px] justify-center  mt-5 ">
         <div className="flex flex-col gap-1 items-center justify-center">
-          <div className="rounded-full w-16 h-16">
+          <div className="rounded-full relative w-16 h-16">
             {channel.image ? (
-              <Image src={channel.image} alt="channel_image" />
+              <Image
+                layout={"fill"}
+                objectFit="cover"
+                src={channel.image}
+                className="rounded-full"
+                alt="channel_image"
+              />
             ) : (
               <Image
                 src={"/assets/logo.svg"}
                 alt="channel_image"
-                width={100}
-                height={100}
+                layout={"fill"}
+                className="rounded-full"
+                objectFit="cover"
               />
             )}
           </div>
@@ -56,7 +63,7 @@ const AllChannelCard = ({
                       onSuccess: () => {
                         router.push(`/channels/${channel.id}`);
                       },
-                    },
+                    }
                   )
                 }
               >
