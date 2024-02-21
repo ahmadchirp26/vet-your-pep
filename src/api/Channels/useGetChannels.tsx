@@ -22,6 +22,7 @@ const GET_CHANNELS_ADMIN_QUERY = graphql(`
         title
         about
         isPaid
+        totalMembers
         members {
           id
           paidStatus
@@ -37,7 +38,7 @@ interface Props {
   joined: boolean;
 }
 const useGetChannels = (
-  props: Props | undefined = { limit: 100, joined: false },
+  props: Props | undefined = { limit: 100, joined: false }
 ) => {
   const [paginationParams, setPaginationParams] = useState({
     limit: props.limit,
@@ -94,10 +95,10 @@ const useGetChannels = (
           paginationParamsExtended.limit
             ? Math.ceil(
                 paginationParamsExtended.totalRows /
-                  paginationParamsExtended.limit,
+                  paginationParamsExtended.limit
               )
             : 0,
-          1,
+          1
         );
         const newPage = Math.min(Math.max(page, 1), maxPages);
         const newOffset = (newPage - 1) * paginationParamsExtended.limit;
@@ -114,12 +115,12 @@ const useGetChannels = (
         const latestTotalRows = paginationParamsExtended.totalRows;
         const maxPages = Math.max(
           pageSize ? Math.ceil(latestTotalRows / pageSize) : 0,
-          1,
+          1
         );
         // Possible page change due to pageSize change
         const newPage = Math.min(
           Math.max(paginationParams.offset / pageSize + 1, 1),
-          maxPages,
+          maxPages
         );
         const newOffset = (newPage - 1) * pageSize;
         setPaginationParams({

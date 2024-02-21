@@ -26,7 +26,7 @@ const UserProfile = ({ id }: Props) => {
     useAuthSessionContext();
   const followUserMutation = useFollowMutation();
   const unfollowUserMutation = useUnFollowMutation();
-  if (status === "pending" || userSessionStatus === "loading") {
+  if (status === "pending") {
     return <div>Loading...</div>;
   }
   if (status === "error") {
