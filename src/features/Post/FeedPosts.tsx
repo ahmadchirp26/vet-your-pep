@@ -44,18 +44,7 @@ interface Props {
 
 const FeedPosts = ({ status, posts, channelId, className }: Props) => {
   if (status === "pending") {
-    //[Todo]: Add a skeleton
-    return (
-      <div
-        className={cn(
-          "container-drop-shadow w-full rounded-3xl p-4 space-y-8 w-xs",
-          className
-        )}
-      >
-        <PostCardSkeleton />
-        <PostCardSkeleton />
-      </div>
-    );
+    return <FeedPostsSkeleton className={className} />;
   }
   if (status === "error") {
     //[Todo]: handle error
@@ -110,5 +99,18 @@ const FeedPosts = ({ status, posts, channelId, className }: Props) => {
     </div>
   );
 };
-
+export const FeedPostsSkeleton = ({ className }: {className?:string}) => {
+  return (
+    <div
+      className={cn(
+        "container-drop-shadow bg-greendarkest w-full rounded-3xl p-4 space-y-8 w-xs",
+        className
+      )}
+    >
+      <PostCardSkeleton />
+      <PostCardSkeleton />
+      <PostCardSkeleton />
+    </div>
+  );
+};
 export default FeedPosts;

@@ -1,6 +1,7 @@
+import { ChannelViewTemplateSkeleton } from "./_templates/ChannelViewTemplate";
+
 const Loading = () => {
-    return <div>Loading..</div>;
-  };
-  
-  export default Loading;
-  
+  return <ChannelViewTemplateSkeleton />;
+};
+
+export default Loading;

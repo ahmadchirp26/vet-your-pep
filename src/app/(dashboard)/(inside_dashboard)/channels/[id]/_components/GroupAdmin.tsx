@@ -8,13 +8,13 @@ interface Props {
 const GroupAdmin = ({ channelId }: Props) => {
   const { data, status } = useGetChannel(channelId);
   if (status === "pending") {
-    //[Todo]: add skeleton
-    return <p>{"Loading..."}</p>;
+    return <GroupAdminSkeleton />;
   }
   if (status === "error") {
     //[Todo]: add error
     return <p>{"Error"}</p>;
   }
+  
   return (
     <div className="bg-greendarkest rounded-3xl p-3 space-y-4 shadow-glow">
       <p className="text-md font-bold text-white text-center">
@@ -46,4 +46,15 @@ const GroupAdmin = ({ channelId }: Props) => {
   );
 };
 
+export const GroupAdminSkeleton = () => {
+  return (
+    <div className="bg-greendarkest rounded-3xl p-3 space-y-4 shadow-glow flex flex-col items-center">
+      <div className="h-6 w-16 p-2 bg-greenlight rounded-lg animate-pulse" />
+      <div className="flex flex-col items-center justify-center gap-2">
+        <div className="h-12 w-12 bg-greenlight rounded-full animate-pulse" />
+        <div className="h-2 w-20 p-2 bg-greenlight rounded-lg animate-pulse" />
+      </div>
+    </div>
+  );
+};
 export default GroupAdmin;

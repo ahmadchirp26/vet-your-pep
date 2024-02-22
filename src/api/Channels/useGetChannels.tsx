@@ -55,7 +55,7 @@ const useGetChannels = (
     placeholderData: keepPreviousData,
     queryKey: channelKeys.listJoined({
       ...paginationParams,
-      filter: { search: searchQuery },
+      filter: {title: searchQuery },
       joined: props.joined,
     }),
     queryFn: ({ queryKey }) => {
@@ -64,9 +64,7 @@ const useGetChannels = (
         input: {
           limit: queryKey[2].limit,
           offset: queryKey[2].offset,
-          filter: {
-            search: queryKey[2].filter?.search,
-          },
+          filter: queryKey[2].filter,
           joined: queryKey[2].joined,
         },
       });
