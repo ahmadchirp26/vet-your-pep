@@ -1,3 +1,4 @@
+//[Todo]: Replace this with S3UploadHandlerMutationFn and remove this completely
 import useAuthSessionContext from "../../lib/Authentication/context/AuthSessionContext";
 import { graphql } from "@/__generated__";
 import { requestGraphQl } from "@/lib/react-query-graphql";
@@ -39,7 +40,7 @@ export const S3UploadHandlerMutationFn = async (
 };
 
 const useProtectedS3UploadHandler = () => {
-  const { data, status } = useAuthSessionContext();
+  const { data } = useAuthSessionContext();
   const mutation = useMutation({
     mutationFn: async ({ fileToUpload }: { fileToUpload: File }) => {
       if (!data?.accessToken) {

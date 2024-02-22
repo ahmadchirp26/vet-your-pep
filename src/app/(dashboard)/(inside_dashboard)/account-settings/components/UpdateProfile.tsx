@@ -9,6 +9,7 @@ import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
 import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
 import useUpdateCustomerMutation from "@/api/AccountSettings/useUpdateCustomerMutation";
 import ProfilePicture from "./ProfilePicture";
+import VerifiedIcon from "@/components/icons/VerifiedIcon";
 
 const UpdateProfile = () => {
   const { data } = useCustomerDataQuery();
@@ -58,12 +59,7 @@ const UpdateProfile = () => {
                 <span className="text-white font-bold text-xl ">
                   {data?.getCustomerData.lastName}
                 </span>
-                <Image
-                  src={"/assets/verified_icon.svg"}
-                  alt="verified_icon"
-                  height={15}
-                  width={15}
-                />
+                <VerifiedIcon className= {"w-4 h-4"} />
               </div>
               <div className="flex items-center gap-2">
                 <Image

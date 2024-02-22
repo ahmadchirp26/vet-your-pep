@@ -12,8 +12,7 @@ import ChannelMembers, {
 } from "../_components/ChannelMembers";
 import OnlineFriends, { OnlineFriendsSkeleton } from "@/features/OnlineFriends";
 import { useMediaQuery } from "@uidotdev/usehooks";
-import ChannelPostFeed from "../_components/ChannelPostFeed";
-import { FeedPostsSkeleton } from "@/features/Post/FeedPosts";
+import FeedPosts, { FeedPostsSkeleton } from "@/features/Post/FeedPosts";
 
 type Props = {
   channelId: string;
@@ -35,7 +34,10 @@ const ChannelViewTemplate = (props: Props) => {
         {isMediumDeviceAndLarge ? (
           <div className="flex items-start space-x-3 mt-4">
             <div className="flex gap-3 flex-1">
-              <ChannelPostFeed channelId={props.channelId} />
+              <FeedPosts
+                className={"container-drop-shadow bg-greendarkest"}
+                channelId={props.channelId}
+              />
             </div>
             <div className="space-y-3">
               <GroupAdmin channelId={props.channelId} />
@@ -65,7 +67,10 @@ const ChannelViewTemplate = (props: Props) => {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="Feed">
-              <ChannelPostFeed channelId={props.channelId} />
+              <FeedPosts
+                className={"container-drop-shadow bg-greendarkest"}
+                channelId={props.channelId}
+              />
             </TabsContent>
             <TabsContent value="Members" className="gap-5">
               <GroupAdmin channelId={props.channelId} />

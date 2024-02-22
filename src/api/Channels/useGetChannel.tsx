@@ -21,60 +21,20 @@ const GET_CHANNEL_BY_ID_DOCUMENT = graphql(`
       status
       totalMembers
       title
-      posts {
+      moderator {
         id
-        createdDate
-        body
-        images
-        customer {
-          id
-          firstName
-          lastName
-          email
-          profileImage
-        }
-        comments {
-          content
-          id
-          user {
-            firstName
-            lastName
-            id
-            email
-            profileImage
-          }
-        }
-
-        likeCount
-        likes {
-          id
-          user {
-            firstName
-            lastName
-            id
-            email
-            profileImage
-          }
-        }
+        profileImage
+        firstName
+        lastName
       }
       members {
         id
         customer {
           id
+          profileImage
           firstName
           lastName
-          email
-          profileImage
         }
-        paidStatus
-        roleChannel
-      }
-      moderator {
-        firstName
-        lastName
-        id
-        email
-        profileImage
       }
     }
   }
@@ -114,41 +74,7 @@ export const useGetChannel = (id: string) => {
             profileImage: data.getChannelById.moderator.profileImage
               ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${data.getChannelById.moderator.profileImage}`
               : undefined,
-          },
-          posts: data.getChannelById.posts?.map((post) => {
-            return {
-              ...post,
-              customer: {
-                ...post.customer,
-                profileImage: post.customer.profileImage
-                  ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${post.customer.profileImage}`
-                  : undefined,
-              },
-              comments: post.comments?.map((comment) => ({
-                ...comment,
-                user: {
-                  ...comment.user,
-                  profileImage: comment.user.profileImage
-                    ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${comment.user.profileImage}`
-                    : undefined,
-                },
-              })),
-              likes: post.likes?.map((like) => ({
-                ...like,
-                user: like.user
-                  ? {
-                      ...like.user,
-                      profileImage: like.user.profileImage
-                        ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${like.user.profileImage}`
-                        : undefined,
-                    }
-                  : null,
-              })),
-              images: post.images?.map(
-                (url) => `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${url}`
-              ),
-            };
-          }),
+          }
         },
       };
     },
@@ -187,14 +113,27 @@ export const fetchChannelServerSide = async (
         ...data,
         getChannelById: {
           ...data.getChannelById,
-          posts: data.getChannelById.posts?.map((post) => {
-            return {
-              ...post,
-              images: post.images?.map(
-                (url) => `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${url}`
-              ),
-            };
-          }),
+          image: data.getChannelById.image
+            ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${data.getChannelById.image}`
+            : undefined,
+          backgroundImage: data.getChannelById.backgroundImage
+            ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${data.getChannelById.backgroundImage}`
+            : undefined,
+          members: data.getChannelById.members?.map((member) => ({
+            ...member,
+            customer: {
+              ...member.customer,
+              profileImage: member.customer.profileImage
+                ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${member.customer.profileImage}`
+                : undefined,
+            },
+          })),
+          moderator: {
+            ...data.getChannelById.moderator,
+            profileImage: data.getChannelById.moderator.profileImage
+              ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${data.getChannelById.moderator.profileImage}`
+              : undefined,
+          }
         },
       },
       queryClient,

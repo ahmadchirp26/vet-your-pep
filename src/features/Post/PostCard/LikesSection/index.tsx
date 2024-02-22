@@ -29,7 +29,7 @@ interface Props {
 const LikesButtonTrigger = React.forwardRef<
   HTMLButtonElement,
   { isLikedByMe: boolean; postId: string; totalLikes: number }
->((props, ref) => {
+>(({isLikedByMe,postId,totalLikes, ...props}, ref) => {
   const likeMutation = useLikeMutation();
   const unlikeMutation = useUnLikeMutation();
 
@@ -41,16 +41,16 @@ const LikesButtonTrigger = React.forwardRef<
         className="p-0 h-auto text-white"
         isLoading={likeMutation.isPending || unlikeMutation.isPending}
         onClick={() => {
-          if (props.isLikedByMe) {
-            unlikeMutation.mutate({ input: { postId: props.postId } });
+          if (isLikedByMe) {
+            unlikeMutation.mutate({ input: { postId: postId } });
           } else {
-            likeMutation.mutate({ input: { postId: props.postId } });
+            likeMutation.mutate({ input: { postId: postId } });
           }
         }}
       >
         <LikeIcon
-          fill={props.isLikedByMe ? "red" : "transparent"}
-          stroke={props.isLikedByMe ? "red" : "#79CD00"}
+          fill={isLikedByMe ? "red" : "transparent"}
+          stroke={isLikedByMe ? "red" : "#79CD00"}
           className="w-6 h-6"
         />
       </Button>
@@ -59,9 +59,9 @@ const LikesButtonTrigger = React.forwardRef<
         size={"sm"}
         className="px-2 text-graylight"
         ref={ref}
-        disabled={props.totalLikes === 0}
+        disabled={totalLikes === 0}
         {...props}
-      >{`${props.totalLikes} Like${props.totalLikes > 1 ? "s" : ""}`}</Button>
+      >{`${totalLikes} Like${totalLikes > 1 ? "s" : ""}`}</Button>
     </div>
   );
 });
