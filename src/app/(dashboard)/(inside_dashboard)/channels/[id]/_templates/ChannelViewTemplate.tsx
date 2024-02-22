@@ -1,14 +1,19 @@
 "use client";
 import React from "react";
+import AboutCard, { AboutCardSkeleton } from "../_components/AboutCard";
 import JoinedChannels, {
   JoinedChannelsSkeleton,
 } from "@/features/Channels/JoinedChannels";
+import Banner, { BannerSkeleton } from "../_components/Banner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import GroupAdmin from "../_components/GroupAdmin";
-import ChannelMembers from "../_components/ChannelMembers";
-import OnlineFriends from "@/features/OnlineFriends";
+import GroupAdmin, { GroupAdminSkeleton } from "../_components/GroupAdmin";
+import ChannelMembers, {
+  ChannelMembersSkeleton,
+} from "../_components/ChannelMembers";
+import OnlineFriends, { OnlineFriendsSkeleton } from "@/features/OnlineFriends";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import ChannelPostFeed from "../_components/ChannelPostFeed";
+import { FeedPostsSkeleton } from "@/features/Post/FeedPosts";
 
 type Props = {
   channelId: string;
@@ -22,7 +27,7 @@ const ChannelViewTemplate = (props: Props) => {
       {isMediumDeviceAndLarge && (
         <div className="space-y-4 min-w-[220px]">
           <AboutCard channelId={props.channelId} />
-          <AllChannels />
+          <JoinedChannels />
         </div>
       )}
       <div className="flex-1">
@@ -71,6 +76,31 @@ const ChannelViewTemplate = (props: Props) => {
             </TabsContent>
           </Tabs>
         )}
+      </div>
+    </div>
+  );
+};
+
+export const ChannelViewTemplateSkeleton = () => {
+  return (
+    <div className="p-3 md:flex items-start gap-x-3">
+      <OnlineFriendsSkeleton className="md:flex-col order-3 mb-4 md:min-w-min" />
+      <div className="space-y-4 min-w-[220px]">
+        <AboutCardSkeleton />
+        <JoinedChannelsSkeleton />
+      </div>
+
+      <div className="flex-1">
+        <BannerSkeleton />
+        <div className="flex items-start space-x-3 mt-4">
+          <div className="flex gap-3 flex-1">
+            <FeedPostsSkeleton />
+          </div>
+          <div className="space-y-3">
+            <GroupAdminSkeleton />
+            <ChannelMembersSkeleton />
+          </div>
+        </div>
       </div>
     </div>
   );
