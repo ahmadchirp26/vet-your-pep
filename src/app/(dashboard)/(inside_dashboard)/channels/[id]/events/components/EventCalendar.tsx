@@ -1,17 +1,27 @@
-"use client";
+import { useGetEventByChannelId } from "@/api/Events/useGetEventByChannelId";
 import { Calendar } from "@/components/ui/calendar";
 import React from "react";
 
-const EventCalendar = () => {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
+interface Props {
+  channelId: string;
+}
+
+const EventCalendar = ({ channelId }: Props) => {
+  const { data } = useGetEventByChannelId(channelId);
+  const [selectedDate, setSelectedDate] = React.useState<Date | undefined>();
 
   return (
-    <Calendar
-      mode="single"
-      selected={date}
-      onSelect={setDate}
-      className="rounded-2xl container-drop-shadow bg-greendarkest text-white "
-    />
+    <>
+      {data?.getEventsByChannel?.results?.map((event, index) => (
+        <Calendar
+          key={index}
+          mode="single"
+          selected={new Date(event.startDate)} // Convert the string to Date object here
+          onSelect={setSelectedDate}
+          className="rounded-2xl container-drop-shadow bg-greendarkest text-white "
+        />
+      ))}
+    </>
   );
 };
 

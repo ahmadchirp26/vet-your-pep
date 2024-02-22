@@ -1,9 +1,11 @@
+"use client";
 import AllChannels from "@/features/Channels/JoinedChannels";
 import ProfileCard from "@/features/ProfileCard";
 import EventCalendar from "./components/EventCalendar";
 import EventStepper from "./components/EventStepper";
 
-const Events = () => {
+const Events = (props: { params: { id: string } }) => {
+  const channelId = props.params.id;
   return (
     <>
       <div className="p-3 flex gap-5 max-md:flex-col ">
@@ -14,10 +16,10 @@ const Events = () => {
         </div>
         <div className="flex gap-3 w-full max-md:justify-center max-lg:flex-col ">
           <div className="max-lg:order-2">
-            <EventCalendar />
+            <EventCalendar channelId={channelId} />
           </div>
           <div className="max-lg:order-1">
-            <EventStepper />
+            <EventStepper channelId={channelId} />
           </div>
           {/* <div className="text-red-500">events stepper</div> */}
         </div>

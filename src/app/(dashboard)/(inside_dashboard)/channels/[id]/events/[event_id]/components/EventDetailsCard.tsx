@@ -1,7 +1,13 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
-const EventDetailsCard = () => {
+interface Props {
+  EventId: string;
+}
+
+const EventDetailsCard = ({ EventId }: Props) => {
+  console.log(EventId);
+  console.log("Losd");
   return (
     <>
       <div className="flex justify-between gap-5 max-md:flex-col">
@@ -9,7 +15,7 @@ const EventDetailsCard = () => {
         <div className="flex flex-col gap-1 p-10 max-xl:p-5 max-md:order-2 max-sm:p-2">
           <div className="flex gap-3 items-center">
             <div className="bg-greenaccent w-6 h-6 rounded-full"></div>
-            <span className="font-bold text-white text-lg">The Beat Box</span>
+            <span className="font-bold text-white text-lg">The Beat ox</span>
           </div>
           <span className="text-graylight text-sm">05 Dec 2023 4:00 PM</span>
           <span className="text-white">Online</span>
