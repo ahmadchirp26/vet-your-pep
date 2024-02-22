@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import FollowButtonManager from "@/features/FollowButtonManager.tsx";
 
 interface Props {
   userThatLiked: {
@@ -26,12 +26,7 @@ const LikesCard = ({ userThatLiked }: Props) => {
         {userThatLiked.firstName + " " + userThatLiked.lastName}
       </span>
       <div className="ml-auto">
-        <Button
-          className="rounded-full border border-white bg-greentertiary hover:bg-greenaccent text-white flex justify-center items-center w-20"
-          type="button"
-        >
-          Follow
-        </Button>
+        <FollowButtonManager customerId={userThatLiked.id} />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 "use client";
+import useGetPosts from "@/api/Posts/useGetPosts";
 import NewPost from "@/features/Post/NewPost";
 import PostCard, { PostCardSkeleton } from "@/features/Post/PostCard";
 import { cn } from "@/utils/cn";
@@ -6,43 +7,15 @@ import { cn } from "@/utils/cn";
 interface Props {
   className?: string;
   channelId?: string;
-  status: "pending" | "error" | "success";
-  posts?: Array<{
-    id: string;
-    body: string;
-    createdAt: Date;
-    channel: {
-      id: string;
-      title: string;
-    };
-    customer: {
-      id: string;
-      profileImage?: string;
-      firstName: string;
-      lastName: string;
-    };
-    comments: Array<{
-      content: string;
-      user: {
-        id: string;
-        profileImage?: string;
-        firstName: string;
-        lastName: string;
-      };
-    }>;
-    likes: Array<{
-      user: {
-        id: string;
-        profileImage?: string;
-        firstName: string;
-        lastName: string;
-      };
-    }>;
-    images: Array<string>;
-  }>;
+  customerId?: string;
+  onlyShowPosts?: boolean;
 }
 
-const FeedPosts = ({ status, posts, channelId, className }: Props) => {
+const FeedPosts = ({ className, channelId, customerId, onlyShowPosts = false }: Props) => {
+  const { status, data } = useGetPosts({
+    channelId,
+    customerId,
+  });
   if (status === "pending") {
     return <FeedPostsSkeleton className={className} />;
   }
@@ -54,12 +27,12 @@ const FeedPosts = ({ status, posts, channelId, className }: Props) => {
   return (
     <div
       className={cn(
-        "container-drop-shadow bg-greendarkest w-full rounded-3xl p-4 space-y-8 w-xs",
+        "w-full rounded-3xl p-4 space-y-8 w-xs",
         className
       )}
     >
-      <NewPost channelId={channelId} />
-      {posts?.map((post, index) => (
+      {!onlyShowPosts && <NewPost channelId={channelId} />}
+      {data.getPosts.results.map((post, index) => (
         <PostCard
           key={index}
           channelId={post.channel.id}
@@ -87,7 +60,7 @@ const FeedPosts = ({ status, posts, channelId, className }: Props) => {
           postContent={post.body}
           postId={post.id}
           postImages={post.images ?? []}
-          postedTime={post.createdAt}
+          postedTime={post.createdDate}
           postedBy={{
             id: post.customer.id,
             firstName: post.customer.firstName,
@@ -99,7 +72,7 @@ const FeedPosts = ({ status, posts, channelId, className }: Props) => {
     </div>
   );
 };
-export const FeedPostsSkeleton = ({ className }: {className?:string}) => {
+export const FeedPostsSkeleton = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(

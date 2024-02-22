@@ -7,7 +7,6 @@ const JOIN_CHANNEL_MUTATION = graphql(`
   #graphql
   mutation JoinChannel($channelId: String!) {
     joinChannel(channelId: $channelId) {
-      message
       success
     }
   }
