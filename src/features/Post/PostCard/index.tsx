@@ -6,6 +6,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { CalculatePostTime } from "@/utils/calculate-post-time";
 import PostMedia from "@/features/Post/PostCard/PostMedia";
 import LikesSection from "@/features/Post/PostCard/LikesSection";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface Props {
   postId: string;
@@ -35,7 +37,7 @@ const PostCard = (post: Props) => {
   return (
     <div className="border border-white rounded-3xl p-4 space-y-4 flex flex-col">
       <div className="flex justify-between items-center">
-        <div className="flex items-start gap-3">
+        <div className="flex items-center gap-3">
           <Avatar>
             <AvatarImage src={post.postedBy.profileImage} alt="profile_image" />
             <AvatarFallback>
@@ -43,16 +45,21 @@ const PostCard = (post: Props) => {
                 post.postedBy.lastName.toLocaleUpperCase().charAt(0)}
             </AvatarFallback>
           </Avatar>
-          <div className="flex flex-col">
-            <span className="text-white font-bold">
-              {post.postedBy.firstName + " " + post.postedBy.lastName}
-            </span>
-            <span className="text-gray-300 text-xs truncate">
+          <div>
+            <Link href={`/profile/${post.postedBy.id}`}>
+              <Button
+                variant={"link"}
+                className={"text-white font-semibold px-0 py-0 h-auto"}
+              >
+                {post.postedBy.firstName + " " + post.postedBy.lastName}
+              </Button>
+            </Link>
+            <p className="text-gray-300 text-xs truncate">
               Posted on {post.channel}
-            </span>
-            <span className="text-graylight text-xs">
+            </p>
+            <p className="text-graylight text-xs">
               {CalculatePostTime(post.postedTime)}
-            </span>
+            </p>
           </div>
         </div>
         {/* <DropdownMenu>

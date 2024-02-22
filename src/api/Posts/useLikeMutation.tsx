@@ -2,28 +2,27 @@ import { graphql } from "@/lib/react-query-graphql";
 import { useQueryClient } from "@tanstack/react-query";
 import { useGraphQLMutationProtected } from "../helpers";
 import { channelKeys } from "../Channels/query-keys";
-import { userAllFeedsKeys } from "./query-keys";
+import { postKeys } from "./query-keys";
 
 const LIKE_MUTATION = graphql(`
   mutation likePost($input: CreateLikeInput!) {
     likePost(input: $input) {
-      message
+      id
     }
   }
 `);
-
 
 export const useLikeMutation = () => {
   const queryClient = useQueryClient();
   return useGraphQLMutationProtected(
     {
-      onSuccess: async() => {
+      onSuccess: async () => {
         await queryClient.invalidateQueries({
-          queryKey:userAllFeedsKeys.all
+          queryKey:postKeys.all
         });      
         return queryClient.invalidateQueries({
-          queryKey:channelKeys.detail()
-        })
+          queryKey: channelKeys.detail(),
+        });
         // const userId = data?.sub;
         // if (!userId) {
         //   return;
