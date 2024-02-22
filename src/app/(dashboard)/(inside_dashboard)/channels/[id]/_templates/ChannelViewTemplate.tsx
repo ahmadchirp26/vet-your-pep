@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import AboutCard from "../_components/AboutCard";
-import AllChannels from "@/features/AllChannels";
-import Banner from "../_components/Banner";
+import JoinedChannels, {
+  JoinedChannelsSkeleton,
+} from "@/features/Channels/JoinedChannels";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import GroupAdmin from "../_components/GroupAdmin";
 import ChannelMembers from "../_components/ChannelMembers";

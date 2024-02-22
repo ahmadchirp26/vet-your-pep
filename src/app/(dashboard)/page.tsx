@@ -1,5 +1,5 @@
-import AllChannels from "@/features/AllChannels";
-import NewChannels from "@/features/NewChannels";
+import AllChannels from "@/features/Channels/JoinedChannels";
+import NewChannels from "@/features/Channels/NewChannels";
 import OnlineFriends from "@/features/OnlineFriends";
 import ProfileCard from "@/features/ProfileCard";
 import AllPostsFeed from "./_components/AllPostsFeed";

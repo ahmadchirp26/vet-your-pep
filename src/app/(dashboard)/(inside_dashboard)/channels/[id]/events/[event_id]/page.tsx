@@ -1,4 +1,4 @@
-import AllChannels from "@/features/AllChannels";
+import AllChannels from "@/features/Channels/JoinedChannels";
 import ProfileCard from "@/features/ProfileCard";
 import EventDetailsCard from "./components/EventDetailsCard";
 import Image from "next/image";

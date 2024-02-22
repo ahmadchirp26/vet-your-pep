@@ -123,10 +123,66 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "search-bar-in":{
+          "0%": {
+            opacity: 0,
+            width: "0",
+          },
+          "50%": {
+            opacity: 0,
+            width: "20%",
+          },
+          "100%": {
+            opacity: 1,
+            width: "100%",
+          },
+        },
+        "search-bar-out": {
+          "0%": {
+            opacity: 1,
+            width: "100%",
+          },
+          "50%": {
+            opacity: 0,
+            width: "20%",
+          },
+          "100%": {
+            opacity: "0",
+            width: "0",
+          },
+        },
+        "search-text-in": {
+          "0%": {
+            opacity: 0,
+            width: "0%",
+          },
+          "50%": {
+            opacity: 0,
+            width: "80%",
+          },
+          "100%": {
+            opacity: 1,
+            width: "100%",
+          },
+        },
+        "search-text-out": {
+          "0%": {
+            opacity: 1,
+            width: "100%",
+          },
+          "50%": {
+            opacity: 0,
+            width: "80%",
+          },
+          "100%": {
+            opacity: "0",
+            width: "0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out"
       },
       boxShadow: {
         glow: "0px 0px 15px 0px #247a7f",

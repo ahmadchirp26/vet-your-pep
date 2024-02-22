@@ -1,14 +1,12 @@
 import { cn } from "@/utils/cn";
 
-interface Props {
-  className?: string;
-}
-export const SearchIcon = ({ className }: Props) => (
+export const SearchIcon = ({ className, ...props }: React.ComponentProps<'svg'>) => (
   <svg
     viewBox="0 0 33 33"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={cn("w-5 h-5", className)}
+    {...props}
   >
     <path
       d="M15.0745 28.149C22.2955 28.149 28.149 22.2955 28.149 15.0745C28.149 7.85353 22.2955 2 15.0745 2C7.85353 2 2 7.85353 2 15.0745C2 22.2955 7.85353 28.149 15.0745 28.149Z"

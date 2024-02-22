@@ -1,4 +1,4 @@
-import AllChannels from "@/features/AllChannels";
+import AllChannels from "@/features/Channels/JoinedChannels";
 import UserProfile from "../components/MyProfile";
 
 const MyProfile = (props:{params:{id:string}}) => {

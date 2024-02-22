@@ -25,7 +25,8 @@ const ChannelCard = ({
   return (
     <>
       <div
-        className={`flex gap-3 w-full items-center mt-5 hover:bg-greenaccent rounded-md p-2 ${
+          ref={ref}
+          className={`flex gap-3 w-full items-center hover:bg-greenaccent px-4 py-1.5 ${
           isLandingPage
             ? "max-xl:flex-col max-xl:justify-center"
             : "max-md:flex-col max-md:justify-center "
