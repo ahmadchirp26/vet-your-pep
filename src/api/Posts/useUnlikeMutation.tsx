@@ -12,7 +12,6 @@ const UN_LIKE_MUTATION = graphql(`
   }
 `);
 
-
 export const useUnLikeMutation = () => {
   const queryClient = useQueryClient();
   return useGraphQLMutationProtected(

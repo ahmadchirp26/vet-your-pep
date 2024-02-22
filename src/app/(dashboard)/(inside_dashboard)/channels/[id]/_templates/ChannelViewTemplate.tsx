@@ -42,6 +42,7 @@ const ChannelViewTemplate = (props: Props) => {
             <div className="space-y-3">
               <GroupAdmin channelId={props.channelId} />
               <ChannelMembers channelId={props.channelId} />
+              <EventCard />
             </div>
           </div>
         ) : (

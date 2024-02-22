@@ -12,18 +12,17 @@ const LIKE_MUTATION = graphql(`
   }
 `);
 
-
 export const useLikeMutation = () => {
   const queryClient = useQueryClient();
   return useGraphQLMutationProtected(
     {
-      onSuccess: async() => {
+      onSuccess: async () => {
         await queryClient.invalidateQueries({
           queryKey:postKeys.all
         });      
         return queryClient.invalidateQueries({
-          queryKey:channelKeys.detail()
-        })
+          queryKey: channelKeys.detail(),
+        });
         // const userId = data?.sub;
         // if (!userId) {
         //   return;
