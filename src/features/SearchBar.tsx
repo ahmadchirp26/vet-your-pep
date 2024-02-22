@@ -4,12 +4,13 @@ import { cn } from "@/utils/cn";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
-interface Props {
+interface Props extends React.ComponentProps<"div"> {
   className?: string;
-  setSearchTerm: (term: string) => void; // New prop to handle search term changes
+  setSearchTerm: (term: string) => void;
+  inputProps?: React.ComponentProps<typeof Input>;
 }
 
-const SearchBar = ({ className, setSearchTerm }: Props) => {
+const SearchBar = ({ className, setSearchTerm,inputProps, ...props }: Props) => {
   const [searchInput, setSearchInput] = useState("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +25,7 @@ const SearchBar = ({ className, setSearchTerm }: Props) => {
         "border border-white-500 rounded-full w-full max-h-12 flex items-center p-3 search-drop-shadow",
         className
       )}
+      {...props}
     >
       <SearchIcon />
       <Input
@@ -34,6 +36,7 @@ const SearchBar = ({ className, setSearchTerm }: Props) => {
         className="bg-transparent outline-none text-base border-none placeholder:text-graylight"
         value={searchInput}
         onChange={handleInputChange}
+        {...inputProps}
       />
     </div>
   );

@@ -27,13 +27,13 @@ const Banner = ({ channelId, className, isEditMode = false }: Props) => {
   const router = useRouter();
   const isModerator = session?.sub === data?.getChannelById.moderator.id;
   if (status === "pending") {
-    //[Todo]: add skeleton
-    return <p>{"Loading..."}</p>;
+    return <BannerSkeleton />
   }
   if (status === "error") {
     //[Todo]: add error
     return <p>{"Error"}</p>;
   }
+  
   return (
     <div
       className={cn("rounded-t-2xl relative p-4", className)}
@@ -124,4 +124,21 @@ const Banner = ({ channelId, className, isEditMode = false }: Props) => {
   );
 };
 
+export const BannerSkeleton = () => {
+  return (
+    <div className="rounded-t-2xl relative p-4 h-[200px]">
+      <div className="absolute inset-0 w-full bg-black bg-opacity-30 overflow-hidden rounded-t-2xl"></div>
+      <div className="absolute rounded-full flex items-center justify-center w-32 h-32 bottom-5 overflow-hidden">
+        <div className="h-32 w-32 bg-greenlight rounded-full animate-pulse" />
+      </div>
+      <div className="absolute top-5 right-5">
+        <div className="h-6 w-6 p-2 bg-greenlight rounded-lg animate-pulse" />
+      </div>
+      <div className="absolute bottom-5 right-5 space-y-2">
+        <div className="h-8 w-32 bg-greenlight rounded-lg animate-pulse" />
+        <div className="h-6 w-24 bg-greenlight rounded-lg animate-pulse" />
+      </div>
+    </div>
+  );
+};
 export default Banner;

@@ -1,5 +1,5 @@
 "use client";
-import AllChannels from "@/features/AllChannels";
+import AllChannels from "@/features/Channels/JoinedChannels";
 import ProfileCard from "@/features/ProfileCard";
 import { usePlatformRules } from "@/api/PlatformRules/usePlatformRules";
 import RuleCard from "@/app/(dashboard)/(inside_dashboard)/app-rules/components/RuleCard";
