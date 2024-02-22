@@ -24,29 +24,31 @@ const ChannelMembers = ({ channelId }: Props) => {
     return <div>Error fetching data</div>;
   }
   return (
-    <>
-      <div className="bg-greendarkest rounded-3xl p-4 mt-5 container-drop-shadow">
-        <div className="flex justify-between">
-          <span className="text-white text-sm ">
+    <div className="bg-greendarkest rounded-3xl pb-4 px-4 space-y-2 shadow-glow">
+      <div className="flex justify-between items-center py-2">
+        <span className="text-white text-sm">
             Members ({data.getChannelById.members?.length ?? 0})
           </span>
-          <Link
-            href={`/channels/${channelId}/members`}
-            className="text-underline text-greensharp text-sm"
-          >
-            See all
-          </Link>
+        <Button variant={"link"} asChild className={"text-white p-0"}>
+          <Link href={`/channels/${channelId}/members`}>See all</Link>
+        </Button>
         </div>
+      <div className={"px-2"}>
         {data.getChannelById.members?.length && (
-          <Carousel className="mt-3">
-            <CarouselContent>
+          <Carousel className={"px-6"}>
+            <CarouselPrevious />
+            <CarouselContent className="w-48 px-2">
               {data.getChannelById.members.map((member, memberIndex) => (
                 <CarouselItem
-                  className="flex justify-center items-center basis-3/3"
+                  className="flex justify-center items-center w-12 h-12 basis-1/3"
                   key={memberIndex}
                 >
                   <Link href={`/profile/${member.customer.id}`}>
-                    <Avatar className="hover:bg-greenaccent rounded-md cursor-pointer ">
+                    <Avatar
+                      className={
+                        "hover:outline-2 hover:outline hover:outline-greensharp transition-all"
+                      }
+                    >
                       <AvatarImage
                         src={member.customer.profileImage ?? undefined}
                         alt={member.customer.firstName}
@@ -63,12 +65,13 @@ const ChannelMembers = ({ channelId }: Props) => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
             <CarouselNext />
           </Carousel>
         )}
       </div>
-    </>
+    </div>
+  );
+};
   );
 };
 
