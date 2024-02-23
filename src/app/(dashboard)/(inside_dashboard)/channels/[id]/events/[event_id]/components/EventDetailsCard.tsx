@@ -1,6 +1,7 @@
 "use client";
 import { useGetEventById } from "@/api/Events/useGetEventById";
 import { Button } from "@/components/ui/button";
+import formatDate from "@/features/DateFormatter";
 import Image from "next/image";
 
 interface Props {
@@ -22,7 +23,7 @@ const EventDetailsCard = ({ EventId }: Props) => {
             </span>
           </div>
           <span className="text-graylight text-sm">
-            {data?.getEventById?.startDate}
+            {formatDate(data?.getEventById?.startDate)}
           </span>
           <span className="text-white">Online</span>
           {/* Description */}
@@ -38,12 +39,15 @@ const EventDetailsCard = ({ EventId }: Props) => {
         </div>
 
         <div className="rounded-xl mt-10 max-md:order-1">
-          <Image
-            src={"/assets/event_details_image.png"}
-            alt="event_details_image"
-            width={500}
-            height={600}
-          />
+          {data?.getEventById?.images?.map((imageUrl, index) => (
+            <Image
+              key={index}
+              src={imageUrl}
+              alt="event_details_image"
+              width={500}
+              height={600}
+            />
+          ))}
         </div>
       </div>
     </>
