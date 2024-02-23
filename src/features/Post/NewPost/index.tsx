@@ -46,39 +46,23 @@ const NewPostForm = ({ channelId, onSuccess }: Props) => {
         }
 
         // Converting attachments to urls
-        formik.setValues((v) => {
-          return {
-            ...v,
-            attachments: v.attachments?.map((v) => ({
-              ...v,
-              status: "uploading",
-            })),
-          };
-        });
-        const uploadedAttachments = formik.values.attachments
+        
+        const uploadedAttachments = values.attachments?.length
           ? await S3UploadHandlerMutationFn(
-              formik.values.attachments.map((v) => ({
-                file: v.nativeFile,
-                id: v.id,
-              })),
+              values.attachments,
               data.accessToken,
-              ({ id, status, file }) => {
+              (fileSchema) => {
                 formik.setValues((v) => {
-                  if (typeof id !== "number") return v;
-                  if (!v.attachments?.[id]) return v;
+                  if (typeof fileSchema.id !== "number") return v;
+                  if (!v.attachments?.[fileSchema.id]) return v;
                   return {
                     ...v,
                     attachments: [
-                      ...v.attachments.slice(0, id),
+                      ...v.attachments.slice(0, fileSchema.id),
                       {
-                        id,
-                        status,
-                        nativeFile: file,
-                        nativeURL: URL.createObjectURL(file),
-                        uploadedURL:
-                          status === "uploaded" ? file.name : undefined,
+                        ...fileSchema
                       },
-                      ...v.attachments.slice(id + 1),
+                      ...v.attachments.slice(fileSchema.id + 1),
                     ],
                   };
                 });
@@ -90,7 +74,7 @@ const NewPostForm = ({ channelId, onSuccess }: Props) => {
           input: {
             body: values.body,
             channelId: values.channelId,
-            images: uploadedAttachments,
+            images: uploadedAttachments?.map(v => v.uploadedURL).filter(Boolean) as string[] | undefined,
           },
         });
         toast({
@@ -99,6 +83,7 @@ const NewPostForm = ({ channelId, onSuccess }: Props) => {
         });
         onSuccess();
       } catch (e) {
+        console.log(e);
         toast({
           title: "Failed to create post",
           variant: "destructive",

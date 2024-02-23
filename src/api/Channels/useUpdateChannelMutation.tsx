@@ -7,7 +7,6 @@ const UPDATE_CHANNEL_MUTATION = graphql(`
   #graphql
   mutation updateChannel($input: UpdateChannelInput!) {
     updateChannel(input: $input) {
-      message
       success
     }
   }

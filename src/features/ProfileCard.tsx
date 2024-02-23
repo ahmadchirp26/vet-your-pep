@@ -1,12 +1,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import Link from "next/link";
 import { FriendsIcon } from "@/components/icons/FriendsIcon";
 import useCustomerDataQuery from "@/api/AccountSettings/useCustomerDataQuery";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
+import VerifiedIcon from "@/components/icons/VerifiedIcon";
 
 const ProfileCard = () => {
   const { data, status } = useCustomerDataQuery();
@@ -46,12 +46,7 @@ const ProfileCard = () => {
           </span>
         </div>
         <div className="bg-greenaccent p-2 w-full justify-center rounded-3xl gap-2 flex items-center">
-          <Image
-            src={"/assets/verified_icon.svg"}
-            alt="verified_badge"
-            width={20}
-            height={20}
-          />
+          <VerifiedIcon className="w-4 h-4 mr-2" />
           <span className="text-white">Verified</span>
         </div>
         <div className="flex w-full justify-center items-center">

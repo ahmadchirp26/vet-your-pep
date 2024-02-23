@@ -1,5 +1,6 @@
 import { graphql } from "@/__generated__";
 import { requestGraphQl } from "@/lib/react-query-graphql";
+import { type FileSchema } from "@/lib/zod-schemas/attachment";
 
 const document = graphql(`
   query getPostUploadUrls($input: Float!) {
@@ -11,14 +12,9 @@ const document = graphql(`
 `);
 
 const S3UploadHandlerMutationFn = async (
-  filesToUpload: Array<{ file: File; id: string | number }>,
+  filesToUpload: Array<FileSchema>,
   accessToken: string,
-  onFileUploadStatusChange?: (params: {
-    id: number | string;
-    file: File;
-    fileName?: string;
-    status: "error" | "uploaded" | "uploading";
-  }) => void
+  onFileUploadStatusChange?: (params: FileSchema) => void,
 ) => {
   try {
     const authourizationHeaders = new Headers({
@@ -29,7 +25,7 @@ const S3UploadHandlerMutationFn = async (
       authourizationHeaders,
     ]);
     const signedUrls = getPostUploadUrls;
-    return (await Promise.all(
+    return await Promise.all(
       filesToUpload
         .map(async (fileToUpload, index) => {
           const data = signedUrls[index];
@@ -37,32 +33,32 @@ const S3UploadHandlerMutationFn = async (
             if (!data) {
               throw new Error("No signed url found");
             }
-            onFileUploadStatusChange && onFileUploadStatusChange({
-              id: fileToUpload.id,
-              file: fileToUpload.file,
+            fileToUpload = {
+              ...fileToUpload,
               status: "uploading",
-            });
+            };
+            onFileUploadStatusChange && onFileUploadStatusChange(fileToUpload);
             await fetch(data.signedUrl, {
               method: "PUT",
-              body: fileToUpload.file,
+              body: fileToUpload.nativeFile,
             });
-            onFileUploadStatusChange && onFileUploadStatusChange({
-              id: fileToUpload.id,
-              file: fileToUpload.file,
-              fileName: data.fileName,
+            fileToUpload = {
+              ...fileToUpload,
               status: "uploaded",
-            });
-            return data.fileName;
+              uploadedURL: data.fileName,
+            };
+            onFileUploadStatusChange && onFileUploadStatusChange(fileToUpload);
           } catch (e) {
-            onFileUploadStatusChange && onFileUploadStatusChange({
-              id: fileToUpload.id,
-              file: fileToUpload.file,
+            fileToUpload = {
+              ...fileToUpload,
               status: "error",
-            });
+            };
+            onFileUploadStatusChange && onFileUploadStatusChange(fileToUpload);
           }
+          return fileToUpload;
         })
-        .filter((f) => f)
-    )) as Array<string>;
+        .filter((f) => f),
+    );
   } catch (e) {
     // console.log(e);
     throw new Error("Something went wrong");

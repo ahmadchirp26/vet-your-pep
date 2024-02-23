@@ -32,8 +32,10 @@ const EditCoverImage = (props: Props) => {
             const [uploadedUrl] = await S3UploadHandlerMutationFn(
               [
                 {
-                  file: file,
-                  id: "0",
+                  id: "cover-image",
+                  nativeFile: file,
+                  nativeURL: URL.createObjectURL(file),
+                  status: "uploading",
                 },
               ],
               data?.accessToken
@@ -43,7 +45,7 @@ const EditCoverImage = (props: Props) => {
               input: {
                 id: props.channelId,
                 title: props.channelTitle,
-                backgroundImage: uploadedUrl,
+                backgroundImage: uploadedUrl?.uploadedURL,
               },
             });
             toast({

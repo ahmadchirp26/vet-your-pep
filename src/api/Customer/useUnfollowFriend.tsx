@@ -2,18 +2,17 @@ import { graphql } from "@/lib/react-query-graphql";
 import { useQueryClient } from "@tanstack/react-query";
 import { useGraphQLMutationProtected } from "../helpers";
 
-import { customerKeys } from "../Customer/query-keys";
+import { customerKeys } from "./query-keys";
 
-const FOLLOW_MUTATION = graphql(`
-  mutation FollowCustomer($customerId: String!) {
-    followCustomer(customerId: $customerId) {
-      message
+const UNFOLLOW_MUTATION = graphql(`
+  mutation UnfollowCustomer($customerId: String!) {
+    unfollowCustomer(customerId: $customerId) {
       success
     }
   }
 `);
 
-export const useFollowMutation = () => {
+export const useUnFollowMutation = () => {
   const queryClient = useQueryClient();
   return useGraphQLMutationProtected(
     {
@@ -23,6 +22,6 @@ export const useFollowMutation = () => {
         });
       },
     },
-    FOLLOW_MUTATION
+    UNFOLLOW_MUTATION
   );
 };
