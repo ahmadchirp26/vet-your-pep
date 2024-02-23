@@ -4,10 +4,10 @@ import EventDetailsCard from "./components/EventDetailsCard";
 
 import BackButton from "@/components/ui/backButton";
 
-const EventDetails = (props: { params: { id: string } }) => {
-  const EventId = props.params.id;
-  console.log(EventId);
-  console.log("Hello");
+const EventDetails = (props: { params: { event_id: string } }) => {
+  const EventId = props.params.event_id;
+  // console.log("First Event ID", EventId);
+
   return (
     <>
       <div className="flex gap-3 p-4 ">
