@@ -10,7 +10,7 @@ interface Props {
 
 const EventStepper = ({ channelId }: Props) => {
   const { data } = useGetEventByChannelId(channelId);
-  console.log("Channel ID", channelId);
+  console.log(data);
   return (
     <>
       <div className="bg-greendarkest p-12 container-drop-shadow rounded-2xl">

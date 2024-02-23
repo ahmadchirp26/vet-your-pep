@@ -8,7 +8,8 @@ interface Props {
 }
 
 const EventCard = ({ channelId }: Props) => {
-  const { data } = useGetEventByChannelId(channelId);
+  const { data, error } = useGetEventByChannelId(channelId);
+  console.log(data);
 
   return (
     <>
