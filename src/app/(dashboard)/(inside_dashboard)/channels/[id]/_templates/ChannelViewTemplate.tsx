@@ -13,6 +13,7 @@ import ChannelMembers, {
 import OnlineFriends, { OnlineFriendsSkeleton } from "@/features/OnlineFriends";
 import { useMediaQuery } from "@uidotdev/usehooks";
 import FeedPosts, { FeedPostsSkeleton } from "@/features/Post/FeedPosts";
+import EventCard from "../_components/EventCard";
 
 type Props = {
   channelId: string;
@@ -42,6 +43,7 @@ const ChannelViewTemplate = (props: Props) => {
             <div className="space-y-3">
               <GroupAdmin channelId={props.channelId} />
               <ChannelMembers channelId={props.channelId} />
+              <EventCard channelId={props.channelId} />
             </div>
           </div>
         ) : (
