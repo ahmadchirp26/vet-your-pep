@@ -46,6 +46,7 @@ const EventDetailsCard = ({ EventId }: Props) => {
               alt="event_details_image"
               width={500}
               height={600}
+              className="rounded-xl"
             />
           ))}
         </div>

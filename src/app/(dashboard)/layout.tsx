@@ -17,7 +17,7 @@ const DashboardLayout = async ({ children }: PropsWithChildren) => {
     return redirect("/login");
   }
 
-  await fetchCustomerSendBirdTokenServerSide();
+  // await fetchCustomerSendBirdTokenServerSide();
   return (
     <div className="h-full space-y-4 w-full">
       <div className="flex gap-4 items-center p-2">

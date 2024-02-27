@@ -67,6 +67,12 @@ const ChannelViewTemplate = (props: Props) => {
               >
                 About
               </TabsTrigger>
+              <TabsTrigger
+                value="Events"
+                className="w-full bg-greendarkest text-white"
+              >
+                Events
+              </TabsTrigger>
             </TabsList>
             <TabsContent value="Feed">
               <FeedPosts
@@ -80,6 +86,9 @@ const ChannelViewTemplate = (props: Props) => {
             </TabsContent>
             <TabsContent value="Info">
               <AboutCard channelId={props.channelId} />
+            </TabsContent>
+            <TabsContent value="Events">
+              <EventCard channelId={props.channelId} />
             </TabsContent>
           </Tabs>
         )}

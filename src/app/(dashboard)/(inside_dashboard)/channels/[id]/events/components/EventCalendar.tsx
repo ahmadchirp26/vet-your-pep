@@ -1,4 +1,4 @@
-import { useGetEventByChannelId } from "@/api/Events/useGetEventByChannelId";
+import { useGetEventByChannelId } from "@/api/Events/useGetEvents";
 import { Calendar } from "@/components/ui/calendar";
 import React from "react";
 
@@ -10,17 +10,23 @@ const EventCalendar = ({ channelId }: Props) => {
   const { data } = useGetEventByChannelId(channelId);
   const [selectedDate, setSelectedDate] = React.useState<Date | undefined>();
 
+  let latestEvent;
+
+  if (data) {
+    latestEvent = data.getEvents.results[data.getEvents.results.length - 1];
+  }
+
   return (
     <>
-      {data?.getEventsByChannel?.results?.map((event, index) => (
+      {latestEvent ? (
         <Calendar
-          key={index}
+          key={latestEvent.id}
           mode="single"
-          selected={new Date(event.startDate)} // Convert the string to Date object here
+          selected={new Date(latestEvent.startDate)} // Convert the string to Date object here
           onSelect={setSelectedDate}
           className="rounded-2xl container-drop-shadow bg-greendarkest text-white "
         />
-      ))}
+      ) : null}
     </>
   );
 };
