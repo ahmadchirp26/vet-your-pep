@@ -78,7 +78,7 @@ const useGetPosts = ({ limit = 100, channelId, customerId }: Props) => {
         ? { channelId }
         : customerId
           ? data?.sub === customerId
-            ? { myPosts: true }
+            ? { userFeed: false }
             : { customerId }
           : { userFeed: true }),
     }),

@@ -42,6 +42,7 @@ export const fetchCustomerSendBirdTokenServerSide = async (
       queryClient,
     };
   } catch (error) {
+    console.log(error);
     throw {
       status: 500,
       message: "Internal Server Error",
