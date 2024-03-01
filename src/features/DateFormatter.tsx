@@ -1,6 +1,6 @@
-export default function formatDate(dateString: any) {
+export default function formatDate(dateString: string) {
   const date = new Date(dateString);
-  const options = {
+  return date.toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -8,6 +8,5 @@ export default function formatDate(dateString: any) {
     minute: "numeric",
     hour12: true,
     timeZone: "UTC",
-  };
-  return date.toLocaleDateString("en-US", options);
+  });
 }
