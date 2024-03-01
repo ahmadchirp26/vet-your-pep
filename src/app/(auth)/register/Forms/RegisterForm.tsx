@@ -35,7 +35,7 @@ const RegisterForm = () => {
         .max(15, "Phone number must not exceed 15 characters")
         .matches(/^[0-9]+$/, "Phone number must contain only numbers"),
 
-      password: Yup.string().required("Password is required"),
+      password: Yup.string().required("Password is required").min(8, "Minimum password length should be 8 characters"),
       confirmPassword: Yup.string()
         .required("Confirm Password is required")
         .test("passwords-match", "Passwords must match", function (value) {
@@ -64,7 +64,6 @@ const RegisterForm = () => {
       }
     },
   });
-
   return (
     <FormikProvider value={formik}>
       <form
@@ -79,9 +78,10 @@ const RegisterForm = () => {
           name="email"
           placeholder="Email"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.email}
           icon={<RegisterEmailIcon className={"w-6 h-6"} />}
-          error={formik.errors.email}
+          error={formik.touched.email ? formik.errors.email : undefined}
         />
 
         {/* First Name and Last Name */}
@@ -92,8 +92,9 @@ const RegisterForm = () => {
             name="firstName"
             placeholder="First Name"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.firstName}
-            error={formik.errors.firstName}
+            error={formik.touched.firstName ? formik.errors.firstName:undefined}
           />
           <InputField
             type="text"
@@ -101,8 +102,9 @@ const RegisterForm = () => {
             name="lastName"
             placeholder="Last Name"
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             value={formik.values.lastName}
-            error={formik.errors.lastName}
+            error={formik.touched.lastName ? formik.errors.lastName:undefined}
           />
         </div>
 
@@ -114,9 +116,10 @@ const RegisterForm = () => {
           name="phoneNumber"
           placeholder="Phone Number"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.phoneNumber}
           icon={<RegisterPhoneIcon className={"w-6 h-6"} />}
-          error={formik.errors.phoneNumber}
+          error={formik.touched.phoneNumber ? formik.errors.phoneNumber:undefined}
         />
 
         {/* Password */}
@@ -127,9 +130,10 @@ const RegisterForm = () => {
           name="password"
           placeholder="Password"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.password}
           icon={<RegisterPasswordIcon className={"w-6 h-6"} />}
-          error={formik.errors.password}
+          error={formik.touched.password ? formik.errors.password:undefined}
         />
 
         {/* Confirm Password */}
@@ -139,9 +143,10 @@ const RegisterForm = () => {
           name="confirmPassword"
           placeholder="Confirm Password"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.confirmPassword}
           icon={<RegisterPasswordIcon className={"w-6 h-6"} />}
-          error={formik.errors.confirmPassword}
+          error={formik.touched.confirmPassword ? formik.errors.confirmPassword:undefined}
         />
 
         <div className="flex gap-2">

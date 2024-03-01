@@ -53,8 +53,9 @@ const LoginForm = () => {
           name="email"
           placeholder="Email"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.email}
-          error={formik.errors.email}
+          error={formik.touched.email ? formik.errors.email:undefined}
           icon={<RegisterEmailIcon className="w-6 h-6" />}
         />
         <InputField
@@ -63,8 +64,9 @@ const LoginForm = () => {
           name="password"
           placeholder="Password"
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           value={formik.values.password}
-          error={formik.errors.password}
+          error={formik.touched.password ? formik.errors.password:undefined}
           icon={<RegisterPasswordIcon className="w-6 h-6" />}
         />
         <Link href="/login/forgot-password">
