@@ -6,7 +6,7 @@ import ResponsiveMenu from "./_components/ResponsiveMenu";
 import Logo from "../../../public/assets/logo.svg";
 import Link from "next/link";
 import MainSearchBar from "./_components/MainSearchBar";
-import { fetchCustomerSendBirdTokenServerSide } from "@/api/SendBird/useCustomerSendbirdToken";
+//import { fetchCustomerSendBirdTokenServerSide } from "@/api/SendBird/useCustomerSendbirdToken";
 import { getSessionServerAction } from "@/lib/Authentication/server-actions/getSessionServerAction";
 import { redirect } from "next/navigation";
 
@@ -17,7 +17,7 @@ const DashboardLayout = async ({ children }: PropsWithChildren) => {
     return redirect("/login");
   }
 
-  await fetchCustomerSendBirdTokenServerSide();
+  // await fetchCustomerSendBirdTokenServerSide();
   return (
     <div className="h-full space-y-4 w-full">
       <div className="flex gap-4 items-center p-2">
