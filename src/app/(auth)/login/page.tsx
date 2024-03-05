@@ -1,10 +1,8 @@
+'use client';
 import Image from "next/image";
-import { FcGoogle } from "react-icons/fc";
-
-import { Button } from "@/components/ui/button";
-
 import Link from "next/link";
 import LoginForm from "@/app/(auth)/login/Forms/LoginForm";
+import GoogleOAuthButton from "./_components/GoogleOAuthButton";
 
 export default function Login() {
   return (
@@ -34,12 +32,13 @@ export default function Login() {
             <div className="h-[1px] bg-graydark w-full"></div>
           </div>
 
-          <Button
+          <GoogleOAuthButton />
+          {/* <Button
             type="submit"
             className="field-drop-shadow mt-3 flex h-10 px-10 items-center hover:bg-white justify-center gap-3 rounded-full bg-white text-black"
           >
             <FcGoogle size={25} /> Sign in with Google
-          </Button>
+          </Button> */}
         </div>
       </div>
       <div className="md:block flex-1 login-background hidden">
