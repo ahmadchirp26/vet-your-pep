@@ -21,12 +21,14 @@ const PostMediaLightbox = ({ images }: Props) => {
         close={() => setOpen(false)}
         slides={images.map((src) => ({ src }))}
       />
-      <div className="relative w-full" style = {{width:"400px"}}>
+      <div className="relative w-full" style={{ width: "400px" }}>
         <Image
           src={remainingImages[0]}
           alt="post_image"
           layout="fill"
           className="rounded-xl"
+          width={100}
+          height={100}
         />
         <div
           className="bg-black opacity-80 flex justify-center items-center rounded-xl absolute inset-0 cursor-pointer z-50"
@@ -42,9 +44,15 @@ const PostMediaLightbox = ({ images }: Props) => {
 const PostMedia = (props: Props) => {
   const images = props.images.slice(0, minimumDisplayableImages);
   return (
-    <div className={`grid ${images.length >= 2 ? 'grid-cols-2':'grid-cols-1'} gap-2`}>
+    <div
+      className={`grid ${images.length >= 2 ? "grid-cols-2" : "grid-cols-1"} gap-2`}
+    >
       {images.map((image, index) => (
-        <div key={index} className="relative w-full" style ={{height:"200px"}}>
+        <div
+          key={index}
+          className="relative w-full"
+          style={{ height: "200px" }}
+        >
           <Image
             src={image}
             alt="post_image"

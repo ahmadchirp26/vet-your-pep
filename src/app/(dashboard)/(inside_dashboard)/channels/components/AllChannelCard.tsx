@@ -25,7 +25,12 @@ const AllChannelCard = ({
         <div className="flex flex-col gap-1 items-center justify-center">
           <div className="rounded-full w-16 h-16">
             {channel.image ? (
-              <Image src={channel.image} alt="channel_image" />
+              <Image
+                src={channel.image}
+                alt="channel_image"
+                width={100}
+                height={100}
+              />
             ) : (
               <Image
                 src={"/assets/logo.svg"}
@@ -56,7 +61,7 @@ const AllChannelCard = ({
                       onSuccess: () => {
                         router.push(`/channels/${channel.id}`);
                       },
-                    },
+                    }
                   )
                 }
               >

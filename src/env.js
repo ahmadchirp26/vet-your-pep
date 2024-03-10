@@ -19,6 +19,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SERVER_GRAPHQL_URL: z.string(),
     NEXT_PUBLIC_AWS_S3_FILE_HOST: z.string(),
     NEXT_PUBLIC_SENDGRID_API_KEY: z.string(),
+    NEXT_PUBLIC_GOOGLE_CLIENT_ID: z.string(),
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
   },
 
@@ -31,6 +32,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SERVER_GRAPHQL_URL: process.env.NEXT_PUBLIC_SERVER_GRAPHQL_URL,
     NEXT_PUBLIC_AWS_S3_FILE_HOST: process.env.NEXT_PUBLIC_AWS_S3_FILE_HOST,
     NEXT_PUBLIC_SENDGRID_API_KEY: process.env.NEXT_PUBLIC_SENDGRID_API_KEY,
+    NEXT_PUBLIC_GOOGLE_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

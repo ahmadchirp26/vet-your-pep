@@ -7,11 +7,10 @@ import { userAllFeedsKeys } from "./query-keys";
 const UN_LIKE_MUTATION = graphql(`
   mutation unlikePost($input: UpdateLikeInput!) {
     unlikePost(input: $input) {
-      message
+      id
     }
   }
 `);
-
 
 export const useUnLikeMutation = () => {
   const queryClient = useQueryClient();
