@@ -55,7 +55,7 @@ const useGetChannels = (
     placeholderData: keepPreviousData,
     queryKey: channelKeys.listJoined({
       ...paginationParams,
-      filter: {title: searchQuery },
+      filter: { title: searchQuery },
       joined: props.joined,
     }),
     queryFn: ({ queryKey }) => {
@@ -83,7 +83,7 @@ const useGetChannels = (
               ? `https://${env.NEXT_PUBLIC_AWS_S3_FILE_HOST}/${channel.backgroundImage}`
               : undefined,
           })),
-        }
+        },
       };
     },
   });

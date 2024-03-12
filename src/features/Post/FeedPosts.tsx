@@ -11,7 +11,12 @@ interface Props {
   onlyShowPosts?: boolean;
 }
 
-const FeedPosts = ({ className, channelId, customerId, onlyShowPosts = false }: Props) => {
+const FeedPosts = ({
+  className,
+  channelId,
+  customerId,
+  onlyShowPosts = false,
+}: Props) => {
   const { status, data } = useGetPosts({
     channelId,
     customerId,
@@ -25,12 +30,7 @@ const FeedPosts = ({ className, channelId, customerId, onlyShowPosts = false }: 
   }
 
   return (
-    <div
-      className={cn(
-        "w-full rounded-3xl p-4 space-y-8 w-xs",
-        className
-      )}
-    >
+    <div className={cn("w-full rounded-3xl p-4 space-y-8 w-xs", className)}>
       {!onlyShowPosts && <NewPost channelId={channelId} />}
       {data.getPosts.results.map((post, index) => (
         <PostCard
@@ -40,7 +40,7 @@ const FeedPosts = ({ className, channelId, customerId, onlyShowPosts = false }: 
           comments={
             post.comments?.map((comment) => ({
               commentContent: comment.content,
-              postedDate: new Date(),
+              postedDate: comment.createdDate,
               postedBy: {
                 id: comment.user.id,
                 firstName: comment.user.firstName,

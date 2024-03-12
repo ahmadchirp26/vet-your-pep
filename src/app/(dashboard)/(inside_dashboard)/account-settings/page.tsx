@@ -70,13 +70,13 @@ const AccountSettings = () => {
             </div>
           </div>
         </div>
-        <div className="bg-greendarkest w-[300px] max-md:w-[240px] rounded-2xl container-drop-shadow">
+        {/* <div className="bg-greendarkest w-[300px] max-md:w-[240px] rounded-2xl container-drop-shadow">
           <div className="mt-3 w-full gap-4 flex flex-col p-4">
             {blockArray.map((block, index) => (
               <BlockListCard key={index} block={block} />
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

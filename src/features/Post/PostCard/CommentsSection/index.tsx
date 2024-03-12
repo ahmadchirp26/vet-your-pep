@@ -38,7 +38,7 @@ const CommentsSection_ = ({ comments, postId }: CommentsSection_Props) => {
 const CommentsSectionTrigger = React.forwardRef<
   HTMLButtonElement,
   { totalComments: number; "data-state"?: "open" | "closed" }
->(({totalComments, ...props}, ref) => {
+>(({ totalComments, ...props }, ref) => {
   return (
     <div className="flex items-center">
       <MessageSquareIcon
@@ -49,9 +49,9 @@ const CommentsSectionTrigger = React.forwardRef<
         size={"sm"}
         className="px-2 text-graylight"
         ref={ref}
-        disabled={totalComments === 0}
+        disabled={totalComments < 0}
         {...props}
-      >{`${totalComments} Comments${totalComments > 1 ? "s" : ""}`}</Button>
+      >{`${totalComments} Comments${totalComments >= 0 ? "" : ""}`}</Button>
     </div>
   );
 });
