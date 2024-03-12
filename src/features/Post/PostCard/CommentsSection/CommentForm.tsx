@@ -10,22 +10,30 @@ const Schema = z.object({
   content: z.string().min(0, "Comment cannot be empty"),
 });
 interface Props {
-    postId: string;
+  postId: string;
 }
-const CommentForm = ({postId}:Props) => {
+const CommentForm = ({ postId }: Props) => {
   const { mutate, status } = useAddCommentToPostMutation();
   const formik = useFormik<z.infer<typeof Schema>>({
     initialValues: {
       content: "",
     },
+
     validationSchema: toFormikValidationSchema(Schema),
-    onSubmit: (values) => {
-      mutate({
-        input: {
-          content: values.content,
-          postId
-        },
-      });
+    onSubmit: (values, { resetForm }) => {
+      try {
+        mutate({
+          input: {
+            content: values.content,
+            postId,
+          },
+        });
+
+        // Reset the form after successful submission
+        resetForm();
+      } catch (error) {
+        console.error("Error submitting comment:", error);
+      }
     },
   });
   console.log(formik.errors);
@@ -50,8 +58,8 @@ const CommentForm = ({postId}:Props) => {
           <Button
             className="rounded-full bg-greentertiary hover:bg-greendarkest lex justify-center items-center w-20 h-7"
             type="submit"
-            isLoading={status === 'pending'}
-            disabled={status === 'pending' || !formik.isValid}
+            isLoading={status === "pending"}
+            disabled={status === "pending" || !formik.isValid}
           >
             Send
           </Button>

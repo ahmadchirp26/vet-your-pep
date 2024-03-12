@@ -51,19 +51,19 @@ const UpdateProfile = () => {
             <div className="flex items-center max-md:flex-col max-md:justify-center max-md:items-center w-full gap-2">
               <ProfilePicture />
             </div>
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2 w-60">
+            <div className="flex flex-col gap-1 max-sm:justify-center max-sm:items-center w-full">
+              <div className="flex items-center gap-2 w-60 max-sm:w-full max-sm:text-center max-sm:justify-center ">
                 <span className="text-white font-bold text-xl ">
                   {data?.getCustomerData.firstName}
                 </span>
                 <span className="text-white font-bold text-xl ">
                   {data?.getCustomerData.lastName}
                 </span>
-                <VerifiedIcon className= {"w-4 h-4"} />
+                <VerifiedIcon className={"w-4 h-4"} />
               </div>
               <div className="flex items-center gap-2">
                 <Image
-                  src={"/assets/email_icon.svg"}
+                  src={"/assets/mail_icon.svg"}
                   alt="email_icon"
                   height={13}
                   width={13}
