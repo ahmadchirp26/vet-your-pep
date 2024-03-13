@@ -1,9 +1,11 @@
+"use client";
 import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 
 import RegisterForm from "@/app/(auth)/register/Forms/RegisterForm";
 import { Button } from "@/components/ui/button";
+import GoogleOAuthButton from "../login/_components/GoogleOAuthButton";
 
 export default function Register() {
   return (
@@ -34,13 +36,14 @@ export default function Register() {
             </div>
             <div className="h-[1px] bg-graydark w-full"></div>
           </div>
+          <GoogleOAuthButton />
 
-          <Button
+          {/* <Button
             type="submit"
             className="field-drop-shadow flex h-10 px-10 items-center hover:bg-white justify-center gap-3 rounded-full bg-white text-black"
           >
             <FcGoogle size={25} /> Sign up with Google
-          </Button>
+          </Button> */}
         </div>
       </div>
       <div className="flex-1 md:block register-background hidden h-screen">
