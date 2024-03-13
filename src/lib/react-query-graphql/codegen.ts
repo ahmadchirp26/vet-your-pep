@@ -1,5 +1,5 @@
 const config = {
-  schema: process.env.NEXT_PUBLIC_SERVER_GRAPHQL_URL,
+  schema: "https://vet-your-pep-staging-7ffa0a39af72.herokuapp.com/graphql",
   documents: ["./src/**/*.{ts,tsx}"],
   generates: {
     "./src/__generated__/": {

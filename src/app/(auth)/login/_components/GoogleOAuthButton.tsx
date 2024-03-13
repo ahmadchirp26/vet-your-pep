@@ -1,4 +1,4 @@
-
+"use client";
 import { type SocialAuthProviders } from "@/__generated__/graphql";
 import useSocialLoginMutation from "@/api/Authentication/useSocialLoginMutation";
 import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
@@ -11,11 +11,12 @@ import { FcGoogle } from "react-icons/fc";
 
 const GoogleOAuthInner = () => {
   const [loading, setLoading] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
   const { mutateAsync: loginSocial } = useSocialLoginMutation();
   const login = useGoogleLogin({
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     onSuccess: async (codeResponse) => {
+      // console.log("Code Response", codeResponse);
       try {
         await loginSocial([
           {
@@ -25,10 +26,8 @@ const GoogleOAuthInner = () => {
             },
           },
         ]);
-        router.push("/")
-      } catch(e) {
-        
-      }
+        router.push("/");
+      } catch (e) {}
 
       setLoading(false);
     },
@@ -45,7 +44,7 @@ const GoogleOAuthInner = () => {
       disabled={loading}
     >
       {loading ? <SpinnerCircle /> : <FcGoogle size={25} />}
-      Sign up with Google
+      Continue with Google
     </Button>
   );
 };
