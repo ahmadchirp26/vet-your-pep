@@ -9,7 +9,7 @@ interface Props {
   className?: string;
 }
 
-const JoinedChannels = ({className}:Props) => {
+const JoinedChannels = ({ className }: Props) => {
   const {
     data,
     status,
@@ -19,7 +19,9 @@ const JoinedChannels = ({className}:Props) => {
     joined: true,
   });
 
-  if (status === 'pending') {
+  // console.log("Channels Search", setSearchQuery);
+
+  if (status === "pending") {
     return <JoinedChannelsSkeleton className={className} />;
   }
 
@@ -38,7 +40,9 @@ const JoinedChannels = ({className}:Props) => {
   }
 
   return (
-    <div className={cn("rounded-3xl shadow-glow bg-greendarkest pb-4", className)}>
+    <div
+      className={cn("rounded-3xl shadow-glow bg-greendarkest pb-4", className)}
+    >
       <ActionHeader
         onSearch={(searchTerm) => {
           setSearchQuery(searchTerm);
@@ -59,9 +63,11 @@ const JoinedChannels = ({className}:Props) => {
     </div>
   );
 };
-export const JoinedChannelsSkeleton = ({className}:Props) => {
+export const JoinedChannelsSkeleton = ({ className }: Props) => {
   return (
-    <div className={cn("rounded-3xl shadow-glow bg-greendarkest pb-4", className)}>
+    <div
+      className={cn("rounded-3xl shadow-glow bg-greendarkest pb-4", className)}
+    >
       <div className="flex items-center justify-between gap-2 px-4 py-2 mb-2">
         <div className="flex items-center h-12 w-52">
           <div className="bg-greenlight rounded-lg animate-pulse w-20 h-4" />

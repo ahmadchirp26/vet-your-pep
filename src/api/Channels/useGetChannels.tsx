@@ -46,6 +46,7 @@ const useGetChannels = (
     offset: 0,
   });
   const [searchQuery, setSearchQuery] = useState<string | undefined>(undefined);
+  // console.log("search title", searchQuery);
 
   // Getting Graphql request handler with Auth headers
   const protectedRequestHandler = useGraphQLRequestHandlerProtected();
@@ -55,7 +56,7 @@ const useGetChannels = (
     placeholderData: keepPreviousData,
     queryKey: channelKeys.listJoined({
       ...paginationParams,
-      filter: { title: searchQuery },
+      filter: { search: searchQuery },
       joined: props.joined,
     }),
     queryFn: ({ queryKey }) => {

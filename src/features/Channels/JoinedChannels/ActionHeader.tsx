@@ -13,6 +13,11 @@ type Props = {
 const ActionHeader = (props: Props) => {
   const [activeSearch, setActiveSearch] = useState(false);
 
+  const handleSearchTermChange = (searchTerm: string) => {
+    // console.log("Search term entered:", searchTerm);
+    props.onSearch(searchTerm); // Call the onSearch function prop with the search term
+  };
+
   return (
     <div
       className={cn("flex items-center justify-between gap-2", props.className)}
@@ -36,11 +41,14 @@ const ActionHeader = (props: Props) => {
               }
             },
           }}
-          setSearchTerm={props.onSearch}
+          setSearchTerm={handleSearchTermChange}
         />
       </div>
       <Button
-        onClick={() => setActiveSearch((t) => !t)}
+        onClick={() => {
+          // console.log("Search button clicked");
+          setActiveSearch((t) => !t);
+        }}
         variant={"ghost"}
         className="h-auto p-2 hover:bg-greensharp/10"
       >
