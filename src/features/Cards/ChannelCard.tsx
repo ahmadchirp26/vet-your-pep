@@ -6,6 +6,7 @@ import { SpinnerCircle } from "@/components/icons/SpinnerCircle";
 import useJoinChannelMutation from "@/api/Channels/useJoinChannelMutation";
 import { useRouter } from "next/navigation";
 import React from "react";
+import Link from "next/link";
 interface ChannelCardProps {
   channel: NonNullable<APIGetChannelsData>["getChannels"]["results"][number];
   showJoinButton?: boolean;
@@ -74,7 +75,7 @@ const ChannelCard = React.forwardRef<HTMLDivElement, ChannelCardProps>(
 
                     {
                       onSuccess: () => {
-                        router.push(`/channels/${channel.id}`);
+                        // router.push(`/channels/${channel.id}`);
                       },
                     }
                   )

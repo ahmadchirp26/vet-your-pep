@@ -1,6 +1,8 @@
 import useGetFollowers from "@/api/Customer/useGetFollowers";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import FollowButtonManager from "@/features/FollowButtonManager.tsx";
+import Link from "next/link";
 
 interface Props {
   customerId: string;
@@ -20,7 +22,7 @@ const ProfileFollowers = ({ customerId }: Props) => {
   return (
     <div className="space-y-4 py-4">
       <span className="text-white font-bold">My Followers</span>
-      <div className = "space-y-2">
+      <div className="space-y-2">
         {data?.getFollowers.map((follower, index) => {
           const username = `${follower.firstName} ${follower.lastName}`;
           return (
@@ -33,7 +35,14 @@ const ProfileFollowers = ({ customerId }: Props) => {
                       follower.lastName.toLocaleUpperCase().charAt(0)}
                   </AvatarFallback>
                 </Avatar>
-                <span className="font-bold text-white">{username}</span>
+                <Link href={`/profile/${follower.id}`}>
+                  <Button
+                    variant={"link"}
+                    className={"text-white font-bold  px-0 py-0 h-auto"}
+                  >
+                    {username}
+                  </Button>
+                </Link>
               </div>
               <FollowButtonManager customerId={follower.id} />
             </div>
