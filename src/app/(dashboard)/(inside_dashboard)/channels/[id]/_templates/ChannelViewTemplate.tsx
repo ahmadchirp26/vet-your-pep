@@ -23,7 +23,7 @@ const ChannelViewTemplate = (props: Props) => {
   const isMediumDeviceAndLarge = useMediaQuery("(min-width : 769px)");
   return (
     <div className="p-3 md:flex items-start gap-x-3">
-      <OnlineFriends className="md:flex-col order-3 mb-4 md:min-w-min" />
+      {/* <OnlineFriends className="md:flex-col order-3 mb-4 md:min-w-min" /> */}
       {isMediumDeviceAndLarge && (
         <div className="space-y-4 min-w-[220px]">
           <AboutCard channelId={props.channelId} />
@@ -100,7 +100,7 @@ const ChannelViewTemplate = (props: Props) => {
 export const ChannelViewTemplateSkeleton = () => {
   return (
     <div className="p-3 md:flex items-start gap-x-3">
-      <OnlineFriendsSkeleton className="md:flex-col order-3 mb-4 md:min-w-min" />
+      {/* <OnlineFriendsSkeleton className="md:flex-col order-3 mb-4 md:min-w-min" /> */}
       <div className="space-y-4 min-w-[220px]">
         <AboutCardSkeleton />
         <JoinedChannelsSkeleton />
