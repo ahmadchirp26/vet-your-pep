@@ -90,8 +90,8 @@ const ResponsiveMenu = ({ className, initialOpen }: Props) => {
               <li
                 key={idx}
                 className="flex gap-7 rounded-lg p-3 items-center min-w-60 hover:bg-greenaccent cursor-pointer"
-                // onClick={link.onClick}
-                onClick={toggleOpen}
+                onClick={link.onClick}
+                // onClick={toggleOpen}
               >
                 <link.icon fill={"#79CD00"} width={20} height={20} />
                 <span onClick={toggleOpen}>{link.name}</span>
