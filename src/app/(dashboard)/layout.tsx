@@ -31,7 +31,7 @@ const DashboardLayout = async ({ children }: PropsWithChildren) => {
         <MainSearchBar className="flex-1" />
         <div className="flex items-center gap-2">
           <AuthMenu className="hidden sm:flex" />
-          <ResponsiveMenu className="sm:hidden" />
+          <ResponsiveMenu className="sm:hidden" initialOpen={false} />
         </div>
       </div>
       <div className="flex">
