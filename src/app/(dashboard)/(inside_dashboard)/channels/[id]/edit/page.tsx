@@ -15,7 +15,7 @@ const EditProfile = (props: { params: { id: string } }) => {
           <EditChannel channelId={props.params.id} />
         </div>
         <div className="max-md:order-1">
-          <OnlineFriends className="flex md:flex-col" />
+          {/* <OnlineFriends className="flex md:flex-col" /> */}
         </div>
       </div>
     </>
