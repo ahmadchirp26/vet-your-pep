@@ -21,11 +21,21 @@ export const getSession = async ({ shouldBroadcast }: Params) => {
   const accessToken = cookie.get("auth.sessionToken");
   if (!accessToken || typeof accessToken === "boolean") return null;
   const token = jwtDecode<UserSession>(accessToken);
-  if (shouldBroadcast) {
-    AuthBroadcastChannel().postMessage({
-      event: "session",
-      data: { trigger: "getSession" },
-    });
+  console.log("Token", token.exp * 1000);
+
+  if (token.exp * 1000 < Date.now()) {
+    // Token has expired, remove the cookie
+
+    cookie.remove("auth.sessionToken");
+
+    if (shouldBroadcast) {
+      AuthBroadcastChannel().postMessage({
+        event: "session",
+        data: { trigger: "getSession" },
+      });
+    }
+
+    return null;
   }
   return {
     ...token,
