@@ -1,9 +1,17 @@
+"use client";
 import Image from "next/image";
 
 import BackButton from "@/components/ui/backButton";
 import VerifyCodeForm from "@/app/(auth)/login/Forms/VerifyCodeForm";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 
 export default function VerifyCode() {
+  const params = useParams<{ email?: string }>();
+
+  console.log(params.email);
+
+  const email = decodeURIComponent(params?.email ?? "");
+
   return (
     <>
       <div className="flex w-full h-screen p-3 flex-col ">
@@ -22,9 +30,9 @@ export default function VerifyCode() {
             <span className="text-white font-bold ">Verification Code</span>
             <span className="text-graydark text-center text-sm">
               Please enter the verification code, we sent to <br />
-              johndeo@gmail.com
+              {email}
             </span>
-            <VerifyCodeForm />
+            <VerifyCodeForm email={email} />
           </div>
         </div>
       </div>
