@@ -16,7 +16,7 @@ const Document = graphql(`
       email
       firstName
       id
-      isActive
+      # isActive
       lastName
       profileImage
       socialProvider {
