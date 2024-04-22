@@ -11,7 +11,7 @@ const GetCustomerDataQueryDocument = graphql(`
       totalFollowers
       totalFollowings
       id
-      isActive
+      # isActive
       lastName
       profileImage
       password

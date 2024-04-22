@@ -12,7 +12,7 @@ const GET_CUSTOMER_SEARCH_QUERY = graphql(`
         email
         firstName
         id
-        isActive
+        # isActive
         lastName
         profileImage
         stripeCustomerId
